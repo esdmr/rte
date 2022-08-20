@@ -1,0 +1,8 @@
+body {
+	width: 100vw;
+	height: 100vw;
+	margin: 0;
+	overflow: hidden;
+	display: grid;
+	grid-template-columns: auto;
+}
