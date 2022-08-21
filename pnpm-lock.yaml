@@ -4,6 +4,7 @@ packageExtensionsChecksum: 935026bdd72242fb43f616b3529d945b
 
 specifiers:
   '@rollup/plugin-commonjs': ^22.0.2
+  '@rollup/plugin-html': ^0.2.4
   '@rollup/plugin-node-resolve': ^13.3.0
   '@types/html-minifier': ^4.0.2
   esbuild: ^0.15.5
@@ -29,6 +30,7 @@ dependencies:
 
 devDependencies:
   '@rollup/plugin-commonjs': 22.0.2_rollup@2.78.1
+  '@rollup/plugin-html': 0.2.4_rollup@2.78.1
   '@rollup/plugin-node-resolve': 13.3.0_rollup@2.78.1
   '@types/html-minifier': 4.0.2
   esbuild: 0.15.5
@@ -183,6 +185,15 @@ packages:
       is-reference: 1.2.1
       magic-string: 0.25.9
       resolve: 1.22.1
+      rollup: 2.78.1
+    dev: true
+
+  /@rollup/plugin-html/0.2.4_rollup@2.78.1:
+    resolution: {integrity: sha512-x0qpNXxbmGa9Jnl4OX89AORPe2T/a4DqNK69BGRnEdaPKq6MdiUXSTam/eCkF5DxkQGcRcPq0L4vzr/E3q4mVA==}
+    engines: {node: '>= 8.0.0'}
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0
+    dependencies:
       rollup: 2.78.1
     dev: true
 

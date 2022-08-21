@@ -1,25 +1,71 @@
-import process from 'node:process';
-import path from 'node:path';
 import fs from 'node:fs';
-import nodeResolve from '@rollup/plugin-node-resolve';
-import copy from 'rollup-plugin-copy';
-import esbuild from 'rollup-plugin-esbuild';
-import {minify} from 'html-minifier';
-import {typescriptPaths} from 'rollup-plugin-typescript-resolve';
+import path from 'node:path';
+import process from 'node:process';
+import {fileURLToPath} from 'node:url';
 import commonjs from '@rollup/plugin-commonjs';
+import htmlPlugin, {makeHtmlAttributes} from '@rollup/plugin-html';
+import nodeResolve from '@rollup/plugin-node-resolve';
+import {minify} from 'html-minifier';
+import postcssUrl from 'postcss-url';
+import {cacheBuild} from 'rollup-cache';
+import esbuild from 'rollup-plugin-esbuild';
 import monaco from 'rollup-plugin-monaco-editor';
 import postcss from 'rollup-plugin-postcss';
-import {cacheBuild} from 'rollup-cache';
-import postcssUrl from 'postcss-url';
+import {typescriptPaths} from 'rollup-plugin-typescript-resolve';
 
 const isProduction = process.env.NODE_ENV === 'production';
 
+/**
+ * @param {TemplateStringsArray} template
+ * @param {unknown[]} subs
+ */
+function html(template, ...subs) {
+	const stringElements = [];
+	const subsLength = subs.length;
+
+	for (const [index, value] of template.entries()) {
+		stringElements.push(value);
+
+		if (index < subsLength) {
+			stringElements.push(String(subs[index]));
+		}
+	}
+
+	return minify(stringElements.join(''), {
+		caseSensitive: false,
+		collapseBooleanAttributes: true,
+		collapseInlineTagWhitespace: true,
+		collapseWhitespace: true,
+		decodeEntities: true,
+		minifyURLs: true,
+		removeAttributeQuotes: true,
+		removeRedundantAttributes: true,
+		removeScriptTypeAttributes: true,
+		removeStyleLinkTypeAttributes: true,
+		sortAttributes: true,
+	});
+}
+
 export default function getRollupOptions() {
+	const dir = 'build';
+	const publicPath = isProduction ? '/' : `/${dir}/`;
+
+	const cwd = process.cwd();
+	const __dirname = fileURLToPath(new URL('.', import.meta.url));
+
+	if (path.join(cwd, dir) !== path.join(__dirname, dir)) {
+		throw new Error(`Incorrect working directory: ${cwd}. Expected: ${__dirname}`);
+	}
+
+	if (fs.existsSync(dir)) {
+		fs.rmSync(dir, {recursive: true});
+	}
+
 	/** @type {import('rollup').RollupOptions} */
 	const config = {
 		input: 'src/index.tsx',
 		output: {
-			dir: 'build',
+			dir,
 			format: 'esm',
 			compact: true,
 			generatedCode: 'es2015',
@@ -53,8 +99,9 @@ export default function getRollupOptions() {
 			}),
 			typescriptPaths(),
 			postcss({
-				minimize: true,
-				sourceMap: false,
+				minimize: isProduction,
+				sourceMap: !isProduction,
+				extract: true,
 				plugins: [
 					postcssUrl({
 						url(asset) {
@@ -62,13 +109,12 @@ export default function getRollupOptions() {
 								return asset.url;
 							}
 
-							const distPath = path.join(process.cwd(), 'build');
-							const distFontsPath = path.join(distPath, 'fonts');
-							fs.mkdirSync(distFontsPath, {recursive: true});
-							const targetFontPath = path.join(distFontsPath, asset.pathname);
+							const buildPath = path.join(process.cwd(), dir);
+							const fontsPath = path.join(buildPath, 'fonts');
+							fs.mkdirSync(fontsPath, {recursive: true});
+							const targetFontPath = path.join(fontsPath, asset.pathname);
 							fs.cpSync(asset.absolutePath, targetFontPath);
 							const relativePath = path.relative(process.cwd(), targetFontPath);
-							const publicPath = '/';
 							return `${publicPath}${relativePath}`;
 						},
 					}),
@@ -90,27 +136,95 @@ export default function getRollupOptions() {
 				keepNames: !isProduction,
 				target: ['firefox103', 'chrome105'],
 			}),
-			copy({
-				targets: [
+			htmlPlugin({
+				meta: [
+					// eslint-disable-next-line unicorn/text-encoding-identifier-case
+					{charset: 'UTF-8'},
+					{'http-equiv': 'X-UA-Compatible', content: 'IE=edge'},
 					{
-						src: 'src/index.html',
-						dest: 'build',
-						transform: content =>
-							minify(content.toString(), {
-								caseSensitive: false,
-								collapseBooleanAttributes: true,
-								collapseInlineTagWhitespace: true,
-								collapseWhitespace: true,
-								decodeEntities: true,
-								minifyURLs: true,
-								removeAttributeQuotes: true,
-								removeRedundantAttributes: true,
-								removeScriptTypeAttributes: true,
-								removeStyleLinkTypeAttributes: true,
-								sortAttributes: true,
-							}),
+						name: 'Content-Security-Policy',
+						content: 'default-src \'self\';'
+							+ 'base-uri \'none\';'
+							+ 'object-src \'none\';',
 					},
+					{name: 'viewport', content: 'width=device-width, initial-scale=1.0'},
 				],
+				title: 'Gamepad Editor',
+				publicPath,
+				/**
+				 * @param {Partial<import('@rollup/plugin-html').RollupHtmlTemplateOptions>} options
+				 */
+				template(options = {}) {
+					console.log('Generated file types:', ...Object.keys(options.files ?? {}));
+
+					const scriptList = [/^index\.js$/];
+					const preloadList = [
+						/^editor(-\w+)?\.js$/,
+						/^editorSimpleWorker(-\w+)?\.js$/,
+						/^javascript(-\w+)?\.js$/,
+					];
+
+					const scripts = options.files?.js?.map(({fileName}) => {
+						if (scriptList.some(r => r.test(fileName))) {
+							const attributes = makeHtmlAttributes({
+								...options.attributes?.script,
+								src: `${options.publicPath ?? ''}${fileName}`,
+							});
+
+							return html`
+								<script ${attributes}></script>
+							`;
+						}
+
+						if (preloadList.some(r => r.test(fileName))) {
+							const attributes = makeHtmlAttributes({
+								...options.attributes?.preload ?? '',
+								rel: 'preload',
+								href: `${options.publicPath ?? ''}${fileName}`,
+								as: 'script',
+							});
+
+							return html`
+								<link ${attributes} crossorigin>
+							`;
+						}
+
+						return '';
+					}).join('\n') ?? '';
+
+					const links = options.files?.css?.map(({fileName}) => {
+						const attributes = makeHtmlAttributes({
+							...options.attributes?.link ?? '',
+							rel: 'stylesheet',
+							href: `${options.publicPath ?? ''}${fileName}`,
+						});
+
+						return html`
+							<link ${attributes}>
+						`;
+					}).join('\n') ?? '';
+
+					const meta = options.meta?.map(input => {
+						const attributes = makeHtmlAttributes(input);
+						return html`<meta ${attributes}>`;
+					}).join('\n') ?? '';
+
+					const attributes = makeHtmlAttributes(options.attributes?.html);
+
+					return html`
+						<!DOCTYPE html>
+						<html ${attributes}>
+							<head>
+								${meta}
+								<title>${options.title ?? ''}</title>
+								${links}
+								${scripts}
+							</head>
+							<body>
+							</body>
+						</html>
+					`;
+				},
 			}),
 		],
 	};
