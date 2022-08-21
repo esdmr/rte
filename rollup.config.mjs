@@ -3,7 +3,7 @@ import path from 'node:path';
 import fs from 'node:fs';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import copy from 'rollup-plugin-copy';
-import esbuild from 'rollup-plugin-esbuild-transform';
+import esbuild from 'rollup-plugin-esbuild';
 import {minify} from 'html-minifier';
 import {typescriptPaths} from 'rollup-plugin-typescript-resolve';
 import commonjs from '@rollup/plugin-commonjs';
@@ -48,15 +48,7 @@ export default function getRollupOptions() {
 				},
 			},
 			nodeResolve({
-				extensions: [
-					'.js',
-					'.mjs',
-					'.cjs',
-					'.ts',
-					'.mts',
-					'.cts',
-					'.json',
-				],
+				extensions: ['.js', '.mjs', '.cjs', '.ts', '.mts', '.cts', '.json'],
 				browser: true,
 			}),
 			typescriptPaths(),
@@ -84,12 +76,12 @@ export default function getRollupOptions() {
 			}),
 			monaco({
 				languages: ['javascript'],
+				features: ['bracketMatching', 'wordHighlighter'],
 				esm: false,
 				sourcemap: false,
 			}),
 			commonjs(),
 			esbuild({
-				loader: 'tsx',
 				jsx: 'transform',
 				jsxFactory: 'h',
 				jsxFragment: 'Fragment',
@@ -98,29 +90,35 @@ export default function getRollupOptions() {
 				keepNames: !isProduction,
 				target: ['firefox103', 'chrome105'],
 			}),
-			copy({targets: [
-				{
-					src: 'src/index.html',
-					dest: 'build',
-					transform: content => minify(content.toString(), {
-						caseSensitive: false,
-						collapseBooleanAttributes: true,
-						collapseInlineTagWhitespace: true,
-						collapseWhitespace: true,
-						decodeEntities: true,
-						minifyURLs: true,
-						removeAttributeQuotes: true,
-						removeRedundantAttributes: true,
-						removeScriptTypeAttributes: true,
-						removeStyleLinkTypeAttributes: true,
-						sortAttributes: true,
-					}),
-				},
-			]}),
+			copy({
+				targets: [
+					{
+						src: 'src/index.html',
+						dest: 'build',
+						transform: content =>
+							minify(content.toString(), {
+								caseSensitive: false,
+								collapseBooleanAttributes: true,
+								collapseInlineTagWhitespace: true,
+								collapseWhitespace: true,
+								decodeEntities: true,
+								minifyURLs: true,
+								removeAttributeQuotes: true,
+								removeRedundantAttributes: true,
+								removeScriptTypeAttributes: true,
+								removeStyleLinkTypeAttributes: true,
+								sortAttributes: true,
+							}),
+					},
+				],
+			}),
 		],
 	};
 
-	return cacheBuild({
-		name: 'main',
-	}, config);
+	return cacheBuild(
+		{
+			name: 'main',
+		},
+		config,
+	);
 }

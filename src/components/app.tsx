@@ -1,5 +1,6 @@
-import {h, FunctionComponent} from 'preact';
-import MonacoEditor from './monaco-editor.js';
+import {FunctionComponent, h} from 'preact';
+import EditorContainer from './editor-container.js';
 
-const App: FunctionComponent = () => <MonacoEditor/>;
+const App: FunctionComponent = () => <EditorContainer />;
+
 export default App;
