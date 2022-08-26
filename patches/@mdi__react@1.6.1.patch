@@ -1,0 +1,40 @@
+diff --git a/dist/Icon.d.ts b/dist/Icon.d.ts
+index 4aa3fab40c3edaac28e25411d9626a6ee685a000..e8416de9741aa07f5424716974af8557cef3209e 100644
+--- a/dist/Icon.d.ts
++++ b/dist/Icon.d.ts
+@@ -1,4 +1,4 @@
+-import { FunctionComponent } from "react";
++import { FunctionComponent } from "preact";
+ import { IconProps } from './IconProps';
+ export { default as Stack } from './Stack';
+ export declare const Icon: FunctionComponent<IconProps>;
+diff --git a/dist/IconProps.d.ts b/dist/IconProps.d.ts
+index f0658817539059bd51326737390a590b4216ce81..6226832e8bb1ced0c634649d7cc665e537bb289d 100644
+--- a/dist/IconProps.d.ts
++++ b/dist/IconProps.d.ts
+@@ -1,4 +1,4 @@
+-import { CSSProperties, RefObject, AriaAttributes } from 'react';
++import { CSSProperties, RefObject, AriaAttributes } from 'preact';
+ export interface HTMLProps extends AriaAttributes {
+     className?: string;
+ }
+diff --git a/dist/Stack.d.ts b/dist/Stack.d.ts
+index 80da1475cdf6dddb982289a83544af663023ffe5..fcdfece35adcc799c5429d0e9361ed27b7f31822 100644
+--- a/dist/Stack.d.ts
++++ b/dist/Stack.d.ts
+@@ -1,4 +1,4 @@
+-import { FunctionComponent } from "react";
++import { FunctionComponent } from "preact";
+ import { StackProps } from './StackProps';
+ declare const Stack: FunctionComponent<StackProps>;
+ export default Stack;
+diff --git a/dist/StackProps.d.ts b/dist/StackProps.d.ts
+index 7ee96421f7e1ac8344f4c9bd04ea2d153d9c904b..351b5e0abbbeb2411b89ad29b59188f14cc5d293 100644
+--- a/dist/StackProps.d.ts
++++ b/dist/StackProps.d.ts
+@@ -1,4 +1,4 @@
+-import { ReactElement, CSSProperties, RefObject } from "react";
++import { ReactElement, CSSProperties, RefObject } from "preact";
+ import { IconProps, HTMLProps } from "./IconProps";
+ export interface StackPropsBase {
+     ref?: RefObject<SVGSVGElement>;

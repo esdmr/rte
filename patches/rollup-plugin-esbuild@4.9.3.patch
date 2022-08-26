@@ -1,0 +1,33 @@
+diff --git a/dist/index.js b/dist/index.cjs
+similarity index 100%
+rename from dist/index.js
+rename to dist/index.cjs
+diff --git a/dist/index.d.cts b/dist/index.d.cts
+new file mode 100644
+index 0000000000000000000000000000000000000000..19c932720a9664d1f76dfbb0e74914326a253314
+--- /dev/null
++++ b/dist/index.d.cts
+@@ -0,0 +1,2 @@
++import * as mod from './index.js';
++export = mod;
+diff --git a/dist/index.d.mts b/dist/index.d.mts
+new file mode 100644
+index 0000000000000000000000000000000000000000..6ad841178b018d866ffda0e08193feaa963c55c8
+--- /dev/null
++++ b/dist/index.d.mts
+@@ -0,0 +1,2 @@
++export * from './index.js';
++export {default} from './index.js';
+diff --git a/package.json b/package.json
+index 891a7054e38d9e18b4152bb7e5ec38da2157be01..7753207b1bb40d9fbaef2e2b5fd715a78eaaef65 100644
+--- a/package.json
++++ b/package.json
+@@ -6,7 +6,7 @@
+   "types": "dist/index.d.ts",
+   "exports": {
+     "import": "./dist/index.mjs",
+-    "default": "./dist/index.js"
++    "default": "./dist/index.cjs"
+   },
+   "author": "EGOIST",
+   "license": "MIT",

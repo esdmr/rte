@@ -1,0 +1,16 @@
+diff --git a/dist/cjs/index.d.ts b/dist/cjs/index.d.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..d9178bc498505debe5fcdc8752180d330ad9872b
+--- /dev/null
++++ b/dist/cjs/index.d.ts
+@@ -0,0 +1,2 @@
++import * as mod from '../../types/index.js';
++export = mod;
+diff --git a/dist/es/index.d.ts b/dist/es/index.d.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..a6f407ec25caf4e46a728c32299e885cc8713ac9
+--- /dev/null
++++ b/dist/es/index.d.ts
+@@ -0,0 +1,2 @@
++export * from '../../types/index.js';
++export {default} from '../../types/index.js';

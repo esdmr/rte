@@ -1,0 +1,21 @@
+diff --git a/dist/index.d.ts b/dist/index.d.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..9cbd51273ff7537043cdacf3feba2434c194b135
+--- /dev/null
++++ b/dist/index.d.ts
+@@ -0,0 +1,2 @@
++import mod from '../types/index.js';
++export = mod;
+diff --git a/package.json b/package.json
+index 5b58dc642c26dae4aa0eadc7172b381865d69be6..852d78583d123c714bd8b1d9c512eb2b4777d6d7 100644
+--- a/package.json
++++ b/package.json
+@@ -30,7 +30,7 @@
+   "engines": {
+     "node": ">=10"
+   },
+-  "types": "./types/index.d.ts",
++  "types": "./dist/index.d.ts",
+   "homepage": "https://github.com/egoist/rollup-plugin-postcss#readme",
+   "devDependencies": {
+     "@babel/core": "^7.12.9",

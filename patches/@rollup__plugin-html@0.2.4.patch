@@ -1,0 +1,36 @@
+diff --git a/dist/index.d.mts b/dist/index.d.mts
+new file mode 100644
+index 0000000000000000000000000000000000000000..5b2de823145e7ed15d216786a26fea6c86a8f1ab
+--- /dev/null
++++ b/dist/index.d.mts
+@@ -0,0 +1,2 @@
++export * from '../types/index.js';
++export {default} from '../types/index.js';
+diff --git a/dist/index.d.ts b/dist/index.d.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..b9b78320a1d3588ddae60a1dc4c422a2985437a2
+--- /dev/null
++++ b/dist/index.d.ts
+@@ -0,0 +1,3 @@
++import * as mod from '../types/index.js';
++declare const out: typeof mod.default & typeof mod;
++export = out;
+diff --git a/dist/index.es.js b/dist/index.mjs
+similarity index 100%
+rename from dist/index.es.js
+rename to dist/index.mjs
+diff --git a/package.json b/package.json
+index 3c7c6e96e9ebe4702aa0692805ebed8c96d7c7f2..1ac944d57c9b45c7b264847b14999a985db7c29e 100644
+--- a/package.json
++++ b/package.json
+@@ -15,6 +15,10 @@
+   "bugs": "https://github.com/rollup/plugins/issues",
+   "main": "dist/index.js",
+   "module": "dist/index.es.js",
++  "exports": {
++    "require": "./dist/index.js",
++    "import": "./dist/index.mjs"
++  },
+   "engines": {
+     "node": ">= 8.0.0"
+   },
