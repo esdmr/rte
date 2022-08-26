@@ -8,6 +8,7 @@ import esbuild from 'rollup-plugin-esbuild';
 import monaco from 'rollup-plugin-monaco-editor';
 import postcss from 'rollup-plugin-postcss';
 import {typescriptPaths} from 'rollup-plugin-typescript-resolve';
+import {defaultImport} from 'default-import';
 import {buildDir, isProduction, publicPath} from './constants.js';
 import html from './plugins/html.js';
 import licenses from './plugins/licenses.js';
@@ -43,12 +44,12 @@ const config = {
 	preserveEntrySignatures: false,
 	plugins: [
 		isProduction && preactDebug(),
-		nodeResolve({
+		defaultImport(nodeResolve)({
 			extensions: ['.js', '.mjs', '.cjs', '.ts', '.mts', '.cts', '.json'],
 			browser: true,
 		}),
 		typescriptPaths(),
-		postcss({
+		defaultImport(postcss)({
 			minimize: isProduction,
 			sourceMap: !isProduction,
 			extract: 'index.css',
@@ -64,14 +65,14 @@ const config = {
 				}),
 			],
 		}),
-		monaco({
+		defaultImport(monaco)({
 			languages: ['javascript'],
 			features: ['bracketMatching', 'wordHighlighter'],
 			esm: false,
 			sourcemap: false,
 		}),
-		commonjs(),
-		esbuild({
+		defaultImport(commonjs)(),
+		defaultImport(esbuild)({
 			jsx: 'transform',
 			jsxFactory: 'h',
 			jsxFragment: 'Fragment',

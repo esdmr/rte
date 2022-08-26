@@ -1,4 +1,5 @@
 import html_ from '@rollup/plugin-html';
+import {defaultImport} from 'default-import';
 import {h} from 'preact';
 import Document from '../components/document.js';
 import {getOutputHash} from '../hash.js';
@@ -10,7 +11,7 @@ import render from '../render.js';
  * @returns {import('rollup').Plugin}
  */
 export default function html({publicPath}) {
-	return html_({
+	return defaultImport(html_)({
 		meta: [],
 		title: 'Gamepad Editor',
 		publicPath,

@@ -10,38 +10,39 @@
     "watch": "rollup -cw"
   },
   "dependencies": {
-    "monaco-editor": "^0.34.0",
-    "preact": "^10.10.6"
+    "monaco-editor": "0.34.0",
+    "preact": "10.10.6"
   },
   "devDependencies": {
-    "@mdi/js": "^7.0.96",
-    "@mdi/react": "^1.6.1",
-    "@pnpm/lockfile-file": "^5.3.3",
-    "@pnpm/logger": "^4.0.0",
-    "@rollup/plugin-commonjs": "^22.0.2",
-    "@rollup/plugin-html": "^0.2.4",
-    "@rollup/plugin-node-resolve": "^13.3.0",
-    "@types/html-minifier": "^4.0.2",
-    "@types/parse-author": "^2.0.1",
-    "@types/postcss-url": "^10.0.0",
-    "esbuild": "^0.15.5",
-    "execa": "^6.1.0",
-    "html-minifier": "^4.0.0",
-    "node-sass": "^7.0.1",
-    "parse-author": "^2.0.0",
-    "postcss": "^8.4.16",
-    "postcss-url": "^10.1.3",
-    "preact-render-to-string": "^5.2.2",
-    "react": "npm:@preact/compat@^17.1.1",
-    "react-dom": "npm:@preact/compat@^17.1.1",
-    "rollup": "^2.78.1",
-    "rollup-cache": "^1.2.0",
-    "rollup-plugin-esbuild": "^4.9.3",
-    "rollup-plugin-monaco-editor": "^0.2.1",
-    "rollup-plugin-postcss": "^4.0.2",
-    "rollup-plugin-typescript-resolve": "^1.0.1",
-    "typescript": "^4.7.4",
-    "xo": "^0.51.0"
+    "@mdi/js": "7.0.96",
+    "@mdi/react": "1.6.1",
+    "@pnpm/lockfile-file": "5.3.3",
+    "@pnpm/logger": "4.0.0",
+    "@rollup/plugin-commonjs": "22.0.2",
+    "@rollup/plugin-html": "0.2.4",
+    "@rollup/plugin-node-resolve": "13.3.0",
+    "@types/html-minifier": "4.0.2",
+    "@types/parse-author": "2.0.1",
+    "@types/postcss-url": "10.0.0",
+    "default-import": "1.1.5",
+    "esbuild": "0.15.5",
+    "execa": "6.1.0",
+    "html-minifier": "4.0.0",
+    "node-sass": "7.0.1",
+    "parse-author": "2.0.0",
+    "postcss": "8.4.16",
+    "postcss-url": "10.1.3",
+    "preact-render-to-string": "5.2.2",
+    "react": "npm:@preact/compat@17.1.1",
+    "react-dom": "npm:@preact/compat@17.1.1",
+    "rollup": "2.78.1",
+    "rollup-cache": "1.2.0",
+    "rollup-plugin-esbuild": "4.10.1",
+    "rollup-plugin-monaco-editor": "0.2.1",
+    "rollup-plugin-postcss": "4.0.2",
+    "rollup-plugin-typescript-resolve": "1.0.1",
+    "typescript": "4.8.2",
+    "xo": "0.51.0"
   },
   "packageManager": "pnpm@7.9.3",
   "pnpm": {
@@ -55,16 +56,15 @@
       }
     },
     "overrides": {
-      "scss-tokenizer": "^0.4.3"
+      "scss-tokenizer": "0.4.3"
     },
     "patchedDependencies": {
-      "rollup-plugin-monaco-editor@0.2.1": "patches/rollup-plugin-monaco-editor@0.2.1.patch",
+      "@rollup/pluginutils@4.2.1": "patches/@rollup__pluginutils@4.2.1.patch",
       "@rollup/plugin-commonjs@22.0.2": "patches/@rollup__plugin-commonjs@22.0.2.patch",
       "@rollup/plugin-node-resolve@13.3.0": "patches/@rollup__plugin-node-resolve@13.3.0.patch",
       "rollup-cache@1.2.0": "patches/rollup-cache@1.2.0.patch",
-      "rollup-plugin-postcss@4.0.2": "patches/rollup-plugin-postcss@4.0.2.patch",
-      "rollup-plugin-esbuild@4.9.3": "patches/rollup-plugin-esbuild@4.9.3.patch",
-      "@rollup/plugin-html@0.2.4": "patches/@rollup__plugin-html@0.2.4.patch",
+      "@rollup/pluginutils@3.1.0": "patches/@rollup__pluginutils@3.1.0.patch",
+      "@preact/compat@17.1.1": "patches/@preact__compat@17.1.1.patch",
       "@mdi/react@1.6.1": "patches/@mdi__react@1.6.1.patch"
     }
   }
