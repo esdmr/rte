@@ -73,12 +73,12 @@ const config = {
 		}),
 		defaultImport(commonjs)(),
 		defaultImport(esbuild)({
-			jsx: 'transform',
-			jsxFactory: 'h',
-			jsxFragment: 'Fragment',
+			jsx: 'automatic',
+			jsxImportSource: 'preact',
 			minify: true,
 			minifyIdentifiers: isProduction,
 			keepNames: !isProduction,
+			treeShaking: true,
 			target: ['firefox103', 'chrome105'],
 		}),
 		html({
