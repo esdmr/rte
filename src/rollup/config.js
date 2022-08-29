@@ -9,10 +9,11 @@ import monaco from 'rollup-plugin-monaco-editor';
 import postcss from 'rollup-plugin-postcss';
 import {typescriptPaths} from 'rollup-plugin-typescript-resolve';
 import {defaultImport} from 'default-import';
-import {buildDir, isProduction, publicPath} from './constants.js';
+import {buildDir, isProduction} from './constants.js';
 import html from './plugins/html.js';
 import licenses from './plugins/licenses.js';
 import preactDebug from './plugins/preact-debug.js';
+import typedCssModules from './plugins/typed-css-modules.js';
 
 await fs.rm(buildDir, {force: true, recursive: true});
 await fs.mkdir(buildDir, {recursive: true});
@@ -28,7 +29,7 @@ if (!isProduction) {
 
 /** @type {import('rollup').RollupOptions} */
 const config = {
-	input: 'src/index.tsx',
+	input: ['src/index.tsx', 'src/404.ts'],
 	output: {
 		dir: buildDir,
 		assetFileNames: 'assets/[name]-[hash][extname]',
@@ -37,13 +38,26 @@ const config = {
 		compact: true,
 		generatedCode: 'es2015',
 		interop: 'auto',
-		sourcemap: true,
+		sourcemap: !isProduction,
 	},
 	strictDeprecations: true,
 	treeshake: true,
 	preserveEntrySignatures: false,
 	plugins: [
 		isProduction && preactDebug(),
+		{
+			name: 'css-import',
+			resolveId(source, importer, options) {
+				if (source.endsWith('.css.js')) {
+					return this.resolve(source.slice(0, -3), importer, {
+						...options,
+						skipSelf: true,
+					});
+				}
+
+				return null;
+			},
+		},
 		defaultImport(nodeResolve)({
 			extensions: ['.js', '.mjs', '.cjs', '.ts', '.mts', '.cts', '.json'],
 			browser: true,
@@ -52,8 +66,13 @@ const config = {
 		defaultImport(postcss)({
 			minimize: isProduction,
 			sourceMap: !isProduction,
-			extract: 'index.css',
-			to: path.resolve(buildDir, 'index.css'),
+			modules: {
+				generateScopedName: '[local]_[sha256:hash:hex:8]',
+				localsConvention: 'dashesOnly',
+			},
+			namedExports(name) {
+				return name.replace(/-\w/g, value => value.slice(1).toUpperCase());
+			},
 			plugins: [
 				postcssUrl({
 					url: 'copy',
@@ -82,8 +101,28 @@ const config = {
 			target: ['firefox103', 'chrome105'],
 		}),
 		html({
-			publicPath,
+			title: 'Gamepad Editor',
+			publicPath: '/',
+			scriptList: [/^index(-\w+)?\.js$/],
+			preloadList: [
+				/^editor(-\w+)?\.js$/,
+				/^editorSimpleWorker(-\w+)?\.js$/,
+				/^javascript(-\w+)?\.js$/,
+			],
+			stylesheetList: [],
+			csp: 'default-src \'self\';base-uri \'none\';object-src \'none\';',
 		}),
+		html({
+			title: 'SPA Redirect',
+			fileName: '404.html',
+			publicPath: '/',
+			scriptList: [/^404(-\w+)?\.js$/],
+			preloadList: [],
+			stylesheetList: [],
+			csp: 'default-src \'self\';base-uri \'none\';object-src \'none\';',
+			robots: 'noindex,nofollow',
+		}),
+		!isProduction && typedCssModules(),
 		licenses(),
 	],
 };

@@ -1,17 +1,16 @@
-import {FunctionComponent, h} from 'preact';
+import type {FunctionComponent} from 'preact';
 import {lazy, Suspense} from 'preact/compat';
-import EditorSpinner from './editor-spinner.js';
+import {Loading} from './loading.js';
+import * as css from './editor.module.css.js';
 
-const MonacoEditor = lazy(async () =>
-	import('./editor.js').then(mod => mod.default),
+const Editor = /* @__PURE__ */ lazy(async () =>
+	import('./editor.js').then(mod => mod.Editor),
 );
 
-const EditorContainer: FunctionComponent = () => (
-	<div class='editor-container' role='region' aria-live='polite'>
-		<Suspense fallback={<EditorSpinner />}>
-			<MonacoEditor />
+export const EditorContainer: FunctionComponent = () => (
+	<div class={css.editorContainer} role='region' aria-live='polite'>
+		<Suspense fallback={<Loading class={css.editor} />}>
+			<Editor />
 		</Suspense>
 	</div>
 );
-
-export default EditorContainer;

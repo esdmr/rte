@@ -4,7 +4,6 @@ import {fileURLToPath} from 'node:url';
 
 export const isProduction = process.env.NODE_ENV === 'production';
 export const buildDir = 'build';
-export const publicPath = '/';
 
 const cwd = process.cwd();
 const dirname = fileURLToPath(new URL('.', import.meta.url));

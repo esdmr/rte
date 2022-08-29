@@ -1,17 +1,18 @@
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api.js';
-import {FunctionComponent, h} from 'preact';
+import type {FunctionComponent} from 'preact';
 import {EffectCallback, MutableRef, Ref, useEffect, useRef} from 'preact/hooks';
+import assert from '../assert.js';
+import * as css from './editor.module.css.js';
 
 declare global {
 	// eslint-disable-next-line no-var
 	var monaco: unknown;
 }
 
-globalThis.monaco = monaco;
-
+// Debug: globalThis.monaco = monaco;
 type MonacoEditor = monaco.editor.IStandaloneCodeEditor;
 
-const Editor: FunctionComponent<EditorProps> = props => {
+export const Editor: FunctionComponent<EditorProps> = props => {
 	const ref = useRef<HTMLDivElement>(null);
 	const editorRef = useRef<MonacoEditor>();
 
@@ -22,29 +23,57 @@ const Editor: FunctionComponent<EditorProps> = props => {
 		}),
 	);
 
-	return <div ref={ref} class='editor'></div>;
+	return <div ref={ref} class={css.editor}></div>;
 };
 
 interface EditorProps {
 	accessibilityEnabled?: boolean;
+	lightTheme?: string;
+	darkTheme?: string;
+	theme?: 'light' | 'dark' | 'auto';
 }
 
-function getEffectCallback(props: EditorProps, options: {
-	ref: Ref<HTMLElement>;
-	editorRef: MutableRef<MonacoEditor | undefined>;
-}): EffectCallback {
+function getEffectCallback(
+	props: EditorProps,
+	options: {
+		ref: Ref<HTMLElement>;
+		editorRef: MutableRef<MonacoEditor | undefined>;
+	},
+): EffectCallback {
 	return () => {
 		const controller = new AbortController();
-
-		if (!options.ref.current) {
-			throw new TypeError('Ref is null');
-		}
-
+		assert(options.ref.current !== null);
 		const element = options.ref.current;
+
+		props.lightTheme ??= 'vs-light';
+		props.darkTheme ??= 'vs-dark';
+		props.theme ??= 'auto';
+		let theme: string;
+
+		switch (props.theme) {
+			case 'light':
+				theme = props.lightTheme;
+				break;
+
+			case 'dark':
+				theme = props.darkTheme;
+				break;
+
+			case 'auto': {
+				const prefersColorScheme = matchMedia(
+					'(prefers-color-scheme: light)',
+				).matches;
+				theme = prefersColorScheme ? props.lightTheme : props.darkTheme;
+				break;
+			}
+
+			default:
+				throw new Error('Invalid theme name');
+		}
 
 		const editor = monaco.editor.create(element, {
 			language: 'javascript',
-			theme: 'vs-dark',
+			theme,
 			fontFamily: '"System Mono"',
 			fontLigatures: true,
 			scrollBeyondLastLine: false,
@@ -53,16 +82,28 @@ function getEffectCallback(props: EditorProps, options: {
 		});
 
 		editor.layout({
-			width: window.innerWidth,
-			height: window.innerHeight,
+			width: innerWidth,
+			height: innerHeight,
 		});
 
-		window.addEventListener(
+		if (props.theme === 'auto') {
+			matchMedia('(prefers-color-scheme: light)').addEventListener(
+				'change',
+				event => {
+					monaco.editor.setTheme(
+						event.matches ? props.lightTheme! : props.darkTheme!,
+					);
+				},
+				{signal: controller.signal},
+			);
+		}
+
+		addEventListener(
 			'resize',
 			() => {
 				editor.layout({
-					width: window.innerWidth,
-					height: window.innerHeight,
+					width: innerWidth,
+					height: innerHeight,
 				});
 			},
 			{signal: controller.signal},
@@ -84,5 +125,3 @@ function getEffectCallback(props: EditorProps, options: {
 		};
 	};
 }
-
-export default Editor;

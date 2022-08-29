@@ -1,0 +1,23 @@
+.gamepad-face-button-icon text {
+	text-anchor: middle;
+	dominant-baseline: central;
+	font-size: 12px;
+	user-select: none;
+}
+
+.gamepad-face-button-icon .base {
+	fill: currentColor;
+}
+
+.gamepad-face-button-icon .mask-out {
+	fill: white;
+}
+
+.gamepad-face-button-icon .mask-in-fill {
+	fill: black;
+}
+
+.gamepad-face-button-icon .mask-in-stroke {
+	stroke: black;
+	fill: none;
+}

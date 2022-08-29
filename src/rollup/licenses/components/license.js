@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {h, Fragment} from 'preact';
-import LoadableDetails from './loadable-details.js';
+import {LoadableDetails} from './loadable-details.js';
 
 /** @type {import('preact').FunctionComponent<{license: LicenseInfo}>} */
 const LicenseInfo = props => {
@@ -74,7 +74,7 @@ const LegacyLicenses = props =>
 const NoLicense = () => h('p', null, 'License not found!');
 
 /**
- * @typedef {Object} LicenseOptions
+ * @typedef {Object} LicenseProps
  * @prop {string} name
  * @prop {string} version
  * @prop {boolean} [dev]
@@ -98,8 +98,8 @@ const NoLicense = () => h('p', null, 'License not found!');
  *
  * @typedef {undefined} NoLicense
  */
-/** @type {import('preact').FunctionComponent<LicenseOptions>} */
-const License = props =>
+/** @type {import('preact').FunctionComponent<LicenseProps>} */
+export const License = props =>
 	h(
 		Fragment,
 		null,
@@ -125,8 +125,6 @@ const License = props =>
 		h('p', null, ...getAttributions(props.authors)),
 		h(LicenseInfo, {license: props.license}),
 	);
-
-export default License;
 
 /**
  * @param {unknown} pkgLicense

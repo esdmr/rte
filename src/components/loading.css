@@ -1,0 +1,34 @@
+.loading {
+	--count: 3;
+	--count-coefficient: 2;
+	--count-bias: 0;
+	--animation-duration: 2s;
+	display: grid;
+	align-items: end;
+	justify-items: end;
+	padding: 5em;
+}
+
+.loading svg {
+	width: 5em;
+}
+
+.loading circle {
+	--index: 0;
+	fill: var(--foreground);
+	transform-origin: center;
+	transform-box: fill-box;
+	animation: loading calc(var(--animation-duration) / 2) ease-in-out calc(-1 * var(--index) * var(--animation-duration) / (var(--count) * var(--count-coefficient) + var(--count-bias))) infinite alternate;
+}
+
+@keyframes loading {
+	from {
+		opacity: 1;
+		scale: 1;
+	}
+
+	to {
+		opacity: 0.5;
+		scale: 0.9;
+	}
+}

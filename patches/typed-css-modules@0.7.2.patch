@@ -1,0 +1,13 @@
+diff --git a/lib/dts-creator.d.ts b/lib/dts-creator.d.ts
+index 037d676d96780819b1f4b800644917155d6ca7c4..02b2232c286ef201bbc20389ad332d40c6bb4c75 100644
+--- a/lib/dts-creator.d.ts
++++ b/lib/dts-creator.d.ts
+@@ -8,7 +8,7 @@ interface DtsCreatorOptions {
+     namedExports?: boolean;
+     dropExtension?: boolean;
+     EOL?: string;
+-    loaderPlugins?: Plugin<any>[];
++    loaderPlugins?: Plugin[];
+ }
+ export declare class DtsCreator {
+     private rootDir;

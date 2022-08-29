@@ -19,7 +19,7 @@ for (const element of document.querySelectorAll('details[data-load-url]')) {
 	element.addEventListener('toggle', async () => {
 		if (!element.open || isLoading) {
 			if (currentSize > cleanUpThreshold) {
-				window.dispatchEvent(new CustomEvent('try-clean-up'));
+				dispatchEvent(new CustomEvent('try-clean-up'));
 			}
 
 			return;
@@ -60,7 +60,7 @@ for (const element of document.querySelectorAll('details[data-load-url]')) {
 		}
 	});
 
-	window.addEventListener('try-clean-up', () => {
+	addEventListener('try-clean-up', () => {
 		if (element.open || !isLoading) {
 			return;
 		}

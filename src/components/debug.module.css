@@ -1,0 +1,30 @@
+.gamepad-face-button-grid {
+	display: inline-grid;
+	margin: 0.5em;
+	grid-template-areas:
+		' .    up    .  '
+		'left  .   right'
+		' .   down   .  ';
+}
+
+.gamepad-face-button-icon {
+	display: inline-block;
+	width: 2em;
+	height: 2em;
+}
+
+.gamepad-face-button-icon[data-which=down] {
+	grid-area: down;
+}
+
+.gamepad-face-button-icon[data-which=right] {
+	grid-area: right;
+}
+
+.gamepad-face-button-icon[data-which=left] {
+	grid-area: left;
+}
+
+.gamepad-face-button-icon[data-which=up] {
+	grid-area: up;
+}

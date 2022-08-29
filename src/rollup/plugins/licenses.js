@@ -1,7 +1,7 @@
 import {fileURLToPath} from 'node:url';
 import {execaNode} from 'execa';
 
-const scriptPath = fileURLToPath(
+const scriptPath = /* @__PURE__ */ fileURLToPath(
 	new URL('../licenses/fetch.js', import.meta.url),
 );
 

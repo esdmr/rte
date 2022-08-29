@@ -1,7 +1,7 @@
 import {h} from 'preact';
 
 /**
- * @typedef {Object} DocumentOptions
+ * @typedef {Object} DocumentProps
  * @prop {string} title
  * @prop {string} [lang]
  * @prop {string} [charSet]
@@ -10,8 +10,8 @@ import {h} from 'preact';
  * @prop {string} [base]
  * @prop {import('preact').ComponentChildren} [head]
  */
-/** @type {import('preact').FunctionComponent<DocumentOptions>} */
-const Document = props =>
+/** @type {import('preact').FunctionComponent<DocumentProps>} */
+export const Document = props =>
 	h(
 		'html',
 		{lang: props.lang ?? 'en'},
@@ -37,4 +37,3 @@ const Document = props =>
 		),
 		h('body', {children: props.children}),
 	);
-export default Document;

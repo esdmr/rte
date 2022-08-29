@@ -11,11 +11,11 @@ import parseAuthor from 'parse-author';
 import {readWantedLockfile} from '@pnpm/lockfile-file';
 import {mdiArrowLeft} from '@mdi/js';
 import render from '../render.js';
-import Document from '../components/document.js';
+import {Document} from '../components/document.js';
 import {isProduction} from '../constants.js';
-import LoadableDetails from './components/loadable-details.js';
+import {LoadableDetails} from './components/loadable-details.js';
 import {getLicenseInfo} from './components/license.js';
-import Package from './components/package.js';
+import {Package} from './components/package.js';
 
 await fs.mkdir('build', {recursive: true});
 await fs.rm('build/licenses', {force: true, recursive: true});
@@ -23,20 +23,17 @@ await fs.mkdir('build/licenses', {recursive: true});
 
 const onlyProduction = Boolean(process.env.ONLY_PROD);
 
-/** @type {Map<string, Map<string, import('./components/license.js').LicenseOptions>>} */
+/** @type {Map<string, Map<string, import('./components/license.js').LicenseProps>>} */
 const packages = new Map();
 
-/** @type {Record<string, Partial<import('./components/license.js').LicenseOptions>>} */
+/** @type {Record<string, Partial<import('./components/license.js').LicenseProps>>} */
 const overrides = {
 	'preact@10.10.6': {authors: new Set(['Jason Miller'])},
 };
 
 const unusedOverrides = new Set(Object.keys(overrides));
 const lockfile = await readWantedLockfile('', {ignoreIncompatible: false});
-
-if (lockfile === null) {
-	throw new TypeError('Expected a lockfile, got null instead');
-}
+assert(lockfile !== null);
 
 const pnpmDirs = Object.entries(lockfile.packages ?? {})
 	.sort(([a], [b]) => a.localeCompare(b, 'en'))
@@ -104,7 +101,7 @@ await Promise.all(
 			}
 		}
 
-		/** @type {Map<string, import('./components/license.js').LicenseOptions>} */
+		/** @type {Map<string, import('./components/license.js').LicenseProps>} */
 		const licenses = packages.get(name) ?? new Map();
 		packages.set(name, licenses);
 

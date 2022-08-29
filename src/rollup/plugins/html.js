@@ -1,73 +1,73 @@
 import html_ from '@rollup/plugin-html';
 import {defaultImport} from 'default-import';
 import {h} from 'preact';
-import Document from '../components/document.js';
+import {Document} from '../components/document.js';
 import {getOutputHash} from '../hash.js';
 import render from '../render.js';
 
 /**
  * @param {Object} options
+ * @param {string} options.title
+ * @param {string} [options.lang]
+ * @param {string} [options.charSet]
+ * @param {string} [options.csp]
+ * @param {string} [options.robots]
+ * @param {string} [options.base]
+ *
+ * @param {string} [options.fileName]
  * @param {string} options.publicPath
+ * @param {RegExp[]} options.scriptList
+ * @param {RegExp[]} options.preloadList
+ * @param {RegExp[]} options.stylesheetList
  * @returns {import('rollup').Plugin}
  */
-export default function html({publicPath}) {
+export default function html(options) {
 	return defaultImport(html_)({
-		meta: [],
-		title: 'Gamepad Editor',
-		publicPath,
+		fileName: options.fileName ?? 'index.html',
 		/**
-		 * @param {Partial<import('@rollup/plugin-html').RollupHtmlTemplateOptions>} options
+		 * @param {Partial<import('@rollup/plugin-html').RollupHtmlTemplateOptions>} template
 		 */
-		template(options = {}) {
-			console.log('Generated file types:', ...Object.keys(options.files ?? {}));
-
-			const scriptList = [/^index(-\w+)?\.js$/];
-			const preloadList = [
-				/^editor(-\w+)?\.js$/,
-				/^editorSimpleWorker(-\w+)?\.js$/,
-				/^javascript(-\w+)?\.js$/,
-			];
+		template({files = {}} = {}) {
+			console.log('Generated file types:', ...Object.keys(files ?? {}));
 
 			const scripts
-				= options.files?.js?.map(output => {
-					if (scriptList.some(r => r.test(output.fileName))) {
+				= files.js?.map(output => {
+					if (options.scriptList.some(r => r.test(output.fileName))) {
 						return h('script', {
-							...options.attributes?.script,
-							src: `${options.publicPath ?? ''}${output.fileName}`,
+							type: 'module',
+							src: `${options.publicPath}${output.fileName}`,
 						});
 					}
 
-					if (preloadList.some(r => r.test(output.fileName))) {
+					if (options.preloadList.some(r => r.test(output.fileName))) {
 						return h('link', {
-							...options.attributes?.preload,
 							rel: 'preload',
-							href: `${options.publicPath ?? ''}${output.fileName}`,
+							href: `${options.publicPath}${output.fileName}`,
 							as: 'script',
-							crossOrigin: true,
+							crossOrigin: '',
 						});
 					}
 
 					return undefined;
 				}) ?? [];
 
-			const links
-				= options.files?.css?.map(output =>
-					h('link', {
-						...options.attributes?.link,
-						rel: 'stylesheet',
-						href: `${options.publicPath ?? ''}${output.fileName}`,
-						integrity: getOutputHash(output).integrity,
-					}),
-				) ?? [];
+			const stylesheets
+				= files.css?.map(output => {
+					if (options.stylesheetList.some(r => r.test(output.fileName))) {
+						return h('link', {
+							rel: 'stylesheet',
+							href: `${options.publicPath}${output.fileName}`,
+							integrity: getOutputHash(output).integrity,
+						});
+					}
 
-			const meta = options.meta?.map(input => h('meta', input)) ?? [];
+					return undefined;
+				}) ?? [];
 
 			return render(
 				h(Document, {
-					lang: options.attributes?.html?.lang ?? 'en',
-					csp: 'default-src \'self\';base-uri \'none\';object-src \'none\';',
-					title: options.title ?? '',
-					head: [...meta, ...links, ...scripts],
+					...options,
+					head: [...stylesheets, ...scripts],
 				}),
 			);
 		},
