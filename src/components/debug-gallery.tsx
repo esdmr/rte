@@ -1,5 +1,5 @@
 import type {FunctionComponent} from 'preact';
-import * as css from './debug.module.css.js';
+import * as css from './debug-gallery.module.css.js';
 import * as gfbi from './icons/gamepad/face-button/index.js';
 import {Loading} from './loading.js';
 import {Title} from './title.js';
@@ -7,7 +7,7 @@ import {Title} from './title.js';
 const style = [gfbi.symbols, gfbi.lettersAb, gfbi.lettersBa, gfbi.numbersBolt, gfbi.numbersCircle] as const;
 const which = ['down', 'right', 'left', 'up'] as const;
 
-export const Debug: FunctionComponent = () => <main>
+export const DebugGallery: FunctionComponent = () => <main>
 	<Title>Debug gallery</Title>
 	<h1>Debug gallery</h1>
 

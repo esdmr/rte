@@ -110,11 +110,7 @@ const config = {
 			title: 'Gamepad Editor',
 			publicPath: '/',
 			scriptList: [/^index(-\w+)?\.js$/],
-			preloadList: [
-				/^editor(-\w+)?\.js$/,
-				/^editorSimpleWorker(-\w+)?\.js$/,
-				/^javascript(-\w+)?\.js$/,
-			],
+			preloadList: [],
 			stylesheetList: [],
 			csp: 'default-src \'self\';base-uri \'none\';object-src \'none\';',
 		}),
