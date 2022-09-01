@@ -28,7 +28,7 @@ export default function html(options) {
 		 * @param {Partial<import('@rollup/plugin-html').RollupHtmlTemplateOptions>} template
 		 */
 		template({files = {}} = {}) {
-			console.log('Generated file types:', ...Object.keys(files ?? {}));
+			console.log('Generated file types:', ...Object.keys(files));
 
 			const scripts
 				= files.js?.map(output => {

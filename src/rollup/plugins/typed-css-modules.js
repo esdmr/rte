@@ -12,15 +12,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import path from 'node:path';
 import DtsCreator from 'typed-css-modules';
 import find from 'find';
 import {defaultImport} from 'default-import';
+import {buildDir} from '../constants.js';
 
 function newCreator() {
 	return new (defaultImport(DtsCreator))({
 		camelCase: 'dashes',
 		dropExtension: false,
-		outDir: 'build/types',
+		outDir: path.join(buildDir, 'types'),
 		namedExports: true,
 	});
 }
