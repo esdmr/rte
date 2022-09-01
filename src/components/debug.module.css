@@ -1,4 +1,11 @@
-.gamepad-face-button-grid {
+.inline-figure {
+	display: inline-block;
+	width: min-content;
+	text-align: center;
+	margin: 0;
+}
+
+.gfbi-grid {
 	display: inline-grid;
 	margin: 0.5em;
 	grid-template-areas:
@@ -7,24 +14,24 @@
 		' .   down   .  ';
 }
 
-.gamepad-face-button-icon {
+.gfbi {
 	display: inline-block;
 	width: 2em;
 	height: 2em;
 }
 
-.gamepad-face-button-icon[data-which=down] {
+.gfbi[data-which=down] {
 	grid-area: down;
 }
 
-.gamepad-face-button-icon[data-which=right] {
+.gfbi[data-which=right] {
 	grid-area: right;
 }
 
-.gamepad-face-button-icon[data-which=left] {
+.gfbi[data-which=left] {
 	grid-area: left;
 }
 
-.gamepad-face-button-icon[data-which=up] {
+.gfbi[data-which=up] {
 	grid-area: up;
 }
