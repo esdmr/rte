@@ -9,6 +9,7 @@ import monaco from 'rollup-plugin-monaco-editor';
 import postcss from 'rollup-plugin-postcss';
 import {typescriptPaths} from 'rollup-plugin-typescript-resolve';
 import {defaultImport} from 'default-import';
+import injectProcessEnv from 'rollup-plugin-inject-process-env';
 import {buildDir, isProduction} from './constants.js';
 import html from './plugins/html.js';
 import licenses from './plugins/licenses.js';
@@ -91,6 +92,11 @@ const config = {
 			sourcemap: false,
 		}),
 		defaultImport(commonjs)(),
+		defaultImport(injectProcessEnv)({
+			NODE_ENV: isProduction ? 'production' : 'development',
+		}, {
+			exclude: ['**/*.css', 'src/404.ts'],
+		}),
 		defaultImport(esbuild)({
 			jsx: 'automatic',
 			jsxImportSource: 'preact',

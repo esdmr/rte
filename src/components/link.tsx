@@ -5,7 +5,7 @@
 import {cloneElement, type FunctionComponent, isValidElement, type JSX} from 'preact';
 import {useCallback} from 'preact/hooks';
 import {useLocation, useRouter} from 'wouter-preact';
-import {getUrl} from '../wouter-hash.js';
+import history from '../history.js';
 
 type LinkProps = JSX.IntrinsicElements['a'] & {
 	href: string;
@@ -44,7 +44,7 @@ export const Link: FunctionComponent<LinkProps> = props => {
 	);
 
 	const extraProps = {
-		href: getUrl(href, base).hash,
+		href: history.createHref(base + href),
 		onClick: handleClick,
 	};
 

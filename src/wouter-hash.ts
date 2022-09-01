@@ -4,49 +4,15 @@
  */
 import {useCallback, useEffect, useRef, useState} from 'preact/hooks';
 import type {BaseLocationHook} from 'wouter-preact';
-import assert from './assert.js';
+import history from './history.js';
 
-const eventPushState = 'pushState';
-const eventReplaceState = 'replaceState';
-const events = ['popstate', eventPushState, eventReplaceState, 'hashchange'];
-
-if (typeof history !== 'undefined') {
-	for (const type of [eventPushState, eventReplaceState] as const) {
-		history[type] = new Proxy(history[type], {
-			apply(...args) {
-				const result: unknown = Reflect.apply(...args);
-				globalThis.dispatchEvent(new Event(type));
-				return result;
-			},
-		});
-	}
-}
-
-const currentPathname = (base: string) => {
-	const path = location.hash.replace(/^#!/, '') || '/';
-
-	return path.toLowerCase().startsWith(base.toLowerCase())
-		? path.slice(base.length) || '/'
-		: '~' + path;
-};
-
-export const getUrl = (to: string, base: string) => {
-	const url = new URL('/', location.href);
-	url.hash = '#!' + (to.startsWith('~') ? to.slice(1) : base + to);
-	return url;
-};
-
-export const useHashLocation: BaseLocationHook = ({base = '/'} = {}) => {
-	assert(typeof base === 'string');
-
-	const [path, update] = useState(currentPathname(base));
+export const useHashLocation: BaseLocationHook = () => {
+	const [path, update] = useState(history.location.pathname);
 	const hash = useRef(path);
 
 	useEffect(() => {
-		const controller = new AbortController();
-
 		const checkForUpdates = (reason: string) => {
-			const newPath = currentPathname(base);
+			const newPath = history.location.pathname;
 			const oldPath = hash.current;
 
 			if (oldPath !== newPath) {
@@ -60,28 +26,20 @@ export const useHashLocation: BaseLocationHook = ({base = '/'} = {}) => {
 			}
 		};
 
-		for (const event of events) {
-			addEventListener(event, () => {
-				checkForUpdates(event);
-			}, {signal: controller.signal});
-		}
+		const stop = history.listen(() => {
+			checkForUpdates('listen');
+		});
 
 		checkForUpdates('initial');
 
 		return () => {
-			controller.abort();
+			stop();
 		};
-	}, [base]);
+	}, []);
 
 	const navigate = useCallback((to: string, {replace = false} = {}) => {
-		const url = getUrl(to, base);
-
-		history[replace ? eventReplaceState : eventPushState](
-			null,
-			'',
-			url,
-		);
-	}, [base]);
+		history[replace ? 'push' : 'replace'](to);
+	}, []);
 
 	return [path, navigate];
 };
