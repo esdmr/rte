@@ -23,19 +23,3 @@ export const lettersBa: FaceButtonStyle = {
 	left: createFaceButton('Y'),
 	up: createFaceButton('X'),
 };
-
-export const numbersBolt: FaceButtonStyle = {
-	name: 'numbers-bolt',
-	down: createFaceButton('1'),
-	right: createFaceButton('2'),
-	left: createFaceButton('3'),
-	up: createFaceButton('4'),
-};
-
-export const numbersCircle: FaceButtonStyle = {
-	name: 'numbers-circle',
-	up: createFaceButton('1'),
-	right: createFaceButton('2'),
-	down: createFaceButton('3'),
-	left: createFaceButton('4'),
-};

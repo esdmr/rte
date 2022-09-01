@@ -4,7 +4,7 @@ import * as gfbi from './icons/gamepad/face-button/index.js';
 import {Loading} from './loading.js';
 import {Title} from './title.js';
 
-const style = [gfbi.symbols, gfbi.lettersAb, gfbi.lettersBa, gfbi.numbersBolt, gfbi.numbersCircle] as const;
+const style = [gfbi.symbols, gfbi.lettersAb, gfbi.lettersBa] as const;
 const which = ['down', 'right', 'left', 'up'] as const;
 
 export const DebugGallery: FunctionComponent = () => <main>
