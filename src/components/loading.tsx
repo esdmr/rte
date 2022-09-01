@@ -1,9 +1,10 @@
 import type {FunctionComponent} from 'preact';
-import './loading.css';
+import {useClass} from '../use-class.js';
+import * as css from './loading.module.css.js';
 
 export const Loading: FunctionComponent<{class?: string}> = props => (
 	<div
-		class={`loading ${props.class ?? ''}`.trim()}
+		class={useClass(css.loading, props.class)}
 		role='alert'
 		aria-busy='true'
 		aria-labelledby='loading'
