@@ -38,7 +38,7 @@ export const useHashLocation: BaseLocationHook = () => {
 	}, []);
 
 	const navigate = useCallback((to: string, {replace = false} = {}) => {
-		history[replace ? 'push' : 'replace'](to);
+		history[replace ? 'replace' : 'push'](to);
 	}, []);
 
 	return [path, navigate];
