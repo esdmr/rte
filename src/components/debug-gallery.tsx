@@ -1,4 +1,5 @@
 import type {FunctionComponent} from 'preact';
+import {AllowScroll} from './allow-scroll.js';
 import * as css from './debug-gallery.module.css.js';
 import * as gfbi from './icons/gamepad/face-button/index.js';
 import {Loading} from './loading.js';
@@ -9,6 +10,7 @@ const which = ['down', 'right', 'left', 'up'] as const;
 
 export const DebugGallery: FunctionComponent = () => <main>
 	<Title>Debug gallery</Title>
+	<AllowScroll />
 	<h1>Debug gallery</h1>
 
 	<h2>Loading icon</h2>
