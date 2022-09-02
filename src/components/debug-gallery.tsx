@@ -14,7 +14,8 @@ export const DebugGallery: FunctionComponent = () => <main>
 	<h1>Debug gallery</h1>
 
 	<h2>Loading icon</h2>
-	<Loading />
+	<Loading placement='center' />
+	<Loading placement='bottom-right' />
 
 	<h2>Gamepad face button icons</h2>
 	{style.map(style =>

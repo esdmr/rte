@@ -4,9 +4,12 @@
 	--count-bias: 0;
 	--animation-duration: 2s;
 	display: grid;
-	align-items: end;
-	justify-items: end;
+	place-items: end;
 	padding: 5em;
+}
+
+.loading[data-placement=center] {
+	place-items: center;
 }
 
 .loading svg {
