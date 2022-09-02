@@ -100,6 +100,7 @@ const config = {
 		defaultImport(esbuild)({
 			jsx: 'automatic',
 			jsxImportSource: 'preact',
+			jsxDev: !isProduction,
 			minify: true,
 			minifyIdentifiers: isProduction,
 			keepNames: !isProduction,
