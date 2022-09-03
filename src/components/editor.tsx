@@ -42,7 +42,7 @@ function getEffectCallback(
 ): EffectCallback {
 	return () => {
 		const controller = new AbortController();
-		assert(options.ref.current !== null);
+		assert(options.ref.current !== null, 'ref is null');
 		const element = options.ref.current;
 
 		props.lightTheme ??= 'vs-light';

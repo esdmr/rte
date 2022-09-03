@@ -6,7 +6,7 @@ let set = false;
 
 export const AllowScroll: FunctionComponent = () => {
 	useEffect(() => {
-		assert(!set);
+		assert(!set, 'more than one AllowScroll in the render tree');
 		set = true;
 		document.body.classList.add('scroll');
 

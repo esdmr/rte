@@ -11,7 +11,7 @@ export const Title: FunctionComponent<{
 	const title = (toChildArray(props.children) as string[]).join('');
 
 	useEffect(() => {
-		assert(!set);
+		assert(!set, 'more than one Title in the render tree');
 		set = true;
 		const originalTitle = document.title;
 		document.title = title;
