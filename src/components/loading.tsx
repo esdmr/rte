@@ -2,6 +2,8 @@ import type {FunctionComponent} from 'preact';
 import {useClass} from '../use-class.js';
 import * as css from './loading.module.css.js';
 
+const circlesCount = 3;
+
 export const Loading: FunctionComponent<{
 	class?: string;
 	placement: 'center' | 'bottom-right';
@@ -13,10 +15,11 @@ export const Loading: FunctionComponent<{
 		aria-labelledby='loading'
 		data-placement={props.placement}
 	>
-		<svg viewBox='-2.5 -0.5 5 1' xmlns='http://www.w3.org/2000/svg' id='loading'
+		<svg viewBox={`-0.25 -0.25 ${circlesCount + 0.5} 1`} xmlns='http://www.w3.org/2000/svg' id='loading'
+			style={{'--count': circlesCount}}
 			aria-label='Loading'>
-			{[-2, 0, 2].map((cx, i) => (
-				<circle cx={cx} cy='0' r='0.5' style={{'--index': i}} />
+			{Array.from({length: circlesCount}, (_, index) => (
+				<circle cx={index} cy='0' r='0.25' style={{'--step': index / circlesCount}} key={index} />
 			))}
 		</svg>
 	</div>
