@@ -1,0 +1,53 @@
+:root {
+	/* Dark theme */
+	--circular-dark-focus-outline: cornflowerblue;
+	--circular-dark-hover-shadow: #fff2;
+	--circular-dark-active-shadow: #fff4;
+
+	/* Light theme */
+	--circular-light-focus-outline: royalblue;
+	--circular-light-hover-shadow: #0002;
+	--circular-light-active-shadow: #0004;
+
+	--circular-focus-outline: var(--circular-dark-focus-outline);
+	--circular-hover-shadow: var(--circular-dark-hover-shadow);
+	--circular-active-shadow: var(--circular-dark-active-shadow);
+}
+
+@media (prefers-color-scheme: light) {
+	:root {
+		--circular-focus-outline: var(--circular-light-focus-outline);
+		--circular-hover-shadow: var(--circular-light-hover-shadow);
+		--circular-active-shadow: var(--circular-light-active-shadow);
+	}
+}
+
+.circular {
+	display: inline-grid;
+	place-items: center;
+	width: calc(1.5em * var(--SQRT-2));
+	height: calc(1.5em * var(--SQRT-2));
+	border-radius: 1.5em;
+	border: none;
+	background: transparent;
+	color: inherit;
+}
+
+.circular:focus-visible {
+	outline: 0.1em solid var(--circular-focus-outline);
+	outline-offset: 0.1em;
+}
+
+.circular:hover {
+	background: var(--circular-hover-shadow);
+}
+
+.circular:active {
+	background: var(--circular-active-shadow);
+}
+
+.circular svg {
+	display: inline-block;
+	width: 1.5em;
+	height: 1.5em;
+}

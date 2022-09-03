@@ -1,7 +1,10 @@
+import {mdiHome} from '@mdi/js';
+import {Icon} from '@mdi/react';
 import type {FunctionComponent} from 'preact';
 import {Route, Router, Switch} from 'wouter-preact';
 import {useHashLocation} from '../wouter-hash.js';
 import {AllowScroll} from './allow-scroll.js';
+import {CircularButton} from './circular-button.js';
 import {DebugGallery} from './debug-gallery.js';
 import {EditorContainer} from './editor-container.js';
 import {Link} from './link.js';
@@ -29,6 +32,13 @@ export const App: FunctionComponent = () => <Router hook={useHashLocation}>
 			{({id}) => <>
 				<Title>Debug route: {id}</Title>
 				<AllowScroll />
+				<header>
+					<nav>
+						<CircularButton href='/'>
+							<Icon path={mdiHome} title='Home' />
+						</CircularButton>
+					</nav>
+				</header>
 				<h1>Debug route: {id}</h1>
 				<nav>
 					<ul>
@@ -41,6 +51,13 @@ export const App: FunctionComponent = () => <Router hook={useHashLocation}>
 		<Route>
 			{() => <>
 				<Title>Not found</Title>
+				<header>
+					<nav>
+						<CircularButton href='/'>
+							<Icon path={mdiHome} title='Home' />
+						</CircularButton>
+					</nav>
+				</header>
 				<h1>Page not found!</h1>
 			</>}
 		</Route>

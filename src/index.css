@@ -10,12 +10,18 @@
 }
 
 :root {
+	/* Dark theme */
 	--dark-background: #1e1e1e;
 	--dark-foreground: #d4d4d4;
+
+	/* Light theme */
 	--light-background: #fffffe;
 	--light-foreground: #000000;
+
 	--background: var(--dark-background);
 	--foreground: var(--dark-foreground);
+
+	--SQRT-2: 1.414213562;
 }
 
 @media (prefers-color-scheme: light) {
