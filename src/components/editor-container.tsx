@@ -8,9 +8,9 @@ const Editor = /* @__PURE__ */ lazy(async () =>
 );
 
 export const EditorContainer: FunctionComponent = () => (
-	<div class={css.editorContainer} role='region' aria-live='polite'>
+	<main class={css.editorContainer} role='region' aria-live='polite'>
 		<Suspense fallback={<Loading placement='bottom-right' class={css.editor} />}>
 			<Editor />
 		</Suspense>
-	</div>
+	</main>
 );

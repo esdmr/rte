@@ -13,7 +13,7 @@ import {Title} from './title.js';
 export const App: FunctionComponent = () => <Router hook={useHashLocation}>
 	<Switch>
 		<Route path='/'>
-			{() => <>
+			{() => <main>
 				<AllowScroll />
 				<h1>Gamepad Editor</h1>
 				<p>Work in progress!</p>
@@ -24,7 +24,7 @@ export const App: FunctionComponent = () => <Router hook={useHashLocation}>
 						<li><Link href='/debug/route/init'>Debug routes</Link></li>
 					</ul>
 				</nav>
-			</>}
+			</main>}
 		</Route>
 		<Route path='/debug/editor'>{() => <EditorContainer />}</Route>
 		<Route path='/debug/gallery'>{() => <DebugGallery />}</Route>
@@ -38,13 +38,15 @@ export const App: FunctionComponent = () => <Router hook={useHashLocation}>
 						</CircularButton>
 					</nav>
 				</header>
-				<Title h1>Debug route: {id}</Title>
-				<nav>
-					<ul>
-						<li><Link href='/debug/route/a'>link to: a</Link></li>
-						<li><Link href='/debug/route/b'>link to: b</Link></li>
-					</ul>
-				</nav>
+				<main>
+					<Title h1>Debug route: {id}</Title>
+					<nav>
+						<ul>
+							<li><Link href='/debug/route/a'>link to: a</Link></li>
+							<li><Link href='/debug/route/b'>link to: b</Link></li>
+						</ul>
+					</nav>
+				</main>
 			</>}
 		</Route>
 		<Route>
@@ -56,7 +58,9 @@ export const App: FunctionComponent = () => <Router hook={useHashLocation}>
 						</CircularButton>
 					</nav>
 				</header>
-				<Title h1>Page not found!</Title>
+				<main>
+					<Title h1>Page not found!</Title>
+				</main>
 			</>}
 		</Route>
 	</Switch>

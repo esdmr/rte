@@ -20,20 +20,22 @@ export const DebugGallery: FunctionComponent = () => <main>
 			</CircularButton>
 		</nav>
 	</header>
-	<Title h1>Debug Gallery</Title>
+	<main>
+		<Title h1>Debug Gallery</Title>
 
-	<h2>Loading icon</h2>
-	<Loading placement='center' />
-	<Loading placement='bottom-right' />
+		<h2>Loading icon</h2>
+		<Loading placement='center' />
+		<Loading placement='bottom-right' />
 
-	<h2>Gamepad face button icons</h2>
-	{style.map(style =>
-		<figure class={css.inlineFigure}>
-			<div class={css.gfbiGrid}>
-				{which.map(which => <gfbi.GamepadFaceButtonIcon class={css.gfbi} style={style} which={which} />,
-				)}
-			</div>
-			<figcaption><code>{style.name}</code></figcaption>
-		</figure>,
-	)}
+		<h2>Gamepad face button icons</h2>
+		{style.map(style =>
+			<figure class={css.inlineFigure} key={style.name}>
+				<div class={css.gfbiGrid}>
+					{which.map(which => <gfbi.GamepadFaceButtonIcon class={css.gfbi} style={style} which={which} key={which} />,
+					)}
+				</div>
+				<figcaption><code>{style.name}</code></figcaption>
+			</figure>,
+		)}
+	</main>
 </main>;
