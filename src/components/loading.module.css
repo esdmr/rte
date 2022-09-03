@@ -1,6 +1,6 @@
 .loading {
 	--animation-duration: 2s;
-	--animation-scale: 3;
+	--animation-scale: 2;
 	display: grid;
 	place-items: end;
 	padding: 5em;
@@ -19,7 +19,7 @@
 	fill: var(--foreground);
 	transform-origin: center;
 	transform-box: fill-box;
-	animation: loading calc(var(--animation-duration) / 2) ease-in-out calc(-1 * var(--index) * var(--animation-duration) / var(--animation-scale)) infinite alternate;
+	animation: loading calc(var(--animation-duration) / 2) ease-in-out calc(-1 * var(--step) * var(--animation-duration) / var(--animation-scale)) infinite alternate;
 }
 
 @keyframes loading {
