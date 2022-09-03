@@ -4,7 +4,10 @@ import assert from '../assert.js';
 
 let set = false;
 
-export const Title: FunctionComponent<{children: string | string[]}> = props => {
+export const Title: FunctionComponent<{
+	children: string | string[];
+	h1?: boolean;
+}> = props => {
 	const title = (toChildArray(props.children) as string[]).join('');
 
 	useEffect(() => {
@@ -19,5 +22,5 @@ export const Title: FunctionComponent<{children: string | string[]}> = props => 
 		};
 	}, [title]);
 
-	return null;
+	return props.h1 ? <h1>{title}</h1> : null;
 };

@@ -12,7 +12,6 @@ const style = [gfbi.symbols, gfbi.lettersAb, gfbi.lettersBa] as const;
 const which = ['down', 'right', 'left', 'up'] as const;
 
 export const DebugGallery: FunctionComponent = () => <main>
-	<Title>Debug gallery</Title>
 	<AllowScroll />
 	<header>
 		<nav>
@@ -21,7 +20,7 @@ export const DebugGallery: FunctionComponent = () => <main>
 			</CircularButton>
 		</nav>
 	</header>
-	<h1>Debug gallery</h1>
+	<Title h1>Debug Gallery</Title>
 
 	<h2>Loading icon</h2>
 	<Loading placement='center' />

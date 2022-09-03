@@ -30,7 +30,6 @@ export const App: FunctionComponent = () => <Router hook={useHashLocation}>
 		<Route path='/debug/gallery'>{() => <DebugGallery />}</Route>
 		<Route path='/debug/route/:id'>
 			{({id}) => <>
-				<Title>Debug route: {id}</Title>
 				<AllowScroll />
 				<header>
 					<nav>
@@ -39,7 +38,7 @@ export const App: FunctionComponent = () => <Router hook={useHashLocation}>
 						</CircularButton>
 					</nav>
 				</header>
-				<h1>Debug route: {id}</h1>
+				<Title h1>Debug route: {id}</Title>
 				<nav>
 					<ul>
 						<li><Link href='/debug/route/a'>link to: a</Link></li>
@@ -50,7 +49,6 @@ export const App: FunctionComponent = () => <Router hook={useHashLocation}>
 		</Route>
 		<Route>
 			{() => <>
-				<Title>Not found</Title>
 				<header>
 					<nav>
 						<CircularButton href='/'>
@@ -58,7 +56,7 @@ export const App: FunctionComponent = () => <Router hook={useHashLocation}>
 						</CircularButton>
 					</nav>
 				</header>
-				<h1>Page not found!</h1>
+				<Title h1>Page not found!</Title>
 			</>}
 		</Route>
 	</Switch>
