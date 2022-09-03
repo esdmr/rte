@@ -11,7 +11,7 @@ export const AllowScroll: FunctionComponent = () => {
 		document.body.classList.add('scroll');
 
 		return () => {
-			set = true;
+			set = false;
 			document.body.classList.remove('scroll');
 		};
 	}, []);
