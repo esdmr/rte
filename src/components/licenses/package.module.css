@@ -1,0 +1,30 @@
+.pkg {
+	margin: 1em 0;
+}
+
+.content .heading,
+.content p {
+	margin: 0;
+}
+
+.content .heading {
+	margin-block-end: 0.5em;
+}
+
+.has-license-file {
+	display: grid;
+	grid-template-columns: 1fr calc(1.5em * var(--SQRT-2));
+	grid-template-areas: 'content icon';
+	align-items: center;
+}
+
+.has-license-file .content {
+	grid-area: content;
+}
+
+.has-license-file .icon {
+	display: inline-block;
+	grid-area: icon;
+	width: 1.5em;
+	height: 1.5em;
+}

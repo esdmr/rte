@@ -1,5 +1,14 @@
 import {createHash} from 'node:crypto';
 
+/**
+ * @param {import('node:crypto').BinaryLike} content
+ */
+export function getIntegrity(content) {
+	return 'sha256-' + createHash('sha256')
+		.update(content)
+		.digest('base64');
+}
+
 /** @param {import('rollup').OutputAsset | import('rollup').OutputChunk} output */
 export function getOutputHash(output) {
 	const dotIndex = output.fileName.lastIndexOf('.');
@@ -16,11 +25,7 @@ export function getOutputHash(output) {
 		.update(output.type === 'chunk' ? output.code : output.source)
 		.digest('hex');
 
-	const integrity
-		= 'sha256-'
-		+ createHash('sha256')
-			.update(output.type === 'chunk' ? output.code : output.source)
-			.digest('base64');
+	const integrity = getIntegrity(output.type === 'chunk' ? output.code : output.source);
 
 	return {
 		name,

@@ -40,6 +40,7 @@ const config = {
 		generatedCode: 'es2015',
 		interop: 'auto',
 		sourcemap: !isProduction,
+		minifyInternalExports: isProduction,
 	},
 	strictDeprecations: true,
 	treeshake: true,

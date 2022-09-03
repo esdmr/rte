@@ -7,6 +7,8 @@ import {AllowScroll} from './allow-scroll.js';
 import {CircularButton} from './circular-button.js';
 import {DebugGallery} from './debug-gallery.js';
 import {EditorContainer} from './editor-container.js';
+import {LicenseFile} from './licenses/file.js';
+import {Licenses} from './licenses/index.js';
 import {Link} from './link.js';
 import {Title} from './title.js';
 
@@ -20,12 +22,17 @@ export const App: FunctionComponent = () => <Router hook={useHashLocation}>
 				<nav>
 					<ul>
 						<li><Link href='/debug/editor'>Debug Editor</Link></li>
+						<li><Link href='/debug/licenses'>Debug Licenses</Link></li>
 						<li><Link href='/debug/gallery'>Debug Gallery</Link></li>
 						<li><Link href='/debug/route/init'>Debug routes</Link></li>
 					</ul>
 				</nav>
 			</main>}
 		</Route>
+		<Route path='/debug/licenses/dev/:id'>{({id}) => <LicenseFile id={id} return-route='/debug/licenses/dev' />}</Route>
+		<Route path='/debug/licenses/dev'>{() => <Licenses dev return-route='/debug/licenses' />}</Route>
+		<Route path='/debug/licenses/:id'>{({id}) => <LicenseFile id={id} return-route='/debug/licenses' />}</Route>
+		<Route path='/debug/licenses'>{() => <Licenses return-route='/' />}</Route>
 		<Route path='/debug/editor'>{() => <EditorContainer />}</Route>
 		<Route path='/debug/gallery'>{() => <DebugGallery />}</Route>
 		<Route path='/debug/route/:id'>
@@ -51,6 +58,7 @@ export const App: FunctionComponent = () => <Router hook={useHashLocation}>
 		</Route>
 		<Route>
 			{() => <>
+				<AllowScroll />
 				<header>
 					<nav>
 						<CircularButton href='/'>

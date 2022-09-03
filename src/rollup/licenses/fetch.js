@@ -1,34 +1,36 @@
 #!/usr/bin/env node
-import fs from 'node:fs/promises';
-import path from 'node:path';
-import {createWriteStream} from 'node:fs';
+/**
+ * @typedef {import('../../license-types.js').Package} Package
+ * @typedef {import('../../license-types.js').License} License
+ * @typedef {import('../../license-types.js').LegacyLicense} LegacyLicense
+ */
 import assert from 'node:assert';
 import process from 'node:process';
-import {execaCommand} from 'execa';
-import {h} from 'preact';
-import icon from '@mdi/react';
-import parseAuthor from 'parse-author';
+import {existsSync} from 'node:fs';
+import fs from 'node:fs/promises';
+import path from 'node:path';
 import {readWantedLockfile} from '@pnpm/lockfile-file';
-import {mdiArrowLeft} from '@mdi/js';
-import render from '../render.js';
-import {Document} from '../components/document.js';
-import {isProduction} from '../constants.js';
-import {LoadableDetails} from './components/loadable-details.js';
-import {getLicenseInfo} from './components/license.js';
-import {Package} from './components/package.js';
+import parseAuthor from 'parse-author';
+import {buildDir} from '../constants.js';
+import {getIntegrity} from '../hash.js';
 
-await fs.mkdir('build', {recursive: true});
-await fs.rm('build/licenses', {force: true, recursive: true});
-await fs.mkdir('build/licenses', {recursive: true});
+const integrity = getIntegrity(await fs.readFile('pnpm-lock.yaml'));
 
-const onlyProduction = Boolean(process.env.ONLY_PROD);
+if (await isBuildUpToDate(integrity)) {
+	console.log('License files up to date. Ignoring.');
+	process.exit(0);
+}
 
-/** @type {Map<string, Map<string, import('./components/license.js').LicenseProps>>} */
+await fs.mkdir(buildDir, {recursive: true});
+await fs.rm(path.join(buildDir, 'license-files'), {force: true, recursive: true});
+await fs.mkdir(path.join(buildDir, 'license-files'), {recursive: true});
+
+/** @type {Map<string, Package>} */
 const packages = new Map();
 
-/** @type {Record<string, Partial<import('./components/license.js').LicenseProps>>} */
+/** @type {Record<string, Partial<Package>>} */
 const overrides = {
-	'preact@10.10.6': {authors: new Set(['Jason Miller'])},
+	'preact@10.10.6': {authors: ['Jason Miller']},
 };
 
 const unusedOverrides = new Set(Object.keys(overrides));
@@ -39,7 +41,7 @@ const pnpmDirs = Object.entries(lockfile.packages ?? {})
 	.sort(([a], [b]) => a.localeCompare(b, 'en'))
 	.map(([pkgPath, snapshot]) => {
 		const [, name, version]
-			= /^\/((?:@[^/]+\/)?[^/]+)\/(.+)$/.exec(pkgPath) ?? [];
+			= /^\/((?:@.+?\/)?.+?)\/(.+)$/.exec(pkgPath) ?? [];
 
 		assert(name);
 		assert(version);
@@ -51,13 +53,24 @@ const pnpmDirs = Object.entries(lockfile.packages ?? {})
 				'node_modules',
 				name,
 			),
-			snapshot,
+			{
+				name,
+				version,
+				...snapshot,
+			},
 		]);
 	});
 
 await Promise.all(
-	pnpmDirs.map(async ([pkgDir, {dev}]) => {
-		if (onlyProduction && dev) {
+	pnpmDirs.map(async ([pkgDir, snapshot]) => {
+		if (!existsSync(pkgDir)) {
+			if (snapshot.optional) {
+				console.warn('Optional package', `${snapshot.name}@${snapshot.version}`, 'was not found');
+				return;
+			}
+
+			console.error(`Required package ${snapshot.name}@${snapshot.version} was not found`);
+			process.exitCode = 1;
 			return;
 		}
 
@@ -66,28 +79,27 @@ await Promise.all(
 			version,
 			license: pkgLicense,
 			licenses: pkgLicenses,
-			author: pkgAuthor,
-			contributors: pkgContributors,
-			maintainers: pkgMaintainers,
+			author: pkgAuthor = '',
+			contributors: pkgContributors = [],
+			maintainers: pkgMaintainers = [],
 		} = JSON.parse(
 			await fs.readFile(path.join(pkgDir, 'package.json'), 'utf8'),
 		);
 
 		const pkgId = `${name}@${version}`;
-		const authors = new Set(
-			[pkgAuthor ?? '', ...(pkgContributors ?? []), ...(pkgMaintainers ?? [])]
+		const authors = [...new Set(
+			[pkgAuthor, ...pkgContributors, ...pkgMaintainers]
 				.map(contrib => getContributorName(contrib))
 				.filter(Boolean),
-		);
+		)];
 		const {license, licensePath} = getLicenseInfo(
 			pkgLicense,
 			pkgLicenses,
 			pkgDir,
-			pkgId,
 		);
 
 		if (licensePath) {
-			const target = path.join('build/licenses', pkgId);
+			const target = path.join(buildDir, 'license-files', pkgId);
 			await fs.mkdir(path.dirname(target), {recursive: true});
 			await fs.cp(licensePath, target);
 		} else if (license && !Array.isArray(license)) {
@@ -95,20 +107,16 @@ await Promise.all(
 
 			if (dir.some(item => /license/i.test(item))) {
 				console.log(
-					`${pkgId} might have a license file that I could not find. Take a look at`,
+					pkgId, 'might have a license file that I could not find. Take a look at',
 					pkgDir,
 				);
 			}
 		}
 
-		/** @type {Map<string, import('./components/license.js').LicenseProps>} */
-		const licenses = packages.get(name) ?? new Map();
-		packages.set(name, licenses);
-
-		licenses.set(version, {
+		packages.set(pkgId, {
 			name,
 			version,
-			dev: onlyProduction ? undefined : dev ?? false,
+			dev: snapshot.dev,
 			authors,
 			license,
 			...overrides[pkgId],
@@ -122,83 +130,22 @@ if (unusedOverrides.size > 0) {
 	console.warn('Unused overrides:', unusedOverrides);
 }
 
-const children = [];
+/** @type {Package[]} */
+const prodJson = [];
+/** @type {Package[]} */
+const devJson = [];
 
-for (const [name, licenses] of packages) {
-	children.push(h(Package, {name, licenses: [...licenses.values()]}));
+for (const pkg of packages.values()) {
+	if (pkg.dev) {
+		devJson.push(pkg);
+	} else {
+		prodJson.push(pkg);
+	}
 }
 
-const pnpmList = execaCommand('pnpm ls --depth Infinity', {
-	env: {
-		NODE_ENV: onlyProduction ? 'production' : 'development',
-	},
-});
-const licenseIndexLog = createWriteStream('build/licenses/index.log');
-pnpmList.stdout?.pipe(licenseIndexLog);
-await pnpmList;
-
-if (!licenseIndexLog.writableEnded) {
-	licenseIndexLog.end();
-}
-
-await fs.writeFile(
-	'build/licenses/index.html',
-	render(
-		h(
-			Document,
-			{
-				csp: 'default-src \'self\';object-src \'none\';',
-				robots: 'noindex,nofollow',
-				base: '/licenses/',
-				title: 'Licenses',
-				head: [
-					h('link', {rel: 'stylesheet', href: 'index.css'}),
-					h('script', {defer: true, src: 'index.js'}),
-				],
-			},
-			h(
-				'header',
-				null,
-				h(
-					'nav',
-					null,
-					h(
-						'a',
-						{
-							href: '/',
-							class: 'circular-button',
-						},
-						h(icon.default, {path: mdiArrowLeft, title: 'Back', size: '1em'}),
-					),
-				),
-			),
-			h('h1', null, 'Licenses'),
-			h(
-				LoadableDetails,
-				{url: 'index.log'},
-				h('code', null, 'pnpm ls --depth Infinity'),
-			),
-			children,
-		),
-	),
-);
-
-/**
- * @typedef {string | URL} PathLike
- * @type {(target: PathLike, path: PathLike) => Promise<void>}
- */
-const copy = isProduction
-	? fs.cp
-	: (target, path) => fs.symlink(target, path, 'junction');
-
-await copy(
-	new URL('assets/browser.css', import.meta.url),
-	'build/licenses/index.css',
-);
-await copy(
-	new URL('assets/browser.js', import.meta.url),
-	'build/licenses/index.js',
-);
+await fs.writeFile(path.join(buildDir, 'license-files/prod.json'), JSON.stringify(prodJson) + '\n');
+await fs.writeFile(path.join(buildDir, 'license-files/dev.json'), JSON.stringify(devJson) + '\n');
+await fs.writeFile(path.join(buildDir, 'license-files/.integrity'), integrity + '\n');
 
 console.log('Done fetching the licenses.');
 
@@ -207,4 +154,98 @@ function getContributorName(author) {
 	return (
 		(typeof author === 'string' ? parseAuthor(author).name : author?.name) || ''
 	);
+}
+
+/**
+ * @param {string} integrity
+ */
+async function isBuildUpToDate(integrity) {
+	const integrityFile = path.join(buildDir, 'license-files/.integrity');
+
+	if (!existsSync(integrityFile)) {
+		return false;
+	}
+
+	const buildIntegrity = await fs.readFile(integrityFile, 'utf8');
+
+	return integrity.trim() === buildIntegrity.trim();
+}
+
+/**
+ * @param {unknown} pkgLicense
+ * @param {unknown} pkgLicenses
+ * @param {string} pkgDir
+ * @returns {{license: License, licensePath: string | undefined}}
+ */
+function getLicenseInfo(pkgLicense, pkgLicenses, pkgDir) {
+	if (typeof pkgLicense !== 'string') {
+		const licenses = /** @type {LegacyLicense[]} */(
+			[pkgLicense, pkgLicenses]
+				.flat()
+				.filter(
+					license =>
+						typeof license === 'object'
+							&& license !== null
+							&& 'type' in license
+							&& 'url' in license,
+				)
+		);
+
+		if (licenses.length === 0) {
+			const licenseFile = tryFindLicenseFile(pkgDir);
+			return {
+				license: licenseFile ? {type: 'custom'} : undefined,
+				licensePath: licenseFile,
+			};
+		}
+
+		return {license: licenses, licensePath: undefined};
+	}
+
+	const match = /^SEE LICENSE IN (.+)$/.exec(pkgLicense);
+
+	if (match?.[1]) {
+		return {
+			license: {type: 'custom'},
+			licensePath: path.join(pkgDir, match[1]),
+		};
+	}
+
+	const licenseFile = tryFindLicenseFile(pkgDir);
+
+	return {
+		license: {
+			type: 'spdx',
+			id: pkgLicense,
+			hasFile: Boolean(licenseFile),
+		},
+		licensePath: licenseFile,
+	};
+}
+
+/**
+ * @param {string} pkgDir
+ */
+function tryFindLicenseFile(pkgDir) {
+	for (const file of [
+		'LICENSE.md',
+		'LICENSE',
+		'LICENSE.txt',
+		'license.md',
+		'license',
+		'license.txt',
+		'LICENSE-MIT',
+		'LICENSE-MIT.txt',
+		'MIT-LICENSE.txt',
+		'LICENSE.BSD',
+		'License.md',
+		'License',
+		'License.txt',
+	]) {
+		if (existsSync(path.join(pkgDir, file))) {
+			return path.join(pkgDir, file);
+		}
+	}
+
+	return undefined;
 }

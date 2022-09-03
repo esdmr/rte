@@ -9,6 +9,9 @@ const scriptPath = /* @__PURE__ */ fileURLToPath(
 export default function licenses() {
 	return {
 		name: 'licenses',
+		buildStart() {
+			this.addWatchFile('pnpm-lock.yaml');
+		},
 		async closeBundle() {
 			console.log('Fetching the licenses...');
 			await execaNode(scriptPath, {
