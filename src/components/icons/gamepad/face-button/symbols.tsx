@@ -8,8 +8,8 @@ const symbolsRadius = 6;
 const symbolsStrokeWidth = 0.2 * symbolsRadius;
 const crossStrokeLength = Math.sqrt(((2 * symbolsRadius) ** 2) - (symbolsStrokeWidth ** 2));
 const trianglePointsDistance = symbolsRadius - symbolsStrokeWidth;
-const diagonalUnit = /* @__PURE__ */vectorPolar(1, -Math.PI / 4);
-const antiDiagonalUnit = /* @__PURE__ */vectorPolar(1, Math.PI / 4);
+const diagonalUnit = /* @__PURE__ */ vectorPolar(1, -Math.PI / 4);
+const antiDiagonalUnit = /* @__PURE__ */ vectorPolar(1, Math.PI / 4);
 
 export const symbols: FaceButtonStyle = {
 	name: 'symbols',

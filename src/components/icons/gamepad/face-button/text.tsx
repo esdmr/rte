@@ -8,7 +8,7 @@ const createFaceButton = (text: string): FaceButtonStyle[Direction] => ({
 	name: text,
 });
 
-export const lettersAb: FaceButtonStyle = {
+export const lettersAb: FaceButtonStyle = /* @__PURE__ */ {
 	name: 'letters-ab',
 	down: createFaceButton('A'),
 	right: createFaceButton('B'),
@@ -16,7 +16,7 @@ export const lettersAb: FaceButtonStyle = {
 	up: createFaceButton('Y'),
 };
 
-export const lettersBa: FaceButtonStyle = {
+export const lettersBa: FaceButtonStyle = /* @__PURE__ */ {
 	name: 'letters-ba',
 	down: createFaceButton('B'),
 	right: createFaceButton('A'),

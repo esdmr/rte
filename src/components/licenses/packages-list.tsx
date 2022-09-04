@@ -26,5 +26,5 @@ const createComponent = (file: string, route: string) => lazy<FunctionComponent>
 	}
 });
 
-export const Production = createComponent('/licenses.prod.json', '/debug/licenses/');
-export const Development = createComponent('/licenses.dev.json', '/debug/licenses/dev/');
+export const Production = /* @__PURE__ */ createComponent('/license-files/prod.json', '/debug/licenses/');
+export const Development = /* @__PURE__ */ createComponent('/license-files/dev.json', '/debug/licenses/dev/');
