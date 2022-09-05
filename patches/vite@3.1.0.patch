@@ -1,0 +1,46 @@
+diff --git a/dist/node/index.d.ts b/dist/node/index.d.cts
+similarity index 100%
+rename from dist/node/index.d.ts
+rename to dist/node/index.d.cts
+diff --git a/index.d.cts b/index.d.cts
+new file mode 100644
+index 0000000000000000000000000000000000000000..a7db6bd8797b80c0997b5e5231704bac4c1b6ecc
+--- /dev/null
++++ b/index.d.cts
+@@ -0,0 +1 @@
++export * from './dist/node/index.cjs';
+diff --git a/index.d.ts b/index.d.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..a7db6bd8797b80c0997b5e5231704bac4c1b6ecc
+--- /dev/null
++++ b/index.d.ts
+@@ -0,0 +1 @@
++export * from './dist/node/index.cjs';
+diff --git a/index.js b/index.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..36b46ab60cf0f55350f6a471f276557b8072af1a
+--- /dev/null
++++ b/index.js
+@@ -0,0 +1 @@
++export * from './dist/node/index.js';
+diff --git a/package.json b/package.json
+index b929146aee535968a0f7a8303285bd0099504f27..c36b4c95690d75daaf078a1d690eefa472d52e8b 100644
+--- a/package.json
++++ b/package.json
+@@ -8,13 +8,11 @@
+   "bin": {
+     "vite": "bin/vite.js"
+   },
+-  "main": "./dist/node/index.js",
+-  "module": "./dist/node/index.js",
+-  "types": "./dist/node/index.d.ts",
++  "main": "./index.js",
++  "module": "./index.js",
+   "exports": {
+     ".": {
+-      "types": "./dist/node/index.d.ts",
+-      "import": "./dist/node/index.js",
++      "import": "./index.js",
+       "require": "./index.cjs"
+     },
+     "./client": {

@@ -34,7 +34,7 @@
     "sirv": "^2.0.2",
     "typed-css-modules": "0.7.2",
     "typescript": "4.8.2",
-    "vite": "3.0.9",
+    "vite": "3.1.0",
     "vite-plugin-inspect": "^0.6.1",
     "xo": "0.51.0"
   },
@@ -55,7 +55,8 @@
       "wouter-preact@2.8.0-alpha.2": "patches/wouter-preact@2.8.0-alpha.2.patch",
       "typed-css-modules@0.7.2": "patches/typed-css-modules@0.7.2.patch",
       "@prefresh/vite@2.2.8": "patches/@prefresh__vite@2.2.8.patch",
-      "@rollup/pluginutils@4.2.1": "patches/@rollup__pluginutils@4.2.1.patch"
+      "@rollup/pluginutils@4.2.1": "patches/@rollup__pluginutils@4.2.1.patch",
+      "vite@3.1.0": "patches/vite@3.1.0.patch"
     }
   }
 }
