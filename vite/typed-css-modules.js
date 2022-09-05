@@ -35,16 +35,18 @@ async function writeTypes(file, creator = newCreator()) {
 	await content.writeFile();
 }
 
-const creator = newCreator();
-
 /** @type {string[]} */
-const files = await new Promise(resolve => {
-	find.file(/\.module\.css$/, 'src', resolve);
-});
+let files;
 
 export default definePlugin({
 	name: 'typed-css-modules',
 	async buildStart() {
+		const creator = newCreator();
+
+		files = await new Promise(resolve => {
+			find.file(/\.module\.css$/, 'src', resolve);
+		});
+
 		const promises = files.map(async file => {
 			this.addWatchFile(file);
 			await writeTypes(file, creator);
