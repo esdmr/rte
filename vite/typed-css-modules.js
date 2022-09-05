@@ -41,22 +41,12 @@ let files;
 export default definePlugin({
 	name: 'typed-css-modules',
 	async buildStart() {
-		const creator = newCreator();
-
 		files = await new Promise(resolve => {
 			find.file(/\.module\.css$/, 'src', resolve);
 		});
 
-		const promises = files.map(async file => {
+		for (const file of files) {
 			this.addWatchFile(file);
-			await writeTypes(file, creator);
-		});
-
-		await Promise.all(promises);
-	},
-	async watchChange(id) {
-		if (id.endsWith('.css')) {
-			await writeTypes(id);
 		}
 	},
 	async configureServer(server) {
@@ -64,8 +54,15 @@ export default definePlugin({
 
 		server.watcher.on('change', path => {
 			if (path.endsWith('.css')) {
+				console.log(path, 'was changed. Updating its types...');
 				writeTypes(path).catch(console.error);
 			}
 		});
+	},
+	async closeBundle() {
+		console.log('Building the css module types...');
+		const creator = newCreator();
+		await Promise.all(files.map(async file => writeTypes(file, creator)));
+		console.log('Done building the css module types.');
 	},
 });
