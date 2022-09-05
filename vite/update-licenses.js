@@ -1,18 +1,17 @@
 #!/usr/bin/env node
 /**
- * @typedef {import('../../license-types.js').Package} Package
- * @typedef {import('../../license-types.js').License} License
- * @typedef {import('../../license-types.js').LegacyLicense} LegacyLicense
+ * @typedef {import('../src/license-types.js').Package} Package
+ * @typedef {import('../src/license-types.js').License} License
+ * @typedef {import('../src/license-types.js').LegacyLicense} LegacyLicense
  */
 import assert from 'node:assert';
 import process from 'node:process';
 import {existsSync} from 'node:fs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import {createHash} from 'node:crypto';
 import {readWantedLockfile} from '@pnpm/lockfile-file';
 import parseAuthor from 'parse-author';
-import {buildDir} from '../constants.js';
-import {getIntegrity} from '../hash.js';
 
 const integrity = getIntegrity(await fs.readFile('pnpm-lock.yaml'));
 
@@ -21,9 +20,9 @@ if (await isBuildUpToDate(integrity)) {
 	process.exit(0);
 }
 
-await fs.mkdir(buildDir, {recursive: true});
-await fs.rm(path.join(buildDir, 'license-files'), {force: true, recursive: true});
-await fs.mkdir(path.join(buildDir, 'license-files'), {recursive: true});
+await fs.mkdir('build', {recursive: true});
+await fs.rm('build/license-files', {force: true, recursive: true});
+await fs.mkdir('build/license-files', {recursive: true});
 
 /** @type {Map<string, Package>} */
 const packages = new Map();
@@ -99,7 +98,7 @@ await Promise.all(
 		);
 
 		if (licensePath) {
-			const target = path.join(buildDir, 'license-files', pkgId);
+			const target = path.join('build/license-files', pkgId);
 			await fs.mkdir(path.dirname(target), {recursive: true});
 			await fs.cp(licensePath, target);
 		} else if (license && !Array.isArray(license)) {
@@ -143,9 +142,9 @@ for (const pkg of packages.values()) {
 	}
 }
 
-await fs.writeFile(path.join(buildDir, 'license-files/prod.json'), JSON.stringify(prodJson) + '\n');
-await fs.writeFile(path.join(buildDir, 'license-files/dev.json'), JSON.stringify(devJson) + '\n');
-await fs.writeFile(path.join(buildDir, 'license-files/.integrity'), integrity + '\n');
+await fs.writeFile('build/license-files/prod.json', JSON.stringify(prodJson) + '\n');
+await fs.writeFile('build/license-files/dev.json', JSON.stringify(devJson) + '\n');
+await fs.writeFile('build/license-files/.integrity', integrity + '\n');
 
 console.log('Done fetching the licenses.');
 
@@ -160,7 +159,7 @@ function getContributorName(author) {
  * @param {string} integrity
  */
 async function isBuildUpToDate(integrity) {
-	const integrityFile = path.join(buildDir, 'license-files/.integrity');
+	const integrityFile = 'build/license-files/.integrity';
 
 	if (!existsSync(integrityFile)) {
 		return false;
@@ -169,6 +168,15 @@ async function isBuildUpToDate(integrity) {
 	const buildIntegrity = await fs.readFile(integrityFile, 'utf8');
 
 	return integrity.trim() === buildIntegrity.trim();
+}
+
+/**
+ * @param {import('node:crypto').BinaryLike} content
+ */
+function getIntegrity(content) {
+	return 'sha256-' + createHash('sha256')
+		.update(content)
+		.digest('base64');
 }
 
 /**

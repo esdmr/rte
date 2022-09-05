@@ -1,3 +1,8 @@
+/* eslint-disable import/no-unassigned-import */
+import 'monaco-editor/esm/vs/basic-languages/javascript/javascript.contribution.js';
+import 'monaco-editor/esm/vs/editor/contrib/bracketMatching/browser/bracketMatching.js';
+import 'monaco-editor/esm/vs/editor/contrib/wordHighlighter/browser/wordHighlighter.js';
+
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api.js';
 import type {FunctionComponent} from 'preact';
 import {EffectCallback, MutableRef, Ref, useEffect, useRef} from 'preact/hooks';

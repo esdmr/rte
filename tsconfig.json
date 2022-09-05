@@ -4,7 +4,10 @@
     "target": "ES2022",
     "module": "Node16",
     "moduleResolution": "Node16",
-    "rootDirs": ["src", "build/types/src"],
+    "rootDirs": [
+      "src",
+      "build/types/src"
+    ],
     "noEmit": true,
     "jsx": "react-jsx",
     "jsxImportSource": "preact",
@@ -39,6 +42,8 @@
     "moduleDetection": "force"
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "vite/**/*",
+    "vite.config.mjs"
   ]
 }

@@ -1,0 +1,35 @@
+diff --git a/index.d.ts b/index.d.ts
+index 14cb64b01fc458b32f47a88464ef75cfa0ea66cc..c9e9103b7b292a8147fdbde62b69b65a956964ea 100644
+--- a/index.d.ts
++++ b/index.d.ts
+@@ -1,7 +1,7 @@
+ import { FilterPattern } from '@rollup/pluginutils';
+ import { Plugin } from 'vite';
+ 
+-export interface Options {
++interface Options {
+   parserPlugins?: readonly string[];
+   include?: FilterPattern;
+   exclude?: FilterPattern;
+@@ -9,4 +9,4 @@ export interface Options {
+ 
+ declare const prefreshPlugin: (options?: Options) => Plugin;
+ 
+-export default prefreshPlugin;
++export = prefreshPlugin;
+diff --git a/package.json b/package.json
+index 045b3ffa1867e598e3f3b62a869c5b196ed4391f..91d5fcdcffd4dcdb6486e1a18c13c7f6c2bd8dc9 100644
+--- a/package.json
++++ b/package.json
+@@ -4,7 +4,10 @@
+   "main": "src/index.js",
+   "types": "index.d.ts",
+   "exports": {
+-    ".": "./src/index.js",
++    ".": {
++      "types": "./index.d.ts",
++      "default": "./src/index.js"
++    },
+     "./package.json": "./package.json"
+   },
+   "modes": {

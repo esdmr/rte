@@ -16,13 +16,13 @@ import path from 'node:path';
 import DtsCreator from 'typed-css-modules';
 import find from 'find';
 import {defaultImport} from 'default-import';
-import {buildDir} from '../constants.js';
+import {definePlugin} from './plugin-helper.js';
 
 function newCreator() {
 	return new (defaultImport(DtsCreator))({
 		camelCase: 'dashes',
 		dropExtension: false,
-		outDir: path.join(buildDir, 'types'),
+		outDir: path.join('build', 'types'),
 		namedExports: true,
 	});
 }
@@ -35,30 +35,35 @@ async function writeTypes(file, creator = newCreator()) {
 	await content.writeFile();
 }
 
-/** @returns {import('rollup').Plugin} */
-export default function cssModuleTypes() {
-	return {
-		name: 'css-module-types',
-		async buildStart() {
-			const creator = newCreator();
+const creator = newCreator();
 
-			const files = await new Promise(resolve => {
-				find.file(/\.module\.css$/, 'src', resolve);
-			});
+/** @type {string[]} */
+const files = await new Promise(resolve => {
+	find.file(/\.module\.css$/, 'src', resolve);
+});
 
-			const promises = files.map(async (/** @type {string} */ file) => {
-				this.addWatchFile(file);
-				await writeTypes(file, creator);
-			});
+export default definePlugin({
+	name: 'typed-css-modules',
+	async buildStart() {
+		const promises = files.map(async file => {
+			this.addWatchFile(file);
+			await writeTypes(file, creator);
+		});
 
-			await Promise.all(promises);
-		},
-		async watchChange(id) {
-			if (!id.endsWith('.css')) {
-				return;
-			}
-
+		await Promise.all(promises);
+	},
+	async watchChange(id) {
+		if (id.endsWith('.css')) {
 			await writeTypes(id);
-		},
-	};
-}
+		}
+	},
+	async configureServer(server) {
+		server.watcher.add(files);
+
+		server.watcher.on('change', path => {
+			if (path.endsWith('.css')) {
+				writeTypes(path).catch(console.error);
+			}
+		});
+	},
+});
