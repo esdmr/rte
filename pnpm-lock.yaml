@@ -30,7 +30,7 @@ specifiers:
   '@mdi/react': 1.6.1
   '@pnpm/lockfile-file': 5.3.3
   '@pnpm/logger': 4.0.0
-  '@prefresh/vite': ^2.2.8
+  '@prefresh/vite': 2.2.8
   '@types/find': 0.2.1
   '@types/parse-author': 2.0.1
   '@types/postcss-url': 10.0.0
@@ -43,11 +43,11 @@ specifiers:
   preact: 10.10.6
   react: npm:@preact/compat@17.1.1
   react-dom: npm:@preact/compat@17.1.1
-  sirv: ^2.0.2
+  sirv: 2.0.2
   typed-css-modules: 0.7.2
   typescript: 4.8.2
   vite: 3.1.0
-  vite-plugin-inspect: ^0.6.1
+  vite-plugin-inspect: 0.6.1
   wouter-preact: 2.8.0-alpha.2
   xo: 0.51.0
 
