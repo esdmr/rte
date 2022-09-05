@@ -49,15 +49,13 @@
         }
       }
     },
-    "overrides": {
-      "scss-tokenizer": "0.4.3"
-    },
     "patchedDependencies": {
       "@preact/compat@17.1.1": "patches/@preact__compat@17.1.1.patch",
       "@mdi/react@1.6.1": "patches/@mdi__react@1.6.1.patch",
       "wouter-preact@2.8.0-alpha.2": "patches/wouter-preact@2.8.0-alpha.2.patch",
       "typed-css-modules@0.7.2": "patches/typed-css-modules@0.7.2.patch",
-      "@prefresh/vite@2.2.8": "patches/@prefresh__vite@2.2.8.patch"
+      "@prefresh/vite@2.2.8": "patches/@prefresh__vite@2.2.8.patch",
+      "@rollup/pluginutils@4.2.1": "patches/@rollup__pluginutils@4.2.1.patch"
     }
   }
 }

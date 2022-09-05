@@ -5,16 +5,16 @@ index 14cb64b01fc458b32f47a88464ef75cfa0ea66cc..c9e9103b7b292a8147fdbde62b69b65a
 @@ -1,7 +1,7 @@
  import { FilterPattern } from '@rollup/pluginutils';
  import { Plugin } from 'vite';
- 
+
 -export interface Options {
 +interface Options {
    parserPlugins?: readonly string[];
    include?: FilterPattern;
    exclude?: FilterPattern;
 @@ -9,4 +9,4 @@ export interface Options {
- 
+
  declare const prefreshPlugin: (options?: Options) => Plugin;
- 
+
 -export default prefreshPlugin;
 +export = prefreshPlugin;
 diff --git a/package.json b/package.json

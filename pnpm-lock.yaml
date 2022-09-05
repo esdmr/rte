@@ -1,26 +1,26 @@
 lockfileVersion: 5.4
 
-overrides:
-  scss-tokenizer: 0.4.3
-
 packageExtensionsChecksum: c6269d4d2b8f53749e9a6ff01733da3a
 
 patchedDependencies:
   '@preact/compat@17.1.1':
-    hash: lhxtqpwenzmypain7xod4jz6xi
+    hash: y4k23qwlfsmxttlbg2n73wq3bq
     path: patches/@preact__compat@17.1.1.patch
   '@mdi/react@1.6.1':
-    hash: 2psovfys6nw6abc2itdawq5xwu
+    hash: bybv5nhizojq4c2ifughfzw24e
     path: patches/@mdi__react@1.6.1.patch
   wouter-preact@2.8.0-alpha.2:
-    hash: 3eydego6mbp36c6dw6i4krp3ha
+    hash: ignvtktwp77in5csvysi247wve
     path: patches/wouter-preact@2.8.0-alpha.2.patch
   typed-css-modules@0.7.2:
-    hash: zf2rec3fjes3zhwado6osdw6xy
+    hash: ajqq2jxo52exjvo3bsww2uq5wi
     path: patches/typed-css-modules@0.7.2.patch
   '@prefresh/vite@2.2.8':
-    hash: 6p4yrzydicbnhllyacxdq2hii4
+    hash: 4jt37oehemwuq3cvigkaotgg2u
     path: patches/@prefresh__vite@2.2.8.patch
+  '@rollup/pluginutils@4.2.1':
+    hash: xk5h2ttbpkb3i5msx323lq34b4
+    path: patches/@rollup__pluginutils@4.2.1.patch
 
 specifiers:
   '@mdi/js': 7.0.96
@@ -50,18 +50,18 @@ specifiers:
 
 dependencies:
   '@mdi/js': 7.0.96
-  '@mdi/react': 1.6.1_2psovfys6nw6abc2itdawq5xwu
+  '@mdi/react': 1.6.1_bybv5nhizojq4c2ifughfzw24e
   history: 5.3.0
   monaco-editor: 0.34.0
   preact: 10.10.6
-  react: /@preact/compat/17.1.1_lhxtqpwenzmypain7xod4jz6xi_preact@10.10.6
-  react-dom: /@preact/compat/17.1.1_lhxtqpwenzmypain7xod4jz6xi_preact@10.10.6
-  wouter-preact: 2.8.0-alpha.2_3eydego6mbp36c6dw6i4krp3ha_preact@10.10.6
+  react: /@preact/compat/17.1.1_y4k23qwlfsmxttlbg2n73wq3bq_preact@10.10.6
+  react-dom: /@preact/compat/17.1.1_y4k23qwlfsmxttlbg2n73wq3bq_preact@10.10.6
+  wouter-preact: 2.8.0-alpha.2_ignvtktwp77in5csvysi247wve_preact@10.10.6
 
 devDependencies:
   '@pnpm/lockfile-file': 5.3.3_@pnpm+logger@4.0.0
   '@pnpm/logger': 4.0.0
-  '@prefresh/vite': 2.2.8_6p4yrzydicbnhllyacxdq2hii4_preact@10.10.6+vite@3.0.9
+  '@prefresh/vite': 2.2.8_4jt37oehemwuq3cvigkaotgg2u_preact@10.10.6+vite@3.0.9
   '@types/find': 0.2.1
   '@types/parse-author': 2.0.1
   '@types/postcss-url': 10.0.0
@@ -70,7 +70,7 @@ devDependencies:
   find: 0.3.0
   parse-author: 2.0.0
   sirv: 2.0.2
-  typed-css-modules: 0.7.2_zf2rec3fjes3zhwado6osdw6xy
+  typed-css-modules: 0.7.2_ajqq2jxo52exjvo3bsww2uq5wi
   typescript: 4.8.2
   vite: 3.0.9
   vite-plugin-inspect: 0.6.1_vite@3.0.9
@@ -373,7 +373,7 @@ packages:
     resolution: {integrity: sha512-lNqhkV3cpPfYb/Avh+vXLFukUTbHbyHoFo4Jdc7Oc9UvURGVhamFIpgOVvEf2bNA78zvjXTZeVWExUTR+DLBfQ==}
     dev: false
 
-  /@mdi/react/1.6.1_2psovfys6nw6abc2itdawq5xwu:
+  /@mdi/react/1.6.1_bybv5nhizojq4c2ifughfzw24e:
     resolution: {integrity: sha512-4qZeDcluDFGFTWkHs86VOlHkm6gnKaMql13/gpIcUQ8kzxHgpj31NuCkD8abECVfbULJ3shc7Yt4HJ6Wu6SN4w==}
     dependencies:
       prop-types: 15.8.1
@@ -482,7 +482,7 @@ packages:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
     dev: true
 
-  /@preact/compat/17.1.1_lhxtqpwenzmypain7xod4jz6xi_preact@10.10.6:
+  /@preact/compat/17.1.1_y4k23qwlfsmxttlbg2n73wq3bq_preact@10.10.6:
     resolution: {integrity: sha512-OjQJ6oVcjFTiKWs4MIoE/cORFFGhqnt1RO0uxGNAFUglBMPNahMDJyX5w+qEOEaOpaNTLM1L3ixc2bFEpxgs3A==}
     peerDependencies:
       preact: '*'
@@ -507,7 +507,7 @@ packages:
     resolution: {integrity: sha512-Mb9abhJTOV4yCfkXrMrcgFiFT7MfNOw8sDa+XyZBdq/Ai2p4Zyxqsb3EgHLOEdHpMj6J9aiZ54W8H6FTam1u+A==}
     dev: true
 
-  /@prefresh/vite/2.2.8_6p4yrzydicbnhllyacxdq2hii4_preact@10.10.6+vite@3.0.9:
+  /@prefresh/vite/2.2.8_4jt37oehemwuq3cvigkaotgg2u_preact@10.10.6+vite@3.0.9:
     resolution: {integrity: sha512-yGGa+PKPYPTzMlxgQ8aBgxw9K69I8X4iQ0E6KOcIvls96WKqKLLOYZW9SUgCve446jpUXvc9udviPBZjCeZIIQ==}
     peerDependencies:
       preact: ^10.4.0
@@ -517,7 +517,7 @@ packages:
       '@prefresh/babel-plugin': 0.4.3
       '@prefresh/core': 1.3.4_preact@10.10.6
       '@prefresh/utils': 1.1.3
-      '@rollup/pluginutils': 4.2.1
+      '@rollup/pluginutils': 4.2.1_xk5h2ttbpkb3i5msx323lq34b4
       preact: 10.10.6
       vite: 3.0.9
     transitivePeerDependencies:
@@ -525,13 +525,14 @@ packages:
     dev: true
     patched: true
 
-  /@rollup/pluginutils/4.2.1:
+  /@rollup/pluginutils/4.2.1_xk5h2ttbpkb3i5msx323lq34b4:
     resolution: {integrity: sha512-iKnFXr7NkdZAIHiIWE+BX5ULi/ucVFYWD6TbAV+rZctiRTY2PL6tsIKhoIOaoskiWAkgu+VsbXgUVDNLHf+InQ==}
     engines: {node: '>= 8.0.0'}
     dependencies:
       estree-walker: 2.0.2
       picomatch: 2.3.1
     dev: true
+    patched: true
 
   /@types/css-modules-loader-core/1.1.0:
     resolution: {integrity: sha512-LMbyf7THPqLCPHIXAj79v9Pa193MeOHgp1fBFRR6s6VvEVHUFIcM5bc/WttslOf+lao4TURNN1X1zfW5wr2CHQ==}
@@ -3746,7 +3747,7 @@ packages:
     engines: {node: '>=12.20'}
     dev: true
 
-  /typed-css-modules/0.7.2_zf2rec3fjes3zhwado6osdw6xy:
+  /typed-css-modules/0.7.2_ajqq2jxo52exjvo3bsww2uq5wi:
     resolution: {integrity: sha512-R3guXrQ8ry/yhlfvNmkVY4J3+FtKaEdwqrvgSvFpVY0ieYQHqhhBW0RwfE4hnG4m29Ef/4IE0tBsk/UKplmJkA==}
     engines: {node: '>=12.0.0'}
     hasBin: true
@@ -3835,7 +3836,7 @@ packages:
     peerDependencies:
       vite: ^3.0.0
     dependencies:
-      '@rollup/pluginutils': 4.2.1
+      '@rollup/pluginutils': 4.2.1_xk5h2ttbpkb3i5msx323lq34b4
       debug: 4.3.4
       kolorist: 1.5.1
       sirv: 2.0.2
@@ -3899,7 +3900,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /wouter-preact/2.8.0-alpha.2_3eydego6mbp36c6dw6i4krp3ha_preact@10.10.6:
+  /wouter-preact/2.8.0-alpha.2_ignvtktwp77in5csvysi247wve_preact@10.10.6:
     resolution: {integrity: sha512-f19qDB+HhR6C3lnPFdsJQ8wZZIFzm0m8XciEiBzyB1VtkPE/QaSrm1dxcvqrZu1hKaUA/gdee6OGGj0jGDtgGA==}
     peerDependencies:
       preact: ^10.0.0
