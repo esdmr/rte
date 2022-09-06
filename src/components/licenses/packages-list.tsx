@@ -13,7 +13,7 @@ const createComponent = (file: string, route: string) => lazy<FunctionComponent>
 			redirect: 'error',
 		});
 
-		assert(response.ok, `Got status code ${response.status}: ${response.statusText}`);
+		assert(response.ok, `got status code ${response.status}: ${response.statusText}`);
 
 		const json = (await response.json()) as Types.Package[];
 

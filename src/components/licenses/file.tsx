@@ -42,7 +42,7 @@ export const LicenseFile: FunctionComponent<{
 				redirect: 'error',
 			});
 
-			assert(response.ok, `Got status code ${response.status}: ${response.statusText}`);
+			assert(response.ok, `got status code ${response.status}: ${response.statusText}`);
 
 			const text = await response.text();
 			return () => <pre>{text}</pre>;
