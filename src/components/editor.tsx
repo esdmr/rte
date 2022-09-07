@@ -86,10 +86,7 @@ function getEffectCallback(
 			accessibilitySupport: props.accessibilityEnabled ? 'on' : 'auto',
 		});
 
-		editor.layout({
-			width: innerWidth,
-			height: innerHeight,
-		});
+		editor.layout();
 
 		if (props.theme === 'auto') {
 			matchMedia('(prefers-color-scheme: light)').addEventListener(
@@ -106,10 +103,7 @@ function getEffectCallback(
 		addEventListener(
 			'resize',
 			() => {
-				editor.layout({
-					width: innerWidth,
-					height: innerHeight,
-				});
+				editor.layout();
 			},
 			{signal: controller.signal},
 		);
