@@ -142,6 +142,10 @@ for (const pkg of packages.values()) {
 	}
 }
 
+for (const json of [devJson, prodJson]) {
+	json.sort((a, b) => `${a.name}@${a.version}`.localeCompare(`${b.name}@${b.version}`, 'en-US'));
+}
+
 await fs.writeFile('build/license-files/prod.json', JSON.stringify(prodJson) + '\n');
 await fs.writeFile('build/license-files/dev.json', JSON.stringify(devJson) + '\n');
 await fs.writeFile('build/license-files/.integrity', integrity + '\n');
