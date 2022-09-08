@@ -34,7 +34,8 @@ export const Package: FunctionComponent<{
 		<div class={css.content}>
 			<h2 class={css.heading}>
 				<code>{pkg.name}</code>
-				<span><code>{pkg.version}</code></span>
+				{' '}
+				<code class={css.version}>{pkg.version}</code>
 			</h2>
 			<p>{[...getAttributions(pkg.authors)]}</p>
 			{license}
