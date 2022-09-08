@@ -1,27 +1,3 @@
-:root {
-	/* Dark theme */
-	--circular-dark-focus-outline: cornflowerblue;
-	--circular-dark-hover-shadow: #fff2;
-	--circular-dark-active-shadow: #fff4;
-
-	/* Light theme */
-	--circular-light-focus-outline: royalblue;
-	--circular-light-hover-shadow: #0002;
-	--circular-light-active-shadow: #0004;
-
-	--circular-focus-outline: var(--circular-dark-focus-outline);
-	--circular-hover-shadow: var(--circular-dark-hover-shadow);
-	--circular-active-shadow: var(--circular-dark-active-shadow);
-}
-
-@media (prefers-color-scheme: light) {
-	:root {
-		--circular-focus-outline: var(--circular-light-focus-outline);
-		--circular-hover-shadow: var(--circular-light-hover-shadow);
-		--circular-active-shadow: var(--circular-light-active-shadow);
-	}
-}
-
 .circular {
 	display: inline-grid;
 	place-items: center;
@@ -31,19 +7,21 @@
 	border: none;
 	background: transparent;
 	color: inherit;
+	transition: background-color 100ms ease-in-out;
+	/* The :hover/:active backgrounds already indicates the tap. No need for a
+	 * highlight.
+	 */
+	-webkit-tap-highlight-color: transparent;
 }
 
-.circular:focus-visible {
-	outline: 0.1em solid var(--circular-focus-outline);
-	outline-offset: 0.1em;
-}
+/* Note: Default :focus-visible style applies. */
 
 .circular:hover {
-	background: var(--circular-hover-shadow);
+	background: rgba(var(--foreground-rgb) / var(--hover-alpha));
 }
 
 .circular:active {
-	background: var(--circular-active-shadow);
+	background: rgba(var(--foreground-rgb) / var(--active-alpha));
 }
 
 .circular svg {
