@@ -45,10 +45,12 @@ export const LicenseFile: FunctionComponent<{
 			assert(response.ok, `got status code ${response.status}: ${response.statusText}`);
 
 			const text = await response.text();
-			return () => <pre>{text}</pre>;
+			const LoadedLicenseFile = () => <pre>{text}</pre>;
+			return LoadedLicenseFile;
 		} catch (error) {
 			console.error(error);
-			return () => <p>Failed to load the license file.</p>;
+			const ErredLicenseFile = () => <p>Failed to load the license file.</p>;
+			return ErredLicenseFile;
 		}
 	}), [pkgId]);
 

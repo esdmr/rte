@@ -17,12 +17,14 @@ const createComponent = (file: string, route: string) => lazy<FunctionComponent>
 
 		const json = (await response.json()) as Types.Package[];
 
-		return () => <>
+		const LoadedPackagesList = () => <>
 			{json.map(pkg => <Package pkg={pkg} key={`${pkg.name}@${pkg.version}`} route={route} />)}
 		</>;
+		return LoadedPackagesList;
 	} catch (error) {
 		console.error(error);
-		return () => <p>Failed to load the licenses list.</p>;
+		const ErredPackagesList = () => <p>Failed to load the licenses list.</p>;
+		return ErredPackagesList;
 	}
 });
 
