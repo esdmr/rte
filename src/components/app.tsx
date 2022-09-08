@@ -15,7 +15,9 @@ import {Title} from './title.js';
 export const App: FunctionComponent = () => <Router hook={useHashLocation}>
 	<Switch>
 		<Route path='/'>
-			{() => <main>
+			{() => <>
+				<header />
+				<main>
 				<AllowScroll />
 				<h1>Gamepad Editor</h1>
 				<p>Work in progress!</p>
@@ -27,7 +29,8 @@ export const App: FunctionComponent = () => <Router hook={useHashLocation}>
 						<li><Link href='/debug/route/init'>Debug routes</Link></li>
 					</ul>
 				</nav>
-			</main>}
+				</main>
+			</>}
 		</Route>
 		<Route path='/debug/licenses/dev/:id'>{({id}) => <LicenseFile id={id} return-route='/debug/licenses/dev' />}</Route>
 		<Route path='/debug/licenses/dev'>{() => <Licenses dev return-route='/debug/licenses' />}</Route>
