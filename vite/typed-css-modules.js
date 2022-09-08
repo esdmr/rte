@@ -36,15 +36,13 @@ async function writeTypes(file, creator = newCreator()) {
 }
 
 /** @type {string[]} */
-let files;
+const files = await new Promise(resolve => {
+	find.file(/\.module\.css$/, 'src', resolve);
+});
 
 export default definePlugin({
 	name: 'typed-css-modules',
 	async buildStart() {
-		files = await new Promise(resolve => {
-			find.file(/\.module\.css$/, 'src', resolve);
-		});
-
 		for (const file of files) {
 			this.addWatchFile(file);
 		}
@@ -58,11 +56,17 @@ export default definePlugin({
 				writeTypes(path).catch(console.error);
 			}
 		});
+
+		await buildAll();
 	},
 	async closeBundle() {
-		console.log('Building the css module types...');
-		const creator = newCreator();
-		await Promise.all(files.map(async file => writeTypes(file, creator)));
-		console.log('Done building the css module types.');
+		await buildAll();
 	},
 });
+
+async function buildAll() {
+	console.log('Building the css module types...');
+	const creator = newCreator();
+	await Promise.all(files.map(async file => writeTypes(file, creator)));
+	console.log('Done building the css module types.');
+}
