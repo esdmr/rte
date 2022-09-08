@@ -24,28 +24,34 @@ export const Package: FunctionComponent<{
 		license = <p>Custom license.</p>;
 	} else {
 		licenseFile = pkg.license.hasFile;
-		license = <p>
-			<code>{pkg.license.id}</code>.
-			{pkg.license.hasFile || ' License file not found!'}
-		</p>;
+		license = (
+			<p>
+				<code>{pkg.license.id}</code>.
+				{pkg.license.hasFile || ' License file not found!'}
+			</p>
+		);
 	}
 
-	return <div class={useClass(css.pkg, licenseFile ? css.hasLicenseFile : undefined)}>
-		<div class={css.content}>
-			<h2 class={css.heading}>
-				<code>{pkg.name}</code>
-				{' '}
-				<code class={css.version}>{pkg.version}</code>
-			</h2>
-			<p>{[...getAttributions(pkg.authors)]}</p>
-			{license}
+	return (
+		<div
+			class={useClass(css.pkg, licenseFile ? css.hasLicenseFile : undefined)}
+		>
+			<div class={css.content}>
+				<h2 class={css.heading}>
+					<code>{pkg.name}</code> <code class={css.version}>{pkg.version}</code>
+				</h2>
+				<p>{[...getAttributions(pkg.authors)]}</p>
+				{license}
+			</div>
+			{licenseFile && (
+				<div class={css.icon}>
+					<CircularButton href={getLicenseFileUrl(route, pkgId)}>
+						<Icon path={mdiChevronRight} title="See license file" />
+					</CircularButton>
+				</div>
+			)}
 		</div>
-		{licenseFile && <div class={css.icon}>
-			<CircularButton href={getLicenseFileUrl(route, pkgId)}>
-				<Icon path={mdiChevronRight} title='See license file' />
-			</CircularButton>
-		</div>}
-	</div>;
+	);
 };
 
 function getLicenseFileUrl(route: string, pkgId: string) {
@@ -56,7 +62,7 @@ function getLicenseFileUrl(route: string, pkgId: string) {
 	return `${route}${encodedPkgId}`;
 }
 
-function * getAttributions(authors: string[]): Generator<ComponentChild> {
+function* getAttributions(authors: string[]): Generator<ComponentChild> {
 	yield 'By ';
 
 	if (authors.length === 0) {
@@ -65,12 +71,12 @@ function * getAttributions(authors: string[]): Generator<ComponentChild> {
 	}
 
 	if (authors.length <= 2) {
-		yield * iterate(authors, ' and ');
+		yield* iterate(authors, ' and ');
 		yield '.';
 		return;
 	}
 
-	yield * iterate(authors.slice(0, -1), ', ');
+	yield* iterate(authors.slice(0, -1), ', ');
 	yield ', and ';
 	yield format(authors.at(-1)!);
 	yield '.';
@@ -84,7 +90,7 @@ function * getAttributions(authors: string[]): Generator<ComponentChild> {
 	 * @param {Iterable<string>} array
 	 * @param {string} separator
 	 */
-	function * iterate(array: Iterable<string>, separator: string) {
+	function* iterate(array: Iterable<string>, separator: string) {
 		let isFirst = true;
 
 		for (const item of array) {

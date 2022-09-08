@@ -1,4 +1,5 @@
 {
+	"prettier": true,
 	"overrides": [
 		{
 			"files": "**.ts",

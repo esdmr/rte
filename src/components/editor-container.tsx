@@ -4,12 +4,14 @@ import {Loading} from './loading.js';
 import * as css from './editor.module.css.js';
 
 const Editor = /* @__PURE__ */ lazy(async () =>
-	import('./editor.js').then(mod => mod.Editor),
+	import('./editor.js').then((mod) => mod.Editor),
 );
 
 export const EditorContainer: FunctionComponent = () => (
-	<main class={css.editorContainer} role='region' aria-live='polite'>
-		<Suspense fallback={<Loading placement='bottom-right' class={css.editor} />}>
+	<main class={css.editorContainer} role="region" aria-live="polite">
+		<Suspense
+			fallback={<Loading placement="bottom-right" class={css.editor} />}
+		>
 			<Editor />
 		</Suspense>
 	</main>

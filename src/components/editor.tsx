@@ -17,7 +17,7 @@ declare global {
 // Debug: globalThis.monaco = monaco;
 type MonacoEditor = monaco.editor.IStandaloneCodeEditor;
 
-export const Editor: FunctionComponent<EditorProps> = props => {
+export const Editor: FunctionComponent<EditorProps> = (props) => {
 	const ref = useRef<HTMLDivElement>(null);
 	const editorRef = useRef<MonacoEditor>();
 
@@ -91,7 +91,7 @@ function getEffectCallback(
 		if (props.theme === 'auto') {
 			matchMedia('(prefers-color-scheme: light)').addEventListener(
 				'change',
-				event => {
+				(event) => {
 					monaco.editor.setTheme(
 						event.matches ? props.lightTheme! : props.darkTheme!,
 					);

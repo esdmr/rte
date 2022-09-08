@@ -4,10 +4,13 @@ import {NavItem} from './index.js';
 function createWrapper<T extends keyof JSX.IntrinsicElements>(name: T) {
 	const Name: string = name;
 
-	const WrappedComponent: FunctionComponent<JSX.IntrinsicElements[T]> = props =>
+	const WrappedComponent: FunctionComponent<JSX.IntrinsicElements[T]> = (
+		props,
+	) => (
 		<NavItem>
 			<Name {...props} />
-		</NavItem>;
+		</NavItem>
+	);
 
 	if (import.meta.env.DEV) {
 		WrappedComponent.displayName = `WrappedDomNode(${name})`;

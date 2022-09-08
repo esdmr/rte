@@ -3,7 +3,11 @@ import type {Direction, FaceButtonStyle} from './types.js';
 
 const createFaceButton = (text: string): FaceButtonStyle[Direction] => ({
 	Icon() {
-		return <text x={0} y={0} class={css.maskInFill}>{text}</text>;
+		return (
+			<text x={0} y={0} class={css.maskInFill}>
+				{text}
+			</text>
+		);
 	},
 	name: text,
 });

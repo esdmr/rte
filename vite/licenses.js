@@ -3,7 +3,9 @@ import {execaNode} from 'execa';
 import sirv from 'sirv';
 import {definePlugin} from './plugin-helper.js';
 
-const scriptPath = fileURLToPath(new URL('update-licenses.js', import.meta.url));
+const scriptPath = fileURLToPath(
+	new URL('update-licenses.js', import.meta.url),
+);
 
 let isBuild = true;
 
@@ -16,7 +18,7 @@ export default definePlugin({
 	async configureServer(server) {
 		server.watcher.add('pnpm-lock.yaml');
 
-		server.watcher.on('change', path => {
+		server.watcher.on('change', (path) => {
 			if (path === 'pnpm-lock.yaml') {
 				updateLicenses().catch(console.error);
 			}

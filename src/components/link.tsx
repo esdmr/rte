@@ -15,17 +15,22 @@ type LinkProps = JSX.IntrinsicElements['a'] & {
 
 type LinkClickHandler = NonNullable<LinkProps['onClick']>;
 
-export const Link: FunctionComponent<LinkProps> = ({href, onClick, replace = false, ...props}) => {
+export const Link: FunctionComponent<LinkProps> = ({
+	href,
+	onClick,
+	replace = false,
+	...props
+}) => {
 	const [, navigate] = useLocation();
 
 	const handleClick = useCallback<LinkClickHandler>(
 		function (event) {
 			if (
-				event.ctrlKey
-				|| event.metaKey
-				|| event.altKey
-				|| event.shiftKey
-				|| event.button !== 0
+				event.ctrlKey ||
+				event.metaKey ||
+				event.altKey ||
+				event.shiftKey ||
+				event.button !== 0
 			) {
 				return;
 			}

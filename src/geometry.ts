@@ -37,17 +37,11 @@ export function add(...args: Vector[]): Vector {
 }
 
 export function subtract(minuend: Vector, subtrahend: Vector) {
-	return vector(
-		minuend.x - subtrahend.x,
-		minuend.y - subtrahend.y,
-	);
+	return vector(minuend.x - subtrahend.x, minuend.y - subtrahend.y);
 }
 
 export function scale(coefficient: number, vec: Vector) {
-	return vector(
-		coefficient * vec.x,
-		coefficient * vec.y,
-	);
+	return vector(coefficient * vec.x, coefficient * vec.y);
 }
 
 export function normalize(vec: Vector) {
@@ -56,14 +50,17 @@ export function normalize(vec: Vector) {
 
 export function transform(matrix: Transform, vec: Vector) {
 	return vector(
-		(matrix.x.x * vec.x) + (matrix.x.y * vec.y),
-		(matrix.y.x * vec.x) + (matrix.y.y * vec.y),
+		matrix.x.x * vec.x + matrix.x.y * vec.y,
+		matrix.y.x * vec.x + matrix.y.y * vec.y,
 	);
 }
 
 export function rotate(angle: number, vec: Vector) {
-	return transform({
-		x: {x: Math.cos(angle), y: -Math.sin(angle)},
-		y: {x: Math.sin(angle), y: Math.cos(angle)},
-	}, vec);
+	return transform(
+		{
+			x: {x: Math.cos(angle), y: -Math.sin(angle)},
+			y: {x: Math.sin(angle), y: Math.cos(angle)},
+		},
+		vec,
+	);
 }

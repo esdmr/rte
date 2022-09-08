@@ -7,8 +7,11 @@ import {NavRoot} from './components/navigation/index.js';
 import './index.css';
 import {useHashLocation} from './wouter-hash.js';
 
-render(<NavRoot>
-	<Router hook={useHashLocation}>
-		<App />
-	</Router>
-</NavRoot>, document.body);
+render(
+	<NavRoot>
+		<Router hook={useHashLocation}>
+			<App />
+		</Router>
+	</NavRoot>,
+	document.body,
+);

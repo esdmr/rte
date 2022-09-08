@@ -7,7 +7,7 @@ let set = false;
 export const Title: FunctionComponent<{
 	children: string | string[];
 	h1?: boolean;
-}> = props => {
+}> = (props) => {
 	const title = (toChildArray(props.children) as string[]).join('');
 
 	useEffect(() => {

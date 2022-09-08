@@ -36,7 +36,7 @@ async function writeTypes(file, creator = newCreator()) {
 }
 
 /** @type {string[]} */
-const files = await new Promise(resolve => {
+const files = await new Promise((resolve) => {
 	find.file(/\.module\.css$/, 'src', resolve);
 });
 
@@ -50,7 +50,7 @@ export default definePlugin({
 	async configureServer(server) {
 		server.watcher.add(files);
 
-		server.watcher.on('change', path => {
+		server.watcher.on('change', (path) => {
 			if (path.endsWith('.css')) {
 				console.log(path, 'was changed. Updating its types...');
 				writeTypes(path).catch(console.error);
@@ -67,6 +67,6 @@ export default definePlugin({
 async function buildAll() {
 	console.log('Building the css module types...');
 	const creator = newCreator();
-	await Promise.all(files.map(async file => writeTypes(file, creator)));
+	await Promise.all(files.map(async (file) => writeTypes(file, creator)));
 	console.log('Done building the css module types.');
 }

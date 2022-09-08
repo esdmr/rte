@@ -39,8 +39,7 @@ assert(lockfile !== null);
 const pnpmDirs = Object.entries(lockfile.packages ?? {})
 	.sort(([a], [b]) => a.localeCompare(b, 'en'))
 	.map(([pkgPath, snapshot]) => {
-		const [, name, version]
-			= /^\/((?:@.+?\/)?.+?)\/(.+)$/.exec(pkgPath) ?? [];
+		const [, name, version] = /^\/((?:@.+?\/)?.+?)\/(.+)$/.exec(pkgPath) ?? [];
 
 		assert(name);
 		assert(version);
@@ -64,11 +63,17 @@ await Promise.all(
 	pnpmDirs.map(async ([pkgDir, snapshot]) => {
 		if (!existsSync(pkgDir)) {
 			if (snapshot.optional) {
-				console.warn('Optional package', `${snapshot.name}@${snapshot.version}`, 'was not found');
+				console.warn(
+					'Optional package',
+					`${snapshot.name}@${snapshot.version}`,
+					'was not found',
+				);
 				return;
 			}
 
-			console.error(`Required package ${snapshot.name}@${snapshot.version} was not found`);
+			console.error(
+				`Required package ${snapshot.name}@${snapshot.version} was not found`,
+			);
 			process.exitCode = 1;
 			return;
 		}
@@ -86,11 +91,13 @@ await Promise.all(
 		);
 
 		const pkgId = `${name}@${version}`;
-		const authors = [...new Set(
-			[pkgAuthor, ...pkgContributors, ...pkgMaintainers]
-				.map(contrib => getContributorName(contrib))
-				.filter(Boolean),
-		)];
+		const authors = [
+			...new Set(
+				[pkgAuthor, ...pkgContributors, ...pkgMaintainers]
+					.map((contrib) => getContributorName(contrib))
+					.filter(Boolean),
+			),
+		];
 		const {license, licensePath} = getLicenseInfo(
 			pkgLicense,
 			pkgLicenses,
@@ -104,9 +111,10 @@ await Promise.all(
 		} else if (license && !Array.isArray(license)) {
 			const dir = await fs.readdir(pkgDir);
 
-			if (dir.some(item => /license/i.test(item))) {
+			if (dir.some((item) => /license/i.test(item))) {
 				console.log(
-					pkgId, 'might have a license file that I could not find. Take a look at',
+					pkgId,
+					'might have a license file that I could not find. Take a look at',
 					pkgDir,
 				);
 			}
@@ -143,11 +151,19 @@ for (const pkg of packages.values()) {
 }
 
 for (const json of [devJson, prodJson]) {
-	json.sort((a, b) => `${a.name}@${a.version}`.localeCompare(`${b.name}@${b.version}`, 'en-US'));
+	json.sort((a, b) =>
+		`${a.name}@${a.version}`.localeCompare(`${b.name}@${b.version}`, 'en-US'),
+	);
 }
 
-await fs.writeFile('build/license-files/prod.json', JSON.stringify(prodJson) + '\n');
-await fs.writeFile('build/license-files/dev.json', JSON.stringify(devJson) + '\n');
+await fs.writeFile(
+	'build/license-files/prod.json',
+	JSON.stringify(prodJson) + '\n',
+);
+await fs.writeFile(
+	'build/license-files/dev.json',
+	JSON.stringify(devJson) + '\n',
+);
 await fs.writeFile('build/license-files/.integrity', integrity + '\n');
 
 console.log('Done fetching the licenses.');
@@ -178,9 +194,7 @@ async function isBuildUpToDate(integrity) {
  * @param {import('node:crypto').BinaryLike} content
  */
 function getIntegrity(content) {
-	return 'sha256-' + createHash('sha256')
-		.update(content)
-		.digest('base64');
+	return 'sha256-' + createHash('sha256').update(content).digest('base64');
 }
 
 /**
@@ -191,15 +205,15 @@ function getIntegrity(content) {
  */
 function getLicenseInfo(pkgLicense, pkgLicenses, pkgDir) {
 	if (typeof pkgLicense !== 'string') {
-		const licenses = /** @type {LegacyLicense[]} */(
+		const licenses = /** @type {LegacyLicense[]} */ (
 			[pkgLicense, pkgLicenses]
 				.flat()
 				.filter(
-					license =>
-						typeof license === 'object'
-							&& license !== null
-							&& 'type' in license
-							&& 'url' in license,
+					(license) =>
+						typeof license === 'object' &&
+						license !== null &&
+						'type' in license &&
+						'url' in license,
 				)
 		);
 

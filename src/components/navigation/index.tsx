@@ -1,4 +1,12 @@
-import {cloneElement, createContext, Ref, toChildArray, type ComponentChildren, type FunctionComponent, type VNode} from 'preact';
+import {
+	cloneElement,
+	createContext,
+	Ref,
+	toChildArray,
+	type ComponentChildren,
+	type FunctionComponent,
+	type VNode,
+} from 'preact';
 import {useContext, useEffect, useMemo} from 'preact/hooks';
 import assert from '../../assert.js';
 
@@ -13,21 +21,26 @@ function setRef<T>(ref: Ref<T> | null | undefined, value: T | null) {
 
 function isVnodeFocusable(vnode: VNode<Record<string, unknown>>) {
 	const hasHref = typeof vnode.props.href === 'string';
-	const hasTabIndex = Boolean(vnode.props.tabIndex) || Boolean(vnode.props.tabindex);
-	const isContentEditable = Boolean(vnode.props.contentEditable) || Boolean(vnode.props.contenteditable);
+	const hasTabIndex =
+		Boolean(vnode.props.tabIndex) || Boolean(vnode.props.tabindex);
+	const isContentEditable =
+		Boolean(vnode.props.contentEditable) ||
+		Boolean(vnode.props.contenteditable);
 	const isNotDisabled = !vnode.props.disabled;
 
-	return (vnode.type === 'a' && hasHref)
-		|| (vnode.type === 'area' && hasHref)
-		|| (vnode.type === 'input' && isNotDisabled)
-		|| (vnode.type === 'select' && isNotDisabled)
-		|| (vnode.type === 'textarea' && isNotDisabled)
-		|| (vnode.type === 'button' && isNotDisabled)
-		|| vnode.type === 'iframe'
-		|| vnode.type === 'object'
-		|| vnode.type === 'embed'
-		|| hasTabIndex
-		|| isContentEditable;
+	return (
+		(vnode.type === 'a' && hasHref) ||
+		(vnode.type === 'area' && hasHref) ||
+		(vnode.type === 'input' && isNotDisabled) ||
+		(vnode.type === 'select' && isNotDisabled) ||
+		(vnode.type === 'textarea' && isNotDisabled) ||
+		(vnode.type === 'button' && isNotDisabled) ||
+		vnode.type === 'iframe' ||
+		vnode.type === 'object' ||
+		vnode.type === 'embed' ||
+		hasTabIndex ||
+		isContentEditable
+	);
 }
 
 export class NavState {
@@ -70,7 +83,10 @@ export class NavChildToken {
 
 	set child(node: NavNode | undefined) {
 		if (node !== undefined) {
-			assert(this.parent.children[this.index] === undefined, 'more than one child node assigned to token');
+			assert(
+				this.parent.children[this.index] === undefined,
+				'more than one child node assigned to token',
+			);
 		}
 
 		this.parent.children[this.index] = node;
@@ -83,7 +99,11 @@ export interface NavHooks {
 	select?(this: NavNode): void;
 	deselect?(this: NavNode): void;
 	getLeaf?(this: NavNode, via: NavDirection): NavNode | undefined;
-	getNextLeaf?(this: NavNode, child: NavNode, dir: NavDirection): NavNode | undefined;
+	getNextLeaf?(
+		this: NavNode,
+		child: NavNode,
+		dir: NavDirection,
+	): NavNode | undefined;
 }
 
 export class NavNode {
@@ -185,7 +205,7 @@ export class NavNode {
 	}
 }
 
-function * iterateToStart(nodes: Array<NavNode | undefined>, from: number) {
+function* iterateToStart(nodes: Array<NavNode | undefined>, from: number) {
 	const length = nodes.length;
 	assert(length > 0, 'empty node list');
 
@@ -194,7 +214,7 @@ function * iterateToStart(nodes: Array<NavNode | undefined>, from: number) {
 	}
 }
 
-function * iterateToEnd(nodes: Array<NavNode | undefined>, from: number) {
+function* iterateToEnd(nodes: Array<NavNode | undefined>, from: number) {
 	const length = nodes.length;
 	assert(length > 0, 'empty node list');
 
@@ -225,21 +245,27 @@ const navRowHooks: NavHooks = {
 		switch (dir) {
 			case 'next': {
 				const index = this.children.indexOf(child);
-				return getAnyLeaf(iterateToEnd(this.children, index + 1), 'right')
-					?? getAnyLeaf(iterateToStart(this.children, index - 1), 'left')
-					?? this.parent?.getNextLeaf(this, 'next');
+				return (
+					getAnyLeaf(iterateToEnd(this.children, index + 1), 'right') ??
+					getAnyLeaf(iterateToStart(this.children, index - 1), 'left') ??
+					this.parent?.getNextLeaf(this, 'next')
+				);
 			}
 
 			case 'left': {
 				const index = this.children.indexOf(child);
-				return getAnyLeaf(iterateToStart(this.children, index - 1), 'left')
-					?? this.parent?.getNextLeaf(this, dir);
+				return (
+					getAnyLeaf(iterateToStart(this.children, index - 1), 'left') ??
+					this.parent?.getNextLeaf(this, dir)
+				);
 			}
 
 			case 'right': {
 				const index = this.children.indexOf(child);
-				return getAnyLeaf(iterateToEnd(this.children, index + 1), 'left')
-					?? this.parent?.getNextLeaf(this, dir);
+				return (
+					getAnyLeaf(iterateToEnd(this.children, index + 1), 'left') ??
+					this.parent?.getNextLeaf(this, dir)
+				);
 			}
 
 			default:
@@ -258,21 +284,27 @@ export const navColumnHooks: NavHooks = {
 		switch (dir) {
 			case 'next': {
 				const index = this.children.indexOf(child);
-				return getAnyLeaf(iterateToEnd(this.children, index + 1), 'down')
-					?? getAnyLeaf(iterateToStart(this.children, index - 1), 'up')
-					?? this.parent?.getNextLeaf(this, 'next');
+				return (
+					getAnyLeaf(iterateToEnd(this.children, index + 1), 'down') ??
+					getAnyLeaf(iterateToStart(this.children, index - 1), 'up') ??
+					this.parent?.getNextLeaf(this, 'next')
+				);
 			}
 
 			case 'up': {
 				const index = this.children.indexOf(child);
-				return getAnyLeaf(iterateToStart(this.children, index - 1), 'up')
-					?? this.parent?.getNextLeaf(this, dir);
+				return (
+					getAnyLeaf(iterateToStart(this.children, index - 1), 'up') ??
+					this.parent?.getNextLeaf(this, dir)
+				);
 			}
 
 			case 'down': {
 				const index = this.children.indexOf(child);
-				return getAnyLeaf(iterateToEnd(this.children, index + 1), 'down')
-					?? this.parent?.getNextLeaf(this, dir);
+				return (
+					getAnyLeaf(iterateToEnd(this.children, index + 1), 'down') ??
+					this.parent?.getNextLeaf(this, dir)
+				);
 			}
 
 			default:
@@ -310,18 +342,34 @@ export function useChildToken() {
 	const childToken = useContext(navigation);
 	assert(childToken !== undefined, 'navigation context was not setup');
 
-	useEffect(() => () => {
-		childToken.child?.dispose();
-		childToken.child = undefined;
-	}, []);
+	useEffect(
+		() => () => {
+			childToken.child?.dispose();
+			childToken.child = undefined;
+		},
+		[],
+	);
 
 	return childToken;
 }
 
 function wrapNavChildren(node: NavNode, children: ComponentChildren) {
-	return <>
-		{toChildArray(children).map(child => typeof child === 'object' ? <navigation.Provider value={node.newChildToken()} key={child.key as unknown}>{child}</navigation.Provider> : child)}
-	</>;
+	return (
+		<>
+			{toChildArray(children).map((child) =>
+				typeof child === 'object' ? (
+					<navigation.Provider
+						value={node.newChildToken()}
+						key={child.key as unknown}
+					>
+						{child}
+					</navigation.Provider>
+				) : (
+					child
+				),
+			)}
+		</>
+	);
 }
 
 export const NavRoot: FunctionComponent = ({children}) => {
@@ -336,45 +384,53 @@ export const NavRoot: FunctionComponent = ({children}) => {
 		// FIXME: Move to separate API.
 		const controller = new AbortController();
 
-		document.body.addEventListener('keydown', event => {
-			if (!/^Arrow(?:Up|Down|Left|Right)$/.test(event.code)) {
-				return;
-			}
+		document.body.addEventListener(
+			'keydown',
+			(event) => {
+				if (!/^Arrow(?:Up|Down|Left|Right)$/.test(event.code)) {
+					return;
+				}
 
-			event.preventDefault();
+				event.preventDefault();
 
-			if (!rootNode.state.selected) {
-				rootNode.getLeaf('next')?.select();
-				return;
-			}
+				if (!rootNode.state.selected) {
+					rootNode.getLeaf('next')?.select();
+					return;
+				}
 
-			switch (event.code) {
-				case 'ArrowUp':
-					rootNode.state.up();
-					break;
+				switch (event.code) {
+					case 'ArrowUp':
+						rootNode.state.up();
+						break;
 
-				case 'ArrowDown':
-					rootNode.state.down();
-					break;
+					case 'ArrowDown':
+						rootNode.state.down();
+						break;
 
-				case 'ArrowLeft':
-					rootNode.state.left();
-					break;
+					case 'ArrowLeft':
+						rootNode.state.left();
+						break;
 
-				case 'ArrowRight':
-					rootNode.state.right();
-					break;
+					case 'ArrowRight':
+						rootNode.state.right();
+						break;
 
-				// No default
-			}
-		}, {signal: controller.signal});
+					// No default
+				}
+			},
+			{signal: controller.signal},
+		);
 
-		document.body.addEventListener('focusin', event => {
-			if (event.target instanceof HTMLElement) {
-				const node = rootNode.state.elementToNode.get(event.target);
-				node?.select();
-			}
-		}, {signal: controller.signal});
+		document.body.addEventListener(
+			'focusin',
+			(event) => {
+				if (event.target instanceof HTMLElement) {
+					const node = rootNode.state.elementToNode.get(event.target);
+					node?.select();
+				}
+			},
+			{signal: controller.signal},
+		);
 
 		return () => {
 			rootNode.state.deselect();
@@ -415,24 +471,28 @@ export const NavItem: FunctionComponent<{children: VNode}> = ({children}) => {
 	assert(typeof vnode.type === 'string', 'NavItem on a component');
 
 	const oldRef = vnode.ref;
-	const propsIfNotFocusable = isVnodeFocusable(vnode) ? undefined : {
-		tabIndex: -1,
-	};
+	const propsIfNotFocusable = isVnodeFocusable(vnode)
+		? undefined
+		: {
+				tabIndex: -1,
+		  };
 
-	return <navigation.Provider value={undefined}>
-		{cloneElement(vnode, {
-			ref(value: unknown) {
-				if (value instanceof HTMLElement) {
-					node.ref = value;
-					setRef(oldRef, value);
-				} else if (value === null || value === undefined) {
-					node.ref = undefined;
-					setRef(oldRef, value);
-				} else {
-					throw new TypeError('NavItem with a non-HTMLElement ref');
-				}
-			},
-			...propsIfNotFocusable,
-		})}
-	</navigation.Provider>;
+	return (
+		<navigation.Provider value={undefined}>
+			{cloneElement(vnode, {
+				ref(value: unknown) {
+					if (value instanceof HTMLElement) {
+						node.ref = value;
+						setRef(oldRef, value);
+					} else if (value === null || value === undefined) {
+						node.ref = undefined;
+						setRef(oldRef, value);
+					} else {
+						throw new TypeError('NavItem with a non-HTMLElement ref');
+					}
+				},
+				...propsIfNotFocusable,
+			})}
+		</navigation.Provider>
+	);
 };
