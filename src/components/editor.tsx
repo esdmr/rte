@@ -5,7 +5,13 @@ import 'monaco-editor/esm/vs/editor/contrib/wordHighlighter/browser/wordHighligh
 
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api.js';
 import type {FunctionComponent} from 'preact';
-import {EffectCallback, MutableRef, Ref, useEffect, useRef} from 'preact/hooks';
+import {
+	type EffectCallback,
+	type MutableRef,
+	type Ref,
+	useEffect,
+	useRef,
+} from 'preact/hooks';
 import assert from '../assert.js';
 import * as css from './editor.module.css.js';
 
@@ -31,12 +37,12 @@ export const Editor: FunctionComponent<EditorProps> = (props) => {
 	return <div ref={ref} class={css.editor}></div>;
 };
 
-interface EditorProps {
+type EditorProps = {
 	accessibilityEnabled?: boolean;
 	lightTheme?: string;
 	darkTheme?: string;
 	theme?: 'light' | 'dark' | 'auto';
-}
+};
 
 function getEffectCallback(
 	props: EditorProps,

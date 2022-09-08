@@ -1,24 +1,24 @@
-export interface Package {
+export type Package = {
 	name: string;
 	version: string;
 	dev?: boolean | undefined;
 	authors: string[];
 	license: License;
-}
+};
 
 export type License = SpdxLicense | CustomLicense | LegacyLicense[] | undefined;
 
-export interface SpdxLicense {
+export type SpdxLicense = {
 	type: 'spdx';
 	id: string;
 	hasFile: boolean;
-}
+};
 
-export interface CustomLicense {
+export type CustomLicense = {
 	type: 'custom';
-}
+};
 
-export interface LegacyLicense {
+export type LegacyLicense = {
 	type: string;
 	url: string;
-}
+};

@@ -1,4 +1,4 @@
-import {FunctionComponent, lazy} from 'preact/compat';
+import {type FunctionComponent, lazy} from 'preact/compat';
 import assert from '../../assert.js';
 import type * as Types from '../../license-types.js';
 import {NavColumn} from '../navigation/index.js';
