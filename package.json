@@ -6,6 +6,7 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite",
+    "check": "tsc -p .",
     "lint": "xo",
     "lint:fix": "xo --fix",
     "preview": "vite preview"
