@@ -1,6 +1,7 @@
 import {FunctionComponent, lazy} from 'preact/compat';
 import assert from '../../assert.js';
 import type * as Types from '../../license-types.js';
+import {NavColumn} from '../navigation/index.js';
 import {Package} from './package.js';
 
 const createComponent = (file: string, route: string) => lazy<FunctionComponent>(async () => {
@@ -17,9 +18,9 @@ const createComponent = (file: string, route: string) => lazy<FunctionComponent>
 
 		const json = (await response.json()) as Types.Package[];
 
-		const LoadedPackagesList = () => <>
+		const LoadedPackagesList = () => <NavColumn>
 			{json.map(pkg => <Package pkg={pkg} key={`${pkg.name}@${pkg.version}`} route={route} />)}
-		</>;
+		</NavColumn>;
 		return LoadedPackagesList;
 	} catch (error) {
 		console.error(error);

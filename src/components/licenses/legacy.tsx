@@ -1,5 +1,6 @@
 import type {FunctionComponent} from 'preact';
 import type * as Types from '../../license-types.js';
+import {A} from '../navigation/wrappers.js';
 
 export const LegacyLicense: FunctionComponent<{licenses: Types.LegacyLicense[]}> = props =>
 	<>
@@ -7,9 +8,9 @@ export const LegacyLicense: FunctionComponent<{licenses: Types.LegacyLicense[]}>
 		<ul>
 			{props.licenses.map(license =>
 				<li>
-					<a href={license.url}>
+					<A href={license.url}>
 						{license.type ? <code>{license.type}</code> : '[unknown license]'}.
-					</a>
+					</A>
 				</li>,
 			)}
 		</ul>

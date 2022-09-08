@@ -41,12 +41,20 @@ export const Package: FunctionComponent<{
 			{license}
 		</div>
 		{licenseFile && <div class={css.icon}>
-			<CircularButton href={`${route}${encodeURIComponent(pkgId)}`}>
+			<CircularButton href={getLicenseFileUrl(route, pkgId)}>
 				<Icon path={mdiChevronRight} title='See license file' />
 			</CircularButton>
 		</div>}
 	</div>;
 };
+
+function getLicenseFileUrl(route: string, pkgId: string) {
+	const encodedPkgId = encodeURIComponent(pkgId)
+		.replace(/%40/g, '@')
+		.replace(/%2F/g, '/');
+
+	return `${route}${encodedPkgId}`;
+}
 
 function * getAttributions(authors: string[]): Generator<ComponentChild> {
 	yield 'By ';
