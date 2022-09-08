@@ -1,12 +1,12 @@
-export interface Vector {
+export type Vector = {
 	x: number;
 	y: number;
-}
+};
 
-export interface Transform {
+export type Transform = {
 	x: {x: number; y: number};
 	y: {x: number; y: number};
-}
+};
 
 export function vector(x: number, y: number): Vector {
 	return {x, y};

@@ -1,4 +1,4 @@
-import {cloneElement, FunctionComponent} from 'preact';
+import {cloneElement, type FunctionComponent} from 'preact';
 import {useMemo} from 'preact/hooks';
 import {Switch, type SwitchProps} from 'wouter-preact';
 import {navColumnHooks, navigation, NavNode, useChildToken} from './index.js';

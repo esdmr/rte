@@ -1,7 +1,7 @@
 import {
 	cloneElement,
 	createContext,
-	Ref,
+	type Ref,
 	toChildArray,
 	type ComponentChildren,
 	type FunctionComponent,
@@ -95,7 +95,7 @@ export class NavChildToken {
 
 export type NavDirection = 'next' | 'up' | 'down' | 'left' | 'right';
 
-export interface NavHooks {
+export type NavHooks = {
 	select?(this: NavNode): void;
 	deselect?(this: NavNode): void;
 	getLeaf?(this: NavNode, via: NavDirection): NavNode | undefined;
@@ -104,7 +104,7 @@ export interface NavHooks {
 		child: NavNode,
 		dir: NavDirection,
 	): NavNode | undefined;
-}
+};
 
 export class NavNode {
 	static for(childToken: NavChildToken, hooks: NavHooks) {

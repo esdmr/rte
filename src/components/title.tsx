@@ -1,4 +1,4 @@
-import {FunctionComponent, toChildArray} from 'preact';
+import {type FunctionComponent, toChildArray} from 'preact';
 import {useEffect} from 'preact/hooks';
 import assert from '../assert.js';
 
