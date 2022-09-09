@@ -27,7 +27,10 @@ const navItemHooks: NavHooks = {
 
 export const NavItem: FunctionComponent<{children: VNode}> = ({children}) => {
 	const childToken = useChildToken();
-	const node = useMemo(() => NavNode.for(childToken, navItemHooks), []);
+	const node = useMemo(
+		() => NavNode.for(childToken, navItemHooks),
+		[childToken],
+	);
 
 	const vnode: VNode<{
 		contenteditable?: string | boolean;

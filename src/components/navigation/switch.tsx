@@ -8,7 +8,10 @@ import {NavNode} from './node.js';
 
 export const NavSwitch: FunctionComponent<SwitchProps> = (props) => {
 	const childToken = useChildToken();
-	const node = useMemo(() => NavNode.for(childToken, navColumnHooks), []);
+	const node = useMemo(
+		() => NavNode.for(childToken, navColumnHooks),
+		[childToken],
+	);
 
 	return (
 		<Switch>

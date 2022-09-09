@@ -70,7 +70,7 @@ export const NavRoot: FunctionComponent = ({children}) => {
 			// FIXME: Move to separate API.
 			controller.abort();
 		};
-	}, []);
+	}, [rootNode]);
 
 	return wrapNavChildren(rootNode, children);
 };

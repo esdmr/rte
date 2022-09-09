@@ -46,6 +46,10 @@ export const navColumnHooks: NavHooks = {
 
 export const NavColumn: FunctionComponent = ({children}) => {
 	const childToken = useChildToken();
-	const node = useMemo(() => NavNode.for(childToken, navColumnHooks), []);
+	const node = useMemo(
+		() => NavNode.for(childToken, navColumnHooks),
+		[childToken],
+	);
+
 	return wrapNavChildren(node, children);
 };

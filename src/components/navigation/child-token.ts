@@ -31,7 +31,7 @@ export function useChildToken() {
 			childToken.child?.dispose();
 			childToken.child = undefined;
 		},
-		[],
+		[childToken],
 	);
 
 	return childToken;

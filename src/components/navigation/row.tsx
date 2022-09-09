@@ -46,6 +46,10 @@ const navRowHooks: NavHooks = {
 
 export const NavRow: FunctionComponent = ({children}) => {
 	const childToken = useChildToken();
-	const node = useMemo(() => NavNode.for(childToken, navRowHooks), []);
+	const node = useMemo(
+		() => NavNode.for(childToken, navRowHooks),
+		[childToken],
+	);
+
 	return wrapNavChildren(node, children);
 };
