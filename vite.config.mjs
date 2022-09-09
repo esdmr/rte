@@ -61,7 +61,12 @@ export default defineConfig(({command}) => ({
 			skipFull: true,
 			reporter: 'lcov',
 			src: 'src',
-			exclude: ['**/*.test.*', '**/*.d.ts', 'src/license-types.ts'],
+			exclude: [
+				'**/*.test.*',
+				'**/*.d.ts',
+				'src/license-types.ts',
+				'src/components/icons/gamepad/face-button/types.ts',
+			],
 		},
 		cache: {
 			dir: 'node_modules/.cache/vitest',
