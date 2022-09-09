@@ -55,7 +55,7 @@ export const symbols: FaceButtonStyle = {
 		Icon() {
 			const topLeft = vectorPolar(
 				symbolsRadius - symbolsStrokeWidth * Math.SQRT1_2,
-				(-3 * Math.PI) / 4,
+				Math.PI * (-3 / 4),
 			);
 			const bottomRight = scale(-1, topLeft);
 			const size = subtract(bottomRight, topLeft);
@@ -78,7 +78,7 @@ export const symbols: FaceButtonStyle = {
 			const points = [
 				vectorPolar(trianglePointsDistance, -Math.PI / 2),
 				vectorPolar(trianglePointsDistance, Math.PI / 6),
-				vectorPolar(trianglePointsDistance, (5 * Math.PI) / 6),
+				vectorPolar(trianglePointsDistance, Math.PI * (5 / 6)),
 			]
 				.map((vec) => `${numberToString(vec.x)},${numberToString(vec.y)}`)
 				.join(' ');
