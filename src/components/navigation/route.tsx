@@ -4,9 +4,11 @@ import type {FunctionComponent} from 'preact';
 import {AllowScroll} from '../allow-scroll.js';
 import {CircularButton} from '../circular-button.js';
 import {Title} from '../title.js';
-import * as css from './index.module.css.js';
+import {NavColumn} from './column.js';
+import * as css from './route.module.css.js';
+import {NavItem} from './item.js';
+import {NavRow} from './row.js';
 import {A} from './wrappers.js';
-import {NavColumn, NavItem, NavRow} from './index.js';
 
 export const DebugNav: FunctionComponent = () => (
 	<>

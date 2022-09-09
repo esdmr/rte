@@ -1,7 +1,7 @@
 import {type FunctionComponent, lazy} from 'preact/compat';
 import assert from '../../assert.js';
 import type * as Types from '../../license-types.js';
-import {NavColumn} from '../navigation/index.js';
+import {NavColumn} from '../navigation/column.js';
 import {Package} from './package.js';
 
 const createComponent = (file: string, route: string) =>

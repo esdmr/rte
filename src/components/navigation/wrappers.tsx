@@ -1,5 +1,5 @@
 import type {FunctionComponent, JSX} from 'preact';
-import {NavItem} from './index.js';
+import {NavItem} from './item.js';
 
 function createWrapper<T extends keyof JSX.IntrinsicElements>(name: T) {
 	const Name: string = name;

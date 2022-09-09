@@ -7,7 +7,7 @@ import {CircularButton} from '../circular-button.js';
 import {Loading} from '../loading.js';
 import {Title} from '../title.js';
 import {Link} from '../link.js';
-import {NavColumn} from '../navigation/index.js';
+import {NavColumn} from '../navigation/column.js';
 import {Development, Production} from './packages-list.js';
 
 export const Licenses: FunctionComponent<{

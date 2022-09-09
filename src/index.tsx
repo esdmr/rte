@@ -3,7 +3,7 @@ import 'preact/debug';
 import {render} from 'preact';
 import {Router} from 'wouter-preact';
 import {App} from './components/app.js';
-import {NavRoot} from './components/navigation/index.js';
+import {NavRoot} from './components/navigation/root.js';
 import './index.css';
 import {useHashLocation} from './wouter-hash.js';
 

@@ -9,7 +9,7 @@ import {EditorContainer} from './editor-container.js';
 import {LicenseFile} from './licenses/file.js';
 import {Licenses} from './licenses/index.js';
 import {Link} from './link.js';
-import {NavColumn} from './navigation/index.js';
+import {NavColumn} from './navigation/column.js';
 import {DebugNav} from './navigation/route.js';
 import {NavSwitch} from './navigation/switch.js';
 import {Title} from './title.js';
