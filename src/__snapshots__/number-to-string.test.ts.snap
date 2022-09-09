@@ -1,0 +1,7 @@
+// Vitest Snapshot v1
+
+exports[`numberToString > throws if number is infinite or NaN > -Infinity 1`] = `"Assertion failed: number must be finite"`;
+
+exports[`numberToString > throws if number is infinite or NaN > Infinity 1`] = `"Assertion failed: number must be finite"`;
+
+exports[`numberToString > throws if number is infinite or NaN > NaN 1`] = `"Assertion failed: number must be finite"`;

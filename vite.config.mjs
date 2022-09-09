@@ -50,4 +50,22 @@ export default defineConfig(({command}) => ({
 		typedCssModules,
 		updateLicenses,
 	],
+	define: {
+		'import.meta.vitest': 'undefined',
+	},
+	test: {
+		environment: 'jsdom',
+		css: true,
+		coverage: {
+			all: true,
+			skipFull: true,
+			reporter: 'lcov',
+			src: 'src',
+			exclude: ['**/*.test.*', '**/*.d.ts', 'src/license-types.ts'],
+		},
+		cache: {
+			dir: 'node_modules/.cache/vitest',
+		},
+		mockReset: true,
+	},
 }));

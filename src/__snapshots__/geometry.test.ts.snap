@@ -1,0 +1,37 @@
+// Vitest Snapshot v1
+
+exports[`vector > throws if any component is infinite or NaN > both -Infinity 1`] = `"Assertion failed: vector components must be finite"`;
+
+exports[`vector > throws if any component is infinite or NaN > both Infinity 1`] = `"Assertion failed: vector components must be finite"`;
+
+exports[`vector > throws if any component is infinite or NaN > both NaN 1`] = `"Assertion failed: vector components must be finite"`;
+
+exports[`vector > throws if any component is infinite or NaN > x of -Infinity 1`] = `"Assertion failed: vector components must be finite"`;
+
+exports[`vector > throws if any component is infinite or NaN > x of Infinity 1`] = `"Assertion failed: vector components must be finite"`;
+
+exports[`vector > throws if any component is infinite or NaN > x of NaN 1`] = `"Assertion failed: vector components must be finite"`;
+
+exports[`vector > throws if any component is infinite or NaN > y of -Infinity 1`] = `"Assertion failed: vector components must be finite"`;
+
+exports[`vector > throws if any component is infinite or NaN > y of Infinity 1`] = `"Assertion failed: vector components must be finite"`;
+
+exports[`vector > throws if any component is infinite or NaN > y of NaN 1`] = `"Assertion failed: vector components must be finite"`;
+
+exports[`vectorPolar > throws if any component is infinite or NaN > angle of -Infinity 1`] = `"Assertion failed: vector components must be finite"`;
+
+exports[`vectorPolar > throws if any component is infinite or NaN > angle of Infinity 1`] = `"Assertion failed: vector components must be finite"`;
+
+exports[`vectorPolar > throws if any component is infinite or NaN > angle of NaN 1`] = `"Assertion failed: vector components must be finite"`;
+
+exports[`vectorPolar > throws if any component is infinite or NaN > both -Infinity 1`] = `"Assertion failed: vector components must be finite"`;
+
+exports[`vectorPolar > throws if any component is infinite or NaN > both Infinity 1`] = `"Assertion failed: vector components must be finite"`;
+
+exports[`vectorPolar > throws if any component is infinite or NaN > both NaN 1`] = `"Assertion failed: vector components must be finite"`;
+
+exports[`vectorPolar > throws if any component is infinite or NaN > length of -Infinity 1`] = `"Assertion failed: vector components must be finite"`;
+
+exports[`vectorPolar > throws if any component is infinite or NaN > length of Infinity 1`] = `"Assertion failed: vector components must be finite"`;
+
+exports[`vectorPolar > throws if any component is infinite or NaN > length of NaN 1`] = `"Assertion failed: vector components must be finite"`;

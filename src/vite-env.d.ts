@@ -1,2 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/triple-slash-reference
-/// <reference types="vite/client" />
+/* eslint-disable import/no-unassigned-import */
+import 'vite/client';
+import 'vitest/importMeta';

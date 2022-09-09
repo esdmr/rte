@@ -1,14 +1,21 @@
+import assert from './assert.js';
+
 export type Vector = {
-	x: number;
-	y: number;
+	readonly x: number;
+	readonly y: number;
 };
 
 export type Transform = {
-	x: {x: number; y: number};
-	y: {x: number; y: number};
+	readonly x: {readonly x: number; readonly y: number};
+	readonly y: {readonly x: number; readonly y: number};
 };
 
 export function vector(x: number, y: number): Vector {
+	assert(
+		Number.isFinite(x) && Number.isFinite(y),
+		'vector components must be finite',
+	);
+
 	return {x, y};
 }
 
@@ -45,7 +52,14 @@ export function scale(coefficient: number, vec: Vector) {
 }
 
 export function normalize(vec: Vector) {
-	return scale(1 / vectorLength(vec), vec);
+	const length = vectorLength(vec);
+
+	// Zero vector cannot be normalized.
+	if (length === 0) {
+		return vector(0, 0);
+	}
+
+	return scale(1 / length, vec);
 }
 
 export function transform(matrix: Transform, vec: Vector) {
