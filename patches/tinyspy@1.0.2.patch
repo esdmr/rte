@@ -1,0 +1,17 @@
+diff --git a/dist/index.d.ts b/dist/index.d.cts
+similarity index 100%
+rename from dist/index.d.ts
+rename to dist/index.d.cts
+diff --git a/package.json b/package.json
+index 22bc77641c1f72df5267fd168feaed3167855929..e433f38cc40218d0c5aafa0cb43ec77a5c804806 100644
+--- a/package.json
++++ b/package.json
+@@ -6,7 +6,7 @@
+   "module": "./dist/index.js",
+   "types": "./dist/index.d.ts",
+   "exports": {
+-    "types": "./dist/index.d.ts",
++    "types": "./dist/index.d.cts",
+     "import": "./dist/index.js",
+     "require": "./dist/index.cjs",
+     "default": "./dist/index.cjs"

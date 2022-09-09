@@ -24,6 +24,12 @@ patchedDependencies:
   vite@3.1.0:
     hash: klp6idf7vrk2azr2rkipc4iul4
     path: patches/vite@3.1.0.patch
+  tinybench@2.1.5:
+    hash: kwun5jhoqfgceapjjddm3w5qea
+    path: patches/tinybench@2.1.5.patch
+  tinyspy@1.0.2:
+    hash: otxhabklect43mphkuxgrnmuza
+    path: patches/tinyspy@1.0.2.patch
 
 specifiers:
   '@mdi/js': 7.0.96
@@ -4182,19 +4188,21 @@ packages:
       readable-stream: 3.6.0
     dev: true
 
-  /tinybench/2.1.5:
+  /tinybench/2.1.5_kwun5jhoqfgceapjjddm3w5qea:
     resolution: {integrity: sha512-ak+PZZEuH3mw6CCFOgf5S90YH0MARnZNhxjhjguAmoJimEMAJuNip/rJRd6/wyylHItomVpKTzZk9zrhTrQCoQ==}
     dev: true
+    patched: true
 
   /tinypool/0.2.4:
     resolution: {integrity: sha512-Vs3rhkUH6Qq1t5bqtb816oT+HeJTXfwt2cbPH17sWHIYKTotQIFPk3tf2fgqRrVyMDVOc1EnPgzIxfIulXVzwQ==}
     engines: {node: '>=14.0.0'}
     dev: true
 
-  /tinyspy/1.0.2:
+  /tinyspy/1.0.2_otxhabklect43mphkuxgrnmuza:
     resolution: {integrity: sha512-bSGlgwLBYf7PnUsQ6WOc6SJ3pGOcd+d8AA6EUnLDDM0kWEstC1JIlSZA3UNliDXhd9ABoS7hiRBDCu+XP/sf1Q==}
     engines: {node: '>=14.0.0'}
     dev: true
+    patched: true
 
   /to-absolute-glob/2.0.2:
     resolution: {integrity: sha512-rtwLUQEwT8ZeKQbyFJyomBRYXyE16U5VKuy0ftxLMK/PZb2fkOsg5r9kHdauuVDbsNdIBoC/HCthpidamQFXYA==}
@@ -4497,9 +4505,9 @@ packages:
       jsdom: 20.0.0
       local-pkg: 0.4.2
       strip-literal: 0.4.0
-      tinybench: 2.1.5
+      tinybench: 2.1.5_kwun5jhoqfgceapjjddm3w5qea
       tinypool: 0.2.4
-      tinyspy: 1.0.2
+      tinyspy: 1.0.2_otxhabklect43mphkuxgrnmuza
       vite: 3.1.0_klp6idf7vrk2azr2rkipc4iul4
     transitivePeerDependencies:
       - less
