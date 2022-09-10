@@ -14,5 +14,6 @@ export const CircularButton: FunctionComponent<
 			{...props}
 			href={props.href}
 			class={useClass(css.circular, props.class)}
+			draggable={false}
 		/>
 	);
