@@ -4,129 +4,173 @@ import 'monaco-editor/esm/vs/editor/contrib/bracketMatching/browser/bracketMatch
 import 'monaco-editor/esm/vs/editor/contrib/wordHighlighter/browser/wordHighlighter.js';
 
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api.js';
-import type {FunctionComponent} from 'preact';
-import {
-	type EffectCallback,
-	type MutableRef,
-	type Ref,
-	useEffect,
-	useRef,
-} from 'preact/hooks';
+import {type ComponentChild, Component} from 'preact';
 import assert from '../assert.js';
 import * as css from './editor.module.css.js';
 
-declare global {
-	// eslint-disable-next-line no-var
-	var monaco: unknown;
-}
+const lightTheme = 'vs-light';
+const darkTheme = 'vs-dark';
 
-// Debug: globalThis.monaco = monaco;
-type MonacoEditor = monaco.editor.IStandaloneCodeEditor;
+export class MonacoEditor {
+	private readonly editor: monaco.editor.IStandaloneCodeEditor;
+	private _lightTheme: boolean;
 
-export const Editor: FunctionComponent<EditorProps> = (props) => {
-	const ref = useRef<HTMLDivElement>(null);
-	const editorRef = useRef<MonacoEditor>();
+	get lightTheme(): boolean {
+		return this._lightTheme;
+	}
 
-	useEffect(
-		getEffectCallback(props, {
-			ref,
-			editorRef,
-		}),
-	);
+	set lightTheme(value: boolean) {
+		this._lightTheme = value;
+		this.editor.updateOptions({
+			theme: this.getTheme(),
+		});
+	}
 
-	return <div ref={ref} class={css.editor}></div>;
-};
+	private _forceAccessibility: boolean;
 
-type EditorProps = {
-	accessibilityEnabled?: boolean;
-	lightTheme?: string;
-	darkTheme?: string;
-	theme?: 'light' | 'dark' | 'auto';
-};
+	get forceAccessibility(): boolean {
+		return this._forceAccessibility;
+	}
 
-function getEffectCallback(
-	props: EditorProps,
-	options: {
-		ref: Ref<HTMLElement>;
-		editorRef: MutableRef<MonacoEditor | undefined>;
-	},
-): EffectCallback {
-	return () => {
-		const controller = new AbortController();
-		assert(options.ref.current !== null, 'ref is null');
-		const element = options.ref.current;
+	set forceAccessibility(value: boolean) {
+		this._forceAccessibility = value;
+		this.editor.updateOptions({
+			accessibilitySupport: this.getAccessibilitySupport(),
+		});
+	}
 
-		props.lightTheme ??= 'vs-light';
-		props.darkTheme ??= 'vs-dark';
-		props.theme ??= 'auto';
-		let theme: string;
-
-		switch (props.theme) {
-			case 'light':
-				theme = props.lightTheme;
-				break;
-
-			case 'dark':
-				theme = props.darkTheme;
-				break;
-
-			case 'auto': {
-				const prefersColorScheme = matchMedia(
-					'(prefers-color-scheme: light)',
-				).matches;
-				theme = prefersColorScheme ? props.lightTheme : props.darkTheme;
-				break;
-			}
-
-			default:
-				throw new Error('Invalid theme name');
-		}
+	constructor(
+		private readonly element: HTMLElement,
+		options: {
+			lightTheme: boolean;
+			forceAccessibility: boolean;
+		},
+	) {
+		this._lightTheme = options.lightTheme;
+		this._forceAccessibility = options.forceAccessibility;
 
 		const editor = monaco.editor.create(element, {
 			language: 'javascript',
-			theme,
+			theme: this.getTheme(),
 			fontFamily: '"System Mono"',
 			fontLigatures: true,
 			scrollBeyondLastLine: false,
 			ariaContainerElement: element,
-			accessibilitySupport: props.accessibilityEnabled ? 'on' : 'auto',
+			accessibilitySupport: this.getAccessibilitySupport(),
 		});
 
-		editor.layout();
+		this.editor = editor;
+		this.updateLayout();
+	}
 
-		if (props.theme === 'auto') {
-			matchMedia('(prefers-color-scheme: light)').addEventListener(
-				'change',
-				(event) => {
-					monaco.editor.setTheme(
-						event.matches ? props.lightTheme! : props.darkTheme!,
-					);
-				},
-				{signal: controller.signal},
-			);
+	updateLayout() {
+		this.editor.layout();
+	}
+
+	dispose() {
+		this.editor.getModel()?.dispose();
+		this.editor.dispose();
+		this.element.replaceChildren();
+	}
+
+	private getTheme() {
+		return this._lightTheme ? lightTheme : darkTheme;
+	}
+
+	private getAccessibilitySupport() {
+		return this._forceAccessibility ? 'on' : 'auto';
+	}
+}
+
+type EditorProps = {
+	forceAccessibility?: boolean;
+	theme?: 'light' | 'dark' | 'auto';
+};
+
+export class Editor extends Component<EditorProps> {
+	private forceAccessibility = false;
+	private theme: EditorProps['theme'];
+	private editor?: MonacoEditor | undefined;
+	private readonly themeQuery = matchMedia('(prefers-color-scheme: light)');
+
+	constructor(props?: EditorProps) {
+		super(props);
+		this.theme = props?.theme ?? 'auto';
+		this.forceAccessibility = props?.forceAccessibility ?? false;
+	}
+
+	override componentWillReceiveProps(nextProps: Readonly<EditorProps>): void {
+		const theme = nextProps.theme ?? 'auto';
+		const forceAccessibility = nextProps.forceAccessibility ?? false;
+
+		if (this.theme !== theme) {
+			this.theme = theme;
+
+			if (this.editor) {
+				this.editor.lightTheme = this.isLightTheme();
+			}
 		}
 
-		addEventListener(
-			'resize',
-			() => {
-				editor.layout();
-			},
-			{signal: controller.signal},
-		);
+		if (this.forceAccessibility !== forceAccessibility) {
+			this.forceAccessibility = forceAccessibility;
 
-		controller.signal.addEventListener('abort', () => {
-			editor.getModel()?.dispose();
-			editor.dispose();
-			element.replaceChildren();
+			if (this.editor) {
+				this.editor.forceAccessibility = forceAccessibility;
+			}
+		}
+	}
+
+	override shouldComponentUpdate(): boolean {
+		return false;
+	}
+
+	override componentDidMount(): void {
+		assert(this.base instanceof HTMLElement, 'base is not a HTMLElement');
+
+		this.editor = new MonacoEditor(this.base, {
+			forceAccessibility: this.forceAccessibility,
+			lightTheme: this.isLightTheme(),
 		});
 
-		options.editorRef.current = editor;
+		addEventListener('resize', this.onDidResize);
 		console.log('Monaco editor started.');
+	}
 
-		return () => {
-			controller.abort();
-			console.log('monaco editor stopped.');
-			options.editorRef.current = undefined;
-		};
+	override componentWillUnmount(): void {
+		this.themeQuery.removeEventListener('change', this.onDidThemeQueryChange);
+		removeEventListener('resize', this.onDidResize);
+		this.editor?.dispose();
+		console.log('monaco editor stopped.');
+		this.editor = undefined;
+	}
+
+	render(): ComponentChild {
+		return <div class={css.editor} />;
+	}
+
+	private isLightTheme() {
+		this.themeQuery.removeEventListener('change', this.onDidThemeQueryChange);
+
+		switch (this.theme) {
+			case 'light':
+				return true;
+
+			case 'dark':
+				return false;
+
+			default:
+				this.themeQuery.addEventListener('change', this.onDidThemeQueryChange);
+				return this.themeQuery.matches;
+		}
+	}
+
+	private readonly onDidResize = () => {
+		assert(this.editor, 'editor is undefined');
+		this.editor.updateLayout();
+	};
+
+	private readonly onDidThemeQueryChange = (event: MediaQueryListEvent) => {
+		assert(this.editor, 'editor is undefined');
+		this.editor.lightTheme = event.matches;
 	};
 }
