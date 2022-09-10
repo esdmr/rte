@@ -6,9 +6,8 @@ import {CircularButton} from '../circular-button.js';
 import {Title} from '../title.js';
 import {NavColumn} from './column.js';
 import * as css from './route.module.css.js';
-import {NavItem} from './item.js';
 import {NavRow} from './row.js';
-import {A} from './wrappers.js';
+import {A, Div} from './wrappers.js';
 
 export const DebugNav: FunctionComponent = () => (
 	<>
@@ -25,38 +24,24 @@ export const DebugNav: FunctionComponent = () => (
 				<NavColumn>
 					<Title h1>Debug navigation</Title>
 					<div>Text 1</div>
-					<NavItem>
-						<div>Focusable text 2</div>
-					</NavItem>
+					<Div>Focusable text 2</Div>
 					<div>Text 3</div>
 					<A>Anchor without href</A>
 					<br />
 					<A href="https://example.com">Anchor with href (Link)</A>
 					<div class={css.flexColumn}>
 						<NavRow>
-							<NavItem>
-								<div>Column 1</div>
-							</NavItem>
-							<NavItem>
-								<div>Column 2</div>
-							</NavItem>
-							<NavItem>
-								<div>Column 3</div>
-							</NavItem>
+							<Div>Column 1</Div>
+							<Div>Column 2</Div>
+							<Div>Column 3</Div>
 						</NavRow>
 					</div>
 
 					<div class={css.flexRow}>
 						<NavColumn>
-							<NavItem>
-								<div>Row 1</div>
-							</NavItem>
-							<NavItem>
-								<div>Row 2</div>
-							</NavItem>
-							<NavItem>
-								<div>Row 3</div>
-							</NavItem>
+							<Div>Row 1</Div>
+							<Div>Row 2</Div>
+							<Div>Row 3</Div>
 						</NavColumn>
 					</div>
 
@@ -64,41 +49,23 @@ export const DebugNav: FunctionComponent = () => (
 						<NavColumn>
 							<div class={css.flexColumn}>
 								<NavRow>
-									<NavItem>
-										<div>Row 1, Column 1</div>
-									</NavItem>
-									<NavItem>
-										<div>Row 1, Column 2</div>
-									</NavItem>
-									<NavItem>
-										<div>Row 1, Column 3</div>
-									</NavItem>
+									<Div>Row 1, Column 1</Div>
+									<Div>Row 1, Column 2</Div>
+									<Div>Row 1, Column 3</Div>
 								</NavRow>
 							</div>
 							<div class={css.flexColumn}>
 								<NavRow>
-									<NavItem>
-										<div>Row 2, Column 1</div>
-									</NavItem>
-									<NavItem>
-										<div>Row 2, Column 2</div>
-									</NavItem>
-									<NavItem>
-										<div>Row 2, Column 3</div>
-									</NavItem>
+									<Div>Row 2, Column 1</Div>
+									<Div>Row 2, Column 2</Div>
+									<Div>Row 2, Column 3</Div>
 								</NavRow>
 							</div>
 							<div class={css.flexColumn}>
 								<NavRow>
-									<NavItem>
-										<div>Row 3, Column 1</div>
-									</NavItem>
-									<NavItem>
-										<div>Row 3, Column 2</div>
-									</NavItem>
-									<NavItem>
-										<div>Row 3, Column 3</div>
-									</NavItem>
+									<Div>Row 3, Column 1</Div>
+									<Div>Row 3, Column 2</Div>
+									<Div>Row 3, Column 3</Div>
 								</NavRow>
 							</div>
 						</NavColumn>

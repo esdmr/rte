@@ -28,3 +28,5 @@ export const Button = /* @__PURE__ */ createWrapper('button');
 export const Iframe = /* @__PURE__ */ createWrapper('iframe');
 export const Object = /* @__PURE__ */ createWrapper('object');
 export const Embed = /* @__PURE__ */ createWrapper('embed');
+
+export const Div = /* @__PURE__ */ createWrapper('div');
