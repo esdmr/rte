@@ -48,8 +48,6 @@ export default definePlugin({
 		}
 	},
 	async configureServer(server) {
-		server.watcher.add(files);
-
 		server.watcher.on('change', (path) => {
 			if (path.endsWith('.css')) {
 				console.log(path, 'was changed. Updating its types...');
