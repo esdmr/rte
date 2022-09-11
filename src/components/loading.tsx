@@ -1,5 +1,5 @@
 import type {FunctionComponent} from 'preact';
-import {useClass} from '../use-class.js';
+import {classes} from '../classes.js';
 import * as css from './loading.module.css.js';
 
 const circlesCount = 3;
@@ -9,7 +9,7 @@ export const Loading: FunctionComponent<{
 	placement: 'center' | 'bottom-right';
 }> = (props) => (
 	<div
-		class={useClass(css.loading, props.class)}
+		class={classes(css.loading, props.class)}
 		role="alert"
 		aria-busy="true"
 		aria-labelledby="loading"

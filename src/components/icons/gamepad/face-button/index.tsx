@@ -1,5 +1,5 @@
 import type {FunctionComponent} from 'preact';
-import {useClass} from '../../../../use-class.js';
+import {classes} from '../../../../classes.js';
 import * as css from './index.module.css.js';
 import type {Direction, FaceButtonStyle} from './types.js';
 
@@ -13,7 +13,7 @@ export const GamepadFaceButtonIcon: FunctionComponent<{
 
 	return (
 		<svg
-			class={useClass(css.faceButton, props.class)}
+			class={classes(css.faceButton, props.class)}
 			viewBox="-8 -8 16 16"
 			data-style={props.style.name}
 			data-which={props.which}

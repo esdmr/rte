@@ -2,7 +2,7 @@ import type {ComponentChild, FunctionComponent} from 'preact';
 import {Icon} from '@mdi/react';
 import {mdiChevronRight} from '@mdi/js';
 import type * as Types from '../../license-types.js';
-import {useClass} from '../../use-class.js';
+import {classes} from '../../classes.js';
 import {CircularButton} from '../circular-button.js';
 import * as css from './package.module.css.js';
 import {LegacyLicense} from './legacy.js';
@@ -33,9 +33,7 @@ export const Package: FunctionComponent<{
 	}
 
 	return (
-		<div
-			class={useClass(css.pkg, licenseFile ? css.hasLicenseFile : undefined)}
-		>
+		<div class={classes(css.pkg, licenseFile ? css.hasLicenseFile : undefined)}>
 			<div class={css.content}>
 				<h2 class={css.heading}>
 					<code>{pkg.name}</code> <code class={css.version}>{pkg.version}</code>
