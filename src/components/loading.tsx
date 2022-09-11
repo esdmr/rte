@@ -19,7 +19,6 @@ export const Loading: FunctionComponent<{
 			viewBox={`-0.25 -0.25 ${circlesCount - 0.5} 0.5`}
 			xmlns="http://www.w3.org/2000/svg"
 			id="loading"
-			style={{'--count': circlesCount}}
 			aria-label="Loading"
 		>
 			{Array.from({length: circlesCount}, (_, index) => (
@@ -27,7 +26,7 @@ export const Loading: FunctionComponent<{
 					cx={index}
 					cy="0"
 					r="0.25"
-					style={{'--step': index / circlesCount}}
+					style={{'--loading--step': index / circlesCount}}
 					key={index}
 				/>
 			))}

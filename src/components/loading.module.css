@@ -1,6 +1,6 @@
 .loading {
-	--animation-duration: 2s;
-	--animation-scale: 2;
+	--loading--animation-duration: 2s;
+	--loading--animation-scale: 2;
 	display: grid;
 	place-items: end;
 	padding: 5em;
@@ -15,11 +15,11 @@
 }
 
 .loading circle {
-	--step: 0;
+	--loading--step: 0;
 	fill: var(--foreground);
 	transform-origin: center;
 	transform-box: fill-box;
-	animation: loading calc(var(--animation-duration) / 2) ease-in-out calc(-1 * var(--step) * var(--animation-duration) / var(--animation-scale)) infinite alternate;
+	animation: loading calc(var(--loading--animation-duration) / 2) ease-in-out calc(-1 * var(--loading--step) * var(--loading--animation-duration) / var(--loading--animation-scale)) infinite alternate;
 }
 
 @keyframes loading {
