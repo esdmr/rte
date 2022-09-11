@@ -15,7 +15,7 @@ function* iterateRow(grid: NavNode, from: number, dir: 1 | -1) {
 	const to = row * width + (dir > 0 ? width : -1);
 	const {children} = grid;
 
-	for (let index = from; index !== to; index += dir) {
+	for (let index = from + dir; index !== to; index += dir) {
 		const node = children[index];
 
 		if (node !== undefined) {
@@ -25,17 +25,25 @@ function* iterateRow(grid: NavNode, from: number, dir: 1 | -1) {
 }
 
 function* iterateColumn(grid: NavNode, from: number, dir: 1 | -1) {
+	// FIXME: Optimize.
 	const width = gridWidths.get(grid);
 	assert(width, 'grid width not found');
-	const column = from % width;
 	const {children} = grid;
+	const column = from % width;
+	const to = dir > 0 ? getLastIndexOfColumn() : column;
 
-	for (let index = from; index % width === column; index += dir) {
+	for (let index = from + dir * width; index !== to; index += dir * width) {
 		const node = children[index];
 
 		if (node !== undefined) {
 			yield node;
 		}
+	}
+
+	function getLastIndexOfColumn() {
+		const lastIndex = children.length - 1;
+		const row = Math.trunc(lastIndex / width!);
+		return row * width! + width! + column;
 	}
 }
 
