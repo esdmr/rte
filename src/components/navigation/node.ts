@@ -5,6 +5,7 @@ import {NavState} from './state.js';
 export type NavDirection = 'next' | 'up' | 'down' | 'left' | 'right';
 
 export type NavHooks = {
+	dispose?(this: NavNode): void;
 	select?(this: NavNode): void;
 	deselect?(this: NavNode): void;
 	getLeaf?(this: NavNode, via: NavDirection): NavNode | undefined;
@@ -63,22 +64,23 @@ export class NavNode {
 		return new NavChildToken(this, index);
 	}
 
-	dispose() {
+	dispose(root = this) {
 		if (this.isDisposed) {
 			return;
 		}
 
 		for (const [index, child] of this.children.entries()) {
-			child?.dispose();
+			child?.dispose(root);
 			this.children[index] = undefined;
 		}
 
 		if (this.isSelected) {
 			this.state.deselect();
-			this.parent?.getNextLeaf(this, 'next')?.select();
+			root.parent?.getNextLeaf(root, 'next')?.select();
 		}
 
 		this.isDisposed = true;
+		this.hooks.dispose?.call(this);
 		this.ref = undefined;
 	}
 
