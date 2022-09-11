@@ -30,7 +30,7 @@ function* iterateColumn(grid: NavNode, from: number, dir: 1 | -1) {
 	assert(width, 'grid width not found');
 	const {children} = grid;
 	const column = from % width;
-	const to = dir > 0 ? getLastIndexOfColumn() : column;
+	const to = dir > 0 ? getLastIndexOfColumn() : column - width;
 
 	for (let index = from + dir * width; index !== to; index += dir * width) {
 		const node = children[index];
