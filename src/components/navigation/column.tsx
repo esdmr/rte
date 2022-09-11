@@ -3,21 +3,21 @@ import {useMemo} from 'preact/hooks';
 import {useChildToken} from './child-token.js';
 import {wrapNavChildren} from './context.js';
 import {type NavHooks, NavNode} from './node.js';
-import {getAnyLeaf, iterateToStart, iterateToEnd} from './utils.js';
+import {getAnyLeaf, iterateChildren} from './utils.js';
 
 export const navColumnHooks: NavHooks = {
 	getLeaf(via) {
 		return via === 'up'
-			? getAnyLeaf(iterateToStart(this.children, this.children.length - 1), via)
-			: getAnyLeaf(iterateToEnd(this.children, 0), via);
+			? getAnyLeaf(iterateChildren(this, this.children.length, -1), via)
+			: getAnyLeaf(iterateChildren(this, -1, 1), via);
 	},
 	getNextLeaf(child, dir) {
 		switch (dir) {
 			case 'next': {
 				const index = this.children.indexOf(child);
 				return (
-					getAnyLeaf(iterateToEnd(this.children, index + 1), 'down') ??
-					getAnyLeaf(iterateToStart(this.children, index - 1), 'up') ??
+					getAnyLeaf(iterateChildren(this, index, 1), 'down') ??
+					getAnyLeaf(iterateChildren(this, index, -1), 'up') ??
 					this.parent?.getNextLeaf(this, 'next')
 				);
 			}
@@ -25,7 +25,7 @@ export const navColumnHooks: NavHooks = {
 			case 'up': {
 				const index = this.children.indexOf(child);
 				return (
-					getAnyLeaf(iterateToStart(this.children, index - 1), 'up') ??
+					getAnyLeaf(iterateChildren(this, index, -1), 'up') ??
 					this.parent?.getNextLeaf(this, dir)
 				);
 			}
@@ -33,7 +33,7 @@ export const navColumnHooks: NavHooks = {
 			case 'down': {
 				const index = this.children.indexOf(child);
 				return (
-					getAnyLeaf(iterateToEnd(this.children, index + 1), 'down') ??
+					getAnyLeaf(iterateChildren(this, index, 1), 'down') ??
 					this.parent?.getNextLeaf(this, dir)
 				);
 			}

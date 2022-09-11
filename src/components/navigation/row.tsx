@@ -3,21 +3,21 @@ import {useMemo} from 'preact/hooks';
 import {useChildToken} from './child-token.js';
 import {wrapNavChildren} from './context.js';
 import {type NavHooks, NavNode} from './node.js';
-import {getAnyLeaf, iterateToStart, iterateToEnd} from './utils.js';
+import {getAnyLeaf, iterateChildren} from './utils.js';
 
 const navRowHooks: NavHooks = {
 	getLeaf(via) {
 		return via === 'left'
-			? getAnyLeaf(iterateToStart(this.children, this.children.length - 1), via)
-			: getAnyLeaf(iterateToEnd(this.children, 0), via);
+			? getAnyLeaf(iterateChildren(this, this.children.length, -1), via)
+			: getAnyLeaf(iterateChildren(this, -1, 1), via);
 	},
 	getNextLeaf(child, dir) {
 		switch (dir) {
 			case 'next': {
 				const index = this.children.indexOf(child);
 				return (
-					getAnyLeaf(iterateToEnd(this.children, index + 1), 'right') ??
-					getAnyLeaf(iterateToStart(this.children, index - 1), 'left') ??
+					getAnyLeaf(iterateChildren(this, index, 1), 'right') ??
+					getAnyLeaf(iterateChildren(this, index, -1), 'left') ??
 					this.parent?.getNextLeaf(this, 'next')
 				);
 			}
@@ -25,7 +25,7 @@ const navRowHooks: NavHooks = {
 			case 'left': {
 				const index = this.children.indexOf(child);
 				return (
-					getAnyLeaf(iterateToStart(this.children, index - 1), 'left') ??
+					getAnyLeaf(iterateChildren(this, index, -1), 'left') ??
 					this.parent?.getNextLeaf(this, dir)
 				);
 			}
@@ -33,7 +33,7 @@ const navRowHooks: NavHooks = {
 			case 'right': {
 				const index = this.children.indexOf(child);
 				return (
-					getAnyLeaf(iterateToEnd(this.children, index + 1), 'left') ??
+					getAnyLeaf(iterateChildren(this, index, 1), 'right') ??
 					this.parent?.getNextLeaf(this, dir)
 				);
 			}

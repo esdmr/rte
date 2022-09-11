@@ -35,33 +35,27 @@ export function isVnodeFocusable(vnode: VNode<Record<string, unknown>>) {
 	);
 }
 
-export function* iterateToStart(
-	nodes: Array<NavNode | undefined>,
-	from: number,
-) {
-	const length = nodes.length;
+export function* iterateChildren(node: NavNode, from: number, dir: 1 | -1) {
+	const {children} = node;
+	const {length} = children;
 	assert(length > 0, 'empty node list');
+	assert(from >= 0 && from < length, 'from out of range');
 
-	for (let index = from; index >= 0; index--) {
-		yield nodes[index];
+	from += dir;
+	const to = dir < 0 ? length : -1;
+
+	for (let index = from; index !== to; index += dir) {
+		const node = children[index];
+
+		if (node !== undefined) {
+			yield node;
+		}
 	}
 }
 
-export function* iterateToEnd(nodes: Array<NavNode | undefined>, from: number) {
-	const length = nodes.length;
-	assert(length > 0, 'empty node list');
-
-	for (let index = from; index < length; index++) {
-		yield nodes[index];
-	}
-}
-
-export function getAnyLeaf(
-	nodes: Iterable<NavNode | undefined>,
-	via: NavDirection,
-) {
+export function getAnyLeaf(nodes: Iterable<NavNode>, via: NavDirection) {
 	for (const node of nodes) {
-		const leaf = node?.getLeaf(via);
+		const leaf = node.getLeaf(via);
 
 		if (leaf !== undefined) {
 			return leaf;
