@@ -1,7 +1,7 @@
 import type {FunctionComponent} from 'preact';
 import {useMemo, useEffect} from 'preact/hooks';
 import {navColumnHooks} from './column.js';
-import {wrapNavChildren} from './context.js';
+import {wrapNavChildren} from './child-token.js';
 import {NavNode} from './node.js';
 
 export const NavRoot: FunctionComponent = ({children}) => {
