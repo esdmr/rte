@@ -7,6 +7,16 @@ const scriptPath = fileURLToPath(
 	new URL('update-licenses.js', import.meta.url),
 );
 
+const updateLicenses = async () => {
+	console.log('Fetching the licenses...');
+	return execaNode(scriptPath, {
+		stdio: 'inherit',
+		env: {
+			ONLY_PROD: 'true',
+		},
+	});
+};
+
 let isBuild = true;
 
 export default definePlugin({
@@ -40,13 +50,3 @@ export default definePlugin({
 		}
 	},
 });
-
-async function updateLicenses() {
-	console.log('Fetching the licenses...');
-	return execaNode(scriptPath, {
-		stdio: 'inherit',
-		env: {
-			ONLY_PROD: 'true',
-		},
-	});
-}

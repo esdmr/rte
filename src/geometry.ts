@@ -10,28 +10,28 @@ export type Transform = {
 	readonly y: {readonly x: number; readonly y: number};
 };
 
-export function vector(x: number, y: number): Vector {
+export const vector = (x: number, y: number): Vector => {
 	assert(
 		Number.isFinite(x) && Number.isFinite(y),
 		'vector components must be finite',
 	);
 
 	return {x, y};
-}
+};
 
-export function vectorPolar(length: number, angle: number): Vector {
+export const vectorPolar = (length: number, angle: number): Vector => {
 	return vector(length * Math.cos(angle), length * Math.sin(angle));
-}
+};
 
-export function vectorLength(vec: Vector) {
+export const vectorLength = (vec: Vector) => {
 	return Math.hypot(vec.y, vec.x);
-}
+};
 
-export function vectorAngle(vec: Vector) {
+export const vectorAngle = (vec: Vector) => {
 	return Math.atan2(vec.y, vec.x);
-}
+};
 
-export function add(...args: Vector[]): Vector {
+export const add = (...args: Vector[]): Vector => {
 	let x = 0;
 	let y = 0;
 
@@ -41,17 +41,17 @@ export function add(...args: Vector[]): Vector {
 	}
 
 	return {x, y};
-}
+};
 
-export function subtract(minuend: Vector, subtrahend: Vector) {
+export const subtract = (minuend: Vector, subtrahend: Vector) => {
 	return vector(minuend.x - subtrahend.x, minuend.y - subtrahend.y);
-}
+};
 
-export function scale(coefficient: number, vec: Vector) {
+export const scale = (coefficient: number, vec: Vector) => {
 	return vector(coefficient * vec.x, coefficient * vec.y);
-}
+};
 
-export function normalize(vec: Vector) {
+export const normalize = (vec: Vector) => {
 	const length = vectorLength(vec);
 
 	// Zero vector cannot be normalized.
@@ -60,16 +60,16 @@ export function normalize(vec: Vector) {
 	}
 
 	return scale(1 / length, vec);
-}
+};
 
-export function transform(matrix: Transform, vec: Vector) {
+export const transform = (matrix: Transform, vec: Vector) => {
 	return vector(
 		matrix.x.x * vec.x + matrix.x.y * vec.y,
 		matrix.y.x * vec.x + matrix.y.y * vec.y,
 	);
-}
+};
 
-export function rotate(angle: number, vec: Vector) {
+export const rotate = (angle: number, vec: Vector) => {
 	return transform(
 		{
 			x: {x: Math.cos(angle), y: -Math.sin(angle)},
@@ -77,4 +77,4 @@ export function rotate(angle: number, vec: Vector) {
 		},
 		vec,
 	);
-}
+};

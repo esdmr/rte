@@ -6,8 +6,8 @@ const numberFormat = /* @__PURE__ */ new Intl.NumberFormat('en-US', {
 	useGrouping: false,
 });
 
-export function numberToString(number: number) {
+export const numberToString = (number: number) => {
 	assert(Number.isFinite(number), 'number must be finite');
 
 	return numberFormat.format(number);
-}
+};

@@ -7,6 +7,14 @@ import {CircularButton} from '../circular-button.js';
 import * as css from './package.module.css.js';
 import {LegacyLicense} from './legacy.js';
 
+const getLicenseFileUrl = (route: string, pkgId: string) => {
+	const encodedPkgId = encodeURIComponent(pkgId)
+		.replace(/%40/g, '@')
+		.replace(/%2F/g, '/');
+
+	return `${route}${encodedPkgId}`;
+};
+
 export const Package: FunctionComponent<{
 	pkg: Types.Package;
 	route: string;
@@ -51,14 +59,6 @@ export const Package: FunctionComponent<{
 		</div>
 	);
 };
-
-function getLicenseFileUrl(route: string, pkgId: string) {
-	const encodedPkgId = encodeURIComponent(pkgId)
-		.replace(/%40/g, '@')
-		.replace(/%2F/g, '/');
-
-	return `${route}${encodedPkgId}`;
-}
 
 function* getAttributions(authors: string[]): Generator<ComponentChild> {
 	yield 'By ';

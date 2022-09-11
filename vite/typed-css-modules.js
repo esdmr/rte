@@ -18,27 +18,35 @@ import find from 'find';
 import {defaultImport} from 'default-import';
 import {definePlugin} from './plugin-helper.js';
 
-function newCreator() {
+
+/** @type {string[]} */
+const files = await new Promise((resolve) => {
+	find.file(/\.module\.css$/, 'src', resolve);
+});
+
+const newCreator = () => {
 	return new (defaultImport(DtsCreator))({
 		camelCase: 'dashes',
 		dropExtension: false,
 		outDir: path.join('build', 'types'),
 		namedExports: true,
 	});
-}
+};
 
 /**
  * @param {string} file
  */
-async function writeTypes(file, creator = newCreator()) {
+const writeTypes = async (file, creator = newCreator()) => {
 	const content = await creator.create(file);
 	await content.writeFile();
-}
+};
 
-/** @type {string[]} */
-const files = await new Promise((resolve) => {
-	find.file(/\.module\.css$/, 'src', resolve);
-});
+const buildAll = async () => {
+	console.log('Building the css module types...');
+	const creator = newCreator();
+	await Promise.all(files.map(async (file) => writeTypes(file, creator)));
+	console.log('Done building the css module types.');
+};
 
 export default definePlugin({
 	name: 'typed-css-modules',
@@ -61,10 +69,3 @@ export default definePlugin({
 		await buildAll();
 	},
 });
-
-async function buildAll() {
-	console.log('Building the css module types...');
-	const creator = newCreator();
-	await Promise.all(files.map(async (file) => writeTypes(file, creator)));
-	console.log('Done building the css module types.');
-}

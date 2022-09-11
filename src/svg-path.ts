@@ -32,23 +32,23 @@ export class Context {
 	}
 }
 
-export function moveTo(
+export const moveTo = (
 	context: Context,
 	end: Vector,
 	options?: {absolute?: boolean},
-) {
+) => {
 	context.addSegment(options?.absolute, 'm', end);
-}
+};
 
-export function lineTo(
+export const lineTo = (
 	context: Context,
 	end: Vector,
 	options?: {absolute?: boolean},
-) {
+) => {
 	context.addSegment(options?.absolute, 'l', end);
-}
+};
 
-export function bezierCurveTo(
+export const bezierCurveTo = (
 	context: Context,
 	options: {
 		control1: Vector;
@@ -56,7 +56,7 @@ export function bezierCurveTo(
 		end: Vector;
 		absolute?: boolean;
 	},
-) {
+) => {
 	context.addSegment(
 		options.absolute,
 		'c',
@@ -64,35 +64,35 @@ export function bezierCurveTo(
 		options.control2,
 		options.end,
 	);
-}
+};
 
-export function smoothBezierCurveTo(
+export const smoothBezierCurveTo = (
 	context: Context,
 	control: Vector,
 	end: Vector,
 	options?: {absolute?: boolean},
-) {
+) => {
 	context.addSegment(options?.absolute, 's', control, end);
-}
+};
 
-export function quadraticCurveTo(
+export const quadraticCurveTo = (
 	context: Context,
 	control: Vector,
 	end: Vector,
 	options?: {absolute?: boolean},
-) {
+) => {
 	context.addSegment(options?.absolute, 'q', control, end);
-}
+};
 
-export function smoothQuadraticCurveTo(
+export const smoothQuadraticCurveTo = (
 	context: Context,
 	end: Vector,
 	options?: {absolute?: boolean},
-) {
+) => {
 	context.addSegment(options?.absolute, 't', end);
-}
+};
 
-export function ellipticalCurveTo(
+export const ellipticalCurveTo = (
 	context: Context,
 	options: {
 		rx: number;
@@ -103,7 +103,7 @@ export function ellipticalCurveTo(
 		end: Vector;
 		absolute?: boolean;
 	},
-) {
+) => {
 	context.addSegment(
 		options.absolute,
 		'a',
@@ -114,8 +114,8 @@ export function ellipticalCurveTo(
 		options.sweep ? 1 : 0,
 		options.end,
 	);
-}
+};
 
-export function closePath(context: Context) {
+export const closePath = (context: Context) => {
 	context.addSegment(true, 'z');
-}
+};

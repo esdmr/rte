@@ -1,4 +1,4 @@
 /** @param {import('vite').Plugin} plugin */
-export function definePlugin(plugin) {
+export const definePlugin = (plugin) => {
 	return plugin;
-}
+};

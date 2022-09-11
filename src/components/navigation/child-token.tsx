@@ -30,7 +30,7 @@ if (import.meta.env.DEV) {
 	navChildToken.displayName = 'navChildToken';
 }
 
-export function useChildToken() {
+export const useChildToken = () => {
 	const childToken = useContext(navChildToken);
 	assert(childToken !== undefined, 'navChildToken context was not setup');
 
@@ -43,9 +43,9 @@ export function useChildToken() {
 	);
 
 	return childToken;
-}
+};
 
-export function wrapNavChildren(node: NavNode, children: ComponentChildren) {
+export const wrapNavChildren = (node: NavNode, children: ComponentChildren) => {
 	return (
 		<>
 			{toChildArray(children).map((child) =>
@@ -62,4 +62,4 @@ export function wrapNavChildren(node: NavNode, children: ComponentChildren) {
 			)}
 		</>
 	);
-}
+};

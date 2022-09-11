@@ -30,7 +30,14 @@ function* iterateColumn(grid: NavNode, from: number, dir: 1 | -1) {
 	assert(width, 'grid width not found');
 	const {children} = grid;
 	const column = from % width;
-	const to = dir > 0 ? getLastIndexOfColumn() : column - width;
+	const to =
+		dir > 0
+			? (() => {
+					const lastIndex = children.length - 1;
+					const row = Math.trunc(lastIndex / width);
+					return row * width + width + column;
+			  })()
+			: column - width;
 
 	for (let index = from + dir * width; index !== to; index += dir * width) {
 		const node = children[index];
@@ -38,12 +45,6 @@ function* iterateColumn(grid: NavNode, from: number, dir: 1 | -1) {
 		if (node !== undefined) {
 			yield node;
 		}
-	}
-
-	function getLastIndexOfColumn() {
-		const lastIndex = children.length - 1;
-		const row = Math.trunc(lastIndex / width!);
-		return row * width! + width! + column;
 	}
 }
 
