@@ -1,8 +1,7 @@
 import {type FunctionComponent, type VNode, cloneElement} from 'preact';
 import {useMemo} from 'preact/hooks';
 import assert from '../../assert.js';
-import {useChildToken} from './child-token.js';
-import {navigation} from './context.js';
+import {navChildToken, useChildToken} from './child-token.js';
 import {type NavHooks, NavNode} from './node.js';
 import {isVnodeFocusable, setRef} from './utils.js';
 
@@ -51,7 +50,7 @@ export const NavItem: FunctionComponent<{children: VNode}> = ({children}) => {
 		  };
 
 	return (
-		<navigation.Provider value={undefined}>
+		<navChildToken.Provider value={undefined}>
 			{cloneElement(vnode, {
 				ref(value: unknown) {
 					if (value instanceof HTMLElement) {
@@ -66,6 +65,6 @@ export const NavItem: FunctionComponent<{children: VNode}> = ({children}) => {
 				},
 				...propsIfNotFocusable,
 			})}
-		</navigation.Provider>
+		</navChildToken.Provider>
 	);
 };
