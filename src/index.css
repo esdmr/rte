@@ -11,27 +11,23 @@
 
 :root {
 	/* Dark theme */
-	--dark-background: #1e1e1e;
 	--dark-background-rgb: 30 30 30;
-	--dark-foreground: #d4d4d4;
 	--dark-foreground-rgb: 212 212 212;
 	--dark-focus-outline: #6495ed;
 	--dark-blur-outline: #a8a8a8;
 
 	/* Light theme */
-	--light-background: #fffffe;
 	--light-background-rgb: 255 255 254;
-	--light-foreground: #000000;
 	--light-foreground-rgb: 0 0 0;
 	--light-focus-outline: #4169e1;
 	--light-blur-outline: #919191;
 	--light-foreground-22: #0002;
 	--light-foreground-44: #0004;
 
-	--background: var(--dark-background);
 	--background-rgb: var(--dark-background-rgb);
-	--foreground: var(--dark-foreground);
 	--foreground-rgb: var(--dark-foreground-rgb);
+	--background: rgb(var(--background-rgb));
+	--foreground: rgb(var(--foreground-rgb));
 	--focus-outline: var(--dark-focus-outline);
 	--blur-outline: var(--dark-blur-outline);
 	--hover-alpha: 0.15;
@@ -42,9 +38,7 @@
 
 @media (prefers-color-scheme: light) {
 	:root {
-		--background: var(--light-background);
 		--background-rgb: var(--light-background-rgb);
-		--foreground: var(--light-foreground);
 		--foreground-rgb: var(--light-foreground-rgb);
 		--focus-outline: var(--light-focus-outline);
 		--blur-outline: var(--light-blur-outline);
