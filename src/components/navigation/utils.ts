@@ -39,10 +39,14 @@ export function* iterateChildren(node: NavNode, from: number, dir: 1 | -1) {
 	const {children} = node;
 	const {length} = children;
 	assert(length > 0, 'empty node list');
-	assert(from >= 0 && from < length, 'from out of range');
-
 	from += dir;
-	const to = dir < 0 ? length : -1;
+	const to = dir > 0 ? length : -1;
+
+	if (from === to) {
+		return;
+	}
+
+	assert(from >= 0 && from < length, 'from out of range');
 
 	for (let index = from; index !== to; index += dir) {
 		const node = children[index];
