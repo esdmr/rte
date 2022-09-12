@@ -1,4 +1,4 @@
-import assert from '../../assert.js';
+import assert from '../assert.js';
 import {NavChildToken} from './child-token.js';
 import {NavState} from './state.js';
 

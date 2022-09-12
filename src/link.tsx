@@ -5,7 +5,7 @@
 import type {FunctionComponent, JSX} from 'preact';
 import {useCallback} from 'preact/hooks';
 import {useLocation} from 'wouter-preact';
-import history from '../history.js';
+import history from './history.js';
 import {A} from './navigation/wrappers.js';
 
 type LinkProps = JSX.IntrinsicElements['a'] & {

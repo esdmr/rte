@@ -1,6 +1,6 @@
 import {type FunctionComponent, type VNode, cloneElement} from 'preact';
 import {useMemo} from 'preact/hooks';
-import assert from '../../assert.js';
+import assert from '../assert.js';
 import {navChildToken, useChildToken} from './child-token.js';
 import {type NavHooks, NavNode} from './node.js';
 import {isVnodeFocusable, setRef} from './utils.js';

@@ -1,6 +1,6 @@
 import type {FunctionComponent} from 'preact';
 import {useMemo} from 'preact/hooks';
-import assert from '../../assert.js';
+import assert from '../assert.js';
 import {useChildToken, wrapNavChildren} from './child-token.js';
 import {type NavHooks, NavNode} from './node.js';
 import {getAnyLeaf, iterateChildren} from './utils.js';

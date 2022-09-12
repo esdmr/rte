@@ -1,5 +1,5 @@
 import type {FunctionComponent, JSX} from 'preact';
-import {classes} from '../classes.js';
+import {classes} from './classes.js';
 import {Link} from './link.js';
 import * as css from './circular-button.module.css.js';
 import {Button} from './navigation/wrappers.js';

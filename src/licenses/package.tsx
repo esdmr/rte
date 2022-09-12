@@ -1,8 +1,8 @@
 import type {ComponentChild, FunctionComponent} from 'preact';
 import {Icon} from '@mdi/react';
 import {mdiChevronRight} from '@mdi/js';
-import type * as Types from '../../license-types.js';
-import {classes} from '../../classes.js';
+import type * as Types from '../license-types.js';
+import {classes} from '../classes.js';
 import {CircularButton} from '../circular-button.js';
 import * as css from './package.module.css.js';
 import {LegacyLicense} from './legacy.js';

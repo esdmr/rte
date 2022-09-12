@@ -1,6 +1,6 @@
 import {createContext, type ComponentChildren, toChildArray} from 'preact';
 import {useContext, useEffect} from 'preact/hooks';
-import assert from '../../assert.js';
+import assert from '../assert.js';
 import type {NavNode} from './node.js';
 
 export class NavChildToken {

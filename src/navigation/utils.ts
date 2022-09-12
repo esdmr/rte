@@ -1,5 +1,5 @@
 import type {Ref, VNode} from 'preact';
-import assert from '../../assert.js';
+import assert from '../assert.js';
 import type {NavNode, NavDirection} from './node.js';
 
 // eslint-disable-next-line @typescript-eslint/ban-types

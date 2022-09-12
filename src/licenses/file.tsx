@@ -2,7 +2,7 @@ import {mdiArrowLeft} from '@mdi/js';
 import {Icon} from '@mdi/react';
 import type {FunctionComponent} from 'preact';
 import {lazy, Suspense, useMemo} from 'preact/compat';
-import assert from '../../assert.js';
+import assert from '../assert.js';
 import {AllowScroll} from '../allow-scroll.js';
 import {CircularButton} from '../circular-button.js';
 import {Loading} from '../loading.js';

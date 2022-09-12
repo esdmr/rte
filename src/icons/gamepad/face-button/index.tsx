@@ -1,5 +1,5 @@
 import type {FunctionComponent} from 'preact';
-import {classes} from '../../../../classes.js';
+import {classes} from '../../../classes.js';
 import * as css from './index.module.css.js';
 import type {Direction, FaceButtonStyle} from './types.js';
 

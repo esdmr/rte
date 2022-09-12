@@ -1,5 +1,5 @@
 import type {FunctionComponent} from 'preact';
-import type * as Types from '../../license-types.js';
+import type * as Types from '../license-types.js';
 import {A} from '../navigation/wrappers.js';
 
 export const LegacyLicense: FunctionComponent<{

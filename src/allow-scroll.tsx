@@ -1,6 +1,6 @@
 import type {FunctionComponent} from 'preact';
 import {useEffect} from 'preact/hooks';
-import assert from '../assert.js';
+import assert from './assert.js';
 
 let set = false;
 

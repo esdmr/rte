@@ -1,5 +1,5 @@
 import type {FunctionComponent} from 'preact';
-import {classes} from '../classes.js';
+import {classes} from './classes.js';
 import * as css from './loading.module.css.js';
 
 const circlesCount = 3;
