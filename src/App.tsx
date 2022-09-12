@@ -2,17 +2,17 @@ import {mdiHome} from '@mdi/js';
 import {Icon} from '@mdi/react';
 import type {FunctionComponent} from 'preact';
 import {Route} from 'wouter-preact';
-import {AllowScroll} from './allow-scroll.js';
+import {AllowScroll} from './AllowScroll.js';
 import {CircularButton} from './circular-button.js';
-import {DebugGallery} from './debug-gallery.js';
-import {EditorContainer} from './editor-container.js';
-import {LicenseFile} from './licenses/file.js';
+import {DebugGallery} from './DebugGallery.js';
+import {EditorContainer} from './EditorContainer.js';
+import {LicenseFile} from './licenses/LicenseFile.js';
 import {Licenses} from './licenses/index.js';
-import {Link} from './link.js';
-import {NavColumn} from './navigation/column.js';
-import {DebugNav} from './navigation/route.js';
-import {NavSwitch} from './navigation/switch.js';
-import {Title} from './title.js';
+import {Link} from './Link.js';
+import {NavColumn} from './navigation/NavColumn.js';
+import {DebugNav} from './navigation/DebugNav.js';
+import {NavSwitch} from './navigation/NavSwitch.js';
+import {Title} from './Title.js';
 
 export const App: FunctionComponent = () => (
 	<NavSwitch>

@@ -4,8 +4,8 @@ import {mdiChevronRight} from '@mdi/js';
 import type * as Types from '../license-types.js';
 import {classes} from '../classes.js';
 import {CircularButton} from '../circular-button.js';
-import * as css from './package.module.css.js';
-import {LegacyLicense} from './legacy.js';
+import * as css from './Package.module.css.js';
+import {LegacyLicense} from './LegacyLicense.js';
 
 const getLicenseFileUrl = (route: string, pkgId: string) => {
 	const encodedPkgId = encodeURIComponent(pkgId)

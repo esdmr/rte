@@ -6,7 +6,7 @@ import 'monaco-editor/esm/vs/editor/contrib/wordHighlighter/browser/wordHighligh
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api.js';
 import {type ComponentChild, Component} from 'preact';
 import assert from './assert.js';
-import * as css from './editor.module.css.js';
+import * as css from './Editor.module.css.js';
 
 const lightTheme = 'vs-light';
 const darkTheme = 'vs-dark';

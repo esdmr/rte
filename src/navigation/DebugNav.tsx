@@ -1,14 +1,14 @@
 import {mdiArrowLeft} from '@mdi/js';
 import {Icon} from '@mdi/react';
 import type {FunctionComponent} from 'preact';
-import {AllowScroll} from '../allow-scroll.js';
+import {AllowScroll} from '../AllowScroll.js';
 import {CircularButton} from '../circular-button.js';
-import {Title} from '../title.js';
-import {NavColumn} from './column.js';
-import {NavFlow} from './flow.js';
-import {NavGrid} from './grid.js';
-import * as css from './route.module.css.js';
-import {NavRow} from './row.js';
+import {Title} from '../Title.js';
+import {NavColumn} from './NavColumn.js';
+import {NavFlow} from './NavFlow.js';
+import {NavGrid} from './NavGrid.js';
+import * as css from './DebugNav.module.css.js';
+import {NavRow} from './NavRow.js';
 import {A, Div} from './wrappers.js';
 
 export const DebugNav: FunctionComponent = () => (

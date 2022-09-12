@@ -3,10 +3,10 @@ import {Icon} from '@mdi/react';
 import type {FunctionComponent} from 'preact';
 import {lazy, Suspense, useMemo} from 'preact/compat';
 import assert from '../assert.js';
-import {AllowScroll} from '../allow-scroll.js';
+import {AllowScroll} from '../AllowScroll.js';
 import {CircularButton} from '../circular-button.js';
-import {Loading} from '../loading.js';
-import {Title} from '../title.js';
+import {Loading} from '../Loading.js';
+import {Title} from '../Title.js';
 
 export const LicenseFile: FunctionComponent<{
 	id: string;

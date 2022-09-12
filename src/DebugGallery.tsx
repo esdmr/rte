@@ -1,12 +1,12 @@
 import {mdiArrowLeft} from '@mdi/js';
 import {Icon} from '@mdi/react';
 import type {FunctionComponent} from 'preact';
-import {AllowScroll} from './allow-scroll.js';
+import {AllowScroll} from './AllowScroll.js';
 import {CircularButton} from './circular-button.js';
-import * as css from './debug-gallery.module.css.js';
+import * as css from './DebugGallery.module.css.js';
 import * as gfbi from './icons/gamepad/face-button/index.js';
-import {Loading} from './loading.js';
-import {Title} from './title.js';
+import {Loading} from './Loading.js';
+import {Title} from './Title.js';
 
 const style = [gfbi.symbols, gfbi.lettersAb, gfbi.lettersBa] as const;
 const which = ['down', 'right', 'left', 'up'] as const;

@@ -2,7 +2,7 @@ import {cloneElement, type FunctionComponent} from 'preact';
 import {useMemo} from 'preact/hooks';
 import {Switch, type SwitchProps} from 'wouter-preact';
 import {navChildToken, useChildToken} from './child-token.js';
-import {navColumnHooks} from './column.js';
+import {navColumnHooks} from './NavColumn.js';
 import {NavNode} from './node.js';
 
 export const NavSwitch: FunctionComponent<SwitchProps> = (props) => {

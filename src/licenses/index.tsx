@@ -2,12 +2,12 @@ import {mdiArrowLeft} from '@mdi/js';
 import {Icon} from '@mdi/react';
 import type {FunctionComponent} from 'preact';
 import {Suspense} from 'preact/compat';
-import {AllowScroll} from '../allow-scroll.js';
+import {AllowScroll} from '../AllowScroll.js';
 import {CircularButton} from '../circular-button.js';
-import {Loading} from '../loading.js';
-import {Title} from '../title.js';
-import {Link} from '../link.js';
-import {NavColumn} from '../navigation/column.js';
+import {Loading} from '../Loading.js';
+import {Title} from '../Title.js';
+import {Link} from '../Link.js';
+import {NavColumn} from '../navigation/NavColumn.js';
 import {Development, Production} from './packages-list.js';
 
 export const Licenses: FunctionComponent<{
