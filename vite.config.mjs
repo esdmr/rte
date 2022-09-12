@@ -43,7 +43,9 @@ export default defineConfig(({command}) => ({
 		cors: false,
 	},
 	plugins: [
-		defaultImport(inspect)(),
+		defaultImport(inspect)({
+			build: false,
+		}),
 		preactDebug,
 		cssImport,
 		prefresh(),
