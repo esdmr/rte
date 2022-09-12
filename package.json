@@ -24,7 +24,7 @@
     "wouter-preact": "2.8.0-alpha.2"
   },
   "devDependencies": {
-    "@pnpm/lockfile-file": "5.3.3",
+    "@pnpm/lockfile-file": "5.3.4",
     "@pnpm/logger": "4.0.0",
     "@prefresh/vite": "2.2.8",
     "@testing-library/preact": "3.2.2",
