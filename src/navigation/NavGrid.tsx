@@ -49,7 +49,7 @@ function* iterateColumn(grid: NavNode, from: number, dir: 1 | -1) {
 }
 
 const navGridHooks: NavHooks = {
-	dispose() {
+	onDispose() {
 		gridWidths.delete(this);
 	},
 	getLeaf(via) {

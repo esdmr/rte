@@ -5,9 +5,9 @@ import {NavState} from './state.js';
 export type NavDirection = 'next' | 'up' | 'down' | 'left' | 'right';
 
 export type NavHooks = {
-	dispose?(this: NavNode): void;
-	select?(this: NavNode): void;
-	deselect?(this: NavNode): void;
+	onDispose?(this: NavNode): void;
+	onSelect?(this: NavNode): void;
+	onDeselect?(this: NavNode): void;
 	getLeaf?(this: NavNode, via: NavDirection): NavNode | undefined;
 	getNextLeaf?(
 		this: NavNode,
@@ -80,13 +80,13 @@ export class NavNode {
 		}
 
 		this.isDisposed = true;
-		this.hooks.dispose?.call(this);
+		this.hooks.onDispose?.call(this);
 		this.ref = undefined;
 	}
 
 	select() {
 		assert(!this.isDisposed, 'node is disposed');
-		assert(this.hooks.select !== undefined, 'select hook is undefined');
+		assert(this.hooks.onSelect !== undefined, 'select hook is undefined');
 
 		if (this.isSelected) {
 			return;
@@ -94,14 +94,14 @@ export class NavNode {
 
 		this.state.deselect();
 		this.state.selected = this;
-		this.hooks.select.call(this);
+		this.hooks.onSelect.call(this);
 	}
 
 	deselect() {
 		assert(!this.isDisposed, 'node is disposed');
 		assert(this.isSelected, 'node is not selected');
-		assert(this.hooks.deselect !== undefined, 'deselect hook is undefined');
-		this.hooks.deselect.call(this);
+		assert(this.hooks.onDeselect !== undefined, 'deselect hook is undefined');
+		this.hooks.onDeselect.call(this);
 	}
 
 	getLeaf(via: NavDirection) {
