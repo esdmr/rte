@@ -11,11 +11,6 @@ const navItemHooks: NavHooks = {
 		assert(ref, 'no ref to select');
 		ref.focus();
 	},
-	onDeselect() {
-		const {ref} = this;
-		assert(ref, 'no ref to deselect');
-		ref.blur();
-	},
 	getLeaf() {
 		return this;
 	},
