@@ -4,13 +4,35 @@ import assert from '../assert.js';
 import type {NavNode} from './node.js';
 
 export class NavChildToken {
+	private revoked = false;
+
 	constructor(readonly parent: NavNode, private readonly index: number) {}
 
+	revoke() {
+		this.clear();
+		this.revoked = true;
+	}
+
+	clear() {
+		if (this.revoked) {
+			return;
+		}
+
+		this.child?.dispose();
+		this.child = undefined;
+	}
+
 	get child() {
+		if (this.revoked) {
+			return undefined;
+		}
+
 		return this.parent.children[this.index];
 	}
 
 	set child(node: NavNode | undefined) {
+		assert(!this.revoked, 'child token is revoked');
+
 		if (node !== undefined) {
 			assert(
 				this.parent.children[this.index] === undefined,
@@ -36,8 +58,7 @@ export const useChildToken = () => {
 
 	useEffect(
 		() => () => {
-			childToken.child?.dispose();
-			childToken.child = undefined;
+			childToken.clear();
 		},
 		[childToken],
 	);
