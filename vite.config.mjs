@@ -45,6 +45,7 @@ export default defineConfig(({command}) => ({
 	plugins: [
 		defaultImport(inspect)({
 			build: false,
+			outputDir: 'node_modules/.cache/vite-inspect',
 		}),
 		preactDebug,
 		cssImport,
