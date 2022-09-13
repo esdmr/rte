@@ -56,7 +56,6 @@ export class NavNode {
 		readonly parent: NavNode | undefined,
 		private readonly hooks: NavHooks,
 	) {
-		this.parent = parent;
 		this.state = parent?.state ?? new NavState();
 	}
 
