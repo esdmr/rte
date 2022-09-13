@@ -5,6 +5,7 @@ import {NavState} from './state.js';
 export type NavDirection = 'next' | 'up' | 'down' | 'left' | 'right';
 
 export type NavHooks = {
+	onNewChild?(this: NavNode): NavChildToken | void;
 	onDispose?(this: NavNode): void;
 	onSelect?(this: NavNode): void;
 	onDeselect?(this: NavNode): void;
@@ -25,10 +26,10 @@ export class NavNode {
 
 	readonly state: NavState;
 	readonly children: Array<NavNode | undefined> = [];
-	private isDisposed = false;
+	private disposed = false;
 
-	get isSelected() {
-		assert(!this.isDisposed, 'node is disposed');
+	get selected() {
+		assert(!this.disposed, 'node is disposed');
 		return this.state.selected === this;
 	}
 
@@ -59,13 +60,19 @@ export class NavNode {
 	}
 
 	newChildToken() {
-		assert(!this.isDisposed, 'node is disposed');
+		assert(!this.disposed, 'node is disposed');
+		const maybeChildToken = this.hooks.onNewChild?.call(this);
+
+		if (maybeChildToken) {
+			return maybeChildToken;
+		}
+
 		const index = this.children.push(undefined) - 1;
 		return new NavChildToken(this, index);
 	}
 
 	dispose(root = this) {
-		if (this.isDisposed) {
+		if (this.disposed) {
 			return;
 		}
 
@@ -74,21 +81,21 @@ export class NavNode {
 			this.children[index] = undefined;
 		}
 
-		if (this.isSelected) {
+		if (this.selected) {
 			this.state.deselect();
 			root.parent?.getNextLeaf(root, 'next')?.select();
 		}
 
-		this.isDisposed = true;
+		this.disposed = true;
 		this.hooks.onDispose?.call(this);
 		this.ref = undefined;
 	}
 
 	select() {
-		assert(!this.isDisposed, 'node is disposed');
+		assert(!this.disposed, 'node is disposed');
 		assert(this.hooks.onSelect !== undefined, 'select hook is undefined');
 
-		if (this.isSelected) {
+		if (this.selected) {
 			return;
 		}
 
@@ -98,19 +105,18 @@ export class NavNode {
 	}
 
 	deselect() {
-		assert(!this.isDisposed, 'node is disposed');
-		assert(this.isSelected, 'node is not selected');
-		assert(this.hooks.onDeselect !== undefined, 'deselect hook is undefined');
-		this.hooks.onDeselect.call(this);
+		assert(!this.disposed, 'node is disposed');
+		assert(this.selected, 'node is not selected');
+		this.hooks.onDeselect?.call(this);
 	}
 
 	getLeaf(via: NavDirection) {
-		assert(!this.isDisposed, 'node is disposed');
+		assert(!this.disposed, 'node is disposed');
 		return this.hooks.getLeaf?.call(this, via);
 	}
 
 	getNextLeaf(child: NavNode, via: NavDirection) {
-		assert(!this.isDisposed, 'node is disposed');
+		assert(!this.disposed, 'node is disposed');
 		assert(this.children.includes(child), 'node is not a child');
 		return this.hooks.getNextLeaf?.call(this, child, via);
 	}

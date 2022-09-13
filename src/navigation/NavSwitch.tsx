@@ -2,13 +2,13 @@ import {cloneElement, type FunctionComponent} from 'preact';
 import {useMemo} from 'preact/hooks';
 import {Switch, type SwitchProps} from 'wouter-preact';
 import {navChildToken, useChildToken} from './child-token.js';
-import {navColumnHooks} from './NavColumn.js';
+import {navUnaryHooks} from './unary.js';
 import {NavNode} from './node.js';
 
 export const NavSwitch: FunctionComponent<SwitchProps> = (props) => {
 	const childToken = useChildToken();
 	const node = useMemo(
-		() => NavNode.for(childToken, navColumnHooks),
+		() => NavNode.for(childToken, navUnaryHooks),
 		[childToken],
 	);
 

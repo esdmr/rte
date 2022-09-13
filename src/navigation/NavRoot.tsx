@@ -1,11 +1,11 @@
 import type {FunctionComponent} from 'preact';
 import {useMemo, useEffect} from 'preact/hooks';
-import {navColumnHooks} from './NavColumn.js';
+import {type UnaryProps, navUnaryHooks} from './unary.js';
 import {wrapNavChildren} from './child-token.js';
 import {NavNode} from './node.js';
 
-export const NavRoot: FunctionComponent = ({children}) => {
-	const rootNode = useMemo(() => new NavNode(undefined, navColumnHooks), []);
+export const NavRoot: FunctionComponent<UnaryProps> = ({children}) => {
+	const rootNode = useMemo(() => new NavNode(undefined, navUnaryHooks), []);
 
 	useEffect(() => {
 		console.debug({rootNode});
