@@ -5,6 +5,7 @@ import {type NavHooks, NavNode} from './node.js';
 import {getAnyLeaf, iterateChildren} from './utils.js';
 
 export const navColumnHooks: NavHooks = {
+	type: '↓',
 	getLeaf(via) {
 		return via === 'up'
 			? getAnyLeaf(iterateChildren(this, this.children.length, -1), via)

@@ -5,6 +5,7 @@ import {NavState} from './state.js';
 export type NavDirection = 'next' | 'up' | 'down' | 'left' | 'right';
 
 export type NavHooks = {
+	type?: string;
 	onNewChild?(this: NavNode): NavChildToken | void;
 	onDispose?(this: NavNode): void;
 	onSelect?(this: NavNode): void;
@@ -57,6 +58,26 @@ export class NavNode {
 	) {
 		this.parent = parent;
 		this.state = parent?.state ?? new NavState();
+	}
+
+	getPath(): string {
+		let path = this.parent
+			? `${this.parent.getPath()}[${this.parent.children.indexOf(this)}]`
+			: 'root';
+
+		if (this.hooks.type) {
+			path += `(${this.hooks.type})`;
+		}
+
+		if (this.disposed && !this.parent?.disposed) {
+			path += '.dispose()';
+		}
+
+		if (this.selected) {
+			path += '.select()';
+		}
+
+		return path;
 	}
 
 	newChildToken() {
