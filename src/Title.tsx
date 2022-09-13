@@ -14,7 +14,7 @@ export const Title: FunctionComponent<{
 		assert(!set, 'more than one Title in the render tree');
 		set = true;
 		const originalTitle = document.title;
-		document.title = title;
+		document.title = `${title} - ${originalTitle}`;
 
 		return () => {
 			set = false;
