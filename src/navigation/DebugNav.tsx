@@ -9,18 +9,7 @@ import {NavFlow} from './NavFlow.js';
 import {NavGrid} from './NavGrid.js';
 import * as css from './DebugNav.module.css.js';
 import {NavRow} from './NavRow.js';
-import {A} from './wrappers.js';
-import {NavItem} from './NavItem.js';
-
-const Div: FunctionComponent = (props) => (
-	<NavItem>
-		<div tabIndex={0} {...props} />
-	</NavItem>
-);
-
-if (import.meta.env.DEV) {
-	Div.displayName = `WrappedDomNode(div)`;
-}
+import {A, Button} from './wrappers.js';
 
 export const DebugNav: FunctionComponent = () => (
 	<>
@@ -38,9 +27,9 @@ export const DebugNav: FunctionComponent = () => (
 					<Title h1>Debug navigation</Title>
 					<h2>Texts and Anchors</h2>
 					<div>Text 1</div>
-					<Div>Focusable text 2</Div>
+					<Button>Focusable button 2</Button>
 					<div>Text 3</div>
-					<A>Anchor without href</A>
+					<A role="presentation">Anchor without href</A>
 					<br />
 					<A href="https://example.com">Anchor with href (Link)</A>
 
@@ -62,18 +51,18 @@ export const DebugNav: FunctionComponent = () => (
 					<h2>Columns</h2>
 					<div class={css.flexColumn}>
 						<NavRow>
-							<Div>Column 1</Div>
-							<Div>Column 2</Div>
-							<Div>Column 3</Div>
+							<Button>Column 1</Button>
+							<Button>Column 2</Button>
+							<Button>Column 3</Button>
 						</NavRow>
 					</div>
 
 					<h2>Rows</h2>
 					<div class={css.flexRow}>
 						<NavColumn>
-							<Div>Row 1</Div>
-							<Div>Row 2</Div>
-							<Div>Row 3</Div>
+							<Button>Row 1</Button>
+							<Button>Row 2</Button>
+							<Button>Row 3</Button>
 						</NavColumn>
 					</div>
 
@@ -82,23 +71,23 @@ export const DebugNav: FunctionComponent = () => (
 						<NavColumn>
 							<div class={css.flexColumn}>
 								<NavRow>
-									<Div>Row 1, Column 1</Div>
-									<Div>Row 1, Column 2</Div>
-									<Div>Row 1, Column 3</Div>
+									<Button>Row 1, Column 1</Button>
+									<Button>Row 1, Column 2</Button>
+									<Button>Row 1, Column 3</Button>
 								</NavRow>
 							</div>
 							<div class={css.flexColumn}>
 								<NavRow>
-									<Div>Row 2, Column 1</Div>
-									<Div>Row 2, Column 2</Div>
-									<Div>Row 2, Column 3</Div>
+									<Button>Row 2, Column 1</Button>
+									<Button>Row 2, Column 2</Button>
+									<Button>Row 2, Column 3</Button>
 								</NavRow>
 							</div>
 							<div class={css.flexColumn}>
 								<NavRow>
-									<Div>Row 3, Column 1</Div>
-									<Div>Row 3, Column 2</Div>
-									<Div>Row 3, Column 3</Div>
+									<Button>Row 3, Column 1</Button>
+									<Button>Row 3, Column 2</Button>
+									<Button>Row 3, Column 3</Button>
 								</NavRow>
 							</div>
 						</NavColumn>
@@ -107,15 +96,15 @@ export const DebugNav: FunctionComponent = () => (
 					<h2>Real Grid</h2>
 					<div class={css.grid}>
 						<NavGrid width={3}>
-							<Div>Item 1, 1</Div>
-							<Div>Item 1, 2</Div>
-							<Div>Item 1, 3</Div>
-							<Div>Item 2, 1</Div>
-							<Div>Item 2, 2</Div>
-							<Div>Item 2, 3</Div>
-							<Div>Item 3, 1</Div>
-							<Div>Item 3, 2</Div>
-							<Div>Item 3, 3</Div>
+							<Button>Item 1, 1</Button>
+							<Button>Item 1, 2</Button>
+							<Button>Item 1, 3</Button>
+							<Button>Item 2, 1</Button>
+							<Button>Item 2, 2</Button>
+							<Button>Item 2, 3</Button>
+							<Button>Item 3, 1</Button>
+							<Button>Item 3, 2</Button>
+							<Button>Item 3, 3</Button>
 						</NavGrid>
 					</div>
 				</NavColumn>
