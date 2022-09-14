@@ -28,8 +28,8 @@ export const DebugNav: FunctionComponent = () => (
 		<NavColumn>
 			<header>
 				<nav>
-					<CircularButton href="/">
-						<Icon path={mdiArrowLeft} title="Back" />
+					<CircularButton href="/" title="Back">
+						<Icon path={mdiArrowLeft} />
 					</CircularButton>
 				</nav>
 			</header>

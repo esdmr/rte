@@ -16,8 +16,8 @@ export const DebugGallery: FunctionComponent = () => (
 		<AllowScroll />
 		<header>
 			<nav>
-				<CircularButton href="/">
-					<Icon path={mdiArrowLeft} title="Back" />
+				<CircularButton href="/" title="Back">
+					<Icon path={mdiArrowLeft} />
 				</CircularButton>
 			</nav>
 		</header>

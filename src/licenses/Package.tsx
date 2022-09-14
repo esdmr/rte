@@ -51,8 +51,11 @@ export const Package: FunctionComponent<{
 			</div>
 			{licenseFile && (
 				<div class={css.icon}>
-					<CircularButton href={getLicenseFileUrl(route, pkgId)}>
-						<Icon path={mdiChevronRight} title="See license file" />
+					<CircularButton
+						href={getLicenseFileUrl(route, pkgId)}
+						title="See license file"
+					>
+						<Icon path={mdiChevronRight} />
 					</CircularButton>
 				</div>
 			)}

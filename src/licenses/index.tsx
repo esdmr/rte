@@ -19,8 +19,8 @@ export const Licenses: FunctionComponent<{
 		<NavColumn>
 			<header>
 				<nav>
-					<CircularButton href={props['return-route']}>
-						<Icon path={mdiArrowLeft} title="Back" />
+					<CircularButton href={props['return-route']} title="Back">
+						<Icon path={mdiArrowLeft} />
 					</CircularButton>
 				</nav>
 			</header>

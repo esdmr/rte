@@ -68,8 +68,8 @@ export const App: FunctionComponent = () => (
 					<NavColumn>
 						<header>
 							<nav>
-								<CircularButton href="/">
-									<Icon path={mdiHome} title="Home" />
+								<CircularButton href="/" title="Home">
+									<Icon path={mdiHome} />
 								</CircularButton>
 							</nav>
 						</header>
@@ -99,8 +99,8 @@ export const App: FunctionComponent = () => (
 					<AllowScroll />
 					<header>
 						<nav>
-							<CircularButton href="/">
-								<Icon path={mdiHome} title="Home" />
+							<CircularButton href="/" title="Home">
+								<Icon path={mdiHome} />
 							</CircularButton>
 						</nav>
 					</header>
