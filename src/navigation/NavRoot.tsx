@@ -1,76 +1,29 @@
-import type {FunctionComponent} from 'preact';
+import type {FunctionComponent, Ref} from 'preact';
 import {useMemo, useEffect} from 'preact/hooks';
 import {type UnaryProps, navUnaryHooks} from './unary.js';
 import {wrapNavChildren} from './child-token.js';
 import {NavNode} from './node.js';
+import {setRef} from './utils.js';
 
-export const NavRoot: FunctionComponent<UnaryProps> = ({children}) => {
+type NavRootProps = UnaryProps & {
+	'nav-ref'?: Ref<NavNode>;
+};
+
+export const NavRoot: FunctionComponent<NavRootProps> = (props) => {
 	const rootNode = useMemo(() => new NavNode(undefined, navUnaryHooks), []);
 
 	useEffect(() => {
-		console.debug({rootNode});
+		setRef(props['nav-ref'], rootNode);
 
 		// FIXME: Remove.
+		console.debug({rootNode});
 		(globalThis as any).rootNode = rootNode;
-
-		// FIXME: Move to separate API.
-		const controller = new AbortController();
-
-		document.body.addEventListener(
-			'keydown',
-			(event) => {
-				if (!/^Arrow(?:Up|Down|Left|Right)$/.test(event.code)) {
-					return;
-				}
-
-				event.preventDefault();
-
-				if (!rootNode.state.selected) {
-					rootNode.getLeaf('next')?.select();
-					return;
-				}
-
-				switch (event.code) {
-					case 'ArrowUp':
-						rootNode.state.up();
-						break;
-
-					case 'ArrowDown':
-						rootNode.state.down();
-						break;
-
-					case 'ArrowLeft':
-						rootNode.state.left();
-						break;
-
-					case 'ArrowRight':
-						rootNode.state.right();
-						break;
-
-					// No default
-				}
-			},
-			{signal: controller.signal},
-		);
-
-		document.body.addEventListener(
-			'focusin',
-			(event) => {
-				if (event.target instanceof HTMLElement) {
-					const node = rootNode.state.elementToNode.get(event.target);
-					node?.select();
-				}
-			},
-			{signal: controller.signal},
-		);
 
 		return () => {
 			rootNode.state.deselect();
-
-			// FIXME: Move to separate API.
-			controller.abort();
+			setRef(props['nav-ref'], null);
 		};
 	}, [rootNode]);
 
-	return wrapNavChildren(rootNode, children);
+	return wrapNavChildren(rootNode, props.children);
 };
