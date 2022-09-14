@@ -53,5 +53,5 @@ export const NavFlow: FunctionComponent = ({children}) => {
 		[childToken],
 	);
 
-	return wrapNavChildren(node, children);
+	return <>{wrapNavChildren(node, children)}</>;
 };

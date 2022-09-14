@@ -67,20 +67,16 @@ export const useChildToken = () => {
 };
 
 export const wrapNavChildren = (node: NavNode, children: ComponentChildren) => {
-	return (
-		<>
-			{toChildArray(children).map((child) =>
-				typeof child === 'object' ? (
-					<navChildToken.Provider
-						value={node.newChildToken()}
-						key={child.key as unknown}
-					>
-						{child}
-					</navChildToken.Provider>
-				) : (
-					child
-				),
-			)}
-		</>
+	return toChildArray(children).map((child) =>
+		typeof child === 'object' ? (
+			<navChildToken.Provider
+				value={node.newChildToken()}
+				key={child.key as unknown}
+			>
+				{child}
+			</navChildToken.Provider>
+		) : (
+			child
+		),
 	);
 };

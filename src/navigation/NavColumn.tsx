@@ -51,5 +51,5 @@ export const NavColumn: FunctionComponent = ({children}) => {
 		[childToken],
 	);
 
-	return wrapNavChildren(node, children);
+	return <>{wrapNavChildren(node, children)}</>;
 };

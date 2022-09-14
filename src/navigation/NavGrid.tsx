@@ -111,5 +111,5 @@ export const NavGrid: FunctionComponent<{
 	);
 
 	gridWidths.set(node, width);
-	return wrapNavChildren(node, children);
+	return <>{wrapNavChildren(node, children)}</>;
 };

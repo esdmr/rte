@@ -25,5 +25,5 @@ export const NavRoot: FunctionComponent<NavRootProps> = (props) => {
 		};
 	}, [rootNode]);
 
-	return wrapNavChildren(rootNode, props.children);
+	return <>{wrapNavChildren(rootNode, props.children)}</>;
 };
