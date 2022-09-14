@@ -9,7 +9,18 @@ import {NavFlow} from './NavFlow.js';
 import {NavGrid} from './NavGrid.js';
 import * as css from './DebugNav.module.css.js';
 import {NavRow} from './NavRow.js';
-import {A, Div} from './wrappers.js';
+import {A} from './wrappers.js';
+import {NavItem} from './NavItem.js';
+
+const Div: FunctionComponent = (props) => (
+	<NavItem>
+		<div tabIndex={0} {...props} />
+	</NavItem>
+);
+
+if (import.meta.env.DEV) {
+	Div.displayName = `WrappedDomNode(div)`;
+}
 
 export const DebugNav: FunctionComponent = () => (
 	<>

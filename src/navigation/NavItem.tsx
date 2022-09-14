@@ -36,13 +36,9 @@ export const NavItem: FunctionComponent<{children: VNode}> = ({children}) => {
 	}> = children;
 
 	assert(typeof vnode.type === 'string', 'NavItem on a component');
+	assert(isVnodeFocusable(vnode), 'dom node is not focusable');
 
 	const oldRef = vnode.ref;
-	const propsIfNotFocusable = isVnodeFocusable(vnode)
-		? undefined
-		: {
-				tabIndex: -1,
-		  };
 
 	return (
 		<navChildToken.Provider value={undefined}>
@@ -58,7 +54,6 @@ export const NavItem: FunctionComponent<{children: VNode}> = ({children}) => {
 						throw new TypeError('NavItem with a non-HTMLElement ref');
 					}
 				},
-				...propsIfNotFocusable,
 			})}
 		</navChildToken.Provider>
 	);

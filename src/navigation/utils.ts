@@ -13,12 +13,15 @@ export const setRef = <T>(ref: Ref<T> | null | undefined, value: T | null) => {
 
 export const isVnodeFocusable = (vnode: VNode<Record<string, unknown>>) => {
 	const hasHref = typeof vnode.props.href === 'string';
-	const hasTabIndex =
-		Boolean(vnode.props.tabIndex) || Boolean(vnode.props.tabindex);
-	const isContentEditable =
-		Boolean(vnode.props.contentEditable) ||
-		Boolean(vnode.props.contenteditable);
 	const isNotDisabled = !vnode.props.disabled;
+
+	const hasTabIndex =
+		typeof vnode.props.tabIndex === 'number' ||
+		typeof vnode.props.tabindex === 'number';
+
+	const isContentEditable = Boolean(
+		vnode.props.contentEditable || vnode.props.contenteditable,
+	);
 
 	return (
 		(vnode.type === 'a' && hasHref) ||
