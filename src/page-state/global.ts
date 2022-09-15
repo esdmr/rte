@@ -1,6 +1,7 @@
 import {createContext} from 'preact';
 import {PageStateNode} from './node.js';
 
+const originalTitle = document.title;
 export const rootState = new PageStateNode(undefined, {});
 export const pageStateContext = createContext(rootState);
 
@@ -50,5 +51,11 @@ export const queueUpdate = () => {
 
 		toggleEvent('keydown', rootState.hasEvent('onKeyDown'), onKeyDown);
 		toggleEvent('focusin', rootState.hasEvent('onFocusIn'), onFocusIn);
+
+		const titles = [...rootState.listTitles(), originalTitle];
+		document.title = titles.filter(Boolean).join(' - ');
+
+		// FIXME: Remove.
+		console.debug('Page state updated.');
 	});
 };

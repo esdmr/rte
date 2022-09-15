@@ -1,26 +1,21 @@
 import {type FunctionComponent, toChildArray} from 'preact';
-import {useEffect} from 'preact/hooks';
-import assert from './assert.js';
-
-let set = false;
+import {useContext, useEffect} from 'preact/hooks';
+import {pageStateContext} from './page-state/global.js';
 
 export const Title: FunctionComponent<{
 	children: string | string[];
 	h1?: boolean;
 }> = (props) => {
 	const title = (toChildArray(props.children) as string[]).join('');
+	const pageState = useContext(pageStateContext);
 
 	useEffect(() => {
-		assert(!set, 'more than one Title in the render tree');
-		set = true;
-		const originalTitle = document.title;
-		document.title = `${title} - ${originalTitle}`;
+		pageState.title = title;
 
 		return () => {
-			set = false;
-			document.title = originalTitle;
+			pageState.title = '';
 		};
-	}, [title]);
+	}, [title, pageState]);
 
 	return props.h1 ? <h1>{title}</h1> : null;
 };

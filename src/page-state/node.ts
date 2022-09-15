@@ -10,18 +10,20 @@ export type PageStateEvents = {
 export type PageStateHooks = PageStateEvents;
 
 export class PageStateNode implements Disposable {
-	private _child: PageStateNode | undefined;
 	private disposed = false;
 	private connected = false;
+	private _child: PageStateNode | undefined;
 
-	get child(): PageStateNode | undefined {
+	get child() {
 		return this._child;
 	}
 
-	set child(value: PageStateNode | undefined) {
-		if (this.child !== value) {
-			this.child?.dispose();
+	set child(value) {
+		if (this.child === value) {
+			return;
 		}
+
+		this.child?.dispose();
 
 		assert(
 			!value || value.parent === this,
@@ -29,6 +31,24 @@ export class PageStateNode implements Disposable {
 		);
 
 		this._child = value;
+
+		if (this.connected) {
+			queueUpdate();
+		}
+	}
+
+	private _title = '';
+
+	get title() {
+		return this._title;
+	}
+
+	set title(value) {
+		if (this._title === value) {
+			return;
+		}
+
+		this._title = value;
 
 		if (this.connected) {
 			queueUpdate();
@@ -51,10 +71,18 @@ export class PageStateNode implements Disposable {
 			return;
 		}
 
+		if (this.connected) {
+			queueUpdate();
+		}
+
 		this.child = undefined;
 		this.parent._child = undefined;
 		this.disposed = true;
 		this.connected = false;
+	}
+
+	listTitles(): string[] {
+		return [...(this._child?.listTitles() ?? []), this.title];
 	}
 
 	hasEvent(name: keyof PageStateEvents): boolean {
