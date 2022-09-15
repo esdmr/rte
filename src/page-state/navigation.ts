@@ -1,12 +1,10 @@
 import type {RefObject} from 'preact';
 import type {NavNode} from '../navigation/node.js';
-import type {InputMode} from './stack.js';
+import type {PageStateHooks} from './node.js';
 
-export const navInputMode = (rootRef: RefObject<NavNode>): InputMode => ({
+export const navPageState = (root: NavNode): PageStateHooks => ({
 	onKeyDown(event) {
-		const {current: root} = rootRef;
-
-		if (!root || !/^Arrow(?:Up|Down|Left|Right)$/.test(event.code)) {
+		if (!/^Arrow(?:Up|Down|Left|Right)$/.test(event.code)) {
 			return false;
 		}
 
@@ -40,9 +38,7 @@ export const navInputMode = (rootRef: RefObject<NavNode>): InputMode => ({
 		return true;
 	},
 	onFocusIn(event) {
-		const {current: root} = rootRef;
-
-		if (!root || !(event.target instanceof HTMLElement)) {
+		if (!(event.target instanceof HTMLElement)) {
 			return false;
 		}
 

@@ -1,29 +1,42 @@
-import type {FunctionComponent, Ref} from 'preact';
-import {useMemo, useEffect} from 'preact/hooks';
-import {type UnaryProps, navUnaryHooks} from './unary.js';
+import type {FunctionComponent} from 'preact';
+import {useContext, useEffect, useMemo} from 'preact/hooks';
+import {pageStateContext} from '../page-state/global.js';
+import {navPageState as navPageStateHooks} from '../page-state/navigation.js';
+import {PageStateNode} from '../page-state/node.js';
 import {wrapNavChildren} from './child-token.js';
 import {NavNode} from './node.js';
-import {setRef} from './utils.js';
+import {navUnaryHooks, type UnaryProps} from './unary.js';
 
-type NavRootProps = UnaryProps & {
-	'nav-ref'?: Ref<NavNode>;
-};
-
-export const NavRoot: FunctionComponent<NavRootProps> = (props) => {
+export const NavRoot: FunctionComponent<UnaryProps> = (props) => {
 	const rootNode = useMemo(() => new NavNode(undefined, navUnaryHooks), []);
+	const parentPageState = useContext(pageStateContext);
+	const pageState = useMemo(
+		() => new PageStateNode(parentPageState, navPageStateHooks(rootNode)),
+		[parentPageState],
+	);
 
 	useEffect(() => {
-		setRef(props['nav-ref'], rootNode);
+		parentPageState.child = pageState;
 
+		return () => {
+			pageState.dispose();
+		};
+	}, [parentPageState]);
+
+	useEffect(() => {
 		// FIXME: Remove.
 		console.debug({rootNode});
 		(globalThis as any).rootNode = rootNode;
 
 		return () => {
 			rootNode.state.deselect();
-			setRef(props['nav-ref'], null);
+			rootNode.dispose();
 		};
 	}, [rootNode]);
 
-	return <>{wrapNavChildren(rootNode, props.children)}</>;
+	return (
+		<pageStateContext.Provider value={pageState}>
+			{wrapNavChildren(rootNode, props.children)}
+		</pageStateContext.Provider>
+	);
 };
