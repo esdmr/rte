@@ -58,7 +58,7 @@ export class PageStateNode implements Disposable {
 	constructor(
 		private readonly parent: PageStateNode | undefined,
 		private readonly hooks: PageStateHooks,
-		readonly root = document.body,
+		readonly root: HTMLElement = parent?.root ?? document.body,
 	) {
 		if (!parent || parent.connected) {
 			this.connected = true;
