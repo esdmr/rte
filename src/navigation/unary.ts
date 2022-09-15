@@ -10,9 +10,6 @@ export type UnaryProps = {
 const childTokens = new WeakMap<NavNode, NavChildToken>();
 
 export const navUnaryHooks: NavHooks = {
-	onDispose() {
-		throw new Error('Disposal of a unary NavItem');
-	},
 	onNewChild() {
 		assert(
 			this.children.length <= 1,
