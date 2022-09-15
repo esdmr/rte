@@ -30,13 +30,16 @@ export const DebugTitle: FunctionComponent = () => {
 
 	return (
 		<>
-			<input
-				type="range"
-				onChange={updateTitleCount}
-				min={0}
-				max={10}
-				value={titleCount}
-			/>
+			<label>
+				Nest level (Currently: {titleCount}):
+				<input
+					type="range"
+					onChange={updateTitleCount}
+					min={0}
+					max={10}
+					value={titleCount}
+				/>
+			</label>
 
 			{element}
 		</>
