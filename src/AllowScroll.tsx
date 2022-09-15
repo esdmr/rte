@@ -1,20 +1,17 @@
 import type {FunctionComponent} from 'preact';
-import {useEffect} from 'preact/hooks';
-import assert from './assert.js';
-
-let set = false;
+import {useContext, useEffect} from 'preact/hooks';
+import {pageStateContext} from './page-state/global.js';
 
 export const AllowScroll: FunctionComponent = () => {
+	const pageState = useContext(pageStateContext);
+
 	useEffect(() => {
-		assert(!set, 'more than one AllowScroll in the render tree');
-		set = true;
-		document.body.classList.add('scroll');
+		pageState.root.classList.add('scroll');
 
 		return () => {
-			set = false;
-			document.body.classList.remove('scroll');
+			pageState.root.classList.remove('scroll');
 		};
-	}, []);
+	}, [pageState]);
 
 	return null;
 };
