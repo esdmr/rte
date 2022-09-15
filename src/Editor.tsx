@@ -75,11 +75,11 @@ export class MonacoEditor implements Disposable {
 	}
 
 	private getTheme() {
-		return this._lightTheme ? lightTheme : darkTheme;
+		return this.lightTheme ? lightTheme : darkTheme;
 	}
 
 	private getAccessibilitySupport() {
-		return this._forceAccessibility ? 'on' : 'auto';
+		return this.forceAccessibility ? 'on' : 'auto';
 	}
 }
 
