@@ -1,4 +1,3 @@
-import type {RefObject} from 'preact';
 import type {NavNode} from '../navigation/node.js';
 import type {PageStateHooks} from './node.js';
 
