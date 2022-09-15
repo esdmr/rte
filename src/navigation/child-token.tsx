@@ -38,6 +38,7 @@ export class NavChildToken {
 				this.parent.children[this.index] === undefined,
 				'more than one child node assigned to token',
 			);
+			assert(node.parent === this.parent, 'child node has an incorrect parent');
 		}
 
 		this.parent.children[this.index] = node;
