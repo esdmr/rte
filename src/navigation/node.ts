@@ -1,4 +1,5 @@
 import assert from '../assert.js';
+import type {Disposable} from '../disposable.js';
 import {NavChildToken} from './child-token.js';
 import {NavState} from './state.js';
 
@@ -18,7 +19,7 @@ export type NavHooks = {
 	): NavNode | undefined;
 };
 
-export class NavNode {
+export class NavNode implements Disposable {
 	static for(childToken: NavChildToken, hooks: NavHooks) {
 		const node = new NavNode(childToken.parent, hooks);
 		childToken.child = node;

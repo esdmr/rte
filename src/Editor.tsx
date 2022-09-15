@@ -6,12 +6,13 @@ import 'monaco-editor/esm/vs/editor/contrib/wordHighlighter/browser/wordHighligh
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api.js';
 import {type ComponentChild, Component} from 'preact';
 import assert from './assert.js';
+import type {Disposable} from './disposable.js';
 import * as css from './Editor.module.css.js';
 
 const lightTheme = 'vs-light';
 const darkTheme = 'vs-dark';
 
-export class MonacoEditor {
+export class MonacoEditor implements Disposable {
 	private readonly editor: monaco.editor.IStandaloneCodeEditor;
 	private _lightTheme: boolean;
 
