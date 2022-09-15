@@ -13,6 +13,7 @@ import {NavColumn} from './navigation/NavColumn.js';
 import {DebugNav} from './navigation/DebugNav.js';
 import {NavSwitch} from './navigation/NavSwitch.js';
 import {Title} from './Title.js';
+import {DebugPageState} from './page-state/DebugPageState.js';
 
 export const App: FunctionComponent = () => (
 	<NavSwitch>
@@ -41,6 +42,9 @@ export const App: FunctionComponent = () => (
 									</li>
 									<li>
 										<Link href="/debug/nav">Debug navigation</Link>
+									</li>
+									<li>
+										<Link href="/debug/page-state">Debug page state</Link>
 									</li>
 								</NavColumn>
 							</ul>
@@ -93,6 +97,7 @@ export const App: FunctionComponent = () => (
 			)}
 		</Route>
 		<Route path="/debug/nav">{() => <DebugNav />}</Route>
+		<Route path="/debug/page-state">{() => <DebugPageState />}</Route>
 		<Route>
 			{() => (
 				<>
