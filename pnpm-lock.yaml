@@ -1,5 +1,8 @@
 lockfileVersion: 5.4
 
+overrides:
+  '@preact/signals-core': 1.0.1
+
 packageExtensionsChecksum: c6269d4d2b8f53749e9a6ff01733da3a
 
 patchedDependencies:
@@ -36,6 +39,7 @@ specifiers:
   '@mdi/react': 1.6.1
   '@pnpm/lockfile-file': 5.3.4
   '@pnpm/logger': 4.0.0
+  '@preact/signals': ^1.0.3
   '@prefresh/vite': 2.2.8
   '@testing-library/preact': 3.2.2
   '@types/find': 0.2.1
@@ -65,6 +69,7 @@ specifiers:
 dependencies:
   '@mdi/js': 7.0.96
   '@mdi/react': 1.6.1_bybv5nhizojq4c2ifughfzw24e
+  '@preact/signals': 1.0.3_preact@10.10.6
   history: 5.3.0
   monaco-editor: 0.34.0
   preact: 10.10.6
@@ -525,6 +530,19 @@ packages:
       preact: 10.10.6
     dev: false
     patched: true
+
+  /@preact/signals-core/1.0.1:
+    resolution: {integrity: sha512-1yBu72jd80QWdp8WvNFBg7K+0REv+NqJg1CGIwAl5kJ+qE7I06Lm2+K3z2qVZmABiDjQgjU2vKA9yEjniWv5uA==}
+    dev: false
+
+  /@preact/signals/1.0.3_preact@10.10.6:
+    resolution: {integrity: sha512-aBUYPBzdw+UD99t3n2v+OKecjaA2SnvImLDKH7jZtgwPE6E4Jr+B+H3P1tYty+bRsIKnHuFcvYUIZJAP1armFw==}
+    peerDependencies:
+      preact: 10.x
+    dependencies:
+      '@preact/signals-core': 1.0.1
+      preact: 10.10.6
+    dev: false
 
   /@prefresh/babel-plugin/0.4.3:
     resolution: {integrity: sha512-fYAWbU1WDSLn108kKY4eDaaeUcnszFqXjgaGKYXNZ5NLulpRTpsrY+Sbfo9q8LDpWrBpqIgzjrwNnvglWI1xNQ==}

@@ -1,10 +1,12 @@
 import assert from '../assert.js';
 import type {Disposable} from '../disposable.js';
-import {queueUpdate} from './global.js';
+import type {GamepadClone} from './gamepad.js';
+import {queueUpdate} from './update.js';
 
 export type PageStateEvents = {
 	onKeyDown?(this: PageStateNode, event: KeyboardEvent): boolean;
 	onFocusIn?(this: PageStateNode, event: FocusEvent): boolean;
+	onGamepad?(this: PageStateNode, gamepads: GamepadClone[]): boolean;
 };
 
 export type PageStateHooks = PageStateEvents;
