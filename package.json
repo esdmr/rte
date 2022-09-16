@@ -49,9 +49,6 @@
   },
   "packageManager": "pnpm@7.11.0",
   "pnpm": {
-    "overrides": {
-      "@preact/signals-core": "1.0.1"
-    },
     "packageExtensions": {
       "eslint-import-resolver-webpack": {
         "peerDependenciesMeta": {
