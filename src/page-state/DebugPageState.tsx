@@ -11,7 +11,7 @@ import {GamepadToSignal} from './GamepadToSignal.js';
 
 export const DebugPageState: FunctionComponent = () => {
 	return (
-		<GamepadToSignal precision={2}>
+		<GamepadToSignal>
 			<AllowScroll />
 			<NavColumn>
 				<header>
