@@ -1,5 +1,6 @@
 import type {FunctionComponent, JSX} from 'preact';
 import {useCallback, useState} from 'preact/hooks';
+import {Input} from '../navigation/wrappers.js';
 import {Title} from '../Title.js';
 import {DebugPageNode} from './DebugPageNode.js';
 
@@ -32,7 +33,7 @@ export const DebugTitle: FunctionComponent = () => {
 		<>
 			<label>
 				Nest level (Currently: {titleCount}):
-				<input
+				<Input
 					type="range"
 					onChange={updateTitleCount}
 					min={0}
