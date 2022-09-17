@@ -1,15 +1,20 @@
 import assert from '../assert.js';
 import type {Disposable} from '../disposable.js';
+import {isFocusVisible} from '../focus-visible.js';
 import {NavChildToken} from './child-token.js';
 import {NavState} from './state.js';
 
 export type NavDirection = 'next' | 'up' | 'down' | 'left' | 'right';
 
+export type NavSelectOptions = {
+	focusVisible?: boolean;
+};
+
 export type NavHooks = {
 	type?: string;
 	onNewChild?(this: NavNode): NavChildToken | void;
 	onDispose?(this: NavNode): void;
-	onSelect?(this: NavNode): void;
+	onSelect?(this: NavNode, options?: NavSelectOptions): void;
 	onDeselect?(this: NavNode): void;
 	getLeaf?(this: NavNode, via: NavDirection): NavNode | undefined;
 	getNextLeaf?(
@@ -104,7 +109,9 @@ export class NavNode implements Disposable {
 
 		if (this.selected) {
 			this.state.deselect();
-			root.parent?.getNextLeaf(root, 'next')?.select();
+			root.parent?.getNextLeaf(root, 'next')?.select({
+				focusVisible: isFocusVisible(),
+			});
 		}
 
 		this.disposed = true;
@@ -112,7 +119,7 @@ export class NavNode implements Disposable {
 		this.ref = undefined;
 	}
 
-	select() {
+	select(options?: NavSelectOptions) {
 		assert(!this.disposed, 'node is disposed');
 		assert(this.hooks.onSelect !== undefined, 'select hook is undefined');
 
@@ -122,7 +129,7 @@ export class NavNode implements Disposable {
 
 		this.state.deselect();
 		this.state.selected = this;
-		this.hooks.onSelect.call(this);
+		this.hooks.onSelect.call(this, options);
 	}
 
 	deselect() {

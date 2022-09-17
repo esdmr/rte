@@ -1,15 +1,23 @@
 import {type FunctionComponent, type VNode, cloneElement} from 'preact';
 import {useMemo} from 'preact/hooks';
 import assert from '../assert.js';
+import {makeFocusVisible, removeFocusVisible} from '../focus-visible.js';
 import {navChildToken, useChildToken} from './child-token.js';
 import {type NavHooks, NavNode} from './node.js';
 import {isVnodeFocusable, setRef} from './utils.js';
 
 const navItemHooks: NavHooks = {
-	onSelect() {
+	onSelect(options) {
 		const {ref} = this;
 		assert(ref, 'no ref to select');
+		ref.dataset.skipFocusEvent = '';
 		ref.focus();
+
+		if (options?.focusVisible) {
+			makeFocusVisible();
+		} else {
+			removeFocusVisible();
+		}
 	},
 	getLeaf() {
 		return this;

@@ -1,4 +1,4 @@
-import type {NavNode} from './node.js';
+import type {NavNode, NavSelectOptions} from './node.js';
 
 export class NavState {
 	selected: NavNode | undefined;
@@ -14,23 +14,23 @@ export class NavState {
 		this.selected = undefined;
 	}
 
-	next() {
-		this.selected?.parent?.getNextLeaf(this.selected, 'next')?.select();
+	next(options?: NavSelectOptions) {
+		this.selected?.parent?.getNextLeaf(this.selected, 'next')?.select(options);
 	}
 
-	up() {
-		this.selected?.parent?.getNextLeaf(this.selected, 'up')?.select();
+	up(options?: NavSelectOptions) {
+		this.selected?.parent?.getNextLeaf(this.selected, 'up')?.select(options);
 	}
 
-	down() {
-		this.selected?.parent?.getNextLeaf(this.selected, 'down')?.select();
+	down(options?: NavSelectOptions) {
+		this.selected?.parent?.getNextLeaf(this.selected, 'down')?.select(options);
 	}
 
-	left() {
-		this.selected?.parent?.getNextLeaf(this.selected, 'left')?.select();
+	left(options?: NavSelectOptions) {
+		this.selected?.parent?.getNextLeaf(this.selected, 'left')?.select(options);
 	}
 
-	right() {
-		this.selected?.parent?.getNextLeaf(this.selected, 'right')?.select();
+	right(options?: NavSelectOptions) {
+		this.selected?.parent?.getNextLeaf(this.selected, 'right')?.select(options);
 	}
 }
