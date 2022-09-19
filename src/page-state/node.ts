@@ -27,10 +27,10 @@ export class PageStateNode implements Disposable {
 
 		this.child?.dispose();
 
-		assert(
-			!value || value.parent === this,
-			'child node has an incorrect parent',
-		);
+		if (value) {
+			assert(!value.disposed, 'child node is disposed');
+			assert(value.parent === this, 'child node has an incorrect parent');
+		}
 
 		this._child = value;
 
