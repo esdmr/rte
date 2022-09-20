@@ -1,13 +1,13 @@
-import {type FunctionComponent, toChildArray} from 'preact';
-import {useContext, useEffect} from 'preact/hooks';
-import {pageStateContext} from './page-state/global.js';
+import {toChildArray, type FunctionComponent} from 'preact';
+import {useEffect} from 'preact/hooks';
+import {usePageState} from './page-state/global.js';
 
 export const Title: FunctionComponent<{
 	children: string | string[];
 	h1?: boolean;
 }> = (props) => {
 	const title = (toChildArray(props.children) as string[]).join('');
-	const pageState = useContext(pageStateContext);
+	const pageState = usePageState();
 
 	useEffect(() => {
 		pageState.title = title;

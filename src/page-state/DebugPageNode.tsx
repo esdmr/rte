@@ -1,10 +1,10 @@
 import type {FunctionComponent} from 'preact';
-import {useContext, useMemo, useEffect} from 'preact/hooks';
-import {pageStateContext} from './global.js';
+import {useEffect, useMemo} from 'preact/hooks';
+import {pageStateContext, usePageState} from './global.js';
 import {PageStateNode} from './node.js';
 
 export const DebugPageNode: FunctionComponent = ({children}) => {
-	const parentPageState = useContext(pageStateContext);
+	const parentPageState = usePageState();
 	const pageState = useMemo(
 		() => new PageStateNode(parentPageState, {}),
 		[parentPageState],
