@@ -34,23 +34,13 @@ export const NavItem: FunctionComponent<{children: VNode}> = ({children}) => {
 		[childToken],
 	);
 
-	const vnode: VNode<{
-		contenteditable?: string | boolean;
-		contentEditable?: string | boolean;
-		disabled?: boolean;
-		href?: string;
-		tabindex?: string | number;
-		tabIndex?: string | number;
-	}> = children;
+	assert(isVnodeFocusable(children), 'dom node is not focusable');
 
-	assert(typeof vnode.type === 'string', 'NavItem on a component');
-	assert(isVnodeFocusable(vnode), 'dom node is not focusable');
-
-	const oldRef = vnode.ref;
+	const oldRef = children.ref;
 
 	return (
 		<navChildToken.Provider value={undefined}>
-			{cloneElement(vnode, {
+			{cloneElement(children, {
 				ref(value: unknown) {
 					if (value instanceof HTMLElement) {
 						node.ref = value;
