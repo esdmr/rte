@@ -1,4 +1,5 @@
 import type {FunctionComponent} from 'preact';
+import {useId} from 'preact/hooks';
 import {classes} from '../../../classes.js';
 import * as css from './index.module.css.js';
 import type {Direction, FaceButtonStyle} from './types.js';
@@ -8,7 +9,9 @@ export const GamepadFaceButtonIcon: FunctionComponent<{
 	which: Direction;
 	class?: string;
 }> = (props) => {
-	const id = `gabi-mask-${props.style.name}-${props.which}`;
+	// `useId` does not seem to be fully unique. Suffix it with the props to
+	// make it unique.
+	const id = `${useId()}-${props.style.name}-${props.which}`;
 	const symbol = props.style[props.which];
 
 	return (
@@ -19,7 +22,13 @@ export const GamepadFaceButtonIcon: FunctionComponent<{
 			data-which={props.which}
 			aria-label={`Gamepad ${symbol.name} button`}
 		>
-			<circle cx={0} cy={0} r={8} class={css.base} mask={`url(#${id})`} />
+			<circle
+				cx={0}
+				cy={0}
+				r={8}
+				class={css.base}
+				mask={`url(#${CSS.escape(id)})`}
+			/>
 			<defs aria-hidden>
 				<mask id={id}>
 					<rect x={-8} y={-8} width={16} height={16} class={css.maskOut} />
