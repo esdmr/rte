@@ -33,7 +33,7 @@ export class NavChildToken {
 	set child(node: NavNode | undefined) {
 		assert(!this.revoked, 'child token is revoked');
 
-		if (node !== undefined) {
+		if (node !== undefined && node !== this.child) {
 			assert(
 				this.child === undefined,
 				'more than one child node assigned to token',
