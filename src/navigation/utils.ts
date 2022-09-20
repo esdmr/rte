@@ -11,9 +11,56 @@ export const setRef = <T>(ref: Ref<T> | null | undefined, value: T | null) => {
 	}
 };
 
+const focusableVnodes: Record<
+	string,
+	(vnode: VNode<Record<string, unknown>>) => boolean
+> = {
+	a(vnode) {
+		return typeof vnode.props.href === 'string';
+	},
+	area(vnode) {
+		return typeof vnode.props.href === 'string';
+	},
+	input(vnode) {
+		return !vnode.props.disabled && vnode.props.type !== 'hidden';
+	},
+	select(vnode) {
+		return !vnode.props.disabled;
+	},
+	textarea(vnode) {
+		return !vnode.props.disabled;
+	},
+	button(vnode) {
+		return !vnode.props.disabled;
+	},
+	details() {
+		return true;
+	},
+	iframe() {
+		return true;
+	},
+	object() {
+		return true;
+	},
+	embed() {
+		return true;
+	},
+	audio(vnode) {
+		return Boolean(vnode.props.controls);
+	},
+	video(vnode) {
+		return Boolean(vnode.props.controls);
+	},
+	img(vnode) {
+		return Boolean(vnode.props.usemap || vnode.props.useMap);
+	},
+};
+
 export const isVnodeFocusable = (vnode: VNode<Record<string, unknown>>) => {
-	const hasHref = typeof vnode.props.href === 'string';
-	const isNotDisabled = !vnode.props.disabled;
+	assert(
+		typeof vnode.type === 'string',
+		'cannot determine if component vnode is focusable',
+	);
 
 	const hasTabIndex =
 		typeof vnode.props.tabIndex === 'number' ||
@@ -24,17 +71,10 @@ export const isVnodeFocusable = (vnode: VNode<Record<string, unknown>>) => {
 	);
 
 	return (
-		(vnode.type === 'a' && hasHref) ||
-		(vnode.type === 'area' && hasHref) ||
-		(vnode.type === 'input' && isNotDisabled) ||
-		(vnode.type === 'select' && isNotDisabled) ||
-		(vnode.type === 'textarea' && isNotDisabled) ||
-		(vnode.type === 'button' && isNotDisabled) ||
-		vnode.type === 'iframe' ||
-		vnode.type === 'object' ||
-		vnode.type === 'embed' ||
-		hasTabIndex ||
-		isContentEditable
+		!vnode.props.inert &&
+		(hasTabIndex ||
+			isContentEditable ||
+			Boolean(focusableVnodes[vnode.type]?.(vnode)))
 	);
 };
 
