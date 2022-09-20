@@ -19,7 +19,7 @@
     "@preact/signals": "1.0.4",
     "history": "5.3.0",
     "monaco-editor": "0.34.0",
-    "preact": "10.10.6",
+    "preact": "10.11.0",
     "react": "npm:@preact/compat@17.1.1",
     "react-dom": "npm:@preact/compat@17.1.1",
     "wouter-preact": "2.8.0-alpha.2"
