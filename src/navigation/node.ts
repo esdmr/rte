@@ -40,22 +40,22 @@ export class NavNode implements Disposable {
 		return this.state.selected === this;
 	}
 
+	private _ref: HTMLElement | undefined;
+
 	get ref() {
-		return this.state.nodeToElement.get(this);
+		return this._ref;
 	}
 
 	set ref(current: HTMLElement | undefined) {
-		const old = this.ref;
-
-		if (old !== undefined) {
-			this.state.nodeToElement.delete(this);
-			this.state.elementToNode.delete(old);
+		if (this._ref !== undefined) {
+			this.state.elementToNode.delete(this._ref);
 		}
 
 		if (current !== undefined) {
-			this.state.nodeToElement.set(this, current);
 			this.state.elementToNode.set(current, this);
 		}
+
+		this._ref = current;
 	}
 
 	constructor(
