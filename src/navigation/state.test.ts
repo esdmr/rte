@@ -47,7 +47,7 @@ describe('NavState', () => {
 			});
 			parent.children[1] = other;
 
-			expect(parent.state).instanceOf(NavState);
+			expect(parent.state).toBeInstanceOf(NavState);
 			parent.state.selected = current;
 
 			parent.state[dir]();
@@ -73,7 +73,7 @@ describe('NavState', () => {
 			});
 			parent.children[1] = other;
 
-			expect(parent.state).instanceOf(NavState);
+			expect(parent.state).toBeInstanceOf(NavState);
 			parent.state.selected = current;
 
 			parent.state[dir]({focusVisible: true});
