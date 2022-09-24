@@ -25,6 +25,4 @@ export const makeFocusVisible = () => {
 	lastElement = activeElement;
 };
 
-export const isFocusVisible = () => {
-	return lastElement !== undefined;
-};
+export const isFocusVisible = () => lastElement !== undefined;

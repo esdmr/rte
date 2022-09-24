@@ -9,28 +9,26 @@ import {DebugGamepad} from './DebugGamepad.js';
 import {DebugTitle} from './DebugTitle.js';
 import {GamepadToSignal} from './GamepadToSignal.js';
 
-export const DebugPageState: FunctionComponent = () => {
-	return (
-		<GamepadToSignal>
-			<AllowScroll />
-			<NavColumn>
-				<header>
-					<nav>
-						<CircularButton href="/" title="Back">
-							<Icon path={mdiArrowLeft} />
-						</CircularButton>
-					</nav>
-				</header>
-				<main>
-					<Title h1>Debug page state</Title>
+export const DebugPageState: FunctionComponent = () => (
+	<GamepadToSignal>
+		<AllowScroll />
+		<NavColumn>
+			<header>
+				<nav>
+					<CircularButton href="/" title="Back">
+						<Icon path={mdiArrowLeft} />
+					</CircularButton>
+				</nav>
+			</header>
+			<main>
+				<Title h1>Debug page state</Title>
 
-					<h2>Title</h2>
-					<DebugTitle />
+				<h2>Title</h2>
+				<DebugTitle />
 
-					<h2>Gamepads</h2>
-					<DebugGamepad />
-				</main>
-			</NavColumn>
-		</GamepadToSignal>
-	);
-};
+				<h2>Gamepads</h2>
+				<DebugGamepad />
+			</main>
+		</NavColumn>
+	</GamepadToSignal>
+);

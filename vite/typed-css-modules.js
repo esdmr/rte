@@ -23,14 +23,13 @@ const files = await new Promise((resolve) => {
 	find.file(/\.module\.css$/, 'src', resolve);
 });
 
-const newCreator = () => {
-	return new (defaultImport(DtsCreator))({
+const newCreator = () =>
+	new (defaultImport(DtsCreator))({
 		camelCase: 'dashes',
 		dropExtension: false,
 		outDir: path.join('build', 'types'),
 		namedExports: true,
 	});
-};
 
 /**
  * @param {string} file

@@ -16,24 +16,21 @@ export type GamepadClone = {
 const buttonsComparisonPrecision = 2;
 const axesComparisonPrecision = 15;
 
-export const compareGamepads = (from: GamepadClone, to: Gamepad) => {
-	return (
-		from.index !== to.index ||
-		from.id !== to.id ||
-		from.buttons.length !== to.buttons.length ||
-		from.axes.length !== to.axes.length ||
-		from.buttons.some(
-			(button, index) =>
-				button.value.toFixed(buttonsComparisonPrecision) !==
-				to.buttons[index]!.value.toFixed(buttonsComparisonPrecision),
-		) ||
-		from.axes.some(
-			(axis, index) =>
-				axis.toFixed(axesComparisonPrecision) !==
-				to.axes[index]!.toFixed(axesComparisonPrecision),
-		)
+export const compareGamepads = (from: GamepadClone, to: Gamepad) =>
+	from.index !== to.index ||
+	from.id !== to.id ||
+	from.buttons.length !== to.buttons.length ||
+	from.axes.length !== to.axes.length ||
+	from.buttons.some(
+		(button, index) =>
+			button.value.toFixed(buttonsComparisonPrecision) !==
+			to.buttons[index]!.value.toFixed(buttonsComparisonPrecision),
+	) ||
+	from.axes.some(
+		(axis, index) =>
+			axis.toFixed(axesComparisonPrecision) !==
+			to.axes[index]!.toFixed(axesComparisonPrecision),
 	);
-};
 
 export const cloneGamepads = (gamepads: Gamepad[]) =>
 	gamepads.map<GamepadClone>((gamepad) => ({

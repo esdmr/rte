@@ -18,9 +18,13 @@ const clearGamepadState = (node: PageStateNode) => {
 	const state = gamepadState.get(node);
 
 	if (state) {
-		if (state.timeoutId !== undefined) clearTimeout(state.timeoutId);
-		if (state.intervalId !== undefined) clearInterval(state.intervalId);
-		console.debug('Gamepad clear', state.heldButton);
+		if (state.timeoutId !== undefined) {
+			clearTimeout(state.timeoutId);
+		}
+
+		if (state.intervalId !== undefined) {
+			clearInterval(state.intervalId);
+		}
 	}
 
 	gamepadState.delete(node);

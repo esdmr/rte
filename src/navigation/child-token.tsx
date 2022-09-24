@@ -67,8 +67,8 @@ export const useChildToken = () => {
 	return childToken;
 };
 
-export const wrapNavChildren = (node: NavNode, children: ComponentChildren) => {
-	return toChildArray(children).map((child) =>
+export const wrapNavChildren = (node: NavNode, children: ComponentChildren) =>
+	toChildArray(children).map((child) =>
 		typeof child === 'object' ? (
 			<navChildToken.Provider
 				value={node.newChildToken()}
@@ -80,4 +80,3 @@ export const wrapNavChildren = (node: NavNode, children: ComponentChildren) => {
 			child
 		),
 	);
-};

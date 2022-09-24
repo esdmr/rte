@@ -19,17 +19,12 @@ export const vector = (x: number, y: number): Vector => {
 	return {x, y};
 };
 
-export const vectorPolar = (length: number, angle: number): Vector => {
-	return vector(length * Math.cos(angle), length * Math.sin(angle));
-};
+export const vectorPolar = (length: number, angle: number): Vector =>
+	vector(length * Math.cos(angle), length * Math.sin(angle));
 
-export const vectorLength = (vec: Vector) => {
-	return Math.hypot(vec.y, vec.x);
-};
+export const vectorLength = (vec: Vector) => Math.hypot(vec.y, vec.x);
 
-export const vectorAngle = (vec: Vector) => {
-	return Math.atan2(vec.y, vec.x);
-};
+export const vectorAngle = (vec: Vector) => Math.atan2(vec.y, vec.x);
 
 export const add = (...args: Vector[]): Vector => {
 	let x = 0;
@@ -43,13 +38,11 @@ export const add = (...args: Vector[]): Vector => {
 	return {x, y};
 };
 
-export const subtract = (minuend: Vector, subtrahend: Vector) => {
-	return vector(minuend.x - subtrahend.x, minuend.y - subtrahend.y);
-};
+export const subtract = (minuend: Vector, subtrahend: Vector) =>
+	vector(minuend.x - subtrahend.x, minuend.y - subtrahend.y);
 
-export const scale = (coefficient: number, vec: Vector) => {
-	return vector(coefficient * vec.x, coefficient * vec.y);
-};
+export const scale = (coefficient: number, vec: Vector) =>
+	vector(coefficient * vec.x, coefficient * vec.y);
 
 export const normalize = (vec: Vector) => {
 	const length = vectorLength(vec);
@@ -62,19 +55,17 @@ export const normalize = (vec: Vector) => {
 	return scale(1 / length, vec);
 };
 
-export const transform = (matrix: Transform, vec: Vector) => {
-	return vector(
+export const transform = (matrix: Transform, vec: Vector) =>
+	vector(
 		matrix.x.x * vec.x + matrix.x.y * vec.y,
 		matrix.y.x * vec.x + matrix.y.y * vec.y,
 	);
-};
 
-export const rotate = (angle: number, vec: Vector) => {
-	return transform(
+export const rotate = (angle: number, vec: Vector) =>
+	transform(
 		{
 			x: {x: Math.cos(angle), y: -Math.sin(angle)},
 			y: {x: Math.sin(angle), y: Math.cos(angle)},
 		},
 		vec,
 	);
-};
