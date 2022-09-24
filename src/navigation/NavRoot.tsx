@@ -7,6 +7,12 @@ import {wrapNavChildren} from './child-token.js';
 import {NavNode} from './node.js';
 import {navUnaryHooks, type UnaryProps} from './unary.js';
 
+declare global {
+	/** Used for debugging. Only available in development mode. */
+	// eslint-disable-next-line no-var
+	var navRootNode: NavNode | undefined;
+}
+
 export const NavRoot: FunctionComponent<UnaryProps> = (props) => {
 	const rootNode = useMemo(() => new NavNode(undefined, navUnaryHooks), []);
 	const parentPageState = usePageState();
@@ -23,16 +29,17 @@ export const NavRoot: FunctionComponent<UnaryProps> = (props) => {
 		};
 	}, [parentPageState]);
 
-	useEffect(() => {
-		// FIXME: Remove.
-		console.debug({rootNode});
-		(globalThis as any).rootNode = rootNode;
-
-		return () => {
+	useEffect(
+		() => () => {
 			rootNode.state.deselect();
 			rootNode.dispose();
-		};
-	}, [rootNode]);
+		},
+		[rootNode],
+	);
+
+	if (import.meta.env.DEV) {
+		globalThis.navRootNode = rootNode;
+	}
 
 	return (
 		<pageStateContext.Provider value={pageState}>
