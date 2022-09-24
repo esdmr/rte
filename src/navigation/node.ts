@@ -36,7 +36,6 @@ export class NavNode implements Disposable {
 	private disposed = false;
 
 	get selected() {
-		assert(!this.disposed, 'node is disposed');
 		return this.state.selected === this;
 	}
 
