@@ -134,15 +134,21 @@ export class Editor extends Component<EditorProps> {
 		});
 
 		addEventListener('resize', this.onDidResize);
-		console.log('Monaco editor started.');
+
+		if (import.meta.env.DEV) {
+			console.log('Monaco editor started.');
+		}
 	}
 
 	override componentWillUnmount(): void {
 		this.themeQuery.removeEventListener('change', this.onDidThemeQueryChange);
 		removeEventListener('resize', this.onDidResize);
 		this.editor?.dispose();
-		console.log('monaco editor stopped.');
 		this.editor = undefined;
+
+		if (import.meta.env.DEV) {
+			console.log('monaco editor stopped.');
+		}
 	}
 
 	render(): ComponentChild {

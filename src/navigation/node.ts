@@ -88,9 +88,7 @@ export class NavNode implements Disposable {
 		}
 	}
 
-	/**
-	 * Used for debugging. Only available in development mode.
-	 */
+	/** Used for debugging. Only available in development mode. */
 	getPath?(): string;
 
 	newChildToken() {

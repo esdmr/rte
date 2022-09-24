@@ -43,7 +43,8 @@ export const queueUpdate = () => {
 		const titles = [...rootState.listTitles(), originalTitle];
 		document.title = titles.filter(Boolean).join(' - ');
 
-		// FIXME: Remove.
-		console.debug('Page state updated.');
+		if (import.meta.env.DEV) {
+			console.debug('Page state updated.');
+		}
 	});
 };

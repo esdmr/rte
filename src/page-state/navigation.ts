@@ -25,6 +25,10 @@ const clearGamepadState = (node: PageStateNode) => {
 		if (state.intervalId !== undefined) {
 			clearInterval(state.intervalId);
 		}
+
+		if (import.meta.env.DEV) {
+			console.debug('Gamepad clear', state.heldButton);
+		}
 	}
 
 	gamepadState.delete(node);
@@ -114,11 +118,15 @@ export const navPageState = (root: NavNode): PageStateHooks => ({
 					timeoutId: setTimeout(() => {
 						newState.timeoutId = undefined;
 						handleKeyPress(root, heldButton, true);
-						console.debug('Gamepad repeat initial', heldButton);
+						if (import.meta.env.DEV) {
+							console.debug('Gamepad repeat initial', heldButton);
+						}
 
 						newState.intervalId = setInterval(() => {
 							handleKeyPress(root, heldButton, true);
-							console.debug('Gamepad repeat', heldButton);
+							if (import.meta.env.DEV) {
+								console.debug('Gamepad repeat', heldButton);
+							}
 						}, gamepadRepeatInterval);
 					}, gamepadRepeatDelay),
 					intervalId: undefined,
@@ -126,7 +134,9 @@ export const navPageState = (root: NavNode): PageStateHooks => ({
 
 				gamepadState.set(this, newState);
 				handleKeyPress(root, heldButton, true);
-				console.debug('Gamepad press', heldButton);
+				if (import.meta.env.DEV) {
+					console.debug('Gamepad press', heldButton);
+				}
 			}
 		}
 
