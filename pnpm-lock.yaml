@@ -43,7 +43,7 @@ specifiers:
   '@types/jsdom': 20.0.0
   '@types/parse-author': 2.0.1
   '@types/postcss-url': 10.0.0
-  '@vitest/coverage-c8': 0.23.1
+  '@vitest/coverage-c8': 0.23.4
   default-import: 1.1.5
   execa: 6.1.0
   find: 0.3.0
@@ -83,7 +83,7 @@ devDependencies:
   '@types/jsdom': 20.0.0
   '@types/parse-author': 2.0.1
   '@types/postcss-url': 10.0.0
-  '@vitest/coverage-c8': 0.23.1_jsdom@20.0.0
+  '@vitest/coverage-c8': 0.23.4_jsdom@20.0.0
   default-import: 1.1.5
   execa: 6.1.0
   find: 0.3.0
@@ -831,11 +831,11 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: true
 
-  /@vitest/coverage-c8/0.23.1_jsdom@20.0.0:
-    resolution: {integrity: sha512-si3vK1h3BHdoGfb5J2jXstthROHwDW+yqVNGO/NOPG8642+d1RO/jFFvF3OSSYFEsxxcDL0uywEVcXCjGuPYdA==}
+  /@vitest/coverage-c8/0.23.4_jsdom@20.0.0:
+    resolution: {integrity: sha512-jmD00a5DQH9gu9K+YdvVhcMuv2CzHvU4gCnySS40Ec5hKlXtlCzRfNHl00VnhfuBeaQUmaQYe60BLT413HyDdg==}
     dependencies:
       c8: 7.12.0
-      vitest: 0.23.1_jsdom@20.0.0
+      vitest: 0.23.4_jsdom@20.0.0
     transitivePeerDependencies:
       - '@edge-runtime/vm'
       - '@vitest/browser'
@@ -1272,7 +1272,7 @@ packages:
     dev: true
 
   /concat-map/0.0.1:
-    resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
+    resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
     dev: true
 
   /confusing-browser-globals/1.0.11:
