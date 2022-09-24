@@ -63,27 +63,36 @@ export class NavNode implements Disposable {
 		private readonly hooks: NavHooks,
 	) {
 		this.state = parent?.state ?? new NavState();
+
+		if (import.meta.env.DEV) {
+			this.getPath = () => {
+				let path = this.parent
+					? `${
+							this.parent.getPath?.() ?? 'unknown'
+					  }[${this.parent.children.indexOf(this)}]`
+					: 'root';
+
+				if (this.hooks.type) {
+					path += `(${this.hooks.type})`;
+				}
+
+				if (this.disposed && !this.parent?.disposed) {
+					path += '.dispose()';
+				}
+
+				if (this.selected) {
+					path += '.select()';
+				}
+
+				return path;
+			};
+		}
 	}
 
-	getPath(): string {
-		let path = this.parent
-			? `${this.parent.getPath()}[${this.parent.children.indexOf(this)}]`
-			: 'root';
-
-		if (this.hooks.type) {
-			path += `(${this.hooks.type})`;
-		}
-
-		if (this.disposed && !this.parent?.disposed) {
-			path += '.dispose()';
-		}
-
-		if (this.selected) {
-			path += '.select()';
-		}
-
-		return path;
-	}
+	/**
+	 * Used for debugging. Only available in development mode.
+	 */
+	getPath?(): string;
 
 	newChildToken() {
 		assert(!this.disposed, 'node is disposed');
