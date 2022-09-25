@@ -136,7 +136,7 @@ export class Editor extends Component<EditorProps> {
 		addEventListener('resize', this.onDidResize);
 
 		if (import.meta.env.DEV) {
-			console.log('Monaco editor started.');
+			console.debug('Monaco editor started.');
 		}
 	}
 
@@ -147,7 +147,7 @@ export class Editor extends Component<EditorProps> {
 		this.editor = undefined;
 
 		if (import.meta.env.DEV) {
-			console.log('monaco editor stopped.');
+			console.debug('monaco editor stopped.');
 		}
 	}
 
