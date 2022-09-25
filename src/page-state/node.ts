@@ -12,8 +12,8 @@ export type PageStateEvents = {
 export type PageStateHooks = PageStateEvents;
 
 export class PageStateNode implements Disposable {
+	protected connected = false;
 	private disposed = false;
-	private connected = false;
 	private _child: PageStateNode | undefined;
 
 	get child() {
@@ -59,7 +59,7 @@ export class PageStateNode implements Disposable {
 
 	constructor(
 		private readonly parent: PageStateNode | undefined,
-		private readonly hooks: PageStateHooks,
+		protected readonly hooks: PageStateHooks,
 		readonly root: HTMLElement = parent?.root ?? document.body,
 	) {
 		if (!parent || parent.connected) {
