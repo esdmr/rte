@@ -55,7 +55,7 @@ const gamepadLoop = () => {
 		.filter((gamepad): gamepad is Gamepad => gamepad !== null)
 		.filter(({connected, mapping}) => connected && mapping === 'standard');
 
-	if (newGamepads.length > 0) {
+	if (newGamepads.length > 0 && document.visibilityState === 'visible') {
 		queueGamepadLoop();
 	}
 
@@ -78,6 +78,16 @@ export const queueGamepadLoop = () => {
 
 	gamepadLoopId = requestAnimationFrame(gamepadLoop);
 };
+
+document.addEventListener('visibilitychange', () => {
+	if (import.meta.env.DEV) {
+		console.debug('Visibility changed:', document.visibilityState);
+	}
+
+	if (document.visibilityState === 'visible') {
+		queueGamepadLoop();
+	}
+});
 
 export const standardButtons = {
 	a: 0,
