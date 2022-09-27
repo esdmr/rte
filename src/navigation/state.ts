@@ -1,7 +1,9 @@
+import type {MutablePageStateNode} from '../page-state/mutable-node.js';
 import type {NavNode, NavSelectOptions} from './node.js';
 
 export class NavState {
 	selected: NavNode | undefined;
+	selectedNodePageState: MutablePageStateNode | undefined;
 	readonly elementToNode = new Map<HTMLElement, NavNode>();
 
 	deselect() {

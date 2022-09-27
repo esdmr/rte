@@ -1,6 +1,7 @@
 import type {FunctionComponent} from 'preact';
 import {useEffect, useMemo} from 'preact/hooks';
 import {pageStateContext, usePageState} from '../page-state/global.js';
+import {MutablePageStateNode} from '../page-state/mutable-node.js';
 import {navPageState as navPageStateHooks} from '../page-state/navigation.js';
 import {PageStateNode} from '../page-state/node.js';
 import {wrapNavChildren} from './child-token.js';
@@ -20,6 +21,10 @@ export const NavRoot: FunctionComponent<UnaryProps> = (props) => {
 		() => new PageStateNode(parentPageState, navPageStateHooks(rootNode)),
 		[parentPageState],
 	);
+	const selectedNodePageState = useMemo(
+		() => new MutablePageStateNode(pageState),
+		[pageState],
+	);
 
 	useEffect(() => {
 		parentPageState.child = pageState;
@@ -27,7 +32,17 @@ export const NavRoot: FunctionComponent<UnaryProps> = (props) => {
 		return () => {
 			pageState.dispose();
 		};
-	}, [parentPageState]);
+	}, [pageState]);
+
+	useEffect(() => {
+		pageState.child = selectedNodePageState;
+		rootNode.state.selectedNodePageState = selectedNodePageState;
+
+		return () => {
+			selectedNodePageState.dispose();
+			rootNode.state.selectedNodePageState = undefined;
+		};
+	}, [selectedNodePageState]);
 
 	useEffect(
 		() => () => {
@@ -42,7 +57,7 @@ export const NavRoot: FunctionComponent<UnaryProps> = (props) => {
 	}
 
 	return (
-		<pageStateContext.Provider value={pageState}>
+		<pageStateContext.Provider value={selectedNodePageState}>
 			{wrapNavChildren(rootNode, props.children)}
 		</pageStateContext.Provider>
 	);

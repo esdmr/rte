@@ -1,12 +1,18 @@
 import {type FunctionComponent, type VNode, cloneElement} from 'preact';
-import {useMemo} from 'preact/hooks';
+import {useEffect, useMemo} from 'preact/hooks';
 import assert from '../assert.js';
 import {makeFocusVisible, removeFocusVisible} from '../focus-visible.js';
+import type {PageStateHooks} from '../page-state/node.js';
 import {navChildToken, useChildToken} from './child-token.js';
 import {type NavHooks, NavNode} from './node.js';
 import {isVnodeFocusable, setRef} from './utils.js';
 
+const pageStates = new WeakMap<NavNode, PageStateHooks>();
+
 const navItemHooks: NavHooks = {
+	onDispose() {
+		pageStates.delete(this);
+	},
 	onSelect(options) {
 		const {ref} = this;
 		assert(ref, 'no ref to select');
@@ -18,6 +24,31 @@ const navItemHooks: NavHooks = {
 		} else {
 			removeFocusVisible();
 		}
+
+		const hooks = pageStates.get(this);
+
+		if (!hooks) {
+			return;
+		}
+
+		assert(
+			this.state.selectedNodePageState,
+			'selectedNodePageState is not set',
+		);
+
+		this.state.selectedNodePageState.setHooks(hooks);
+	},
+	onDeselect() {
+		if (!pageStates.has(this)) {
+			return;
+		}
+
+		assert(
+			this.state.selectedNodePageState,
+			'selectedNodePageState is not set',
+		);
+
+		this.state.selectedNodePageState.setHooks();
 	},
 	getLeaf() {
 		return this;
@@ -27,20 +58,34 @@ const navItemHooks: NavHooks = {
 	},
 };
 
-export const NavItem: FunctionComponent<{children: VNode}> = ({children}) => {
+export const NavItem: FunctionComponent<{
+	onSelectPageStateHooks?: PageStateHooks | undefined;
+	children: VNode;
+}> = (props) => {
 	const childToken = useChildToken();
 	const node = useMemo(
 		() => NavNode.for(childToken, navItemHooks),
 		[childToken],
 	);
 
-	assert(isVnodeFocusable(children), 'dom node is not focusable');
+	useEffect(() => {
+		if (!props.onSelectPageStateHooks) {
+			return;
+		}
 
-	const oldRef = children.ref;
+		pageStates.set(node, props.onSelectPageStateHooks);
+
+		return () => {
+			pageStates.delete(node);
+		};
+	}, [node, props.onSelectPageStateHooks]);
+
+	assert(isVnodeFocusable(props.children), 'dom node is not focusable');
+	const oldRef = props.children.ref;
 
 	return (
 		<navChildToken.Provider value={undefined}>
-			{cloneElement(children, {
+			{cloneElement(props.children, {
 				ref(value: unknown) {
 					if (value instanceof HTMLElement) {
 						node.ref = value;
