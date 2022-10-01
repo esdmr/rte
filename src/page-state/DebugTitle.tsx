@@ -3,6 +3,7 @@ import {useCallback, useState} from 'preact/hooks';
 import {Input} from '../navigation/wrappers.js';
 import {Title} from '../Title.js';
 import {DebugPageNode} from './DebugPageNode.js';
+import * as css from './DebugTitle.module.css.js';
 
 export const DebugTitle: FunctionComponent = () => {
 	const [titleCount, update] = useState(0);
@@ -35,6 +36,7 @@ export const DebugTitle: FunctionComponent = () => {
 				Nest level (Currently: {titleCount}):
 				<Input
 					type="range"
+					class={css.range}
 					onChange={updateTitleCount}
 					min={0}
 					max={10}
