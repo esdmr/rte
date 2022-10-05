@@ -5,7 +5,7 @@ import {NavColumn} from './navigation/NavColumn.js';
 
 export const HomePage: FunctionComponent = () => (
 	<>
-		<header />
+		<header aria-hidden />
 		<main>
 			<AllowScroll />
 			<h1>Gamepad Editor</h1>
