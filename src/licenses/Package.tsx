@@ -1,4 +1,4 @@
-import type {ComponentChild, FunctionComponent} from 'preact';
+import type {FunctionComponent} from 'preact';
 import {Icon} from '@mdi/react';
 import {mdiChevronRight} from '@mdi/js';
 import type * as Types from '../license-types.js';
@@ -13,6 +13,20 @@ const getLicenseFileUrl = (route: string, pkgId: string) => {
 		.replace(/%2F/g, '/');
 
 	return `${route}${encodedPkgId}`;
+};
+
+const listFormat = new Intl.ListFormat('en', {style: 'long'});
+
+const getAttributions = (authors: string[]) => {
+	if (authors.length === 0) {
+		return ['unknown authors'];
+	}
+
+	return listFormat
+		.formatToParts(authors)
+		.map((item) =>
+			item.type === 'element' ? <i>{item.value}</i> : item.value,
+		);
 };
 
 export const Package: FunctionComponent<{
@@ -46,7 +60,7 @@ export const Package: FunctionComponent<{
 				<h2 class={css.heading}>
 					<code>{pkg.name}</code> <code class={css.version}>{pkg.version}</code>
 				</h2>
-				<p>{[...getAttributions(pkg.authors)]}</p>
+				<p>By {getAttributions(pkg.authors)}.</p>
 				{license}
 			</div>
 			{licenseFile && (
@@ -62,46 +76,3 @@ export const Package: FunctionComponent<{
 		</div>
 	);
 };
-
-function* getAttributions(authors: string[]): Generator<ComponentChild> {
-	yield 'By ';
-
-	if (authors.length === 0) {
-		yield 'unknown authors.';
-		return;
-	}
-
-	if (authors.length <= 2) {
-		yield* iterate(authors, ' and ');
-		yield '.';
-		return;
-	}
-
-	yield* iterate(authors.slice(0, -1), ', ');
-	yield ', and ';
-	yield format(authors.at(-1)!);
-	yield '.';
-
-	/** @param {string} item */
-	function format(item: string) {
-		return <i>{item}</i>;
-	}
-
-	/**
-	 * @param {Iterable<string>} array
-	 * @param {string} separator
-	 */
-	function* iterate(array: Iterable<string>, separator: string) {
-		let isFirst = true;
-
-		for (const item of array) {
-			if (isFirst) {
-				isFirst = false;
-			} else {
-				yield separator;
-			}
-
-			yield format(item);
-		}
-	}
-}
