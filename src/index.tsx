@@ -6,6 +6,10 @@ import {App} from './App.js';
 import {NavRoot} from './navigation/NavRoot.js';
 import './index.css';
 import {useHashLocation} from './wouter-hash.js';
+import {InputGuide} from './InputGuide.js';
+
+const app = document.createElement('div');
+document.body.append(app);
 
 render(
 	<NavRoot>
@@ -13,5 +17,9 @@ render(
 			<App />
 		</Router>
 	</NavRoot>,
-	document.body,
+	app,
 );
+
+const inputGuide = document.createElement('div');
+document.body.append(inputGuide);
+render(<InputGuide />, inputGuide);
