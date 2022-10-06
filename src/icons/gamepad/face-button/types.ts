@@ -5,9 +5,9 @@ export type Direction = 'down' | 'right' | 'left' | 'up';
 export type FaceButtonStyle = Record<
 	Direction,
 	{
-		Icon: FunctionComponent;
-		name: string;
+		readonly Icon: FunctionComponent;
+		readonly name: string;
 	}
 > & {
-	name: string;
+	readonly name: string;
 };
