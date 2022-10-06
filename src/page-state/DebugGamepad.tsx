@@ -4,9 +4,9 @@ import {gamepads} from './GamepadToSignal.js';
 
 export const DebugGamepad: FunctionComponent = () => (
 	<>
-		{gamepads.value.length === 0 && <div key="empty">Empty list.</div>}
+		{gamepads.value.length === 0 && <p key="empty">Empty list.</p>}
 		{gamepads.value.map((gamepad) => (
-			<div key={gamepad.index}>
+			<article key={gamepad.index}>
 				<h3>
 					Gamepad #{gamepad.index}: {gamepad.id}
 				</h3>
@@ -29,7 +29,7 @@ export const DebugGamepad: FunctionComponent = () => (
 				</table>
 
 				<p>Axes ({gamepad.axes.length}):</p>
-				<table>
+				<table aria-live="polite">
 					{gamepad.axes.map((axis, index) => (
 						<tr key={index}>
 							<td>{index}</td>
@@ -38,7 +38,7 @@ export const DebugGamepad: FunctionComponent = () => (
 						</tr>
 					))}
 				</table>
-			</div>
+			</article>
 		))}
 	</>
 );

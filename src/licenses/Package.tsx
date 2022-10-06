@@ -63,16 +63,18 @@ export const Package: FunctionComponent<{
 	}
 
 	return (
-		<div class={classes(css.pkg, licenseFile ? css.hasLicenseFile : undefined)}>
-			<div class={css.content}>
-				<h2 class={css.heading}>
+		<article
+			class={classes(css.pkg, licenseFile ? css.hasLicenseFile : undefined)}
+		>
+			<div class={css.content} role="presentation">
+				<h3 class={css.heading}>
 					<code>{pkg.name}</code> <code class={css.version}>{pkg.version}</code>
-				</h2>
+				</h3>
 				<p>By {getAttributions(pkg.authors)}.</p>
 				{license}
 			</div>
 			{licenseFile && (
-				<div class={css.icon}>
+				<div class={css.icon} role="presentation">
 					<CircularButton
 						href={getLicenseFileUrl(route, pkgId)}
 						title="See license file"
@@ -81,6 +83,6 @@ export const Package: FunctionComponent<{
 					</CircularButton>
 				</div>
 			)}
-		</div>
+		</article>
 	);
 };
