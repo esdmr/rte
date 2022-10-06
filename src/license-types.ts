@@ -1,24 +1,35 @@
 export type Package = {
-	name: string;
-	version: string;
-	dev?: boolean | undefined;
-	authors: string[];
-	license: License;
+	readonly name: string;
+	readonly version: string;
+	readonly dev?: boolean | undefined;
+	readonly authors: readonly string[];
+	readonly license: License;
 };
 
-export type License = SpdxLicense | CustomLicense | LegacyLicense[] | undefined;
+export type License =
+	| SpdxLicense
+	| CustomLicense
+	| LegacyLicense
+	| UnknownLicense;
 
 export type SpdxLicense = {
-	type: 'spdx';
-	id: string;
-	hasFile: boolean;
+	readonly type: 'spdx';
+	readonly id: string;
+	readonly hasFile: boolean;
 };
 
 export type CustomLicense = {
-	type: 'custom';
+	readonly type: 'custom';
 };
 
 export type LegacyLicense = {
-	type: string;
-	url: string;
+	readonly type: 'legacy';
+	readonly entries: ReadonlyArray<{
+		readonly type: string;
+		readonly url: string;
+	}>;
+};
+
+export type UnknownLicense = {
+	readonly type: 'unknown';
 };

@@ -7,11 +7,11 @@ import {NavState} from './state.js';
 export type NavDirection = 'next' | 'up' | 'down' | 'left' | 'right';
 
 export type NavSelectOptions = {
-	focusVisible?: boolean;
+	readonly focusVisible?: boolean;
 };
 
 export type NavHooks = {
-	type?: string;
+	readonly type?: string;
 	onNewChild?(this: NavNode): NavChildToken | void;
 	onDispose?(this: NavNode): void;
 	onSelect?(this: NavNode, options?: NavSelectOptions): void;

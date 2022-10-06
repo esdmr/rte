@@ -5,22 +5,22 @@ import * as css from './InputGuide.module.css.js';
 export type InputMode = 'keyboard' | 'ps' | 'xbox' | 'switch';
 
 export type InputGuideIcon = {
-	Icon: FunctionComponent;
-	mode: InputMode;
+	readonly Icon: FunctionComponent;
+	readonly mode: InputMode;
 };
 
 export type InputGuideEntry = {
-	text: string;
-	icons: InputGuideIcon[];
+	readonly text: string;
+	readonly icons: readonly InputGuideIcon[];
 };
 
-export const activeMode = signal<InputMode>('keyboard');
-export const guideEntries = signal<InputGuideEntry[]>([]);
+export const activeInputMode = signal<InputMode>('keyboard');
+export const inputGuideEntries = signal<readonly InputGuideEntry[]>([]);
 
 export const InputGuide: FunctionComponent = () => (
 	<ul class={css.guide} aria-label="Input guide" aria-live="polite">
-		{guideEntries.value.map(({text, icons}) => {
-			const icon = icons.find((icon) => icon.mode === activeMode.value);
+		{inputGuideEntries.value.map(({text, icons}) => {
+			const icon = icons.find((icon) => icon.mode === activeInputMode.value);
 
 			return icon ? (
 				<li class={css.entry} key={text}>

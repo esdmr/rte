@@ -18,7 +18,7 @@ import find from 'find';
 import {defaultImport} from 'default-import';
 import {definePlugin} from './plugin-helper.js';
 
-/** @type {string[]} */
+/** @type {readonly string[]} */
 const files = await new Promise((resolve) => {
 	find.file(/\.module\.css$/, 'src', resolve);
 });

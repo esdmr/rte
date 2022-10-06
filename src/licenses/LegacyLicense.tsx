@@ -3,7 +3,7 @@ import type * as Types from '../license-types.js';
 import {A} from '../navigation/wrappers.js';
 
 export const LegacyLicense: FunctionComponent<{
-	licenses: Types.LegacyLicense[];
+	license: Types.LegacyLicense;
 }> = (props) => (
 	<>
 		<p>
@@ -11,7 +11,7 @@ export const LegacyLicense: FunctionComponent<{
 			field.
 		</p>
 		<ul>
-			{props.licenses.map((license) => (
+			{props.license.entries.map((license) => (
 				<li>
 					<A href={license.url}>
 						{license.type ? <code>{license.type}</code> : '[unknown license]'}.

@@ -1,16 +1,16 @@
 import {rootState} from './global.js';
 
 export type GamepadButtonClone = {
-	value: number;
-	pressed: boolean;
-	touched: boolean;
+	readonly value: number;
+	readonly pressed: boolean;
+	readonly touched: boolean;
 };
 
 export type GamepadClone = {
-	index: number;
-	id: string;
-	buttons: GamepadButtonClone[];
-	axes: number[];
+	readonly index: number;
+	readonly id: string;
+	readonly buttons: readonly GamepadButtonClone[];
+	readonly axes: readonly number[];
 };
 
 const buttonsComparisonPrecision = 2;
@@ -32,7 +32,7 @@ export const compareGamepads = (from: GamepadClone, to: Gamepad) =>
 			to.axes[index]!.toFixed(axesComparisonPrecision),
 	);
 
-export const cloneGamepads = (gamepads: Gamepad[]) =>
+export const cloneGamepads = (gamepads: readonly Gamepad[]) =>
 	gamepads.map<GamepadClone>((gamepad) => ({
 		index: gamepad.index,
 		id: gamepad.id,

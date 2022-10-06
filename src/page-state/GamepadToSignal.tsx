@@ -5,7 +5,7 @@ import type {GamepadClone} from './gamepad.js';
 import {pageStateContext, usePageState} from './global.js';
 import {PageStateNode} from './node.js';
 
-export const gamepads = signal<GamepadClone[]>([]);
+export const gamepads = signal<readonly GamepadClone[]>([]);
 
 export const GamepadToSignal: FunctionComponent = (props) => {
 	const parentPageState = usePageState();

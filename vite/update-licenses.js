@@ -205,7 +205,7 @@ function getIntegrity(content) {
  */
 function getLicenseInfo(pkgLicense, pkgLicenses, pkgDir) {
 	if (typeof pkgLicense !== 'string') {
-		const licenses = /** @type {LegacyLicense[]} */ (
+		const licenses = /** @type {LegacyLicense['entries']} */ (
 			[pkgLicense, pkgLicenses]
 				.flat()
 				.filter(
@@ -220,12 +220,15 @@ function getLicenseInfo(pkgLicense, pkgLicenses, pkgDir) {
 		if (licenses.length === 0) {
 			const licenseFile = tryFindLicenseFile(pkgDir);
 			return {
-				license: licenseFile ? {type: 'custom'} : undefined,
+				license: {type: licenseFile ? 'custom' : 'unknown'},
 				licensePath: licenseFile,
 			};
 		}
 
-		return {license: licenses, licensePath: undefined};
+		return {
+			license: {type: 'legacy', entries: licenses},
+			licensePath: undefined,
+		};
 	}
 
 	const match = /^SEE LICENSE IN (.+)$/.exec(pkgLicense);

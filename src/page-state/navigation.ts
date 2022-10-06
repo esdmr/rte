@@ -7,7 +7,7 @@ const gamepadRepeatDelay = 500;
 const gamepadRepeatInterval = 30;
 
 type GamepadState = {
-	heldButton: 'ArrowUp' | 'ArrowDown' | 'ArrowLeft' | 'ArrowRight';
+	readonly heldButton: 'ArrowUp' | 'ArrowDown' | 'ArrowLeft' | 'ArrowRight';
 	timeoutId: ReturnType<typeof setTimeout> | undefined;
 	intervalId: ReturnType<typeof setInterval> | undefined;
 };

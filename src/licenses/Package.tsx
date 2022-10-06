@@ -17,7 +17,7 @@ const getLicenseFileUrl = (route: string, pkgId: string) => {
 
 const listFormat = new Intl.ListFormat('en', {style: 'long'});
 
-const getAttributions = (authors: string[]) => {
+const getAttributions = (authors: readonly string[]) => {
 	if (authors.length === 0) {
 		return ['unknown authors'];
 	}
@@ -37,21 +37,29 @@ export const Package: FunctionComponent<{
 	let licenseFile = false;
 	let license;
 
-	if (Array.isArray(pkg.license)) {
-		license = <LegacyLicense licenses={pkg.license} />;
-	} else if (pkg.license === undefined) {
-		license = <p>License not found!</p>;
-	} else if (pkg.license.type === 'custom') {
-		licenseFile = true;
-		license = <p>Custom license.</p>;
-	} else {
-		licenseFile = pkg.license.hasFile;
-		license = (
-			<p>
-				<code>{pkg.license.id}</code>.
-				{pkg.license.hasFile || ' License file not found!'}
-			</p>
-		);
+	switch (pkg.license.type) {
+		case 'spdx':
+			licenseFile = pkg.license.hasFile;
+			license = (
+				<p>
+					<code>{pkg.license.id}</code>.
+					{pkg.license.hasFile || ' License file not found!'}
+				</p>
+			);
+
+			break;
+
+		case 'custom':
+			licenseFile = true;
+			license = <p>Custom license.</p>;
+			break;
+
+		case 'legacy':
+			license = <LegacyLicense license={pkg.license} />;
+			break;
+
+		default:
+			license = <p>License not found!</p>;
 	}
 
 	return (

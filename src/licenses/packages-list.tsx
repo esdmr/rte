@@ -20,7 +20,7 @@ const createComponent = (file: string, route: string) =>
 				`got status code ${response.status}: ${response.statusText}`,
 			);
 
-			const json = (await response.json()) as Types.Package[];
+			const json = (await response.json()) as readonly Types.Package[];
 
 			const LoadedPackagesList = () => (
 				<NavColumn>

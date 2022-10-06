@@ -3,10 +3,10 @@ import {useEffect} from 'preact/hooks';
 import {usePageState} from './page-state/global.js';
 
 export const Title: FunctionComponent<{
-	children: string | string[];
+	children: string | readonly string[];
 	h1?: boolean;
 }> = (props) => {
-	const title = (toChildArray(props.children) as string[]).join('');
+	const title = toChildArray(props.children).join('');
 	const pageState = usePageState();
 
 	useEffect(() => {

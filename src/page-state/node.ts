@@ -6,7 +6,7 @@ import {queueUpdate} from './update.js';
 export type PageStateEvents = {
 	onKeyDown?(this: PageStateNode, event: KeyboardEvent): boolean;
 	onFocusIn?(this: PageStateNode, event: FocusEvent): boolean;
-	onGamepad?(this: PageStateNode, gamepads: GamepadClone[]): boolean;
+	onGamepad?(this: PageStateNode, gamepads: readonly GamepadClone[]): boolean;
 };
 
 export type PageStateHooks = PageStateEvents;
@@ -84,7 +84,7 @@ export class PageStateNode implements Disposable {
 		this.connected = false;
 	}
 
-	listTitles(): string[] {
+	listTitles(): readonly string[] {
 		return [...(this._child?.listTitles() ?? []), this.title];
 	}
 
