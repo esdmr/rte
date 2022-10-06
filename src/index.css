@@ -93,3 +93,7 @@ pre {
 	outline-offset: 0.1em;
 	z-index: 9990;
 }
+
+.app {
+	display: contents;
+}

@@ -1,9 +1,12 @@
-.guide {
+.guide-container {
 	--guide--padding: 0.5em;
 	position: fixed;
 	pointer-events: none;
 	bottom: calc(var(--body-padding-vertical) - var(--guide--padding));
 	right: calc(var(--body-padding-horizontal) - var(--guide--padding));
+}
+
+.guide {
 	background: rgba(var(--background-rgb) / 0.5);
 	backdrop-filter: blur(2px);
 	padding: var(--guide--padding);
