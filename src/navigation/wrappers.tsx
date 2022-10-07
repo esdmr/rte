@@ -13,15 +13,10 @@ function createButtonLike<T extends 'a' | 'button'>(name: T) {
 		const ref = useRef<ButtonLike>(null);
 		const vnode = <Name {...props} children={props.children} ref={ref} />;
 		const isFocusable = isVnodeFocusable(vnode);
-		const isInteractive = Boolean(props.href) || Boolean(props.onSelect);
 		const pageStateHooks = useMemo(() => buttonPageState(ref), []);
 
 		return isFocusable ? (
-			<NavItem
-				onSelectPageStateHooks={isInteractive ? pageStateHooks : undefined}
-			>
-				{vnode}
-			</NavItem>
+			<NavItem onSelectPageStateHooks={pageStateHooks}>{vnode}</NavItem>
 		) : (
 			vnode
 		);
