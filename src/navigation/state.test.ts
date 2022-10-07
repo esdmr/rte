@@ -1,6 +1,5 @@
 import {describe, expect, it, vi} from 'vitest';
-import type {NavDirection, NavSelectOptions} from './node.js';
-import {NavNode} from './node.js';
+import {type NavDirection, type NavSelectOptions, NavNode} from './node.js';
 import {NavState} from './state.js';
 
 describe('NavState', () => {
