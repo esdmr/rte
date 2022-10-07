@@ -18,7 +18,12 @@ export const activeInputMode = signal<InputMode>('keyboard');
 export const inputGuideEntries = signal<readonly InputGuideEntry[]>([]);
 
 export const InputGuide: FunctionComponent = () => (
-	<ul class={css.guide} aria-label="Input guide" aria-live="polite">
+	<ul
+		class={css.guide}
+		aria-label="Input guide"
+		aria-live="polite"
+		hidden={inputGuideEntries.value.length === 0}
+	>
 		{inputGuideEntries.value.map(({text, icons}) => {
 			const icon = icons.find((icon) => icon.mode === activeInputMode.value);
 
