@@ -1,4 +1,5 @@
 import {rootState} from './global.js';
+import {activeInputMode} from './input-mode.js';
 
 export type GamepadButtonClone = {
 	readonly value: number;
@@ -53,6 +54,7 @@ const gamepadLoop = () => {
 	const newGamepads = navigator
 		.getGamepads()
 		.filter((gamepad): gamepad is Gamepad => gamepad !== null)
+		// TODO: Implement non-standard gamepad mapping.
 		.filter(({connected, mapping}) => connected && mapping === 'standard');
 
 	if (newGamepads.length > 0 && document.visibilityState === 'visible') {
@@ -66,6 +68,8 @@ const gamepadLoop = () => {
 		);
 
 	if (shouldUpdate) {
+		// TODO: Implement gamepad type detection.
+		activeInputMode.value = 'ps';
 		oldGamepads = cloneGamepads(newGamepads);
 		rootState.dispatchEvent('onGamepad', oldGamepads);
 	}

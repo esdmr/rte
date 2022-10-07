@@ -1,3 +1,4 @@
+import {inputGuideEntries, type InputGuideEntry} from '../InputGuide.js';
 import {
 	onFocusIn,
 	onGamepadConnected,
@@ -42,6 +43,10 @@ export const queueUpdate = () => {
 
 		const titles = [...rootState.listTitles(), originalTitle];
 		document.title = titles.filter(Boolean).join(' - ');
+
+		const newEntries: InputGuideEntry[] = [];
+		rootState.applyInputGuideEntries(newEntries);
+		inputGuideEntries.value = newEntries;
 
 		if (import.meta.env.DEV) {
 			console.debug('Page state updated.');

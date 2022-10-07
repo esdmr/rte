@@ -1,5 +1,6 @@
 import assert from '../assert.js';
 import type {Disposable} from '../disposable.js';
+import type {InputGuideEntry} from '../InputGuide.js';
 import type {GamepadClone} from './gamepad.js';
 import {queueUpdate} from './update.js';
 
@@ -9,7 +10,12 @@ export type PageStateEvents = {
 	onGamepad?(this: PageStateNode, gamepads: readonly GamepadClone[]): boolean;
 };
 
-export type PageStateHooks = PageStateEvents;
+export type PageStateHooks = PageStateEvents & {
+	applyInputGuideEntries?(
+		this: PageStateNode,
+		entries: InputGuideEntry[],
+	): void;
+};
 
 export class PageStateNode implements Disposable {
 	protected connected = false;
@@ -86,6 +92,11 @@ export class PageStateNode implements Disposable {
 
 	listTitles(): readonly string[] {
 		return [...(this._child?.listTitles() ?? []), this.title];
+	}
+
+	applyInputGuideEntries(entries: InputGuideEntry[]) {
+		this.hooks.applyInputGuideEntries?.call(this, entries);
+		this.child?.applyInputGuideEntries(entries);
 	}
 
 	hasEvent(name: keyof PageStateEvents): boolean {

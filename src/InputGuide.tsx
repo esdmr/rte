@@ -1,8 +1,7 @@
 import {signal} from '@preact/signals';
 import type {FunctionComponent} from 'preact';
 import * as css from './InputGuide.module.css.js';
-
-export type InputMode = 'keyboard' | 'ps' | 'xbox' | 'switch';
+import {activeInputMode, type InputMode} from './page-state/input-mode.js';
 
 export type InputGuideIcon = {
 	readonly Icon: FunctionComponent;
@@ -14,7 +13,6 @@ export type InputGuideEntry = {
 	readonly icons: readonly InputGuideIcon[];
 };
 
-export const activeInputMode = signal<InputMode>('keyboard');
 export const inputGuideEntries = signal<readonly InputGuideEntry[]>([]);
 
 export const InputGuide: FunctionComponent = () => (

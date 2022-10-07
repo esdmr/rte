@@ -1,4 +1,5 @@
 import type {RefObject} from 'preact';
+import * as gfbi from '../icons/gamepad/face-button/index.js';
 import {StandardButtons} from './gamepad.js';
 import type {PageStateHooks, PageStateNode} from './node.js';
 
@@ -26,5 +27,30 @@ export const buttonPageState = (
 		}
 
 		return false;
+	},
+	applyInputGuideEntries(entries) {
+		entries.push({
+			text: 'Select',
+			icons: [
+				{
+					Icon: () => (
+						<gfbi.GamepadFaceButtonIcon style={gfbi.symbols} which="down" />
+					),
+					mode: 'ps',
+				},
+				{
+					Icon: () => (
+						<gfbi.GamepadFaceButtonIcon style={gfbi.lettersAb} which="down" />
+					),
+					mode: 'xbox',
+				},
+				{
+					Icon: () => (
+						<gfbi.GamepadFaceButtonIcon style={gfbi.lettersBa} which="right" />
+					),
+					mode: 'switch',
+				},
+			],
+		});
 	},
 });
