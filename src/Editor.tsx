@@ -133,7 +133,9 @@ export class Editor extends Component<EditorProps> {
 			lightTheme: this.isLightTheme(),
 		});
 
-		addEventListener('resize', this.onDidResize);
+		addEventListener('resize', this.onDidResize, {
+			passive: true,
+		});
 
 		if (import.meta.env.DEV) {
 			console.debug('Monaco editor started.');
@@ -166,7 +168,9 @@ export class Editor extends Component<EditorProps> {
 				return false;
 
 			default:
-				this.themeQuery.addEventListener('change', this.onDidThemeQueryChange);
+				this.themeQuery.addEventListener('change', this.onDidThemeQueryChange, {
+					passive: true,
+				});
 				return this.themeQuery.matches;
 		}
 	}
