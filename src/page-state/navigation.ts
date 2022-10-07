@@ -1,6 +1,6 @@
 import {removeFocusVisible} from '../focus-visible.js';
 import type {NavNode} from '../navigation/node.js';
-import {standardButtons} from './gamepad.js';
+import {StandardButtons} from './gamepad.js';
 import type {PageStateHooks, PageStateNode} from './node.js';
 
 const gamepadRepeatDelay = 500;
@@ -97,13 +97,13 @@ export const navPageState = (root: NavNode): PageStateHooks => ({
 		const heldButton =
 			gamepad === undefined
 				? undefined
-				: gamepad.buttons[standardButtons.up]!.pressed
+				: gamepad.buttons[StandardButtons.up]!.pressed
 				? 'ArrowUp'
-				: gamepad.buttons[standardButtons.down]!.pressed
+				: gamepad.buttons[StandardButtons.down]!.pressed
 				? 'ArrowDown'
-				: gamepad.buttons[standardButtons.left]!.pressed
+				: gamepad.buttons[StandardButtons.left]!.pressed
 				? 'ArrowLeft'
-				: gamepad.buttons[standardButtons.right]!.pressed
+				: gamepad.buttons[StandardButtons.right]!.pressed
 				? 'ArrowRight'
 				: undefined;
 

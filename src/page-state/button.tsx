@@ -1,5 +1,5 @@
 import type {RefObject} from 'preact';
-import {standardButtons} from './gamepad.js';
+import {StandardButtons} from './gamepad.js';
 import type {PageStateHooks, PageStateNode} from './node.js';
 
 const gamepadButtonHeld = new WeakSet<PageStateNode>();
@@ -13,7 +13,7 @@ export const buttonPageState = (
 	},
 	onGamepad([gamepad]) {
 		const oldState = gamepadButtonHeld.has(this);
-		const newState = gamepad?.buttons[standardButtons.a]!.pressed ?? false;
+		const newState = gamepad?.buttons[StandardButtons.a]!.pressed ?? false;
 
 		if (newState && !oldState) {
 			ref.current?.click();

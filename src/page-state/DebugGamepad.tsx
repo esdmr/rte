@@ -1,5 +1,5 @@
 import type {FunctionComponent} from 'preact';
-import {standardAxesMap, standardButtonsMap} from './gamepad.js';
+import {StandardAxes, StandardButtons} from './gamepad.js';
 import {gamepads} from './GamepadToSignal.js';
 
 export const DebugGamepad: FunctionComponent = () => (
@@ -20,7 +20,7 @@ export const DebugGamepad: FunctionComponent = () => (
 						return (
 							<tr key={index}>
 								<td>{index}</td>
-								<td>{standardButtonsMap[index]}</td>
+								<td>{StandardButtons[index]}</td>
 								<td>{button.value}</td>
 								<td>{state}</td>
 							</tr>
@@ -33,7 +33,7 @@ export const DebugGamepad: FunctionComponent = () => (
 					{gamepad.axes.map((axis, index) => (
 						<tr key={index}>
 							<td>{index}</td>
-							<td>{standardAxesMap[index]}</td>
+							<td>{StandardAxes[index]}</td>
 							<td>{axis}</td>
 						</tr>
 					))}
