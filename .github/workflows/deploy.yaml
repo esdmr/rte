@@ -1,17 +1,25 @@
-name: CI
+name: Deployment
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
+  workflow_dispatch:
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
 
 jobs:
-  test:
-    name: Test
+  deploy:
+    name: Deploy
     runs-on: ubuntu-latest
+    environment: github-pages
 
     steps:
       - name: Checkout
@@ -45,11 +53,17 @@ jobs:
       - name: Build
         run: pnpm run build
 
-      - name: Type check
-        run: pnpm run check
+      - name: Remove generated declaration files
+        run: rm build/types
 
-      - name: Lint
-        run: pnpm run lint
+      - name: Setup Pages
+        uses: actions/configure-pages@v2
 
-      - name: Test
-        run: pnpm test
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: build
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
