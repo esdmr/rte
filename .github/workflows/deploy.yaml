@@ -54,7 +54,7 @@ jobs:
         run: pnpm run build
 
       - name: Remove generated declaration files
-        run: rm build/types
+        run: rm -r build/types
 
       - name: Setup Pages
         uses: actions/configure-pages@v2
