@@ -6,6 +6,9 @@ describe('404', () => {
 	const oldHref = currentUrl.href;
 
 	vi.stubGlobal('location', {
+		get hostname() {
+			return currentUrl.hostname;
+		},
 		get href() {
 			return currentUrl.href;
 		},
@@ -27,5 +30,21 @@ describe('404', () => {
 		location.replace('/some/path?a=b#/cde/d');
 		main();
 		expect(location.href).toBe(new URL('/#/some/path', oldHref).href);
+	});
+
+	it('redirects github pages to hash', () => {
+		location.replace('https://esdmr.github.io/example/some/path');
+		main();
+		expect(location.href).toBe(
+			new URL('https://esdmr.github.io/example/#/some/path').href,
+		);
+	});
+
+	it('disregards hash and query string in github pages', () => {
+		location.replace('https://esdmr.github.io/example/some/path?a=b#/cde/d');
+		main();
+		expect(location.href).toBe(
+			new URL('https://esdmr.github.io/example/#/some/path').href,
+		);
 	});
 });
