@@ -52,7 +52,7 @@ specifiers:
   monaco-editor: 0.34.0
   parse-author: 2.0.0
   preact: 10.11.0
-  react: npm:@preact/compat@17.1.1
+  react: npm:@preact/compat@17.1.2
   react-dom: npm:@preact/compat@17.1.1
   sirv: 2.0.2
   typed-css-modules: 0.7.2
@@ -70,7 +70,7 @@ dependencies:
   history: 5.3.0
   monaco-editor: 0.34.0
   preact: 10.11.0
-  react: /@preact/compat/17.1.1_y4k23qwlfsmxttlbg2n73wq3bq_preact@10.11.0
+  react: /@preact/compat/17.1.2_preact@10.11.0
   react-dom: /@preact/compat/17.1.1_y4k23qwlfsmxttlbg2n73wq3bq_preact@10.11.0
   wouter-preact: 2.8.0-alpha.2_ignvtktwp77in5csvysi247wve_preact@10.11.0
 
@@ -532,6 +532,14 @@ packages:
       preact: 10.11.0
     dev: false
     patched: true
+
+  /@preact/compat/17.1.2_preact@10.11.0:
+    resolution: {integrity: sha512-7pOZN9lMDDRQ+6aWvjwTp483KR8/zOpfS83wmOo3zfuLKdngS8/5RLbsFWzFZMGdYlotAhX980hJ75bjOHTwWg==}
+    peerDependencies:
+      preact: '*'
+    dependencies:
+      preact: 10.11.0
+    dev: false
 
   /@preact/signals-core/1.1.1:
     resolution: {integrity: sha512-otWUXVDAX2qWMBqBELvYBcEehBnta9zWhFZ+PZ3siL6LCu4Rk0u7q1bUgfTKPJjAbMYyPcIMoX/j34kDqcNlLg==}
