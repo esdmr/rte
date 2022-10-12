@@ -10,4 +10,7 @@ export const voidPageState: PageStateHooks = {
 	onKeyDown() {
 		return true;
 	},
+	applyInputGuideEntries(entries) {
+		entries.length = 0;
+	},
 };
