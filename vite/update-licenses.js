@@ -37,6 +37,7 @@ const lockfile = await readWantedLockfile('', {ignoreIncompatible: false});
 assert(lockfile !== null);
 
 const pnpmDirs = Object.entries(lockfile.packages ?? {})
+	.filter(([, snapshot]) => !snapshot.dev)
 	.sort(([a], [b]) => a.localeCompare(b, 'en'))
 	.map(([pkgPath, snapshot]) => {
 		const [, name, version] = /^\/((?:@.+?\/)?.+?)\/(.+)$/.exec(pkgPath) ?? [];
@@ -123,7 +124,6 @@ await Promise.all(
 		packages.set(pkgId, {
 			name,
 			version,
-			dev: snapshot.dev,
 			authors,
 			license,
 			...overrides[pkgId],
@@ -137,32 +137,13 @@ if (unusedOverrides.size > 0) {
 	console.warn('Unused overrides:', unusedOverrides);
 }
 
-/** @type {Package[]} */
-const prodJson = [];
-/** @type {Package[]} */
-const devJson = [];
-
-for (const pkg of packages.values()) {
-	if (pkg.dev) {
-		devJson.push(pkg);
-	} else {
-		prodJson.push(pkg);
-	}
-}
-
-for (const json of [devJson, prodJson]) {
-	json.sort((a, b) =>
-		`${a.name}@${a.version}`.localeCompare(`${b.name}@${b.version}`, 'en-US'),
-	);
-}
-
-await fs.writeFile(
-	'build/license-files/prod.json',
-	JSON.stringify(prodJson) + '\n',
+const deps = [...packages.values()].sort((a, b) =>
+	`${a.name}@${a.version}`.localeCompare(`${b.name}@${b.version}`, 'en-US'),
 );
+
 await fs.writeFile(
-	'build/license-files/dev.json',
-	JSON.stringify(devJson) + '\n',
+	'build/license-files/deps.json',
+	JSON.stringify(deps) + '\n',
 );
 await fs.writeFile('build/license-files/.integrity', integrity + '\n');
 
