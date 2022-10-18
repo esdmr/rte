@@ -37,7 +37,7 @@
     "default-import": "1.1.5",
     "execa": "6.1.0",
     "find": "0.3.0",
-    "jsdom": "20.0.0",
+    "jsdom": "20.0.1",
     "parse-author": "2.0.0",
     "sirv": "2.0.2",
     "typed-css-modules": "0.7.2",
