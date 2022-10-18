@@ -19,13 +19,11 @@ export const useHashLocation: BaseLocationHook = () => {
 				hash.current = newPath;
 				update(newPath);
 
-				if (import.meta.env.DEV) {
-					console.debug('Routed', {
-						reason,
-						old: oldPath,
-						new: newPath,
-					});
-				}
+				console.debug('Routed', {
+					reason,
+					old: oldPath,
+					new: newPath,
+				});
 			}
 		};
 

@@ -1,5 +1,6 @@
 import {defineConfig} from 'vite';
 import prefresh from '@prefresh/vite';
+import strip from '@rollup/plugin-strip';
 import {defaultImport} from 'default-import';
 import inspect from 'vite-plugin-inspect';
 import cssImport from './vite/css-import.js';
@@ -49,6 +50,11 @@ export default defineConfig(({command}) => ({
 		}),
 		preactDebug,
 		cssImport,
+		command === 'build' &&
+			defaultImport(strip)({
+				functions: ['performance.mark', 'performance.measure', 'console.debug'],
+				include: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'],
+			}),
 		prefresh(),
 		typedCssModules,
 		updateLicenses,

@@ -137,9 +137,7 @@ export class Editor extends Component<EditorProps> {
 			passive: true,
 		});
 
-		if (import.meta.env.DEV) {
-			console.debug('Monaco editor started.');
-		}
+		console.debug('Monaco editor started.');
 	}
 
 	override componentWillUnmount(): void {
@@ -148,9 +146,7 @@ export class Editor extends Component<EditorProps> {
 		this.editor?.dispose();
 		this.editor = undefined;
 
-		if (import.meta.env.DEV) {
-			console.debug('monaco editor stopped.');
-		}
+		console.debug('monaco editor stopped.');
 	}
 
 	render(): ComponentChild {
