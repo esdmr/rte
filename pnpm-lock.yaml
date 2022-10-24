@@ -59,7 +59,7 @@ specifiers:
   typed-css-modules: 0.7.2
   typescript: 4.8.4
   vite: 3.1.0
-  vite-plugin-inspect: 0.7.2
+  vite-plugin-inspect: 0.7.5
   vitest: 0.23.4
   wouter-preact: 2.8.0-alpha.2
   xo: 0.52.3
@@ -95,7 +95,7 @@ devDependencies:
   typed-css-modules: 0.7.2_ajqq2jxo52exjvo3bsww2uq5wi
   typescript: 4.8.4
   vite: 3.1.0_klp6idf7vrk2azr2rkipc4iul4
-  vite-plugin-inspect: 0.7.2_vite@3.1.0
+  vite-plugin-inspect: 0.7.5_vite@3.1.0
   vitest: 0.23.4_jsdom@20.0.1
   xo: 0.52.3
 
@@ -4534,8 +4534,8 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /vite-plugin-inspect/0.7.2_vite@3.1.0:
-    resolution: {integrity: sha512-d6lR45+bjojVvBTNvDKssSdvHs238RLVIQ3sErRR5H0ktSncLQnjsm9TBMnxUDTFoIl75MIZZHsYpnCkh2a2mg==}
+  /vite-plugin-inspect/0.7.5_vite@3.1.0:
+    resolution: {integrity: sha512-O8xq6dbvD1G7le75u6BfQTXJDUMXcRYlMVPzUpRjSB6hLyqH6BNnNkNrb/cVgCNNmKwk7dX+H2I+XVU2xpJk9Q==}
     engines: {node: '>=14'}
     peerDependencies:
       vite: ^3.1.0
