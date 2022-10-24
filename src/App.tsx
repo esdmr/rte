@@ -14,12 +14,6 @@ import {UnknownRoute} from './UnknownRoute.js';
 export const App: FunctionComponent = () => (
 	<NavSwitch>
 		<Route path="/">{() => <HomePage />}</Route>
-		<Route path="/debug/licenses/dev/:id+">
-			{({id}) => <LicenseFile id={id} return-route="/debug/licenses/dev" />}
-		</Route>
-		<Route path="/debug/licenses/dev">
-			{() => <Licenses dev return-route="/debug/licenses" />}
-		</Route>
 		<Route path="/debug/licenses/:id+">
 			{({id}) => <LicenseFile id={id} return-route="/debug/licenses" />}
 		</Route>

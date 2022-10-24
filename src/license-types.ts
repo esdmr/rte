@@ -1,7 +1,6 @@
 export type Package = {
 	readonly name: string;
 	readonly version: string;
-	readonly dev?: boolean | undefined;
 	readonly authors: readonly string[];
 	readonly license: License;
 };
