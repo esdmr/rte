@@ -41,11 +41,7 @@ const createComponent = (file: string, route: string) =>
 		}
 	});
 
-export const Production = /* @__PURE__ */ createComponent(
-	'license-files/prod.json',
+export const Dependencies = /* @__PURE__ */ createComponent(
+	'license-files/deps.json',
 	'/debug/licenses/',
-);
-export const Development = /* @__PURE__ */ createComponent(
-	'license-files/dev.json',
-	'/debug/licenses/dev/',
 );
