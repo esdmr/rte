@@ -109,7 +109,7 @@ await Promise.all(
 			const target = path.join('build/license-files', pkgId);
 			await fs.mkdir(path.dirname(target), {recursive: true});
 			await fs.cp(licensePath, target);
-		} else if (license && !Array.isArray(license)) {
+		} else if (license.type !== 'legacy') {
 			const dir = await fs.readdir(pkgDir);
 
 			if (dir.some((item) => /license/i.test(item))) {
