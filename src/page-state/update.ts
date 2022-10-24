@@ -48,8 +48,6 @@ export const queueUpdate = () => {
 		rootState.applyInputGuideEntries(newEntries);
 		inputGuideEntries.value = newEntries;
 
-		if (import.meta.env.DEV) {
-			console.debug('Page state updated.');
-		}
+		console.debug('Page state updated.');
 	});
 };

@@ -51,15 +51,26 @@ let oldGamepads: GamepadClone[] = [];
 const gamepadLoop = () => {
 	gamepadLoopId = undefined;
 
+	performance.mark('gamepad.filter.start');
+
 	const newGamepads = navigator
 		.getGamepads()
 		.filter((gamepad): gamepad is Gamepad => gamepad !== null)
 		// TODO: Implement non-standard gamepad mapping.
 		.filter(({connected, mapping}) => connected && mapping === 'standard');
 
+	performance.mark('gamepad.filter.end');
+	performance.measure(
+		'gamepad.filter',
+		'gamepad.filter.start',
+		'gamepad.filter.end',
+	);
+
 	if (newGamepads.length > 0 && document.visibilityState === 'visible') {
 		queueGamepadLoop();
 	}
+
+	performance.mark('gamepad.unmapped_diff.start');
 
 	const shouldUpdate =
 		oldGamepads.length !== newGamepads.length ||
@@ -67,11 +78,27 @@ const gamepadLoop = () => {
 			compareGamepads(oldGamepad, newGamepads[index]!),
 		);
 
+	performance.mark('gamepad.unmapped_diff.end');
+	performance.measure(
+		'gamepad.unmapped_diff',
+		'gamepad.unmapped_diff.start',
+		'gamepad.unmapped_diff.end',
+	);
+
 	if (shouldUpdate) {
+		performance.mark('gamepad.update.start');
+
 		// TODO: Implement gamepad type detection.
 		activeInputMode.value = 'ps';
 		oldGamepads = cloneGamepads(newGamepads);
 		rootState.dispatchEvent('onGamepad', oldGamepads);
+
+		performance.mark('gamepad.update.end');
+		performance.measure(
+			'gamepad.update',
+			'gamepad.update.start',
+			'gamepad.update.end',
+		);
 	}
 };
 
@@ -86,9 +113,7 @@ export const queueGamepadLoop = () => {
 document.addEventListener(
 	'visibilitychange',
 	() => {
-		if (import.meta.env.DEV) {
-			console.debug('Visibility changed:', document.visibilityState);
-		}
+		console.debug('Visibility changed:', document.visibilityState);
 
 		if (document.visibilityState === 'visible') {
 			queueGamepadLoop();
