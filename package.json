@@ -27,7 +27,7 @@
   "devDependencies": {
     "@pnpm/lockfile-file": "5.3.6",
     "@pnpm/logger": "4.0.0",
-    "@prefresh/vite": "2.2.8",
+    "@prefresh/vite": "2.2.9",
     "@rollup/plugin-strip": "3.0.0",
     "@testing-library/preact": "3.2.2",
     "@types/find": "0.2.1",
