@@ -1,7 +1,7 @@
 import {type PageStateHooks, PageStateNode} from './node.js';
 import {queueUpdate} from './update.js';
 
-const emptyHooks: PageStateHooks = Object.freeze({});
+const emptyHooks: PageStateHooks = /* @__PURE__ */ Object.freeze({});
 
 export class MutablePageStateNode extends PageStateNode {
 	protected declare hooks: PageStateHooks;

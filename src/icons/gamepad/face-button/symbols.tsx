@@ -6,7 +6,7 @@ import type {FaceButtonStyle} from './types.js';
 
 const symbolsRadius = 6;
 const symbolsStrokeWidth = 0.2 * symbolsRadius;
-const crossStrokeLength = Math.sqrt(
+const crossStrokeLength = /* @__PURE__ */ Math.sqrt(
 	(2 * symbolsRadius) ** 2 - symbolsStrokeWidth ** 2,
 );
 const trianglePointsDistance = symbolsRadius - symbolsStrokeWidth;
