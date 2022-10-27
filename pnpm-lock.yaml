@@ -34,7 +34,7 @@ patchedDependencies:
 specifiers:
   '@mdi/js': 7.0.96
   '@mdi/react': 1.6.1
-  '@pnpm/lockfile-file': 5.3.6
+  '@pnpm/lockfile-file': 5.3.7
   '@pnpm/logger': 4.0.0
   '@preact/signals': 1.0.4
   '@prefresh/vite': 2.2.8
@@ -76,7 +76,7 @@ dependencies:
   wouter-preact: 2.8.0-alpha.2_ignvtktwp77in5csvysi247wve_preact@10.11.0
 
 devDependencies:
-  '@pnpm/lockfile-file': 5.3.6_@pnpm+logger@4.0.0
+  '@pnpm/lockfile-file': 5.3.7_@pnpm+logger@4.0.0
   '@pnpm/logger': 4.0.0
   '@prefresh/vite': 2.2.8_4jt37oehemwuq3cvigkaotgg2u_preact@10.11.0+vite@3.1.0
   '@rollup/plugin-strip': 3.0.0
@@ -449,9 +449,9 @@ packages:
       rfc4648: 1.5.2
     dev: true
 
-  /@pnpm/error/3.0.1:
-    resolution: {integrity: sha512-hMlbWbFcfcfolNfSjKjpeaZFow71kNg438LZ8rAd01swiVIYRUf/sRv8gGySru6AijYfz5UqslpIJRDbYBkgQA==}
-    engines: {node: '>=14.19'}
+  /@pnpm/error/3.1.0:
+    resolution: {integrity: sha512-bmXBD/kzlgHqlIZPP8QJUDAxGqug2qhPdnqNnuXyWQSyIEgeaXyPiUh91MLj9GwLoHA9Zdrx5+dfEougzxf4mA==}
+    engines: {node: '>=14.6'}
     dependencies:
       '@pnpm/constants': 6.1.0
     dev: true
@@ -463,14 +463,14 @@ packages:
       execa: /safe-execa/0.1.2
     dev: true
 
-  /@pnpm/lockfile-file/5.3.6_@pnpm+logger@4.0.0:
-    resolution: {integrity: sha512-LpLqfUabSXEzGg85yUw9cUbUmX09lgXQY76tZWCP4nq1c2IgkVeFzT/9IgxcjOe03GXteaRQT1HR9wtPSCHKEQ==}
+  /@pnpm/lockfile-file/5.3.7_@pnpm+logger@4.0.0:
+    resolution: {integrity: sha512-uWjoXJZEgZ6aANqNeQdIFs/meminvDySTA8FJSgmOKngw5bACzNN3upT5DDVRWbvCuWtqcVWdHFNMWbB+R579w==}
     engines: {node: '>=14.6'}
     peerDependencies:
       '@pnpm/logger': ^4.0.0
     dependencies:
       '@pnpm/constants': 6.1.0
-      '@pnpm/error': 3.0.1
+      '@pnpm/error': 3.1.0
       '@pnpm/git-utils': 0.1.0
       '@pnpm/lockfile-types': 4.3.3
       '@pnpm/logger': 4.0.0
