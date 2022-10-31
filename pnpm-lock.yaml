@@ -34,7 +34,7 @@ patchedDependencies:
 specifiers:
   '@mdi/js': 7.0.96
   '@mdi/react': 1.6.1
-  '@pnpm/lockfile-file': 5.3.7
+  '@pnpm/lockfile-file': 5.3.8
   '@pnpm/logger': 4.0.0
   '@preact/signals': 1.0.4
   '@prefresh/vite': 2.2.8
@@ -76,7 +76,7 @@ dependencies:
   wouter-preact: 2.8.0-alpha.2_ignvtktwp77in5csvysi247wve_preact@10.11.0
 
 devDependencies:
-  '@pnpm/lockfile-file': 5.3.7_@pnpm+logger@4.0.0
+  '@pnpm/lockfile-file': 5.3.8_@pnpm+logger@4.0.0
   '@pnpm/logger': 4.0.0
   '@prefresh/vite': 2.2.8_4jt37oehemwuq3cvigkaotgg2u_preact@10.11.0+vite@3.1.0
   '@rollup/plugin-strip': 3.0.0
@@ -463,8 +463,8 @@ packages:
       execa: /safe-execa/0.1.2
     dev: true
 
-  /@pnpm/lockfile-file/5.3.7_@pnpm+logger@4.0.0:
-    resolution: {integrity: sha512-uWjoXJZEgZ6aANqNeQdIFs/meminvDySTA8FJSgmOKngw5bACzNN3upT5DDVRWbvCuWtqcVWdHFNMWbB+R579w==}
+  /@pnpm/lockfile-file/5.3.8_@pnpm+logger@4.0.0:
+    resolution: {integrity: sha512-fgXUwTeyW6yhJp1pUdMZJoFTg7qgi1yr7n3rlqm5sgM7leX1Zzx+6+oNSldeRfz0M2jMANU0PXvqyx2meknO/Q==}
     engines: {node: '>=14.6'}
     peerDependencies:
       '@pnpm/logger': ^4.0.0
@@ -482,10 +482,10 @@ packages:
       js-yaml: /@zkochan/js-yaml/0.0.6
       normalize-path: 3.0.0
       ramda: /@pnpm/ramda/0.28.1
-      semver: 7.3.7
+      semver: 7.3.8
       sort-keys: 4.2.0
       strip-bom: 4.0.0
-      write-file-atomic: 3.0.3
+      write-file-atomic: 4.0.2
     dev: true
 
   /@pnpm/lockfile-types/4.3.3:
@@ -510,7 +510,7 @@ packages:
       '@pnpm/lockfile-types': 4.3.3
       comver-to-semver: 1.0.0
       ramda: /@pnpm/ramda/0.28.1
-      semver: 7.3.7
+      semver: 7.3.8
     dev: true
 
   /@pnpm/ramda/0.28.1:
@@ -743,7 +743,7 @@ packages:
       eslint: 8.23.1
       ignore: 5.2.0
       regexpp: 3.2.0
-      semver: 7.3.7
+      semver: 7.3.8
       tsutils: 3.21.0_typescript@4.8.4
       typescript: 4.8.4
     transitivePeerDependencies:
@@ -817,7 +817,7 @@ packages:
       debug: 4.3.4
       globby: 11.1.0
       is-glob: 4.0.3
-      semver: 7.3.7
+      semver: 7.3.8
       tsutils: 3.21.0_typescript@4.8.4
       typescript: 4.8.4
     transitivePeerDependencies:
@@ -838,7 +838,7 @@ packages:
       eslint: 8.23.1
       eslint-scope: 5.1.1
       eslint-utils: 3.0.0_eslint@8.23.1
-      semver: 7.3.7
+      semver: 7.3.8
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -1100,7 +1100,7 @@ packages:
   /builtins/5.0.1:
     resolution: {integrity: sha512-qwVpFEHNfhYJIzNRBvd2C1kyo6jz3ZSMPyyuR47OPdiKWlbYnZNyDWuyR175qDnAJLiCo5fBBqPb3RiXgWlkOQ==}
     dependencies:
-      semver: 7.3.7
+      semver: 7.3.8
     dev: true
 
   /c8/7.12.0:
@@ -1466,7 +1466,7 @@ packages:
       '@pnpm/crypto.base32-hash': 1.0.1
       '@pnpm/types': 8.7.0
       encode-registry: 3.0.0
-      semver: 7.3.7
+      semver: 7.3.8
     dev: true
 
   /dir-glob/3.0.1:
@@ -2026,7 +2026,7 @@ packages:
       is-core-module: 2.10.0
       minimatch: 3.1.2
       resolve: 1.22.1
-      semver: 7.3.7
+      semver: 7.3.8
     dev: true
 
   /eslint-plugin-no-use-extend-native/0.5.0:
@@ -2075,7 +2075,7 @@ packages:
       read-pkg-up: 7.0.1
       regexp-tree: 0.1.24
       safe-regex: 2.1.1
-      semver: 7.3.7
+      semver: 7.3.8
       strip-indent: 3.0.0
     dev: true
 
@@ -2937,10 +2937,6 @@ packages:
     resolution: {integrity: sha512-vIZ7HTXAoRoIwYSsTnxb0sg9L6rth+JOulNcavsbskQkCIWoSM2cjFOWZs4wGziGZER+Xgs/HXiCQZgiL8ppxQ==}
     dev: true
 
-  /is-typedarray/1.0.0:
-    resolution: {integrity: sha512-cyA56iCMHAh5CdzjJIa4aohJyeO1YbwLi3Jc35MmRU6poroFjIGZzUzupGiRPOjgHg9TLu43xbpwXk523fMxKA==}
-    dev: true
-
   /is-unc-path/1.0.0:
     resolution: {integrity: sha512-mrGpVd0fs7WWLfVsStvgF6iEJnbjDFZh9/emhRDcGWTduTfNHd9CHeUwH3gYIjdbwo4On6hunkztwOaAw0yllQ==}
     engines: {node: '>=0.10.0'}
@@ -3413,7 +3409,7 @@ packages:
     dependencies:
       hosted-git-info: 4.1.0
       is-core-module: 2.10.0
-      semver: 7.3.7
+      semver: 7.3.8
       validate-npm-package-license: 3.0.4
     dev: true
 
@@ -4033,6 +4029,14 @@ packages:
       lru-cache: 6.0.0
     dev: true
 
+  /semver/7.3.8:
+    resolution: {integrity: sha512-NB1ctGL5rlHrPJtFDVIVzTyQylMLu9N9VICA6HSFJo8MCGVTMW6gfpicwKmmK/dAjTOrqu5l63JJOpDSrAis3A==}
+    engines: {node: '>=10'}
+    hasBin: true
+    dependencies:
+      lru-cache: 6.0.0
+    dev: true
+
   /set-blocking/2.0.0:
     resolution: {integrity: sha512-KiKBS8AnWGEyLzofFfmvKwpdPzqiy16LvQfK3yv/fVH7Bj13/wl3JSR1J+rfgRE9q7xUJK4qvgS8raSOeLUehw==}
     dev: true
@@ -4447,12 +4451,6 @@ packages:
     dev: true
     patched: true
 
-  /typedarray-to-buffer/3.1.5:
-    resolution: {integrity: sha512-zdu8XMNEDepKKR+XYOXAVPtWui0ly0NtohUscw+UmaHiAWT8hrV1rr//H6V+0DvJ3OQ19S979M0laLfX8rm82Q==}
-    dependencies:
-      is-typedarray: 1.0.0
-    dev: true
-
   /typescript/4.8.4:
     resolution: {integrity: sha512-QCh+85mCy+h0IGff8r5XWzOVSbBO+KfeYrMQh7NJ58QujwcE22u+NUSmUxqF+un70P9GXKxa2HCNiTTMJknyjQ==}
     engines: {node: '>=4.2.0'}
@@ -4712,13 +4710,12 @@ packages:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
     dev: true
 
-  /write-file-atomic/3.0.3:
-    resolution: {integrity: sha512-AvHcyZ5JnSfq3ioSyjrBkH9yW4m7Ayk8/9My/DD9onKeu/94fwrMocemO2QAJFAlnnDN+ZDS+ZjAR5ua1/PV/Q==}
+  /write-file-atomic/4.0.2:
+    resolution: {integrity: sha512-7KxauUdBmSdWnmpaGFg+ppNjKF8uNLry8LyzjauQDOVONfFLNKrKvQOxZ/VuTIcS/gge/YNahf5RIIQWTSarlg==}
+    engines: {node: ^12.13.0 || ^14.15.0 || >=16.0.0}
     dependencies:
       imurmurhash: 0.1.4
-      is-typedarray: 1.0.0
       signal-exit: 3.0.7
-      typedarray-to-buffer: 3.1.5
     dev: true
 
   /ws/8.9.0:
