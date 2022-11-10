@@ -38,7 +38,7 @@ specifiers:
   '@pnpm/logger': 4.0.0
   '@preact/signals': 1.0.4
   '@prefresh/vite': 2.2.8
-  '@rollup/plugin-strip': 3.0.0
+  '@rollup/plugin-strip': 3.0.1
   '@testing-library/preact': 3.2.2
   '@types/find': 0.2.1
   '@types/jsdom': 20.0.0
@@ -79,7 +79,7 @@ devDependencies:
   '@pnpm/lockfile-file': 5.3.8_@pnpm+logger@4.0.0
   '@pnpm/logger': 4.0.0
   '@prefresh/vite': 2.2.8_4jt37oehemwuq3cvigkaotgg2u_preact@10.11.0+vite@3.1.0
-  '@rollup/plugin-strip': 3.0.0
+  '@rollup/plugin-strip': 3.0.1
   '@testing-library/preact': 3.2.2_preact@10.11.0
   '@types/find': 0.2.1
   '@types/jsdom': 20.0.0
@@ -582,8 +582,8 @@ packages:
     dev: true
     patched: true
 
-  /@rollup/plugin-strip/3.0.0:
-    resolution: {integrity: sha512-rVukw87sJvKbB8Pb7FY8RCfMwr7kWE+JXpaDaEg7FuzXcQ68UIY+dIgymonY88AKPUiOHsuWhuAMCR8vhkgwGg==}
+  /@rollup/plugin-strip/3.0.1:
+    resolution: {integrity: sha512-mG6dHXVhNzU2i5qsS7RNtKuXf4zfDyel4G/RoT1wxaLblHeNSssjgSjWPfkp6ZhXYxFPdZQfkyZ5IpXlfTL8yQ==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       rollup: ^1.20.0||^2.0.0||^3.0.0
@@ -591,7 +591,7 @@ packages:
       rollup:
         optional: true
     dependencies:
-      '@rollup/pluginutils': 4.2.1_xk5h2ttbpkb3i5msx323lq34b4
+      '@rollup/pluginutils': 5.0.2
       estree-walker: 2.0.2
       magic-string: 0.26.7
     dev: true
@@ -604,6 +604,20 @@ packages:
       picomatch: 2.3.1
     dev: true
     patched: true
+
+  /@rollup/pluginutils/5.0.2:
+    resolution: {integrity: sha512-pTd9rIsP92h+B6wWwFbW8RkZv4hiR/xKsqre4SIuAOaOEQRxi0lqLke9k2/7WegC85GgUs9pjmOjCUi3In4vwA==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0||^3.0.0
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+    dependencies:
+      '@types/estree': 1.0.0
+      estree-walker: 2.0.2
+      picomatch: 2.3.1
+    dev: true
 
   /@testing-library/dom/8.17.1:
     resolution: {integrity: sha512-KnH2MnJUzmFNPW6RIKfd+zf2Wue8mEKX0M3cpX6aKl5ZXrJM1/c/Pc8c2xDNYQCnJO48Sm5ITbMXgqTr3h4jxQ==}
@@ -4744,6 +4758,11 @@ packages:
     resolution: {integrity: sha512-5K+2bSy+nPO1fE6TS5KydgqhZ5pyXvO1P6Rw98aflxHi2LFWoShLmDpJOCxSpIP5867LVOCdH/WO+7iXk6/WVQ==}
     engines: {node: '>=12.20'}
     hasBin: true
+    peerDependencies:
+      webpack: '>=1.11.0'
+    peerDependenciesMeta:
+      webpack:
+        optional: true
     dependencies:
       '@eslint/eslintrc': 1.3.2
       '@typescript-eslint/eslint-plugin': 5.41.0_fypurpq5f6m3gqqbn4y6g7g424
@@ -4784,7 +4803,6 @@ packages:
     transitivePeerDependencies:
       - eslint-import-resolver-typescript
       - supports-color
-      - webpack
     dev: true
     bundledDependencies:
       - '@typescript-eslint/eslint-plugin'
