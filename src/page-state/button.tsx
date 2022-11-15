@@ -32,11 +32,25 @@ export const buttonPageState = (
 		entries.push({
 			text: 'Select',
 			icons: [
+				// TODO: Fix these icons.
+				// No keyboard icon yet.
 				{
 					Icon: () => (
 						<gfbi.GamepadFaceButtonIcon style={gfbi.symbols} which="down" />
 					),
-					mode: 'ps',
+					mode: 'playstation-3',
+				},
+				{
+					Icon: () => (
+						<gfbi.GamepadFaceButtonIcon style={gfbi.symbols} which="down" />
+					),
+					mode: 'playstation-4',
+				},
+				{
+					Icon: () => (
+						<gfbi.GamepadFaceButtonIcon style={gfbi.symbols} which="down" />
+					),
+					mode: 'playstation-5',
 				},
 				{
 					Icon: () => (
@@ -44,11 +58,31 @@ export const buttonPageState = (
 					),
 					mode: 'xbox',
 				},
+				// TODO: A preference to toggle Select/Cancel.
 				{
 					Icon: () => (
-						<gfbi.GamepadFaceButtonIcon style={gfbi.lettersBa} which="right" />
+						<gfbi.GamepadFaceButtonIcon style={gfbi.lettersBa} which="down" />
 					),
-					mode: 'switch',
+					mode: 'switch-lr',
+				},
+				// I doubt that switch rotates the icons in horizontal grip.
+				// Though, It does look rather funny.
+				{
+					Icon: () => (
+						<gfbi.GamepadFaceButtonIcon
+							style={gfbi.lettersBa}
+							which="right"
+							rotate="90deg"
+						/>
+					),
+					mode: 'switch-r',
+				},
+				// No dpad icon for switch-l yet.
+				{
+					Icon: () => (
+						<gfbi.GamepadFaceButtonIcon style={gfbi.lettersBa} which="down" />
+					),
+					mode: 'switch-pro',
 				},
 			],
 		});

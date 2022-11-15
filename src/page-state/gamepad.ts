@@ -89,7 +89,7 @@ const gamepadLoop = () => {
 		performance.mark('gamepad.update.start');
 
 		// TODO: Implement gamepad type detection.
-		activeInputMode.value = 'ps';
+		activeInputMode.value = 'playstation-3';
 		oldGamepads = cloneGamepads(newGamepads);
 		rootState.dispatchEvent('onGamepad', oldGamepads);
 
