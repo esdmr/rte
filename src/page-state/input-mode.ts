@@ -1,7 +1,17 @@
-import {signal, effect} from '@preact/signals';
+import {signal, effect, type Signal} from '@preact/signals';
 
 export type InputMode = 'keyboard' | 'ps' | 'xbox' | 'switch';
 export const activeInputMode = signal<InputMode>('keyboard');
+
+declare global {
+	/** Used for debugging. Only available in development mode. */
+	// eslint-disable-next-line no-var
+	var activeInputMode: Signal<InputMode> | undefined;
+}
+
+if (import.meta.env.DEV) {
+	globalThis.activeInputMode = activeInputMode;
+}
 
 let lastInputMode: InputMode;
 

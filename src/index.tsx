@@ -9,6 +9,10 @@ import {guideContainer} from './InputGuide.module.css.js';
 import {useHashLocation} from './wouter-hash.js';
 import {InputGuide} from './InputGuide.js';
 
+if (import.meta.env.DEV) {
+	await import('./debug-utils.js');
+}
+
 const app = document.createElement('div');
 app.classList.add('app');
 app.setAttribute('role', 'presentation');
