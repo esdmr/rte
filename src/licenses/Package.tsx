@@ -78,6 +78,7 @@ export const Package: FunctionComponent<{
 					<CircularButton
 						href={getLicenseFileUrl(route, pkgId)}
 						title="See license file"
+						aria-label={`See license file for ${pkg.name}@${pkg.version}`}
 					>
 						<Icon path={mdiChevronRight} />
 					</CircularButton>

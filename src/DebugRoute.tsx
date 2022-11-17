@@ -20,7 +20,7 @@ export const DebugRoute: FunctionComponent<{id: string}> = ({id}) => (
 			</header>
 			<main>
 				<Title h1>Debug route: {id}</Title>
-				<nav>
+				<nav aria-label="Debug route links">
 					<ul>
 						<NavColumn>
 							<li>
