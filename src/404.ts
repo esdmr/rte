@@ -1,13 +1,10 @@
 export const main = () => {
-	const githubUrlMatch = location.hostname.endsWith('.github.io')
-		? /^(?<repo>\/[^/#?]+)(?<path>\/.*)?$/.exec(location.pathname)
-		: null;
-	const {repo = '', path = '/'} = githubUrlMatch?.groups ?? {};
+	const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+	const pathname = location.pathname.startsWith(base)
+		? location.pathname.slice(base.length) || '/'
+		: '/';
 
-	const base = repo + '/';
-	const pathname = repo ? path : location.pathname;
-
-	const url = new URL(base, location.href);
+	const url = new URL(base, location.origin);
 	url.hash = '#' + pathname;
 	location.replace(url);
 };

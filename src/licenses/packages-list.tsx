@@ -42,6 +42,6 @@ const createComponent = (file: string, route: string) =>
 	});
 
 export const Dependencies = /* @__PURE__ */ createComponent(
-	'license-files/deps.json',
+	`${import.meta.env.BASE_URL}license-files/deps.json`,
 	'/debug/licenses/',
 );

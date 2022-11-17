@@ -1,3 +1,4 @@
+import process from 'node:process';
 import {defineConfig} from 'vite';
 import prefresh from '@prefresh/vite';
 import strip from '@rollup/plugin-strip';
@@ -8,8 +9,13 @@ import preactDebug from './vite/preact-debug.js';
 import typedCssModules from './vite/typed-css-modules.js';
 import updateLicenses from './vite/licenses.js';
 
+/** @param {string} url */
+const ensureTrailingSlash = (url) => (url.endsWith('/') ? url : url + '/');
+
 export default defineConfig(({command}) => ({
-	base: '',
+	base: ensureTrailingSlash(
+		process.env.RTE_BASE_URL ?? process.env.BASE_URL ?? '/',
+	),
 	cacheDir: 'node_modules/.cache/vite',
 	css: {
 		devSourcemap: true,

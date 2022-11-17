@@ -1,13 +1,15 @@
 import {describe, expect, it, vi} from 'vitest';
 import {main} from './404.js';
 
+const baseUrl = new URL(import.meta.env.BASE_URL, 'https://example.com');
+const createUrl = (url: string) => new URL(url, baseUrl);
+
 describe('404', () => {
-	const currentUrl = new URL(location.href);
-	const oldHref = currentUrl.href;
+	const currentUrl = createUrl('');
 
 	vi.stubGlobal('location', {
-		get hostname() {
-			return currentUrl.hostname;
+		get origin() {
+			return currentUrl.origin;
 		},
 		get href() {
 			return currentUrl.href;
@@ -21,30 +23,14 @@ describe('404', () => {
 	});
 
 	it('redirects pages to hash', () => {
-		location.replace('/some/path');
+		location.replace(createUrl('some/path'));
 		main();
-		expect(location.href).toBe(new URL('/#/some/path', oldHref).href);
+		expect(location.href).toBe(createUrl('#/some/path').href);
 	});
 
 	it('disregards hash and query string', () => {
-		location.replace('/some/path?a=b#/cde/d');
+		location.replace(createUrl('some/path?a=b#/cde/d'));
 		main();
-		expect(location.href).toBe(new URL('/#/some/path', oldHref).href);
-	});
-
-	it('redirects github pages to hash', () => {
-		location.replace('https://esdmr.github.io/example/some/path');
-		main();
-		expect(location.href).toBe(
-			new URL('https://esdmr.github.io/example/#/some/path').href,
-		);
-	});
-
-	it('disregards hash and query string in github pages', () => {
-		location.replace('https://esdmr.github.io/example/some/path?a=b#/cde/d');
-		main();
-		expect(location.href).toBe(
-			new URL('https://esdmr.github.io/example/#/some/path').href,
-		);
+		expect(location.href).toBe(createUrl('#/some/path').href);
 	});
 });
