@@ -39,14 +39,17 @@ export const LicenseFile: FunctionComponent<{
 		() =>
 			lazy<FunctionComponent>(async () => {
 				try {
-					const response = await fetch(`/license-files/${pkgId}`, {
-						credentials: 'omit',
-						cache: 'force-cache',
-						headers: new Headers({
-							Accept: 'text/plain',
-						}),
-						redirect: 'error',
-					});
+					const response = await fetch(
+						`${import.meta.env.BASE_URL}license-files/${pkgId}`,
+						{
+							credentials: 'omit',
+							cache: 'force-cache',
+							headers: new Headers({
+								Accept: 'text/plain',
+							}),
+							redirect: 'error',
+						},
+					);
 
 					assert(
 						response.ok,

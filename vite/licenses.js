@@ -42,7 +42,10 @@ export default definePlugin({
 			dev: true,
 		});
 
-		server.middlewares.use('/license-files', licenseFilesRoute);
+		server.middlewares.use(
+			`${server.config.base}license-files`,
+			licenseFilesRoute,
+		);
 	},
 	async closeBundle() {
 		if (isBuild) {
