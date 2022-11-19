@@ -4,7 +4,7 @@ export type InputMode =
 	| 'keyboard'
 	| `playstation-${'3' | '4' | '5'}`
 	| 'xbox'
-	| `switch-${'lr' | 'l' | 'r' | 'pro'}`;
+	| `switch-${'l' | 'r' | 'pro'}`;
 
 export const activeInputMode = signal<InputMode>('keyboard');
 

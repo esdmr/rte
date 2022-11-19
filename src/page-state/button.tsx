@@ -59,12 +59,6 @@ export const buttonPageState = (
 					mode: 'xbox',
 				},
 				// TODO: A preference to toggle Select/Cancel.
-				{
-					Icon: () => (
-						<gfbi.GamepadFaceButtonIcon style={gfbi.lettersBa} which="down" />
-					),
-					mode: 'switch-lr',
-				},
 				// I doubt that switch rotates the icons in horizontal grip.
 				// Though, It does look rather funny.
 				{
