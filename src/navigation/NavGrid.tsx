@@ -25,7 +25,6 @@ function* iterateRow(grid: NavNode, from: number, dir: 1 | -1) {
 }
 
 function* iterateColumn(grid: NavNode, from: number, dir: 1 | -1) {
-	// FIXME: Optimize.
 	const width = gridWidths.get(grid);
 	assert(width, 'grid width not found');
 	const {children} = grid;

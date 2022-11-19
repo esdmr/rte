@@ -56,7 +56,6 @@ const gamepadLoop = () => {
 	const newGamepads = navigator
 		.getGamepads()
 		.filter((gamepad): gamepad is Gamepad => gamepad !== null)
-		// TODO: Implement non-standard gamepad mapping.
 		.filter(({connected, mapping}) => connected && mapping === 'standard');
 
 	performance.mark('gamepad.filter.end');
@@ -88,7 +87,6 @@ const gamepadLoop = () => {
 	if (shouldUpdate) {
 		performance.mark('gamepad.update.start');
 
-		// TODO: Implement gamepad type detection.
 		activeInputMode.value = 'playstation-3';
 		oldGamepads = cloneGamepads(newGamepads);
 		rootState.dispatchEvent('onGamepad', oldGamepads);

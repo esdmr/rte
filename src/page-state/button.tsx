@@ -32,7 +32,6 @@ export const buttonPageState = (
 		entries.push({
 			text: 'Select',
 			icons: [
-				// TODO: Fix these icons.
 				// No keyboard icon yet.
 				{
 					Icon: () => (
@@ -58,7 +57,6 @@ export const buttonPageState = (
 					),
 					mode: 'xbox',
 				},
-				// TODO: A preference to toggle Select/Cancel.
 				// I doubt that switch rotates the icons in horizontal grip.
 				// Though, It does look rather funny.
 				{
