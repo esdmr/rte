@@ -59,7 +59,7 @@ specifiers:
   typed-css-modules: 0.7.2
   typescript: 4.8.4
   vite: 3.1.0
-  vite-plugin-inspect: 0.7.5
+  vite-plugin-inspect: 0.7.7
   vitest: 0.23.4
   wouter-preact: 2.8.0-alpha.2
   xo: 0.52.4
@@ -95,7 +95,7 @@ devDependencies:
   typed-css-modules: 0.7.2_ajqq2jxo52exjvo3bsww2uq5wi
   typescript: 4.8.4
   vite: 3.1.0_klp6idf7vrk2azr2rkipc4iul4
-  vite-plugin-inspect: 0.7.5_vite@3.1.0
+  vite-plugin-inspect: 0.7.7_vite@3.1.0
   vitest: 0.23.4_jsdom@20.0.2
   xo: 0.52.4
 
@@ -4471,8 +4471,8 @@ packages:
     hasBin: true
     dev: true
 
-  /ufo/0.8.5:
-    resolution: {integrity: sha512-e4+UtA5IRO+ha6hYklwj6r7BjiGMxS0O+UaSg9HbaTefg4kMkzj4tXzEBajRR+wkxf+golgAWKzLbytCUDMJAA==}
+  /ufo/0.8.6:
+    resolution: {integrity: sha512-fk6CmUgwKCfX79EzcDQQpSCMxrHstvbLswFChHS0Vump+kFkw7nJBfTZoC1j0bOGoY9I7R3n2DGek5ajbcYnOw==}
     dev: true
 
   /unbox-primitive/1.0.2:
@@ -4547,20 +4547,21 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /vite-plugin-inspect/0.7.5_vite@3.1.0:
-    resolution: {integrity: sha512-O8xq6dbvD1G7le75u6BfQTXJDUMXcRYlMVPzUpRjSB6hLyqH6BNnNkNrb/cVgCNNmKwk7dX+H2I+XVU2xpJk9Q==}
+  /vite-plugin-inspect/0.7.7_vite@3.1.0:
+    resolution: {integrity: sha512-2IlnshZuv0RHtUwMBNR8cW//VDLVKfBOG+JY9qqeL2TaNdet5m+Rw/Zxp63vtcX5FNhWO1fYCK1ENRv6PCOevg==}
     engines: {node: '>=14'}
     peerDependencies:
       vite: ^3.1.0
     dependencies:
-      '@rollup/pluginutils': 4.2.1_xk5h2ttbpkb3i5msx323lq34b4
+      '@rollup/pluginutils': 5.0.2
       debug: 4.3.4
       fs-extra: 10.1.0
       kolorist: 1.6.0
       sirv: 2.0.2
-      ufo: 0.8.5
+      ufo: 0.8.6
       vite: 3.1.0_klp6idf7vrk2azr2rkipc4iul4
     transitivePeerDependencies:
+      - rollup
       - supports-color
     dev: true
 
