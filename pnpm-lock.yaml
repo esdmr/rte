@@ -35,7 +35,7 @@ specifiers:
   '@mdi/js': 7.0.96
   '@mdi/react': 1.6.1
   '@pnpm/lockfile-file': 5.3.8
-  '@pnpm/logger': 4.0.0
+  '@pnpm/logger': 5.0.0
   '@preact/signals': 1.1.2
   '@prefresh/vite': 2.2.8
   '@rollup/plugin-strip': 3.0.1
@@ -76,8 +76,8 @@ dependencies:
   wouter-preact: 2.8.0-alpha.2_ignvtktwp77in5csvysi247wve_preact@10.11.0
 
 devDependencies:
-  '@pnpm/lockfile-file': 5.3.8_@pnpm+logger@4.0.0
-  '@pnpm/logger': 4.0.0
+  '@pnpm/lockfile-file': 5.3.8_@pnpm+logger@5.0.0
+  '@pnpm/logger': 5.0.0
   '@prefresh/vite': 2.2.8_4jt37oehemwuq3cvigkaotgg2u_preact@10.11.0+vite@3.1.0
   '@rollup/plugin-strip': 3.0.1
   '@testing-library/preact': 3.2.2_preact@10.11.0
@@ -463,7 +463,7 @@ packages:
       execa: /safe-execa/0.1.2
     dev: true
 
-  /@pnpm/lockfile-file/5.3.8_@pnpm+logger@4.0.0:
+  /@pnpm/lockfile-file/5.3.8_@pnpm+logger@5.0.0:
     resolution: {integrity: sha512-fgXUwTeyW6yhJp1pUdMZJoFTg7qgi1yr7n3rlqm5sgM7leX1Zzx+6+oNSldeRfz0M2jMANU0PXvqyx2meknO/Q==}
     engines: {node: '>=14.6'}
     peerDependencies:
@@ -473,7 +473,7 @@ packages:
       '@pnpm/error': 3.1.0
       '@pnpm/git-utils': 0.1.0
       '@pnpm/lockfile-types': 4.3.3
-      '@pnpm/logger': 4.0.0
+      '@pnpm/logger': 5.0.0
       '@pnpm/merge-lockfile-changes': 3.0.11
       '@pnpm/types': 8.7.0
       '@zkochan/rimraf': 2.1.2
@@ -495,11 +495,11 @@ packages:
       '@pnpm/types': 8.7.0
     dev: true
 
-  /@pnpm/logger/4.0.0:
-    resolution: {integrity: sha512-SIShw+k556e7S7tLZFVSIHjCdiVog1qWzcKW2RbLEHPItdisAFVNIe34kYd9fMSswTlSRLS/qRjw3ZblzWmJ9Q==}
+  /@pnpm/logger/5.0.0:
+    resolution: {integrity: sha512-YfcB2QrX+Wx1o6LD1G2Y2fhDhOix/bAY/oAnMpHoNLsKkWIRbt1oKLkIFvxBMzLwAEPqnYWguJrYC+J6i4ywbw==}
     engines: {node: '>=12.17'}
     dependencies:
-      bole: 4.0.1
+      bole: 5.0.1
       ndjson: 2.0.0
     dev: true
 
@@ -1074,8 +1074,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /bole/4.0.1:
-    resolution: {integrity: sha512-42r0aSOJFJti2l6LasBHq2BuWJzohGs349olQnH/ETlJo87XnoWw7UT8pGE6UstjxzOKkwz7tjoFcmSr6L16vg==}
+  /bole/5.0.1:
+    resolution: {integrity: sha512-1eK7/EWcuDYq3t7WpALEsIQGHXDMpLIxqUKG3rb1B9YVygEuLNnaVfZbcF1XxxLSEoOau8AWOONrWokMGVESiw==}
     dependencies:
       fast-safe-stringify: 2.1.1
       individual: 3.0.0
