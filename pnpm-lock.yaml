@@ -41,7 +41,7 @@ specifiers:
   '@rollup/plugin-strip': 3.0.1
   '@testing-library/preact': 3.2.2
   '@types/find': 0.2.1
-  '@types/jsdom': 20.0.0
+  '@types/jsdom': 20.0.1
   '@types/parse-author': 2.0.1
   '@types/postcss-url': 10.0.0
   '@vitest/coverage-c8': 0.23.4
@@ -82,7 +82,7 @@ devDependencies:
   '@rollup/plugin-strip': 3.0.1
   '@testing-library/preact': 3.2.2_preact@10.11.0
   '@types/find': 0.2.1
-  '@types/jsdom': 20.0.0
+  '@types/jsdom': 20.0.1
   '@types/parse-author': 2.0.1
   '@types/postcss-url': 10.0.0
   '@vitest/coverage-c8': 0.23.4_jsdom@20.0.2
@@ -687,8 +687,8 @@ packages:
     resolution: {integrity: sha512-z/QT1XN4K4KYuslS23k62yDIDLwLFkzxOuMplDtObz0+y7VqJCaO2o+SPwHCvLFZh7xazvvoor2tA/hPz9ee7g==}
     dev: true
 
-  /@types/jsdom/20.0.0:
-    resolution: {integrity: sha512-YfAchFs0yM1QPDrLm2VHe+WHGtqms3NXnXAMolrgrVP6fgBHHXy1ozAbo/dFtPNtZC/m66bPiCTWYmqp1F14gA==}
+  /@types/jsdom/20.0.1:
+    resolution: {integrity: sha512-d0r18sZPmMQr1eG35u12FZfhIXNrnsPU/g5wvRKCUf/tOGilKKwYMYGqh33BNR6ba+2gkHw1EUiHoN3mn7E5IQ==}
     dependencies:
       '@types/node': 18.7.18
       '@types/tough-cookie': 4.0.2
