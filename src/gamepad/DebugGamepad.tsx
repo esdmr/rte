@@ -1,5 +1,5 @@
 import type {FunctionComponent} from 'preact';
-import {StandardAxes, StandardButtons} from './gamepad.js';
+import {StandardAxes, StandardButtons} from './standard.js';
 import {gamepads} from './GamepadToSignal.js';
 
 export const DebugGamepad: FunctionComponent = () => (

@@ -1,52 +1,6 @@
-import {detectGamepadType, type GamepadType} from './gamepad-db.js';
-import {rootState} from './global.js';
-import {activeInputMode} from './input-mode.js';
-
-export type GamepadButtonClone = {
-	readonly value: number;
-	readonly pressed: boolean;
-	readonly touched: boolean;
-};
-
-export type GamepadClone = {
-	readonly index: number;
-	readonly id: string;
-	readonly type: GamepadType | undefined;
-	readonly buttons: readonly GamepadButtonClone[];
-	readonly axes: readonly number[];
-};
-
-const buttonsComparisonPrecision = 2;
-const axesComparisonPrecision = 15;
-
-export const compareGamepads = (from: GamepadClone, to: Gamepad) =>
-	from.index !== to.index ||
-	from.id !== to.id ||
-	from.buttons.length !== to.buttons.length ||
-	from.axes.length !== to.axes.length ||
-	from.buttons.some(
-		(button, index) =>
-			button.value.toFixed(buttonsComparisonPrecision) !==
-			to.buttons[index]!.value.toFixed(buttonsComparisonPrecision),
-	) ||
-	from.axes.some(
-		(axis, index) =>
-			axis.toFixed(axesComparisonPrecision) !==
-			to.axes[index]!.toFixed(axesComparisonPrecision),
-	);
-
-export const cloneGamepads = (gamepads: readonly Gamepad[]) =>
-	gamepads.map<GamepadClone>((gamepad) => ({
-		index: gamepad.index,
-		id: gamepad.id,
-		type: detectGamepadType(gamepad.id),
-		buttons: gamepad.buttons.map<GamepadButtonClone>((button) => ({
-			value: button.value,
-			pressed: button.pressed,
-			touched: button.touched,
-		})),
-		axes: gamepad.axes.map(Number),
-	}));
+import {rootState} from '../page-state/global.js';
+import {activeInputMode} from '../page-state/input-mode.js';
+import {cloneGamepads, compareGamepads, type GamepadClone} from './diff.js';
 
 let gamepadLoopId: number | undefined;
 let oldGamepads: GamepadClone[] = [];
@@ -126,30 +80,3 @@ document.addEventListener(
 		passive: true,
 	},
 );
-
-export enum StandardButtons {
-	a = 0,
-	b = 1,
-	x = 2,
-	y = 3,
-	l1 = 4,
-	r1 = 5,
-	l2 = 6,
-	r2 = 7,
-	select = 8,
-	start = 9,
-	l3 = 10,
-	r3 = 11,
-	up = 12,
-	down = 13,
-	left = 14,
-	right = 15,
-	_unused = 16,
-}
-
-export enum StandardAxes {
-	leftX = 0,
-	leftY = 1,
-	rightX = 2,
-	rightY = 3,
-}

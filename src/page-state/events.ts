@@ -1,4 +1,4 @@
-import {queueGamepadLoop} from './gamepad.js';
+import {queueGamepadLoop} from '../gamepad/loop.js';
 import {rootState} from './global.js';
 
 export const toggleEvent = (

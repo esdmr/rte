@@ -1,6 +1,6 @@
 import {removeFocusVisible} from '../focus-visible.js';
 import type {NavNode} from '../navigation/node.js';
-import {StandardButtons} from './gamepad.js';
+import {StandardButtons} from '../gamepad/standard.js';
 import type {PageStateHooks, PageStateNode} from './node.js';
 
 const gamepadRepeatDelay = 500;
