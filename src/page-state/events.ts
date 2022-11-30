@@ -22,8 +22,6 @@ export const onFocusIn = (event: FocusEvent) => {
 	rootState.dispatchEvent('onFocusIn', event);
 };
 
-export const onGamepadConnected = (event: GamepadEvent) => {
-	if (event.gamepad.mapping === 'standard') {
-		queueGamepadLoop();
-	}
+export const onGamepadConnected = () => {
+	queueGamepadLoop();
 };

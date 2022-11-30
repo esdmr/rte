@@ -1,3 +1,4 @@
+import {detectGamepadType, type GamepadType} from './gamepad-db.js';
 import {rootState} from './global.js';
 import {activeInputMode} from './input-mode.js';
 
@@ -10,6 +11,7 @@ export type GamepadButtonClone = {
 export type GamepadClone = {
 	readonly index: number;
 	readonly id: string;
+	readonly type: GamepadType | undefined;
 	readonly buttons: readonly GamepadButtonClone[];
 	readonly axes: readonly number[];
 };
@@ -37,6 +39,7 @@ export const cloneGamepads = (gamepads: readonly Gamepad[]) =>
 	gamepads.map<GamepadClone>((gamepad) => ({
 		index: gamepad.index,
 		id: gamepad.id,
+		type: detectGamepadType(gamepad.id),
 		buttons: gamepad.buttons.map<GamepadButtonClone>((button) => ({
 			value: button.value,
 			pressed: button.pressed,
@@ -87,8 +90,10 @@ const gamepadLoop = () => {
 	if (shouldUpdate) {
 		performance.mark('gamepad.update.start');
 
-		activeInputMode.value = 'playstation-3';
 		oldGamepads = cloneGamepads(newGamepads);
+		activeInputMode.value = oldGamepads[0]
+			? oldGamepads[0].type ?? 'xbox'
+			: 'keyboard';
 		rootState.dispatchEvent('onGamepad', oldGamepads);
 
 		performance.mark('gamepad.update.end');

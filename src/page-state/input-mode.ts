@@ -1,10 +1,7 @@
 import {signal, effect, type Signal} from '@preact/signals';
+import type {GamepadType} from './gamepad-db.js';
 
-export type InputMode =
-	| 'keyboard'
-	| `playstation-${'3' | '4' | '5'}`
-	| 'xbox'
-	| `switch-${'l' | 'r' | 'pro'}`;
+export type InputMode = 'keyboard' | GamepadType;
 
 export const activeInputMode = signal<InputMode>('keyboard');
 
