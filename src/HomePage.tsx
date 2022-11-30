@@ -31,6 +31,9 @@ export const HomePage: FunctionComponent = () => (
 						<li>
 							<Link href="/debug/page-state">Debug page state</Link>
 						</li>
+						<li>
+							<Link href="/debug/gamepad">Debug gamepad</Link>
+						</li>
 					</NavColumn>
 				</ul>
 			</nav>

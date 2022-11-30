@@ -7,10 +7,10 @@ export const DebugGamepadState: FunctionComponent = () => (
 		{gamepads.value.length === 0 && <p key="empty">Empty list.</p>}
 		{gamepads.value.map((gamepad) => (
 			<article key={gamepad.index}>
-				<h3>
+				<h2>
 					Gamepad #{gamepad.index} (detected as{' '}
 					<code>{gamepad.type ?? 'unknown'}</code>): {gamepad.id}
-				</h3>
+				</h2>
 
 				<p>Buttons ({gamepad.buttons.length}):</p>
 				<table aria-live="polite">
