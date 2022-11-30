@@ -2,7 +2,7 @@ import type {FunctionComponent} from 'preact';
 import {StandardAxes, StandardButtons} from './standard.js';
 import {gamepads} from './GamepadToSignal.js';
 
-export const DebugGamepad: FunctionComponent = () => (
+export const DebugGamepadState: FunctionComponent = () => (
 	<>
 		{gamepads.value.length === 0 && <p key="empty">Empty list.</p>}
 		{gamepads.value.map((gamepad) => (
