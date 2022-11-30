@@ -3,7 +3,7 @@ similarity index 100%
 rename from dist/index.d.ts
 rename to dist/index.d.cts
 diff --git a/package.json b/package.json
-index 92fe607a41309dbf6d21002842dd0ba2e45a2e48..6d3a37ee3a40cecc05679cbd4532b07db703f8df 100644
+index ab617577636c530bf378db6c90fa592acfcd2331..ab0a57d0766e82c4351b4e3632664329ded09b92 100644
 --- a/package.json
 +++ b/package.json
 @@ -7,7 +7,7 @@
