@@ -6,12 +6,14 @@ export type GamepadButtonClone = {
 	readonly touched: boolean;
 };
 
+export type GamepadAxisClone = number;
+
 export type GamepadClone = {
 	readonly index: number;
 	readonly id: string;
 	readonly type: GamepadType | undefined;
 	readonly buttons: readonly GamepadButtonClone[];
-	readonly axes: readonly number[];
+	readonly axes: readonly GamepadAxisClone[];
 };
 
 const buttonsComparisonPrecision = 2;
