@@ -8,7 +8,8 @@ export const DebugGamepad: FunctionComponent = () => (
 		{gamepads.value.map((gamepad) => (
 			<article key={gamepad.index}>
 				<h3>
-					Gamepad #{gamepad.index}: {gamepad.id}
+					Gamepad #{gamepad.index} (detected as{' '}
+					<code>{gamepad.type ?? 'unknown'}</code>): {gamepad.id}
 				</h3>
 
 				<p>Buttons ({gamepad.buttons.length}):</p>
