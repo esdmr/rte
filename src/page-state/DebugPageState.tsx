@@ -6,7 +6,6 @@ import {CircularButton} from '../circular-button.js';
 import {NavColumn} from '../navigation/NavColumn.js';
 import {Title} from '../Title.js';
 import {GamepadToSignal} from '../gamepad/GamepadToSignal.js';
-import {DebugGamepadState} from '../gamepad/DebugGamepadState.js';
 import {DebugTitle} from './DebugTitle.js';
 
 export const DebugPageState: FunctionComponent = () => (
@@ -25,9 +24,6 @@ export const DebugPageState: FunctionComponent = () => (
 
 				<h2>Title</h2>
 				<DebugTitle />
-
-				<h2>Gamepads</h2>
-				<DebugGamepadState />
 			</main>
 		</NavColumn>
 	</GamepadToSignal>
