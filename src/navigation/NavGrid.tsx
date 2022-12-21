@@ -61,39 +61,45 @@ const navGridHooks: NavHooks = {
 		const index = this.children.indexOf(child);
 
 		switch (dir) {
-			case 'next':
+			case 'next': {
 				return (
 					getAnyLeaf(iterateChildren(this, index, 1), 'right') ??
 					getAnyLeaf(iterateChildren(this, index, -1), 'left') ??
 					this.parent?.getNextLeaf(this, 'next')
 				);
+			}
 
-			case 'up':
+			case 'up': {
 				return (
 					getAnyLeaf(iterateColumn(this, index, -1), 'up') ??
 					this.parent?.getNextLeaf(this, dir)
 				);
+			}
 
-			case 'down':
+			case 'down': {
 				return (
 					getAnyLeaf(iterateColumn(this, index, 1), 'down') ??
 					this.parent?.getNextLeaf(this, dir)
 				);
+			}
 
-			case 'left':
+			case 'left': {
 				return (
 					getAnyLeaf(iterateRow(this, index, -1), 'left') ??
 					this.parent?.getNextLeaf(this, dir)
 				);
+			}
 
-			case 'right':
+			case 'right': {
 				return (
 					getAnyLeaf(iterateRow(this, index, 1), 'right') ??
 					this.parent?.getNextLeaf(this, dir)
 				);
+			}
 
-			default:
+			default: {
 				return this.parent?.getNextLeaf(this, dir);
+			}
 		}
 	},
 };

@@ -39,21 +39,25 @@ const handleKeyPress = (root: NavNode, code: string, focusVisible: boolean) => {
 	}
 
 	switch (code) {
-		case 'ArrowUp':
+		case 'ArrowUp': {
 			root.state.up({focusVisible});
 			break;
+		}
 
-		case 'ArrowDown':
+		case 'ArrowDown': {
 			root.state.down({focusVisible});
 			break;
+		}
 
-		case 'ArrowLeft':
+		case 'ArrowLeft': {
 			root.state.left({focusVisible});
 			break;
+		}
 
-		case 'ArrowRight':
+		case 'ArrowRight': {
 			root.state.right({focusVisible});
 			break;
+		}
 
 		// No default
 	}

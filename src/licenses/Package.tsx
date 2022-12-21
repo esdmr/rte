@@ -38,7 +38,7 @@ export const Package: FunctionComponent<{
 	let license;
 
 	switch (pkg.license.type) {
-		case 'spdx':
+		case 'spdx': {
 			licenseFile = pkg.license.hasFile;
 			license = (
 				<p>
@@ -48,18 +48,22 @@ export const Package: FunctionComponent<{
 			);
 
 			break;
+		}
 
-		case 'custom':
+		case 'custom': {
 			licenseFile = true;
 			license = <p>Custom license.</p>;
 			break;
+		}
 
-		case 'legacy':
+		case 'legacy': {
 			license = <LegacyLicense license={pkg.license} />;
 			break;
+		}
 
-		default:
+		default: {
 			license = <p>License not found!</p>;
+		}
 	}
 
 	return (
