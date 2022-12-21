@@ -157,17 +157,20 @@ export class Editor extends Component<EditorProps> {
 		this.themeQuery.removeEventListener('change', this.onDidThemeQueryChange);
 
 		switch (this.theme) {
-			case 'light':
+			case 'light': {
 				return true;
+			}
 
-			case 'dark':
+			case 'dark': {
 				return false;
+			}
 
-			default:
+			default: {
 				this.themeQuery.addEventListener('change', this.onDidThemeQueryChange, {
 					passive: true,
 				});
 				return this.themeQuery.matches;
+			}
 		}
 	}
 

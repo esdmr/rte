@@ -38,8 +38,9 @@ const navRowHooks: NavHooks = {
 				);
 			}
 
-			default:
+			default: {
 				return this.parent?.getNextLeaf(this, dir);
+			}
 		}
 	},
 };

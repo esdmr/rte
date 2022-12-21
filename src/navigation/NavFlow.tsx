@@ -40,8 +40,9 @@ const navFlowHooks: NavHooks = {
 				);
 			}
 
-			default:
+			default: {
 				return this.parent?.getNextLeaf(this, dir);
+			}
 		}
 	},
 };

@@ -38,8 +38,9 @@ export const navColumnHooks: NavHooks = {
 				);
 			}
 
-			default:
+			default: {
 				return this.parent?.getNextLeaf(this, dir);
+			}
 		}
 	},
 };
