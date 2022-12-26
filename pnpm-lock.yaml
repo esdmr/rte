@@ -44,7 +44,7 @@ specifiers:
   '@types/jsdom': 20.0.1
   '@types/parse-author': 2.0.1
   '@types/postcss-url': 10.0.0
-  '@vitest/coverage-c8': 0.25.3
+  '@vitest/coverage-c8': 0.25.4
   default-import: 1.1.5
   execa: 6.1.0
   find: 0.3.0
@@ -60,7 +60,7 @@ specifiers:
   typescript: 4.8.4
   vite: 3.1.0
   vite-plugin-inspect: 0.7.9
-  vitest: 0.25.3
+  vitest: 0.25.4
   wouter-preact: 2.8.0-alpha.2
   xo: 0.53.1
 
@@ -85,7 +85,7 @@ devDependencies:
   '@types/jsdom': 20.0.1
   '@types/parse-author': 2.0.1
   '@types/postcss-url': 10.0.0
-  '@vitest/coverage-c8': 0.25.3_jsdom@20.0.3
+  '@vitest/coverage-c8': 0.25.4_jsdom@20.0.3
   default-import: 1.1.5
   execa: 6.1.0
   find: 0.3.0
@@ -96,7 +96,7 @@ devDependencies:
   typescript: 4.8.4
   vite: 3.1.0_klp6idf7vrk2azr2rkipc4iul4
   vite-plugin-inspect: 0.7.9_vite@3.1.0
-  vitest: 0.25.3_jsdom@20.0.3
+  vitest: 0.25.4_jsdom@20.0.3
   xo: 0.53.1
 
 packages:
@@ -869,11 +869,11 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: true
 
-  /@vitest/coverage-c8/0.25.3_jsdom@20.0.3:
-    resolution: {integrity: sha512-+tmrB3E7pZTSM+aWKzLk0FpyyaQOoRQf0594hHp+E3Kk0tiFONiEFYf7+9a1Z+C2ffU/0w6KvyBjpNPdashMrg==}
+  /@vitest/coverage-c8/0.25.4_jsdom@20.0.3:
+    resolution: {integrity: sha512-3ozqZUr3x8woBCBXJRzt1P8DRGKsIxajfzRu3ySKJE0bCkIl2hofzHYzkHBZafhfhMOt+hR6L395Io7gyMmpUQ==}
     dependencies:
       c8: 7.12.0
-      vitest: 0.25.3_jsdom@20.0.3
+      vitest: 0.25.4_jsdom@20.0.3
     transitivePeerDependencies:
       - '@edge-runtime/vm'
       - '@vitest/browser'
@@ -4277,8 +4277,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /strip-literal/0.4.2:
-    resolution: {integrity: sha512-pv48ybn4iE1O9RLgCAN0iU4Xv7RlBTiit6DKmMiErbs9x1wH6vXBs45tWc0H5wUIF6TLTrKweqkmYF/iraQKNw==}
+  /strip-literal/1.0.0:
+    resolution: {integrity: sha512-5o4LsH1lzBzO9UFH63AJ2ad2/S2AVx6NtjOcaz+VTT2h1RiRvbipW72z8M/lxEhcPHDBQwpDrnTF7sXy/7OwCQ==}
     dependencies:
       acorn: 8.8.1
     dev: true
@@ -4640,8 +4640,8 @@ packages:
     dev: true
     patched: true
 
-  /vitest/0.25.3_jsdom@20.0.3:
-    resolution: {integrity: sha512-/UzHfXIKsELZhL7OaM2xFlRF8HRZgAHtPctacvNK8H4vOcbJJAMEgbWNGSAK7Y9b1NBe5SeM7VTuz2RsTHFJJA==}
+  /vitest/0.25.4_jsdom@20.0.3:
+    resolution: {integrity: sha512-v/qoSEYPrf8qa1CbKIKYK+1GGmPPEJyXFbkuD6jhh080cfNBsuUDAdMu6hV2h9Uv34EMiUrVETL/wB+EHxFtbA==}
     engines: {node: '>=v14.16.0'}
     hasBin: true
     peerDependencies:
@@ -4672,7 +4672,7 @@ packages:
       jsdom: 20.0.3
       local-pkg: 0.4.2
       source-map: 0.6.1
-      strip-literal: 0.4.2
+      strip-literal: 1.0.0
       tinybench: 2.3.1_bdnno6b3rbhvx4v5swwgwspjai
       tinypool: 0.3.0
       tinyspy: 1.0.2_otxhabklect43mphkuxgrnmuza
