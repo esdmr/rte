@@ -44,7 +44,7 @@ specifiers:
   '@types/jsdom': 20.0.1
   '@types/parse-author': 2.0.1
   '@types/postcss-url': 10.0.0
-  '@vitest/coverage-c8': 0.25.5
+  '@vitest/coverage-c8': 0.25.6
   default-import: 1.1.5
   execa: 6.1.0
   find: 0.3.0
@@ -60,7 +60,7 @@ specifiers:
   typescript: 4.8.4
   vite: 3.1.0
   vite-plugin-inspect: 0.7.9
-  vitest: 0.25.5
+  vitest: 0.25.6
   wouter-preact: 2.8.0-alpha.2
   xo: 0.53.1
 
@@ -85,7 +85,7 @@ devDependencies:
   '@types/jsdom': 20.0.1
   '@types/parse-author': 2.0.1
   '@types/postcss-url': 10.0.0
-  '@vitest/coverage-c8': 0.25.5_jsdom@20.0.3
+  '@vitest/coverage-c8': 0.25.6_jsdom@20.0.3
   default-import: 1.1.5
   execa: 6.1.0
   find: 0.3.0
@@ -96,7 +96,7 @@ devDependencies:
   typescript: 4.8.4
   vite: 3.1.0_klp6idf7vrk2azr2rkipc4iul4
   vite-plugin-inspect: 0.7.9_vite@3.1.0
-  vitest: 0.25.5_jsdom@20.0.3
+  vitest: 0.25.6_jsdom@20.0.3
   xo: 0.53.1
 
 packages:
@@ -869,11 +869,11 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: true
 
-  /@vitest/coverage-c8/0.25.5_jsdom@20.0.3:
-    resolution: {integrity: sha512-tXlg0QVkTQ+7dqhsuwRFovP5vjgYGyBrRREFS55IQ20IsiSaRug9sRblRsckTXmGtz1OMJy/Lxv1gFVo24/ipA==}
+  /@vitest/coverage-c8/0.25.6_jsdom@20.0.3:
+    resolution: {integrity: sha512-+Bcs1XZ8CuEe52QSOgzqmqiV82CXZRRj3yclPQqtLkUV4S6+kdOdfRTtMHOilwhZH70giDjBQx3jgiZoYgFVMA==}
     dependencies:
       c8: 7.12.0
-      vitest: 0.25.5_jsdom@20.0.3
+      vitest: 0.25.6_jsdom@20.0.3
     transitivePeerDependencies:
       - '@edge-runtime/vm'
       - '@vitest/browser'
@@ -4640,8 +4640,8 @@ packages:
     dev: true
     patched: true
 
-  /vitest/0.25.5_jsdom@20.0.3:
-    resolution: {integrity: sha512-lFKSTZV+AjuL44/yNC0aDPKTiasYSqOQ97Gg2G4P2LnjyzQ21ZUs4rQOscHK3lrSnVuir3+1QavHzbDgH4tWQA==}
+  /vitest/0.25.6_jsdom@20.0.3:
+    resolution: {integrity: sha512-jdPgmZ7BcDnm1+hmMPIl9BZjSy+b8Y8V0tQMsv7ECO90Qic7EZ5/+traILXLpsXgqK5KgVrUJmchevAUuKL/1w==}
     engines: {node: '>=v14.16.0'}
     hasBin: true
     peerDependencies:
