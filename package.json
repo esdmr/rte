@@ -44,7 +44,7 @@
     "typed-css-modules": "0.7.2",
     "typescript": "4.8.4",
     "vite": "3.1.0",
-    "vite-plugin-inspect": "0.7.9",
+    "vite-plugin-inspect": "0.7.10",
     "vitest": "0.25.7",
     "xo": "0.53.1"
   },
