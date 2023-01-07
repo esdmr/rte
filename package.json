@@ -28,7 +28,7 @@
     "@pnpm/lockfile-file": "6.0.4",
     "@pnpm/logger": "5.0.0",
     "@prefresh/vite": "2.2.8",
-    "@rollup/plugin-strip": "3.0.1",
+    "@rollup/plugin-strip": "3.0.2",
     "@testing-library/preact": "3.2.2",
     "@types/find": "0.2.1",
     "@types/jsdom": "20.0.1",
