@@ -59,7 +59,7 @@ specifiers:
   typed-css-modules: 0.7.2
   typescript: 4.8.4
   vite: 3.1.0
-  vite-plugin-inspect: 0.7.10
+  vite-plugin-inspect: 0.7.11
   vitest: 0.26.0
   wouter-preact: 2.8.0-alpha.2
   xo: 0.53.1
@@ -95,7 +95,7 @@ devDependencies:
   typed-css-modules: 0.7.2_ajqq2jxo52exjvo3bsww2uq5wi
   typescript: 4.8.4
   vite: 3.1.0_klp6idf7vrk2azr2rkipc4iul4
-  vite-plugin-inspect: 0.7.10_vite@3.1.0
+  vite-plugin-inspect: 0.7.11_vite@3.1.0
   vitest: 0.26.0_jsdom@20.0.3
   xo: 0.53.1
 
@@ -4649,8 +4649,8 @@ packages:
       - terser
     dev: true
 
-  /vite-plugin-inspect/0.7.10_vite@3.1.0:
-    resolution: {integrity: sha512-E4r1tDNMw9XLBXk+3lWBQ5N4GfMQHjm5pzcs4SIATAgnEiGTDE9AlYQ9R6gmRmzFoUH7B5SK9Z5s3o0+LfRsDw==}
+  /vite-plugin-inspect/0.7.11_vite@3.1.0:
+    resolution: {integrity: sha512-mpNsux1BBu0CoI5E0rFseaExHAfq8mtkuDJpQWnB5RBafyNT3bQMlRPWbVZrBXYZHJL7ruqApd4EFvxeXKZu7Q==}
     engines: {node: '>=14'}
     peerDependencies:
       vite: ^3.1.0 || ^4.0.0
