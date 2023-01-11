@@ -44,7 +44,7 @@ specifiers:
   '@types/jsdom': 20.0.1
   '@types/parse-author': 2.0.1
   '@types/postcss-url': 10.0.0
-  '@vitest/coverage-c8': 0.26.0
+  '@vitest/coverage-c8': 0.26.2
   default-import: 1.1.5
   execa: 6.1.0
   find: 0.3.0
@@ -60,7 +60,7 @@ specifiers:
   typescript: 4.8.4
   vite: 3.1.0
   vite-plugin-inspect: 0.7.11
-  vitest: 0.26.1
+  vitest: 0.26.2
   wouter-preact: 2.8.0-alpha.2
   xo: 0.53.1
 
@@ -85,7 +85,7 @@ devDependencies:
   '@types/jsdom': 20.0.1
   '@types/parse-author': 2.0.1
   '@types/postcss-url': 10.0.0
-  '@vitest/coverage-c8': 0.26.0_jsdom@20.0.3
+  '@vitest/coverage-c8': 0.26.2_jsdom@20.0.3
   default-import: 1.1.5
   execa: 6.1.0
   find: 0.3.0
@@ -96,7 +96,7 @@ devDependencies:
   typescript: 4.8.4
   vite: 3.1.0_klp6idf7vrk2azr2rkipc4iul4
   vite-plugin-inspect: 0.7.11_vite@3.1.0
-  vitest: 0.26.1_jsdom@20.0.3
+  vitest: 0.26.2_jsdom@20.0.3
   xo: 0.53.1
 
 packages:
@@ -879,11 +879,11 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: true
 
-  /@vitest/coverage-c8/0.26.0_jsdom@20.0.3:
-    resolution: {integrity: sha512-1LSMHvX1Winy1dIV1XqQanIskYBvd3+TlQtxO6BeyFa57Lah2uNBm3gh5iDB+ZWCySN5o6bl7qOJdaZjEQZZeg==}
+  /@vitest/coverage-c8/0.26.2_jsdom@20.0.3:
+    resolution: {integrity: sha512-h7RZ7trUUsq+yixiXhBaGboap7pjee+x59HE9rsz/JbY/evJhgk+biLY5lOgjpyUonPN0Ymz3mxlrXW9Da54SQ==}
     dependencies:
       c8: 7.12.0
-      vitest: 0.26.0_jsdom@20.0.3
+      vitest: 0.26.2_jsdom@20.0.3
     transitivePeerDependencies:
       - '@edge-runtime/vm'
       - '@vitest/browser'
@@ -4630,27 +4630,8 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /vite-node/0.26.0:
-    resolution: {integrity: sha512-nLtHWCv6reONl1oFsKhQ/LT7n3UNLpvVARAJlmGrQV6qSElht/9AdN41Pa+WSkw2Winh682UzM0Yw0GNlfqejw==}
-    engines: {node: '>=v14.16.0'}
-    hasBin: true
-    dependencies:
-      debug: 4.3.4
-      mlly: 1.0.0
-      pathe: 0.2.0
-      source-map: 0.6.1
-      source-map-support: 0.5.21
-      vite: 3.1.0_klp6idf7vrk2azr2rkipc4iul4
-    transitivePeerDependencies:
-      - less
-      - sass
-      - stylus
-      - supports-color
-      - terser
-    dev: true
-
-  /vite-node/0.26.1:
-    resolution: {integrity: sha512-5FJSKZZJz48zFRKHE55WyevZe61hLMQEsqGn+ungfd60kxEztFybZ3yG9ToGFtOWNCCy7Vn5EVuXD8bdeHOSdw==}
+  /vite-node/0.26.2:
+    resolution: {integrity: sha512-4M/zlatItZAyvrQG+82zQBhgDjRZRhVJYFW4T9wcAKh7eMmSiPOVSeI5zsV9UzHXgCcIDKX0o0r3s4OxExTHqg==}
     engines: {node: '>=v14.16.0'}
     hasBin: true
     dependencies:
@@ -4714,8 +4695,8 @@ packages:
     dev: true
     patched: true
 
-  /vitest/0.26.0_jsdom@20.0.3:
-    resolution: {integrity: sha512-5kUnms5WOa0qrDCJePEPB13v9mhr+ZT1Qy0qNg0eVj1X7/Fx4GY4L1e5s3OH+BQ/J7M5WtaKsUGv9l1pbC7v2Q==}
+  /vitest/0.26.2_jsdom@20.0.3:
+    resolution: {integrity: sha512-Jvqxh6SDy9SsuslkDjts0iDewDIdq4rveEt69YgDuAb1tVDGV0lDepVaeAFraoySWqneJmOt4TngFFNhlw7GfA==}
     engines: {node: '>=v14.16.0'}
     hasBin: true
     peerDependencies:
@@ -4751,53 +4732,7 @@ packages:
       tinypool: 0.3.0
       tinyspy: 1.0.2_otxhabklect43mphkuxgrnmuza
       vite: 3.1.0_klp6idf7vrk2azr2rkipc4iul4
-      vite-node: 0.26.0
-    transitivePeerDependencies:
-      - less
-      - sass
-      - stylus
-      - supports-color
-      - terser
-    dev: true
-
-  /vitest/0.26.1_jsdom@20.0.3:
-    resolution: {integrity: sha512-qTLRnjYmjmJpHlLUtErxtlRqGCe8WItFhGXKklpWivu7CLP9KXN9iTezROe+vf51Kb+BB/fzxK6fUG9DvFGL5Q==}
-    engines: {node: '>=v14.16.0'}
-    hasBin: true
-    peerDependencies:
-      '@edge-runtime/vm': '*'
-      '@vitest/browser': '*'
-      '@vitest/ui': '*'
-      happy-dom: '*'
-      jsdom: '*'
-    peerDependenciesMeta:
-      '@edge-runtime/vm':
-        optional: true
-      '@vitest/browser':
-        optional: true
-      '@vitest/ui':
-        optional: true
-      happy-dom:
-        optional: true
-      jsdom:
-        optional: true
-    dependencies:
-      '@types/chai': 4.3.4
-      '@types/chai-subset': 1.3.3
-      '@types/node': 18.7.18
-      acorn: 8.8.1
-      acorn-walk: 8.2.0
-      chai: 4.3.7
-      debug: 4.3.4
-      jsdom: 20.0.3
-      local-pkg: 0.4.2
-      source-map: 0.6.1
-      strip-literal: 1.0.0
-      tinybench: 2.3.1_bdnno6b3rbhvx4v5swwgwspjai
-      tinypool: 0.3.0
-      tinyspy: 1.0.2_otxhabklect43mphkuxgrnmuza
-      vite: 3.1.0_klp6idf7vrk2azr2rkipc4iul4
-      vite-node: 0.26.1
+      vite-node: 0.26.2
     transitivePeerDependencies:
       - less
       - sass
