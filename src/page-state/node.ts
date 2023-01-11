@@ -1,7 +1,7 @@
 import assert from '../assert.js';
 import type {Disposable} from '../disposable.js';
 import type {InputGuideEntry} from '../InputGuide.js';
-import type {GamepadClone} from './gamepad.js';
+import type {GamepadClone} from '../gamepad/diff.js';
 import {queueUpdate} from './update.js';
 
 export type PageStateEvents = {

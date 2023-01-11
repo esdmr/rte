@@ -1,5 +1,5 @@
 import {signal, effect, type Signal} from '@preact/signals';
-import type {GamepadType} from './gamepad-db.js';
+import type {GamepadType} from '../gamepad/db.js';
 
 export type InputMode = 'keyboard' | GamepadType;
 
