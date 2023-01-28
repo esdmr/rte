@@ -107,9 +107,11 @@ export class PageStateNode implements Disposable {
 		name: K,
 		...args: Parameters<NonNullable<PageStateEvents[K]>>
 	): boolean {
+		const hook = this.hooks[name] as (...args_: typeof args) => boolean;
+
 		return (
 			Boolean(this.child?.dispatchEvent(name, ...args)) ||
-			Boolean(this.hooks[name]?.apply(this, args))
+			Boolean(hook?.apply(this, args))
 		);
 	}
 }
