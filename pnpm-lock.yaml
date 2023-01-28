@@ -57,7 +57,7 @@ specifiers:
   react-dom: npm:@preact/compat@17.1.1
   sirv: 2.0.2
   typed-css-modules: 0.7.2
-  typescript: 4.8.4
+  typescript: 4.9.4
   vite: 3.1.0
   vite-plugin-inspect: 0.7.12
   vitest: 0.26.3
@@ -93,7 +93,7 @@ devDependencies:
   parse-author: 2.0.0
   sirv: 2.0.2
   typed-css-modules: 0.7.2_ajqq2jxo52exjvo3bsww2uq5wi
-  typescript: 4.8.4
+  typescript: 4.9.4
   vite: 3.1.0_klp6idf7vrk2azr2rkipc4iul4
   vite-plugin-inspect: 0.7.12_vite@3.1.0
   vitest: 0.26.3_jsdom@20.0.3
@@ -4541,12 +4541,6 @@ packages:
       yargs: 15.4.1
     dev: true
     patched: true
-
-  /typescript/4.8.4:
-    resolution: {integrity: sha512-QCh+85mCy+h0IGff8r5XWzOVSbBO+KfeYrMQh7NJ58QujwcE22u+NUSmUxqF+un70P9GXKxa2HCNiTTMJknyjQ==}
-    engines: {node: '>=4.2.0'}
-    hasBin: true
-    dev: true
 
   /typescript/4.9.4:
     resolution: {integrity: sha512-Uz+dTXYzxXXbsFpM86Wh3dKCxrQqUcVMxwU54orwlJjOpO3ao8L7j5lH+dWfTwgCwIuM9GQ2kvVotzYJMXTBZg==}
