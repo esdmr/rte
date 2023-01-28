@@ -7,6 +7,7 @@
   ],
   "labels": ["renovate"],
   "major": {
+    "addLabels": ["renovate/major"],
     "automerge": false
   },
   "minor": {
@@ -92,7 +93,22 @@
     },
     {
       "matchManagers": ["github-actions"],
+      "addLabels": ["renovate/actions"],
       "schedule": "at 12am on thursday",
+      "automerge": false
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "matchPackagePatterns": ["^actions/"],
+      "addLabels": ["renovate/actions/official"],
+      "groupName": "actions",
+      "schedule": "at any time",
+      "automerge": true,
+      "stabilityDays": 3
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["major"],
       "automerge": false
     }
   ]
