@@ -1,0 +1,6 @@
+.inline-figure {
+	display: inline-block;
+	width: min-content;
+	text-align: center;
+	margin: 1em;
+}

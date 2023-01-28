@@ -1,9 +1,9 @@
 import {signal} from '@preact/signals';
 import type {FunctionComponent} from 'preact';
 import {useEffect, useMemo} from 'preact/hooks';
-import type {GamepadClone} from './gamepad.js';
-import {pageStateContext, usePageState} from './global.js';
-import {PageStateNode} from './node.js';
+import {pageStateContext, usePageState} from '../page-state/global.js';
+import {PageStateNode} from '../page-state/node.js';
+import type {GamepadClone} from './diff.js';
 
 export const gamepads = signal<readonly GamepadClone[]>([]);
 
