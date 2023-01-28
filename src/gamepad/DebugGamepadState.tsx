@@ -1,6 +1,8 @@
 import type {FunctionComponent} from 'preact';
 import {StandardAxes, StandardButtons} from './standard.js';
 import {gamepads} from './GamepadToSignal.js';
+import {DebugGamepadAxesCircularity} from './DebugGamepadAxesCircularity.js';
+import * as css from './DebugGamepadState.module.css.js';
 
 export const DebugGamepadState: FunctionComponent = () => (
 	<>
@@ -39,6 +41,26 @@ export const DebugGamepadState: FunctionComponent = () => (
 						</tr>
 					))}
 				</table>
+
+				<p>Axes circularity:</p>
+				{gamepad.axes.length >= 2 && (
+					<figure class={css.inlineFigure}>
+						<DebugGamepadAxesCircularity
+							xAxis={gamepad.axes[StandardAxes.leftX]!}
+							yAxis={gamepad.axes[StandardAxes.leftY]!}
+						/>
+						<figcaption>Left axes</figcaption>
+					</figure>
+				)}
+				{gamepad.axes.length >= 4 && (
+					<figure class={css.inlineFigure}>
+						<DebugGamepadAxesCircularity
+							xAxis={gamepad.axes[StandardAxes.rightX]!}
+							yAxis={gamepad.axes[StandardAxes.rightY]!}
+						/>
+						<figcaption>right axes</figcaption>
+					</figure>
+				)}
 			</article>
 		))}
 	</>
