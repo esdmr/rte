@@ -39,7 +39,7 @@ specifiers:
   '@preact/signals': 1.1.3
   '@prefresh/vite': 2.2.8
   '@rollup/plugin-strip': 3.0.2
-  '@testing-library/preact': 3.2.2
+  '@testing-library/preact': 3.2.3
   '@types/find': 0.2.1
   '@types/jsdom': 20.0.1
   '@types/parse-author': 2.0.1
@@ -80,7 +80,7 @@ devDependencies:
   '@pnpm/logger': 5.0.0
   '@prefresh/vite': 2.2.8_4jt37oehemwuq3cvigkaotgg2u_preact@10.11.3+vite@3.1.0
   '@rollup/plugin-strip': 3.0.2
-  '@testing-library/preact': 3.2.2_preact@10.11.3
+  '@testing-library/preact': 3.2.3_preact@10.11.3
   '@types/find': 0.2.1
   '@types/jsdom': 20.0.1
   '@types/parse-author': 2.0.1
@@ -655,8 +655,8 @@ packages:
       pretty-format: 27.5.1
     dev: true
 
-  /@testing-library/preact/3.2.2_preact@10.11.3:
-    resolution: {integrity: sha512-mMPEp/9TOOqf3QqDHY02ieGFfRbi8fAxZvRifn+vOzrdNcCR1zchwPA6BvqXG3wAweRan4QJioYgEc1cePeC3g==}
+  /@testing-library/preact/3.2.3_preact@10.11.3:
+    resolution: {integrity: sha512-y6Kklp1XK3f1X2fWCbujmJyzkf+1BgLYXNgAx21j9+D4CoqMTz5qC4SQufb1L6q/jxLGACzrQ90ewVOTBvHOfg==}
     engines: {node: '>= 12'}
     peerDependencies:
       preact: '>=10 || ^10.0.0-alpha.0 || ^10.0.0-beta.0'
