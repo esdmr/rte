@@ -1,0 +1,16 @@
+.overlay {
+	display: inline-block;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	background-color: red;
+}
+
+.page {
+	background-color: pink;
+}
+
+.dialog {
+	position: absolute;
+	inset: 0;
+}
