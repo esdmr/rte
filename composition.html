@@ -6,6 +6,14 @@
 		<meta name="Content-Security-Policy" content="default-src 'self';base-uri 'none';object-src 'none';">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Gamepad Editor</title>
+		<script type="module">
+			import 'preact/debug';
+
+			if (typeof document.body.inert !== 'boolean') {
+				console.log('Loading inert polyfill….');
+				await import('wicg-inert');
+			}
+		</script>
 		<script type="module" src="./src/composition/debug.tsx"></script>
 	</head>
 	<body>

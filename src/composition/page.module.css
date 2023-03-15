@@ -1,9 +1,8 @@
 .page-content {
-	display: none;
+	display: inline-block;
 	position: absolute;
 	inset: 0;
-}
-
-.page-content.last {
-	display: inline-block;
+	box-sizing: border-box;
+	width: 100vw;
+	height: 100vh;
 }

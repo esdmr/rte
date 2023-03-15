@@ -35,23 +35,23 @@ export class CompositorGroup<
 	before(ref: T, ...newChildren: T[]) {
 		assert(ref.parent === this, 'Reference is not a child of this node');
 		ref._element.before(...newChildren.map((i) => i._element));
-		this._onChildrenUpdated?.();
+		this._onChildrenUpdate();
 	}
 
 	after(ref: T, ...newChildren: T[]) {
 		assert(ref.parent === this, 'Reference is not a child of this node');
 		ref._element.after(...newChildren.map((i) => i._element));
-		this._onChildrenUpdated?.();
+		this._onChildrenUpdate();
 	}
 
 	append(...nodes: T[]): void {
 		this._element.append(...nodes.map((i) => i._element));
-		this._onChildrenUpdated?.();
+		this._onChildrenUpdate();
 	}
 
 	prepend(...nodes: T[]): void {
 		this._element.append(...nodes.map((i) => i._element));
-		this._onChildrenUpdated?.();
+		this._onChildrenUpdate();
 	}
 
 	replace(oldChild: T, ...newChildren: T[]) {
@@ -61,7 +61,7 @@ export class CompositorGroup<
 		);
 
 		oldChild._element.replaceWith(...newChildren.map((i) => i._element));
-		this._onChildrenUpdated?.();
+		this._onChildrenUpdate();
 	}
 
 	remove(oldChild: T) {
@@ -71,10 +71,18 @@ export class CompositorGroup<
 		);
 
 		oldChild._element.remove();
-		this._onChildrenUpdated?.();
+		this._onChildrenUpdate();
 	}
 
-	protected _onChildrenUpdated?(): void;
+	dispose(): void {
+		for (const child of this.children) {
+			child.dispose();
+		}
+	}
+
+	private _onChildrenUpdate() {
+		this.dispatchEvent(new Event('ChildrenUpdate'));
+	}
 }
 
 export function groupParentOf<T extends CompositorNode>(

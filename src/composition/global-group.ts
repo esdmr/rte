@@ -1,5 +1,5 @@
 import {CompositorGroup} from './group.js';
-import type {CompositorLayer} from './layer.js';
+import {useCompositorNode, type CompositorLayer} from './layer.js';
 import {CompositorNode} from './node.js';
 import {CompositorPageGroup} from './page-group.js';
 
@@ -15,4 +15,13 @@ export class CompositorGlobalGroup extends CompositorNode {
 	get activeDescendant() {
 		return this.pages.activeDescendant;
 	}
+
+	dispose(): void {
+		this.pages.dispose();
+		this.overlays.dispose();
+	}
+}
+
+export function useCompositorGlobalGroup() {
+	return useCompositorNode(CompositorGlobalGroup);
 }

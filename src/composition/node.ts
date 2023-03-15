@@ -1,4 +1,5 @@
 import assert from '../assert.js';
+import type {Disposable} from '../disposable.js';
 import type {EventMap} from './types.js';
 import {compositorNodeOfElement} from './registry.js';
 import type {CompositorLayer} from './layer.js';
@@ -15,10 +16,10 @@ export function getCompositorNode(
 	return child;
 }
 
-export abstract class CompositorNode {
+export abstract class CompositorNode implements Disposable {
 	constructor(
 		/** @internal */
-		readonly _element = document.createElement('section'),
+		readonly _element: HTMLElement = document.createElement('div'),
 	) {
 		assert(
 			!compositorNodeOfElement.has(this._element),
@@ -26,6 +27,7 @@ export abstract class CompositorNode {
 		);
 
 		compositorNodeOfElement.set(this._element, this);
+		this.role = 'presentation';
 
 		if (import.meta.env.DEV) {
 			this._element.dataset.compositor = this.constructor.name;
@@ -57,12 +59,36 @@ export abstract class CompositorNode {
 		return this.parent?.root ?? this;
 	}
 
-	get style() {
-		return this._element.style;
-	}
-
 	get classList() {
 		return this._element.classList;
+	}
+
+	get inert() {
+		return this._element.inert;
+	}
+
+	set inert(value) {
+		this._element.inert = value;
+	}
+
+	get hidden() {
+		return this._element.hidden;
+	}
+
+	set hidden(value) {
+		this._element.hidden = value;
+	}
+
+	get role() {
+		return this._element.getAttribute('role') ?? undefined;
+	}
+
+	set role(value) {
+		if (value === undefined) {
+			this._element.removeAttribute('role');
+		} else {
+			this._element.setAttribute('role', value);
+		}
 	}
 
 	abstract get activeDescendant(): CompositorLayer | undefined;
@@ -86,11 +112,6 @@ export abstract class CompositorNode {
 	addEventListener(
 		type: string,
 		listener: EventListenerOrEventListenerObject,
-		options?: boolean | AddEventListenerOptions,
-	): void;
-	addEventListener(
-		type: string,
-		listener: EventListenerOrEventListenerObject,
 		options: boolean | AddEventListenerOptions,
 	): void {
 		this._element.addEventListener(type, listener, options);
@@ -109,12 +130,9 @@ export abstract class CompositorNode {
 		type: string,
 		listener: EventListenerOrEventListenerObject,
 		options?: boolean | EventListenerOptions,
-	): void;
-	removeEventListener(
-		type: string,
-		listener: EventListenerOrEventListenerObject,
-		options?: boolean | EventListenerOptions,
 	): void {
 		this._element.removeEventListener(type, listener, options);
 	}
+
+	abstract dispose(): void;
 }

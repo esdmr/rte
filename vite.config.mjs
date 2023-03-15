@@ -36,7 +36,7 @@ export default defineConfig(({command}) => ({
 		target: ['firefox103', 'chrome104'],
 		outDir: 'build',
 		rollupOptions: {
-			input: ['index.html', '404.html'],
+			input: ['index.html', '404.html', 'composition.html'],
 		},
 	},
 	server: {

@@ -61,6 +61,7 @@ specifiers:
   vite: 3.1.0
   vite-plugin-inspect: 0.7.12
   vitest: 0.27.2
+  wicg-inert: ^3.1.2
   wouter-preact: 2.8.0-alpha.2
   xo: 0.53.1
 
@@ -73,6 +74,7 @@ dependencies:
   preact: 10.11.3
   react: /@preact/compat/17.1.1_y4k23qwlfsmxttlbg2n73wq3bq_preact@10.11.3
   react-dom: /@preact/compat/17.1.1_y4k23qwlfsmxttlbg2n73wq3bq_preact@10.11.3
+  wicg-inert: 3.1.2
   wouter-preact: 2.8.0-alpha.2_ignvtktwp77in5csvysi247wve_preact@10.11.3
 
 devDependencies:
@@ -5006,6 +5008,10 @@ packages:
       siginfo: 2.0.0
       stackback: 0.0.2
     dev: true
+
+  /wicg-inert/3.1.2:
+    resolution: {integrity: sha512-Ba9tGNYxXwaqKEi9sJJvPMKuo063umUPsHN0JJsjrs2j8KDSzkWLMZGZ+MH1Jf1Fq4OWZ5HsESJID6nRza2ang==}
+    dev: false
 
   /word-wrap/1.2.3:
     resolution: {integrity: sha512-Hz/mrNwitNRh/HUAtM/VT/5VH+ygD6DV7mYKZAtHOrbs8U7lvPS6xf7EJKMF0uW1KJCl0H701g3ZGus+muE5vQ==}
