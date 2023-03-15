@@ -40,7 +40,7 @@ jobs:
         run: echo "pnpm_cache_dir=$(pnpm store path)" >>$GITHUB_OUTPUT
 
       - name: Cache pnpm modules
-        uses: actions/cache@940f3d7cf195ba83374c77632d1e2cbb2f24ae68 # v3
+        uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8 # v3
         with:
           path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
           key: ${{ runner.OS }}-pnpm-current-${{ hashFiles('pnpm-lock.yaml') }}
@@ -69,4 +69,4 @@ jobs:
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@497da40f5225e762159b457c9ae5d6f75a136f5c # v1
+        uses: actions/deploy-pages@e690f03220f8a0e2d4da521d8b3a50e0b52650e0 # v1
