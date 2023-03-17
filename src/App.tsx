@@ -18,7 +18,7 @@ export const App: FunctionComponent = () => (
 		<Route path="/debug/licenses/patches/:id/:pkg*">
 			{({id, pkg}) => (
 				<LicenseFile
-					path={id}
+					path={id + '.txt'}
 					label={(pkg ?? 'an unknown') + ' patch'}
 					dir="licenses/files/"
 					return-route="/debug/licenses"

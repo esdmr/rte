@@ -7,7 +7,6 @@
  * @typedef {import('@pnpm/lockfile-file').PackageSnapshot & {
  *   name: string;
  *   version: string;
- *   id: string;
  * }} PackageSnapshotExtended
  */
 import assert from 'node:assert';
@@ -130,7 +129,7 @@ async function getPnpmDirs() {
 
 			const pkgId = `${name}@${version}`;
 
-			return /** @type {const} */ ([
+			return /** @type {[URL, PackageSnapshotExtended]} */ ([
 				new URL(
 					`node_modules/.pnpm/${pkgId.replace(
 						/\//g,
@@ -139,10 +138,9 @@ async function getPnpmDirs() {
 					paths.rootDir,
 				),
 				{
+					...snapshot,
 					name,
 					version,
-					id: pkgId,
-					...snapshot,
 				},
 			]);
 		});
@@ -195,8 +193,10 @@ async function processPnpmDir(pkgDir, snapshot, unusedOverrides) {
 		pkgDir,
 	);
 
+	const pkgId = `${name}@${version}`;
+
 	if (licensePath) {
-		const target = new URL(snapshot.id, paths.depsDir);
+		const target = new URL(pkgId, paths.depsDir);
 		await fs.mkdir(new URL('.', target), {recursive: true});
 		await fs.cp(licensePath, target);
 	} else if (license.type !== 'legacy') {
@@ -204,7 +204,7 @@ async function processPnpmDir(pkgDir, snapshot, unusedOverrides) {
 
 		if (dir.some((item) => /license/i.test(item))) {
 			console.log(
-				snapshot.id,
+				pkgId,
 				'might have a license file that I could not find. Take a look at',
 				pkgDir.pathname,
 			);
@@ -212,17 +212,17 @@ async function processPnpmDir(pkgDir, snapshot, unusedOverrides) {
 	}
 
 	unusedOverrides.delete(name);
-	unusedOverrides.delete(snapshot.id);
+	unusedOverrides.delete(pkgId);
 
-	return /** @type {const} */ ([
-		snapshot.id,
+	return /** @type {[string, Package]} */ ([
+		pkgId,
 		{
 			name,
 			version,
 			authors,
 			license,
 			...overrides[name],
-			...overrides[snapshot.id],
+			...overrides[pkgId],
 		},
 	]);
 }
