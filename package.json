@@ -1,74 +1,75 @@
 {
-  "private": true,
-  "license": "SEE LICENSE IN LICENSE.md",
-  "author": "Saeed M Rad <esdmr0@gmail.com (https://github.com/esdmr)>",
-  "type": "module",
-  "scripts": {
-    "build": "vite build",
-    "check": "tsc -p .",
-    "coverage": "vitest run --coverage",
-    "dev": "vite",
-    "lint": "xo",
-    "lint:fix": "xo --fix",
-    "preview": "vite preview",
-    "test": "vitest"
-  },
-  "dependencies": {
-    "@mdi/js": "7.0.96",
-    "@mdi/react": "1.6.1",
-    "@preact/signals": "1.1.3",
-    "history": "5.3.0",
-    "monaco-editor": "0.34.1",
-    "preact": "10.11.3",
-    "react": "npm:@preact/compat@17.1.1",
-    "react-dom": "npm:@preact/compat@17.1.1",
-    "wouter-preact": "2.8.0-alpha.2"
-  },
-  "devDependencies": {
-    "@pnpm/lockfile-file": "6.0.5",
-    "@pnpm/logger": "5.0.0",
-    "@prefresh/vite": "2.2.8",
-    "@rollup/plugin-strip": "3.0.2",
-    "@testing-library/preact": "3.2.3",
-    "@types/find": "0.2.1",
-    "@types/jsdom": "20.0.1",
-    "@types/parse-author": "2.0.1",
-    "@types/postcss-url": "10.0.0",
-    "@vitest/coverage-c8": "0.27.2",
-    "default-import": "1.1.5",
-    "execa": "6.1.0",
-    "find": "0.3.0",
-    "jsdom": "21.1.0",
-    "parse-author": "2.0.0",
-    "sirv": "2.0.2",
-    "typed-css-modules": "0.7.2",
-    "typescript": "4.9.5",
-    "vite": "3.1.0",
-    "vite-plugin-inspect": "0.7.12",
-    "vitest": "0.27.2",
-    "xo": "0.53.1"
-  },
-  "packageManager": "pnpm@7.27.1",
-  "pnpm": {
-    "packageExtensions": {
-      "eslint-import-resolver-webpack": {
-        "peerDependenciesMeta": {
-          "webpack": {
-            "optional": true
-          }
-        }
-      }
-    },
-    "patchedDependencies": {
-      "@preact/compat@17.1.1": "patches/@preact__compat@17.1.1.patch",
-      "@mdi/react@1.6.1": "patches/@mdi__react@1.6.1.patch",
-      "wouter-preact@2.8.0-alpha.2": "patches/wouter-preact@2.8.0-alpha.2.patch",
-      "typed-css-modules@0.7.2": "patches/typed-css-modules@0.7.2.patch",
-      "@prefresh/vite@2.2.8": "patches/@prefresh__vite@2.2.8.patch",
-      "@rollup/pluginutils@4.2.1": "patches/@rollup__pluginutils@4.2.1.patch",
-      "vite@3.1.0": "patches/vite@3.1.0.patch",
-      "tinybench@2.3.1": "patches/tinybench@2.3.1.patch",
-      "tinyspy@1.0.2": "patches/tinyspy@1.0.2.patch"
-    }
-  }
+	"private": true,
+	"license": "SEE LICENSE IN LICENSE.md",
+	"author": "esdmr <esdmr0@gmail.com (https://github.com/esdmr)>",
+	"type": "module",
+	"scripts": {
+		"build": "vite build",
+		"check": "tsc -p .",
+		"coverage": "vitest run --coverage",
+		"dev": "vite",
+		"lint": "xo",
+		"lint:fix": "xo --fix",
+		"preview": "vite preview",
+		"test": "vitest"
+	},
+	"dependencies": {
+		"@mdi/js": "7.0.96",
+		"@mdi/react": "1.6.1",
+		"@preact/signals": "1.1.3",
+		"history": "5.3.0",
+		"monaco-editor": "0.34.1",
+		"preact": "10.11.3",
+		"react": "npm:@preact/compat@17.1.1",
+		"react-dom": "npm:@preact/compat@17.1.1",
+		"wouter-preact": "2.8.0-alpha.2"
+	},
+	"devDependencies": {
+		"@pnpm/lockfile-file": "6.0.5",
+		"@pnpm/logger": "5.0.0",
+		"@prefresh/vite": "2.2.8",
+		"@rollup/plugin-strip": "3.0.2",
+		"@testing-library/preact": "3.2.3",
+		"@types/find": "0.2.1",
+		"@types/jsdom": "20.0.1",
+		"@types/parse-author": "2.0.1",
+		"@types/postcss-url": "10.0.0",
+		"@vitest/coverage-c8": "0.27.2",
+		"default-import": "1.1.5",
+		"execa": "6.1.0",
+		"find": "0.3.0",
+		"jsdom": "21.1.0",
+		"parse-author": "2.0.0",
+		"sirv": "2.0.2",
+		"typed-css-modules": "0.7.2",
+		"typescript": "4.9.5",
+		"vite": "3.1.0",
+		"vite-plugin-environment": "1.1.3",
+		"vite-plugin-inspect": "0.7.12",
+		"vitest": "0.27.2",
+		"xo": "0.53.1"
+	},
+	"packageManager": "pnpm@7.27.1",
+	"pnpm": {
+		"packageExtensions": {
+			"eslint-import-resolver-webpack": {
+				"peerDependenciesMeta": {
+					"webpack": {
+						"optional": true
+					}
+				}
+			}
+		},
+		"patchedDependencies": {
+			"@preact/compat@17.1.1": "patches/@preact__compat@17.1.1.patch",
+			"@mdi/react@1.6.1": "patches/@mdi__react@1.6.1.patch",
+			"wouter-preact@2.8.0-alpha.2": "patches/wouter-preact@2.8.0-alpha.2.patch",
+			"typed-css-modules@0.7.2": "patches/typed-css-modules@0.7.2.patch",
+			"@prefresh/vite@2.2.8": "patches/@prefresh__vite@2.2.8.patch",
+			"@rollup/pluginutils@4.2.1": "patches/@rollup__pluginutils@4.2.1.patch",
+			"vite@3.1.0": "patches/vite@3.1.0.patch",
+			"tinybench@2.3.1": "patches/tinybench@2.3.1.patch",
+			"tinyspy@1.0.2": "patches/tinyspy@1.0.2.patch"
+		}
+	}
 }

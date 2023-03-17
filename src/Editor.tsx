@@ -141,7 +141,10 @@ export class Editor extends Component<EditorProps> {
 	}
 
 	override componentWillUnmount(): void {
-		this.themeQuery.removeEventListener('change', this.onDidThemeQueryChange);
+		this.themeQuery.removeEventListener(
+			'change',
+			this.onDidThemeQueryChange,
+		);
 		removeEventListener('resize', this.onDidResize);
 		this.editor?.dispose();
 		this.editor = undefined;
@@ -154,7 +157,10 @@ export class Editor extends Component<EditorProps> {
 	}
 
 	private isLightTheme() {
-		this.themeQuery.removeEventListener('change', this.onDidThemeQueryChange);
+		this.themeQuery.removeEventListener(
+			'change',
+			this.onDidThemeQueryChange,
+		);
 
 		switch (this.theme) {
 			case 'light': {
@@ -166,9 +172,13 @@ export class Editor extends Component<EditorProps> {
 			}
 
 			default: {
-				this.themeQuery.addEventListener('change', this.onDidThemeQueryChange, {
-					passive: true,
-				});
+				this.themeQuery.addEventListener(
+					'change',
+					this.onDidThemeQueryChange,
+					{
+						passive: true,
+					},
+				);
 				return this.themeQuery.matches;
 			}
 		}

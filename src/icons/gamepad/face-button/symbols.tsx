@@ -18,9 +18,13 @@ export const symbols: FaceButtonStyle = {
 	down: {
 		Icon() {
 			const path = new svgPath.Context();
-			svgPath.moveTo(path, scale(-crossStrokeLength / 2, antiDiagonalUnit), {
-				absolute: true,
-			});
+			svgPath.moveTo(
+				path,
+				scale(-crossStrokeLength / 2, antiDiagonalUnit),
+				{
+					absolute: true,
+				},
+			);
 			svgPath.lineTo(path, scale(crossStrokeLength, antiDiagonalUnit));
 			svgPath.moveTo(path, scale(-crossStrokeLength / 2, diagonalUnit), {
 				absolute: true,
@@ -80,7 +84,10 @@ export const symbols: FaceButtonStyle = {
 				vectorPolar(trianglePointsDistance, Math.PI / 6),
 				vectorPolar(trianglePointsDistance, Math.PI * (5 / 6)),
 			]
-				.map((vec) => `${numberToString(vec.x)},${numberToString(vec.y)}`)
+				.map(
+					(vec) =>
+						`${numberToString(vec.x)},${numberToString(vec.y)}`,
+				)
 				.join(' ');
 
 			return (

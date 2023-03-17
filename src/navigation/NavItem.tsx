@@ -94,7 +94,9 @@ export const NavItem: FunctionComponent<{
 						node.ref = undefined;
 						setRef(oldRef, value);
 					} else {
-						throw new TypeError('NavItem with a non-HTMLElement ref');
+						throw new TypeError(
+							'NavItem with a non-HTMLElement ref',
+						);
 					}
 				},
 			})}

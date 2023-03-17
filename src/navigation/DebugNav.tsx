@@ -36,15 +36,19 @@ export const DebugNav: FunctionComponent = () => (
 					<h2>Flow</h2>
 					<p>
 						<NavFlow>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit.
-							Accusantium cupiditate,{' '}
-							<A href="https://example.com">temporibus incidunt</A> voluptate
-							possimus magnam hic, ab tempore illum nemo tempora accusamus
-							voluptatum nisi nobis eaque? Vero dolore numquam nulla? Lorem
-							ipsum dolor sit amet consectetur{' '}
-							<A href="https://example.com">adipisicing elit</A>. Fugit maxime
-							nobis eaque asperiores sint mollitia commodi ea, rem doloremque
-							fuga eius alias ut rerum vel ipsum velit quas facere deserunt?
+							Lorem ipsum dolor sit amet consectetur adipisicing
+							elit. Accusantium cupiditate,{' '}
+							<A href="https://example.com">
+								temporibus incidunt
+							</A>{' '}
+							voluptate possimus magnam hic, ab tempore illum nemo
+							tempora accusamus voluptatum nisi nobis eaque? Vero
+							dolore numquam nulla? Lorem ipsum dolor sit amet
+							consectetur{' '}
+							<A href="https://example.com">adipisicing elit</A>.
+							Fugit maxime nobis eaque asperiores sint mollitia
+							commodi ea, rem doloremque fuga eius alias ut rerum
+							vel ipsum velit quas facere deserunt?
 						</NavFlow>
 					</p>
 

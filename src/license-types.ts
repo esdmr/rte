@@ -14,7 +14,7 @@ export type License =
 export type SpdxLicense = {
 	readonly type: 'spdx';
 	readonly id: string;
-	readonly hasFile: boolean;
+	readonly fileMissing?: true | undefined;
 };
 
 export type CustomLicense = {
@@ -31,4 +31,13 @@ export type LegacyLicense = {
 
 export type UnknownLicense = {
 	readonly type: 'unknown';
+};
+
+export type Patch = {
+	readonly name: string;
+	readonly version: string;
+	readonly path: string;
+	readonly originalAuthors: readonly string[];
+	readonly patchAuthors: readonly string[];
+	readonly license: string;
 };

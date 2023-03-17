@@ -1,12 +1,16 @@
-.pkg {
+.project {
 	padding: 1em 0;
+	display: grid;
+	grid-template-columns: 1fr auto;
+	grid-template-areas: 'content icon';
+	align-items: center;
 }
 
-.pkg + .pkg {
+.project + .project {
 	border-top: 0.1em solid rgba(var(--foreground-rgb) / 0.3);
 }
 
-.content .version {
+.version {
 	padding: 0 1em;
 	font-size: 0.8em;
 	color: rgba(var(--foreground-rgb) / 0.75);
@@ -21,20 +25,14 @@
 	margin-block-end: 0.5em;
 }
 
-.has-license-file {
-	display: grid;
-	grid-template-columns: 1fr calc(1.5em * var(--SQRT-2));
-	grid-template-areas: 'content icon';
-	align-items: center;
-}
-
-.has-license-file .content {
+.content {
 	grid-area: content;
 }
 
-.has-license-file .icon {
-	display: inline-block;
+.icon {
+	display: inline-flex;
+	flex-direction: row;
+	gap: 0.1em;
 	grid-area: icon;
-	width: 1.5em;
 	height: 1.5em;
 }

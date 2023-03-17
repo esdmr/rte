@@ -9,18 +9,25 @@ import {Loading} from '../Loading.js';
 import {Title} from '../Title.js';
 
 export const LicenseFile: FunctionComponent<{
-	id: string;
+	label: string;
+	path: string;
+	dir: string;
+	'is-package'?: boolean | undefined;
 	'return-route': string;
 }> = (props) => {
-	const pkgId = decodeURIComponent(props.id);
+	const label = decodeURIComponent(props.label);
+	const path = decodeURIComponent(props.path);
 
-	if (!/^(@.+?\/)?.+?@.+$/.test(pkgId)) {
+	if (props['is-package'] && !/^(@.+?\/)?.+?@.+$/.test(path)) {
 		return (
 			<>
 				<AllowScroll />
 				<header>
 					<nav>
-						<CircularButton href={props['return-route']} title="Back">
+						<CircularButton
+							href={props['return-route']}
+							title="Back"
+						>
 							<Icon path={mdiArrowLeft} />
 						</CircularButton>
 					</nav>
@@ -28,7 +35,7 @@ export const LicenseFile: FunctionComponent<{
 				<main>
 					<Title h1>Invalid package id</Title>
 					<p>
-						<code>{pkgId}</code> is not a valid package name.
+						<code>{path}</code> is not a valid package name.
 					</p>
 				</main>
 			</>
@@ -40,7 +47,7 @@ export const LicenseFile: FunctionComponent<{
 			lazy<FunctionComponent>(async () => {
 				try {
 					const response = await fetch(
-						`${import.meta.env.BASE_URL}license-files/${pkgId}`,
+						`${import.meta.env.BASE_URL}${props.dir}${path}`,
 						{
 							credentials: 'omit',
 							cache: 'force-cache',
@@ -67,7 +74,7 @@ export const LicenseFile: FunctionComponent<{
 					return ErredLicenseFile;
 				}
 			}),
-		[pkgId],
+		[path],
 	);
 
 	return (
@@ -81,7 +88,7 @@ export const LicenseFile: FunctionComponent<{
 				</nav>
 			</header>
 			<main>
-				<Title h1>License file for: {pkgId}</Title>
+				<Title h1>License file for: {label}</Title>
 				<Suspense fallback={<Loading placement="center" />}>
 					<Content />
 				</Suspense>

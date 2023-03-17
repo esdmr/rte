@@ -1,13 +1,15 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: RTE
-Upstream-Contact: Saeed M Rad <esdmr0@gmail.com>
+Upstream-Contact: esdmr <esdmr0@gmail.com>
 Source: https://github.com/esdmr/rte
 
 Files: src/* 404.html index.html
-Copyright: 2022 Saeed M Rad
+Copyright: 2022 esdmr
 License: AGPL-3.0-only
 
 Files:
+	.editorconfig
+	.env
 	.github/*
 	.gitignore
 	.xo-config.json
@@ -20,41 +22,50 @@ Files:
 	tsconfig.json
 	vite.config.mjs
 	vite/*
-Copyright: 2022 Saeed M Rad
+Copyright: 2022 esdmr
 License: MIT
 
 Files: patches/@mdi__react@1.6.1.patch
 Copyright: 2018 Austin Andrews
+X-Patch-By: esdmr
 License: MIT
 
 Files: patches/@preact__compat@17.1.1.patch
 Copyright: 2019 Preact Team
+X-Patch-By: esdmr
 License: MIT
 
 Files: patches/@prefresh__vite@2.2.8.patch
 Copyright: 2020 Jovi De Croock
+X-Patch-By: esdmr
 License: MIT
 
 Files: patches/@rollup__pluginutils@4.2.1.patch
 Copyright: 2019 RollupJS Plugin Contributors
+X-Patch-By: esdmr
 License: MIT
 
 Files: patches/tinybench@2.3.1.patch
 Copyright: 2022 Tinylibs
+X-Patch-By: esdmr
 License: MIT
 
 Files: patches/tinyspy@1.0.2.patch
 Copyright: 2022 Tinylibs
+X-Patch-By: esdmr
 License: MIT
 
 Files: patches/typed-css-modules@0.7.2.patch
 Copyright: 2016 Yosuke Kurami
+X-Patch-By: esdmr
 License: MIT
 
 Files: patches/vite@3.1.0.patch
 Copyright: 2019 Yuxi (Evan) You and Vite contributors
+X-Patch-By: esdmr
 License: MIT
 
 Files: patches/wouter-preact@2.8.0-alpha.2.patch
 Copyright: 2019 Alexey Taktarov
+X-Patch-By: esdmr
 License: ISC

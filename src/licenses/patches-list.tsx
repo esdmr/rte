@@ -2,7 +2,7 @@ import {type FunctionComponent, lazy} from 'preact/compat';
 import assert from '../assert.js';
 import type * as Types from '../license-types.js';
 import {NavColumn} from '../navigation/NavColumn.js';
-import {Package} from './Package.js';
+import {Patch} from './Patch.js';
 
 const createComponent = (file: string, route: string) =>
 	lazy<FunctionComponent>(async () => {
@@ -20,30 +20,30 @@ const createComponent = (file: string, route: string) =>
 				`got status code ${response.status}: ${response.statusText}`,
 			);
 
-			const json = (await response.json()) as readonly Types.Package[];
+			const json = (await response.json()) as readonly Types.Patch[];
 
-			const LoadedPackagesList = () => (
+			const LoadedPatchesList = () => (
 				<NavColumn>
-					{json.map((pkg) => (
-						<Package
-							pkg={pkg}
-							key={`${pkg.name}@${pkg.version}`}
+					{json.map((patch) => (
+						<Patch
+							patch={patch}
+							key={`${patch.name}@${patch.version}`}
 							route={route}
 						/>
 					))}
 				</NavColumn>
 			);
-			return LoadedPackagesList;
+			return LoadedPatchesList;
 		} catch (error) {
 			console.error(error);
-			const ErredPackagesList = () => (
-				<p>Failed to load the package licenses list.</p>
+			const ErredPatchesList = () => (
+				<p>Failed to load the patch licenses list.</p>
 			);
-			return ErredPackagesList;
+			return ErredPatchesList;
 		}
 	});
 
-export const Dependencies = /* @__PURE__ */ createComponent(
-	`${import.meta.env.BASE_URL}licenses/deps/index.json`,
+export const Patches = /* @__PURE__ */ createComponent(
+	`${import.meta.env.BASE_URL}licenses/patches/index.json`,
 	'/debug/licenses/',
 );
