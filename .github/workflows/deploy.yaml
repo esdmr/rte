@@ -23,7 +23,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3
+        uses: actions/checkout@24cb9080177205b6e8c946b17badbe402adc938f # v3
 
       - name: Setup Node.js
         uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c # v3
@@ -71,4 +71,4 @@ jobs:
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@e690f03220f8a0e2d4da521d8b3a50e0b52650e0 # v1
+        uses: actions/deploy-pages@dcda0bb2bcba68842abb9414982734cde54a96d8 # v1
