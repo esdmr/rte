@@ -17,7 +17,8 @@ on:
       - "renovate.json"
 
 jobs:
-  validate-config:
+  validate-renovate-config:
+    name: Validate renovate config
     runs-on: ubuntu-latest
 
     steps:

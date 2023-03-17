@@ -5,8 +5,8 @@ on:
   - pull_request
 
 jobs:
-  test:
-    name: Test
+  reuse-compliance:
+    name: REUSE compliance
     runs-on: ubuntu-latest
 
     steps:
