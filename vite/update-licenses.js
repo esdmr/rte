@@ -16,7 +16,12 @@ import fs from 'node:fs/promises';
 import process from 'node:process';
 import {readWantedLockfile} from '@pnpm/lockfile-file';
 import parseAuthor from 'parse-author';
-import {createDir, getIntegrity, isBuildUpToDate} from './plugin-helper.js';
+import {
+	createDir,
+	destroyDir,
+	getIntegrity,
+	isBuildUpToDate,
+} from './plugin-helper.js';
 import * as paths from './paths.js';
 
 /** @type {Record<string, Partial<Package>>} */
@@ -141,13 +146,6 @@ async function getPnpmDirs() {
 				},
 			]);
 		});
-}
-
-/**
- * @param {URL} dir
- */
-async function destroyDir(dir) {
-	await fs.rm(dir, {force: true, recursive: true});
 }
 
 /**
