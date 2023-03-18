@@ -3,7 +3,7 @@ Upstream-Name: RTE
 Upstream-Contact: esdmr <esdmr0@gmail.com>
 Source: https://github.com/esdmr/rte
 
-Files: src/* 404.html index.html
+Files: src/* composition.html index.html
 Copyright: 2022 esdmr
 License: AGPL-3.0-only
 
