@@ -48,7 +48,8 @@ export function createPage(options: {
 	readonly content: ComponentChild;
 	readonly classes: readonly string[];
 }) {
-	const root = options.root ?? options.page?.findNearest(CompositorGlobalGroup);
+	const root =
+		options.root ?? options.page?.findNearest(CompositorGlobalGroup);
 	assert(root, 'Either root or page needs to be provided');
 
 	const newPage = new CompositorPage();

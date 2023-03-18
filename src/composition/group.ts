@@ -13,11 +13,15 @@ export class CompositorGroup<
 	}
 
 	get firstChild() {
-		return getCompositorNode(this._element.firstElementChild) as T | undefined;
+		return getCompositorNode(this._element.firstElementChild) as
+			| T
+			| undefined;
 	}
 
 	get lastChild() {
-		return getCompositorNode(this._element.lastElementChild) as T | undefined;
+		return getCompositorNode(this._element.lastElementChild) as
+			| T
+			| undefined;
 	}
 
 	get hasChildren() {

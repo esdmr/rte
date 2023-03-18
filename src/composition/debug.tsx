@@ -29,7 +29,8 @@ const abortDialog = (dialog: CompositorDialog<any>) => () => {
 };
 
 const openDialog =
-	(page: CompositorPage, setResult: StateUpdater<string | undefined>) => () => {
+	(page: CompositorPage, setResult: StateUpdater<string | undefined>) =>
+	() => {
 		createDialog<string>({
 			page,
 			content: <Dialog />,
@@ -65,8 +66,9 @@ const Dialog: FunctionComponent = () => {
 	return (
 		<article class={css.dialogContainer}>
 			<h1>
-				This is a dialog! (level = {page.dialogs.children.indexOf(dialog)},
-				randId = {useRandomId()})
+				This is a dialog! (level ={' '}
+				{page.dialogs.children.indexOf(dialog)}, randId ={' '}
+				{useRandomId()})
 			</h1>
 			{result && <p>Dialog result was: {result}</p>}
 			<form onSubmit={resolveDialog(dialog)}>
@@ -90,8 +92,8 @@ const Page: FunctionComponent = () => {
 	return (
 		<>
 			<h1>
-				Hello, World! (level = {root.pages.children.indexOf(page)}, randId ={' '}
-				{useRandomId()})
+				Hello, World! (level = {root.pages.children.indexOf(page)},
+				randId = {useRandomId()})
 			</h1>
 			{result && <p>Dialog result was: {result}</p>}
 			<button
@@ -102,7 +104,9 @@ const Page: FunctionComponent = () => {
 			</button>
 			<button onClick={openDialog(page, setResult)}>Open dialog</button>
 			<button onClick={openPage(page)}>Open page</button>
-			<button onClick={openPage(page, 'replace')}>Open page in-place</button>
+			<button onClick={openPage(page, 'replace')}>
+				Open page in-place
+			</button>
 		</>
 	);
 };
