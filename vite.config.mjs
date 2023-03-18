@@ -4,6 +4,7 @@ import prefresh from '@prefresh/vite';
 import strip from '@rollup/plugin-strip';
 import {defaultImport} from 'default-import';
 import inspect from 'vite-plugin-inspect';
+import environment from 'vite-plugin-environment';
 import cssImport from './vite/css-import.js';
 import preactDebug from './vite/preact-debug.js';
 import typedCssModules from './vite/typed-css-modules.js';
@@ -50,6 +51,9 @@ export default defineConfig(({command}) => ({
 		cors: false,
 	},
 	plugins: [
+		environment(['RTE_TREE_URL', 'RTE_BLOB_URL'], {
+			defineOn: 'import.meta.env',
+		}),
 		defaultImport(inspect)({
 			build: false,
 			outputDir: 'node_modules/.cache/vite-inspect',
@@ -58,7 +62,11 @@ export default defineConfig(({command}) => ({
 		cssImport,
 		command === 'build' &&
 			defaultImport(strip)({
-				functions: ['performance.mark', 'performance.measure', 'console.debug'],
+				functions: [
+					'performance.mark',
+					'performance.measure',
+					'console.debug',
+				],
 				include: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'],
 			}),
 		prefresh(),

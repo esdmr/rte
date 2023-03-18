@@ -15,13 +15,35 @@ import {UnknownRoute} from './UnknownRoute.js';
 export const App: FunctionComponent = () => (
 	<NavSwitch>
 		<Route path="/">{() => <HomePage />}</Route>
-		<Route path="/debug/licenses/:id+">
-			{({id}) => <LicenseFile id={id} return-route="/debug/licenses" />}
+		<Route path="/debug/licenses/patches/:id/:pkg*">
+			{({id, pkg}) => (
+				<LicenseFile
+					path={id + '.txt'}
+					label={(pkg ?? 'an unknown') + ' patch'}
+					dir="licenses/files/"
+					return-route="/debug/licenses"
+				/>
+			)}
 		</Route>
-		<Route path="/debug/licenses">{() => <Licenses return-route="/" />}</Route>
+		<Route path="/debug/licenses/deps/:pkg+">
+			{({pkg}) => (
+				<LicenseFile
+					path={pkg}
+					label={pkg}
+					dir="licenses/deps/"
+					is-package
+					return-route="/debug/licenses"
+				/>
+			)}
+		</Route>
+		<Route path="/debug/licenses">
+			{() => <Licenses return-route="/" />}
+		</Route>
 		<Route path="/debug/editor">{() => <EditorContainer />}</Route>
 		<Route path="/debug/gallery">{() => <DebugGallery />}</Route>
-		<Route path="/debug/route/:id+">{({id}) => <DebugRoute id={id} />}</Route>
+		<Route path="/debug/route/:id+">
+			{({id}) => <DebugRoute id={id} />}
+		</Route>
 		<Route path="/debug/nav">{() => <DebugNav />}</Route>
 		<Route path="/debug/page-state">{() => <DebugPageState />}</Route>
 		<Route path="/debug/gamepad">{() => <DebugGamepad />}</Route>

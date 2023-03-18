@@ -73,9 +73,9 @@ describe('vectorPolar', () => {
 			expect(() => vectorPolar(1, value)).toThrowErrorMatchingSnapshot(
 				`angle of ${value}`,
 			);
-			expect(() => vectorPolar(value, value)).toThrowErrorMatchingSnapshot(
-				`both ${value}`,
-			);
+			expect(() =>
+				vectorPolar(value, value),
+			).toThrowErrorMatchingSnapshot(`both ${value}`);
 		}
 	});
 });
@@ -107,7 +107,10 @@ describe('add', () => {
 
 describe('subtract', () => {
 	it('subtracts all vectors', () => {
-		expect(subtract(vector(3, 2), vector(2, 3))).toMatchObject({x: 1, y: -1});
+		expect(subtract(vector(3, 2), vector(2, 3))).toMatchObject({
+			x: 1,
+			y: -1,
+		});
 	});
 });
 

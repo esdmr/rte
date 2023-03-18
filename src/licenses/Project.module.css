@@ -1,0 +1,41 @@
+.project {
+	padding: 1em 0;
+	display: grid;
+	grid-template-columns: 1fr auto;
+	grid-template-areas: 'content icon';
+	gap: 0.5em;
+}
+
+.project + .project {
+	border-top: 0.1em solid rgba(var(--foreground-rgb) / 0.3);
+}
+
+.version {
+	padding: 0 1em;
+	font-size: 0.8em;
+	color: rgba(var(--foreground-rgb) / 0.75);
+}
+
+.content .heading,
+.content p {
+	margin: 0;
+}
+
+.content .heading {
+	margin-block-end: 0.5em;
+}
+
+.content {
+	grid-area: content;
+}
+
+.icon {
+	display: inline-flex;
+	flex-direction: column;
+	gap: 0.1em;
+	padding: 0.1em;
+	grid-area: icon;
+	border: 0.1em solid rgba(var(--foreground-rgb) / 0.3);
+	border-radius: calc(1.5em * var(--SQRT-2));
+	align-self: center;
+}

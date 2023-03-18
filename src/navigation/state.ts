@@ -12,22 +12,32 @@ export class NavState {
 	}
 
 	next(options?: NavSelectOptions) {
-		this.selected?.parent?.getNextLeaf(this.selected, 'next')?.select(options);
+		this.selected?.parent
+			?.getNextLeaf(this.selected, 'next')
+			?.select(options);
 	}
 
 	up(options?: NavSelectOptions) {
-		this.selected?.parent?.getNextLeaf(this.selected, 'up')?.select(options);
+		this.selected?.parent
+			?.getNextLeaf(this.selected, 'up')
+			?.select(options);
 	}
 
 	down(options?: NavSelectOptions) {
-		this.selected?.parent?.getNextLeaf(this.selected, 'down')?.select(options);
+		this.selected?.parent
+			?.getNextLeaf(this.selected, 'down')
+			?.select(options);
 	}
 
 	left(options?: NavSelectOptions) {
-		this.selected?.parent?.getNextLeaf(this.selected, 'left')?.select(options);
+		this.selected?.parent
+			?.getNextLeaf(this.selected, 'left')
+			?.select(options);
 	}
 
 	right(options?: NavSelectOptions) {
-		this.selected?.parent?.getNextLeaf(this.selected, 'right')?.select(options);
+		this.selected?.parent
+			?.getNextLeaf(this.selected, 'right')
+			?.select(options);
 	}
 }

@@ -35,25 +35,37 @@ export const buttonPageState = (
 				// No keyboard icon yet.
 				{
 					Icon: () => (
-						<gfbi.GamepadFaceButtonIcon style={gfbi.symbols} which="down" />
+						<gfbi.GamepadFaceButtonIcon
+							style={gfbi.symbols}
+							which="down"
+						/>
 					),
 					mode: 'playstation-3',
 				},
 				{
 					Icon: () => (
-						<gfbi.GamepadFaceButtonIcon style={gfbi.symbols} which="down" />
+						<gfbi.GamepadFaceButtonIcon
+							style={gfbi.symbols}
+							which="down"
+						/>
 					),
 					mode: 'playstation-4',
 				},
 				{
 					Icon: () => (
-						<gfbi.GamepadFaceButtonIcon style={gfbi.symbols} which="down" />
+						<gfbi.GamepadFaceButtonIcon
+							style={gfbi.symbols}
+							which="down"
+						/>
 					),
 					mode: 'playstation-5',
 				},
 				{
 					Icon: () => (
-						<gfbi.GamepadFaceButtonIcon style={gfbi.lettersAb} which="down" />
+						<gfbi.GamepadFaceButtonIcon
+							style={gfbi.lettersAb}
+							which="down"
+						/>
 					),
 					mode: 'xbox',
 				},
@@ -72,7 +84,10 @@ export const buttonPageState = (
 				// No dpad icon for switch-l yet.
 				{
 					Icon: () => (
-						<gfbi.GamepadFaceButtonIcon style={gfbi.lettersBa} which="down" />
+						<gfbi.GamepadFaceButtonIcon
+							style={gfbi.lettersBa}
+							which="down"
+						/>
 					),
 					mode: 'switch-pro',
 				},

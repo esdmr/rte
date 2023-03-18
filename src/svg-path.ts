@@ -17,7 +17,9 @@ export class Context {
 		const arg = args
 			.map((item) => {
 				if (typeof item === 'object') {
-					return `${numberToString(item.x)},${numberToString(item.y)}`;
+					return `${numberToString(item.x)},${numberToString(
+						item.y,
+					)}`;
 				}
 
 				if (typeof item === 'number') {
