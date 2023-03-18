@@ -18,7 +18,8 @@ export const DebugGamepadState: FunctionComponent = () => (
 				<table aria-live="polite">
 					{gamepad.buttons.map((button, index) => {
 						const state =
-							(button.pressed ? 'P' : '') + (button.touched ? 'T' : '');
+							(button.pressed ? 'P' : '') +
+							(button.touched ? 'T' : '');
 
 						return (
 							<tr key={index}>

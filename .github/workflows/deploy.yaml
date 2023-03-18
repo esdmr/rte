@@ -58,6 +58,8 @@ jobs:
         run: pnpm run build
         env:
           RTE_BASE_URL: ${{ steps.pages.outputs.base_path }}
+          RTE_TREE_URL: https://github.com/${{ github.repository }}/tree/${{ GITHUB_SHA }}/
+          RTE_BLOB_URL: https://github.com/${{ github.repository }}/blob/${{ GITHUB_SHA }}/
 
       - name: Remove generated declaration files
         run: rm -r build/types

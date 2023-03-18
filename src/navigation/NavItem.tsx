@@ -59,7 +59,7 @@ const navItemHooks: NavHooks = {
 };
 
 export const NavItem: FunctionComponent<{
-	onSelectPageStateHooks?: PageStateHooks | undefined;
+	onSelectPageStateHooks?: PageStateHooks;
 	children: VNode;
 }> = (props) => {
 	const childToken = useChildToken();
@@ -94,7 +94,9 @@ export const NavItem: FunctionComponent<{
 						node.ref = undefined;
 						setRef(oldRef, value);
 					} else {
-						throw new TypeError('NavItem with a non-HTMLElement ref');
+						throw new TypeError(
+							'NavItem with a non-HTMLElement ref',
+						);
 					}
 				},
 			})}

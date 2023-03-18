@@ -7,14 +7,19 @@ export const LegacyLicense: FunctionComponent<{
 }> = (props) => (
 	<>
 		<p>
-			This version uses legacy object <code>license</code>/<code>licenses</code>{' '}
-			field.
+			This version uses legacy object <code>license</code>/
+			<code>licenses</code> field.
 		</p>
 		<ul>
 			{props.license.entries.map((license) => (
 				<li>
 					<A href={license.url}>
-						{license.type ? <code>{license.type}</code> : '[unknown license]'}.
+						{license.type ? (
+							<code>{license.type}</code>
+						) : (
+							'[unknown license]'
+						)}
+						.
 					</A>
 				</li>
 			))}

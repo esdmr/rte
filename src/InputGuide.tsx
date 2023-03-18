@@ -23,7 +23,9 @@ export const InputGuide: FunctionComponent = () => (
 		hidden={inputGuideEntries.value.length === 0}
 	>
 		{inputGuideEntries.value.map(({text, icons}) => {
-			const icon = icons.find((icon) => icon.mode === activeInputMode.value);
+			const icon = icons.find(
+				(icon) => icon.mode === activeInputMode.value,
+			);
 
 			return icon ? (
 				<li class={css.entry} key={text}>

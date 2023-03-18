@@ -1,33 +1,8 @@
 import type {FunctionComponent} from 'preact';
-import {Icon} from '@mdi/react';
-import {mdiChevronRight} from '@mdi/js';
 import type * as Types from '../license-types.js';
-import {classes} from '../classes.js';
-import {CircularButton} from '../circular-button.js';
-import * as css from './Package.module.css.js';
 import {LegacyLicense} from './LegacyLicense.js';
-
-const getLicenseFileUrl = (route: string, pkgId: string) => {
-	const encodedPkgId = encodeURIComponent(pkgId)
-		.replace(/%40/g, '@')
-		.replace(/%2F/g, '/');
-
-	return `${route}${encodedPkgId}`;
-};
-
-const listFormat = new Intl.ListFormat('en', {style: 'long'});
-
-const getAttributions = (authors: readonly string[]) => {
-	if (authors.length === 0) {
-		return ['unknown authors'];
-	}
-
-	return listFormat
-		.formatToParts(authors)
-		.map((item) =>
-			item.type === 'element' ? <i>{item.value}</i> : item.value,
-		);
-};
+import * as css from './Project.module.css.js';
+import {encodePkgId, Project} from './Project.js';
 
 export const Package: FunctionComponent<{
 	pkg: Types.Package;
@@ -39,11 +14,11 @@ export const Package: FunctionComponent<{
 
 	switch (pkg.license.type) {
 		case 'spdx': {
-			licenseFile = pkg.license.hasFile;
+			licenseFile = !pkg.license.fileMissing;
 			license = (
 				<p>
 					<code>{pkg.license.id}</code>.
-					{pkg.license.hasFile || ' License file not found!'}
+					{pkg.license.fileMissing && ' License file not found!'}
 				</p>
 			);
 
@@ -67,27 +42,32 @@ export const Package: FunctionComponent<{
 	}
 
 	return (
-		<article
-			class={classes(css.pkg, licenseFile ? css.hasLicenseFile : undefined)}
+		<Project
+			name={pkgId}
+			heading={
+				<>
+					<code>{pkg.name}</code>{' '}
+					<code class={css.version}>{pkg.version}</code>
+				</>
+			}
+			authors={pkg.authors}
+			registry={{
+				href: `https://www.npmjs.com/package/${pkg.name}/v/${pkg.version}`,
+				external: true,
+			}}
+			repository={{
+				href: pkg.repository,
+				external: true,
+			}}
+			license={
+				licenseFile
+					? {
+							href: `${route}deps/${encodePkgId(pkgId)}`,
+					  }
+					: undefined
+			}
 		>
-			<div class={css.content} role="presentation">
-				<h3 class={css.heading}>
-					<code>{pkg.name}</code> <code class={css.version}>{pkg.version}</code>
-				</h3>
-				<p>By {getAttributions(pkg.authors)}.</p>
-				{license}
-			</div>
-			{licenseFile && (
-				<div class={css.icon} role="presentation">
-					<CircularButton
-						href={getLicenseFileUrl(route, pkgId)}
-						title="See license file"
-						aria-label={`See license file for ${pkg.name}@${pkg.version}`}
-					>
-						<Icon path={mdiChevronRight} />
-					</CircularButton>
-				</div>
-			)}
-		</article>
+			{license}
+		</Project>
 	);
 };

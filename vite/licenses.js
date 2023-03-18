@@ -11,6 +11,7 @@ const updateLicenses = async () => {
 	console.log('Fetching the licenses...');
 	return execaNode(scriptPath, {
 		stdio: 'inherit',
+		cwd: new URL('..', import.meta.url),
 		env: {
 			ONLY_PROD: 'true',
 		},
@@ -37,13 +38,13 @@ export default definePlugin({
 		await updateLicenses();
 		isBuild = false;
 
-		const licenseFilesRoute = sirv('build/license-files', {
+		const licenseFilesRoute = sirv('build/licenses', {
 			extensions: [],
 			dev: true,
 		});
 
 		server.middlewares.use(
-			`${server.config.base}license-files`,
+			`${server.config.base}licenses`,
 			licenseFilesRoute,
 		);
 	},

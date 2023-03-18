@@ -33,7 +33,13 @@ export const GamepadFaceButtonIcon: FunctionComponent<{
 			/>
 			<defs aria-hidden>
 				<mask id={id}>
-					<rect x={-8} y={-8} width={16} height={16} class={css.maskOut} />
+					<rect
+						x={-8}
+						y={-8}
+						width={16}
+						height={16}
+						class={css.maskOut}
+					/>
 					<symbol.Icon />
 				</mask>
 			</defs>

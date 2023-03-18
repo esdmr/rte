@@ -29,7 +29,9 @@ export const EditorContainer: FunctionComponent = () => {
 		<pageStateContext.Provider value={pageState}>
 			<main class={css.editorContainer} role="region" aria-live="polite">
 				<Suspense
-					fallback={<Loading placement="bottom-right" class={css.editor} />}
+					fallback={
+						<Loading placement="bottom-right" class={css.editor} />
+					}
 				>
 					<Editor />
 				</Suspense>
