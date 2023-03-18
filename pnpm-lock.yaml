@@ -48,7 +48,7 @@ specifiers:
   default-import: 1.1.5
   execa: 6.1.0
   find: 0.3.0
-  get-pkg-repo: ^5.0.0
+  get-pkg-repo: 5.0.0
   history: 5.3.0
   jsdom: 21.1.0
   monaco-editor: 0.34.1
