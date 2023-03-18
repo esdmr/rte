@@ -34,7 +34,7 @@
 		"@types/jsdom": "20.0.1",
 		"@types/parse-author": "2.0.1",
 		"@types/postcss-url": "10.0.0",
-		"@vitest/coverage-c8": "0.27.2",
+		"@vitest/coverage-c8": "0.29.1",
 		"default-import": "1.1.5",
 		"execa": "6.1.0",
 		"find": "0.3.0",
@@ -47,7 +47,7 @@
 		"vite": "3.1.0",
 		"vite-plugin-environment": "1.1.3",
 		"vite-plugin-inspect": "0.7.12",
-		"vitest": "0.27.2",
+		"vitest": "0.29.1",
 		"xo": "0.53.1"
 	},
 	"packageManager": "pnpm@7.27.1",
