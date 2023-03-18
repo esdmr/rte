@@ -59,18 +59,19 @@
 						"optional": true
 					}
 				}
+			},
+			"xo": {
+				"dependencies": {
+					"typescript": null
+				},
+				"peerDependencies": {
+					"typescript": "*"
+				}
 			}
 		},
 		"patchedDependencies": {
-			"@preact/compat@17.1.1": "patches/@preact__compat@17.1.1.patch",
-			"@mdi/react@1.6.1": "patches/@mdi__react@1.6.1.patch",
 			"wouter-preact@2.8.0-alpha.2": "patches/wouter-preact@2.8.0-alpha.2.patch",
-			"typed-css-modules@0.7.2": "patches/typed-css-modules@0.7.2.patch",
-			"@prefresh/vite@2.2.8": "patches/@prefresh__vite@2.2.8.patch",
-			"@rollup/pluginutils@4.2.1": "patches/@rollup__pluginutils@4.2.1.patch",
-			"vite@3.1.0": "patches/vite@3.1.0.patch",
-			"tinybench@2.3.1": "patches/tinybench@2.3.1.patch",
-			"tinyspy@1.0.2": "patches/tinyspy@1.0.2.patch"
+			"@prefresh/vite@2.2.8": "patches/@prefresh__vite@2.2.8.patch"
 		}
 	}
 }
