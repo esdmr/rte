@@ -51,8 +51,12 @@ export const Package: FunctionComponent<{
 				</>
 			}
 			authors={pkg.authors}
-			npm={{
+			registry={{
 				href: `https://www.npmjs.com/package/${pkg.name}/v/${pkg.version}`,
+				external: true,
+			}}
+			repository={{
+				href: pkg.repository,
 				external: true,
 			}}
 			license={

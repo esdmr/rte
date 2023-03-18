@@ -3,7 +3,7 @@
 	display: grid;
 	grid-template-columns: 1fr auto;
 	grid-template-areas: 'content icon';
-	align-items: center;
+	gap: 0.5em;
 }
 
 .project + .project {
@@ -31,8 +31,11 @@
 
 .icon {
 	display: inline-flex;
-	flex-direction: row;
+	flex-direction: column;
 	gap: 0.1em;
+	padding: 0.1em;
 	grid-area: icon;
-	height: 1.5em;
+	border: 0.1em solid rgba(var(--foreground-rgb) / 0.3);
+	border-radius: calc(1.5em * var(--SQRT-2));
+	align-self: center;
 }

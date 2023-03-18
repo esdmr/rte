@@ -91,7 +91,7 @@ type EditorProps = {
 export class Editor extends Component<EditorProps> {
 	private forceAccessibility = false;
 	private theme: EditorProps['theme'];
-	private editor?: MonacoEditor | undefined;
+	private editor?: MonacoEditor;
 	private readonly themeQuery = matchMedia('(prefers-color-scheme: light)');
 
 	constructor(props?: EditorProps) {

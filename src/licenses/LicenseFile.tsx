@@ -12,7 +12,7 @@ export const LicenseFile: FunctionComponent<{
 	label: string;
 	path: string;
 	dir: string;
-	'is-package'?: boolean | undefined;
+	'is-package'?: boolean;
 	'return-route': string;
 }> = (props) => {
 	const label = decodeURIComponent(props.label);

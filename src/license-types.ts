@@ -3,6 +3,7 @@ export type Package = {
 	readonly version: string;
 	readonly authors: readonly string[];
 	readonly license: License;
+	readonly repository: string;
 };
 
 export type License =
@@ -14,7 +15,7 @@ export type License =
 export type SpdxLicense = {
 	readonly type: 'spdx';
 	readonly id: string;
-	readonly fileMissing?: true | undefined;
+	readonly fileMissing?: true;
 };
 
 export type CustomLicense = {

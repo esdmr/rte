@@ -15,6 +15,7 @@ import fs from 'node:fs/promises';
 import process from 'node:process';
 import {readWantedLockfile} from '@pnpm/lockfile-file';
 import parseAuthor from 'parse-author';
+import getPkgRepo from 'get-pkg-repo';
 import {
 	createDir,
 	destroyDir,
@@ -174,6 +175,7 @@ async function processPnpmDir(pkgDir, snapshot, unusedOverrides) {
 		version,
 		license: pkgLicense,
 		licenses: pkgLicenses,
+		repository: pkgRepository,
 		author: pkgAuthor = '',
 		contributors: pkgContributors = [],
 		maintainers: pkgMaintainers = [],
@@ -221,13 +223,14 @@ async function processPnpmDir(pkgDir, snapshot, unusedOverrides) {
 			version,
 			authors,
 			license,
+			repository: getPkgRepo({repository: pkgRepository}).browse(),
 			...overrides[name],
 			...overrides[pkgId],
 		},
 	]);
 }
 
-/** @param {string | {name?: string | null | undefined} | null | undefined} author */
+/** @param {string | {name?: string | null} | null | undefined} author */
 function getContributorName(author) {
 	return (
 		(typeof author === 'string'

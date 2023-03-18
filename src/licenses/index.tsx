@@ -58,7 +58,7 @@ export const Licenses: FunctionComponent<{
 						name="Material Design Icons"
 						heading="Material Design Icons"
 						authors={['Google']}
-						github={{
+						repository={{
 							href: 'https://github.com/google/material-design-icons',
 							external: true,
 						}}

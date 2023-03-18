@@ -5,10 +5,10 @@ import * as css from './circular-button.module.css.js';
 import {A, Button} from './navigation/wrappers.js';
 
 export const CircularButton: FunctionComponent<
-	JSX.HTMLAttributes<HTMLButtonElement | HTMLAnchorElement> & {
-		href?: string | undefined;
-		class?: string | undefined;
-		external?: boolean | undefined;
+	Omit<JSX.HTMLAttributes<HTMLButtonElement | HTMLAnchorElement>, 'href'> & {
+		href?: string;
+		class?: string;
+		external?: boolean;
 	}
 > = (props) => {
 	const Anchor = props.external ? A : Link;

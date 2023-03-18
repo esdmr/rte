@@ -1,4 +1,9 @@
-import {mdiCopyright, mdiGithub, mdiNpm, mdiSourceCommit} from '@mdi/js';
+import {
+	mdiCopyright,
+	mdiSourceCommit,
+	mdiSourceRepository,
+	mdiStore,
+} from '@mdi/js';
 import {Icon} from '@mdi/react';
 import type {ComponentChild, FunctionComponent} from 'preact';
 import {CircularButton} from '../circular-button.js';
@@ -18,12 +23,12 @@ type ProjectLink = {
 
 export const Project: FunctionComponent<{
 	readonly heading: ComponentChild;
-	readonly authors?: readonly string[] | undefined;
+	readonly authors?: readonly string[];
 	readonly name: string;
-	readonly github?: ProjectLink | undefined;
-	readonly npm?: ProjectLink | undefined;
-	readonly source?: ProjectLink | undefined;
-	readonly license?: ProjectLink | undefined;
+	readonly repository?: ProjectLink;
+	readonly registry?: ProjectLink;
+	readonly source?: ProjectLink;
+	readonly license?: ProjectLink;
 }> = (props) => {
 	return (
 		<article class={classes(css.project)}>
@@ -40,8 +45,16 @@ export const Project: FunctionComponent<{
 				<div class={css.icon} role="presentation">
 					<NavRow>
 						{[
-							[props.github, mdiGithub, 'GitHub page'] as const,
-							[props.npm, mdiNpm, 'NPM page'] as const,
+							[
+								props.registry,
+								mdiStore,
+								'registry page',
+							] as const,
+							[
+								props.repository,
+								mdiSourceRepository,
+								'repository',
+							] as const,
 							[
 								props.source,
 								mdiSourceCommit,
@@ -58,9 +71,9 @@ export const Project: FunctionComponent<{
 									<CircularButton
 										key={type}
 										href={link.href}
+										external={link.external}
 										title={`See ${type}`}
 										aria-label={`See ${type} for ${props.name}`}
-										external={link.external}
 									>
 										<Icon path={icon} />
 									</CircularButton>

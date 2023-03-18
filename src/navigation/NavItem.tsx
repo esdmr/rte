@@ -59,7 +59,7 @@ const navItemHooks: NavHooks = {
 };
 
 export const NavItem: FunctionComponent<{
-	onSelectPageStateHooks?: PageStateHooks | undefined;
+	onSelectPageStateHooks?: PageStateHooks;
 	children: VNode;
 }> = (props) => {
 	const childToken = useChildToken();
