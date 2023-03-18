@@ -1,4 +1,4 @@
-import * as css from './index.module.css.js';
+import * as css from './index.module.css';
 import type {Direction, FaceButtonStyle} from './types.js';
 
 const createFaceButton = (text: string): FaceButtonStyle[Direction] => ({

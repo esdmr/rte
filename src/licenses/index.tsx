@@ -3,7 +3,7 @@ import {Icon} from '@mdi/react';
 import type {FunctionComponent} from 'preact';
 import {Suspense} from 'preact/compat';
 import {AllowScroll} from '../AllowScroll.js';
-import {CircularButton} from '../circular-button.js';
+import {CircularButton} from '../CircularButton.js';
 import {Loading} from '../Loading.js';
 import {NavColumn} from '../navigation/NavColumn.js';
 import {Title} from '../Title.js';
