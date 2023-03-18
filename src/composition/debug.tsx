@@ -1,6 +1,6 @@
 import type {FunctionComponent, TargetedEvent} from 'preact/compat';
 import {useMemo, useState, type StateUpdater} from 'preact/hooks';
-import * as css from './debug.module.css.js';
+import * as css from './debug.module.css';
 import {
 	createDialog,
 	useCompositorDialog,

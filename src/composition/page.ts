@@ -5,7 +5,7 @@ import {CompositorGlobalGroup} from './global-group.js';
 import {CompositorGroup, groupParentOf} from './group.js';
 import {CompositorLayer, useCompositorNode} from './layer.js';
 import {CompositorNode} from './node.js';
-import * as css from './page.module.css.js';
+import * as css from './page.module.css';
 
 export class CompositorPage extends CompositorNode {
 	readonly content = new CompositorLayer(document.createElement('main'));
