@@ -1,7 +1,7 @@
 import type {FunctionComponent} from 'preact';
 import type * as Types from '../license-types.js';
 import {LegacyLicense} from './LegacyLicense.js';
-import * as css from './Project.module.css.js';
+import * as css from './Project.module.css';
 import {encodePkgId, Project} from './Project.js';
 
 export const Package: FunctionComponent<{

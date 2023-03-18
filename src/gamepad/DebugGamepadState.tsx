@@ -2,7 +2,7 @@ import type {FunctionComponent} from 'preact';
 import {StandardAxes, StandardButtons} from './standard.js';
 import {gamepads} from './GamepadToSignal.js';
 import {DebugGamepadAxesCircularity} from './DebugGamepadAxesCircularity.js';
-import * as css from './DebugGamepadState.module.css.js';
+import * as css from './DebugGamepadState.module.css';
 
 export const DebugGamepadState: FunctionComponent = () => (
 	<>

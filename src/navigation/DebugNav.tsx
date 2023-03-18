@@ -2,12 +2,12 @@ import {mdiArrowLeft} from '@mdi/js';
 import {Icon} from '@mdi/react';
 import type {FunctionComponent} from 'preact';
 import {AllowScroll} from '../AllowScroll.js';
-import {CircularButton} from '../circular-button.js';
+import {CircularButton} from '../CircularButton.js';
 import {Title} from '../Title.js';
 import {NavColumn} from './NavColumn.js';
 import {NavFlow} from './NavFlow.js';
 import {NavGrid} from './NavGrid.js';
-import * as css from './DebugNav.module.css.js';
+import * as css from './DebugNav.module.css';
 import {NavRow} from './NavRow.js';
 import {A, Button} from './wrappers.js';
 

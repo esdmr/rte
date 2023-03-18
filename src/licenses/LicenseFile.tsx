@@ -4,7 +4,7 @@ import type {FunctionComponent} from 'preact';
 import {lazy, Suspense, useMemo} from 'preact/compat';
 import assert from '../assert.js';
 import {AllowScroll} from '../AllowScroll.js';
-import {CircularButton} from '../circular-button.js';
+import {CircularButton} from '../CircularButton.js';
 import {Loading} from '../Loading.js';
 import {Title} from '../Title.js';
 

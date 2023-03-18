@@ -5,7 +5,6 @@ import strip from '@rollup/plugin-strip';
 import {defaultImport} from 'default-import';
 import inspect from 'vite-plugin-inspect';
 import environment from 'vite-plugin-environment';
-import cssImport from './vite/css-import.js';
 import preactDebug from './vite/preact-debug.js';
 import typedCssModules from './vite/typed-css-modules.js';
 import updateLicenses from './vite/licenses.js';
@@ -59,7 +58,6 @@ export default defineConfig(({command}) => ({
 			outputDir: 'node_modules/.cache/vite-inspect',
 		}),
 		preactDebug,
-		cssImport,
 		command === 'build' &&
 			defaultImport(strip)({
 				functions: [

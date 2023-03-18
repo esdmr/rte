@@ -3,7 +3,7 @@ import {useCallback, useState} from 'preact/hooks';
 import {Input} from '../navigation/wrappers.js';
 import {Title} from '../Title.js';
 import {DebugPageNode} from './DebugPageNode.js';
-import * as css from './DebugTitle.module.css.js';
+import * as css from './DebugTitle.module.css';
 
 export const DebugTitle: FunctionComponent = () => {
 	const [titleCount, update] = useState(0);

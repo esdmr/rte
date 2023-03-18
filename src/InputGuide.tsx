@@ -1,6 +1,6 @@
 import {signal} from '@preact/signals';
 import type {FunctionComponent} from 'preact';
-import * as css from './InputGuide.module.css.js';
+import * as css from './InputGuide.module.css';
 import {activeInputMode, type InputMode} from './page-state/input-mode.js';
 
 export type InputGuideIcon = {

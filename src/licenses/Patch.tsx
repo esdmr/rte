@@ -1,6 +1,6 @@
 import type {FunctionComponent} from 'preact';
 import type * as Types from '../license-types.js';
-import * as css from './Project.module.css.js';
+import * as css from './Project.module.css';
 import {encodePkgId, Project} from './Project.js';
 import {Authors} from './Authors.js';
 
