@@ -59,10 +59,8 @@
 		},
 		{
 			"matchPackageNames": [
-				"@istanbuljs/esm-loader-hook",
-				"@types/tap",
-				"c8",
-				"tap"
+				"@vitest/coverage-c8",
+				"vitest"
 			],
 			"addLabels": [
 				"renovate/testing"
@@ -80,26 +78,8 @@
 		},
 		{
 			"matchPackageNames": [
-				"@types/node"
-			],
-			"allowedVersions": "^14.0.0"
-		},
-		{
-			"matchPackageNames": [
-				"@microsoft/api-documenter",
-				"@microsoft/api-extractor",
-				"katex",
-				"@preact/compat",
-				"@mdi/react",
 				"wouter-preact",
-				"typed-css-modules",
-				"@prefresh/vite",
-				"@rollup/pluginutils",
-				"vite",
-				"tinybench",
-				"tinyspy",
-				"react",
-				"react-dom"
+				"@prefresh/vite"
 			],
 			"enabled": false
 		},

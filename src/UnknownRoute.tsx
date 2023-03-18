@@ -2,7 +2,7 @@ import {mdiHome} from '@mdi/js';
 import {Icon} from '@mdi/react';
 import type {FunctionComponent} from 'preact';
 import {AllowScroll} from './AllowScroll.js';
-import {CircularButton} from './circular-button.js';
+import {CircularButton} from './CircularButton.js';
 import {Title} from './Title.js';
 
 export const UnknownRoute: FunctionComponent = () => (

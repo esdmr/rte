@@ -1,7 +1,7 @@
 import type {FunctionComponent} from 'preact';
 import {useId} from 'preact/hooks';
 import {classes} from '../../../classes.js';
-import * as css from './index.module.css.js';
+import * as css from './index.module.css';
 import type {Direction, FaceButtonStyle} from './types.js';
 
 export const GamepadFaceButtonIcon: FunctionComponent<{

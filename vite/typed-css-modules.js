@@ -36,6 +36,13 @@ const newCreator = () =>
  */
 const writeTypes = async (file, creator = newCreator()) => {
 	const content = await creator.create(file);
+
+	Object.defineProperty(content, 'outputFileName', {
+		get() {
+			return this.rInputPath.replace(/\.css$/, '') + '.d.css.ts';
+		},
+	});
+
 	await content.writeFile();
 };
 

@@ -5,7 +5,7 @@ import {Router} from 'wouter-preact';
 import {App} from './App.js';
 import {NavRoot} from './navigation/NavRoot.js';
 import './index.css';
-import {guideContainer} from './InputGuide.module.css.js';
+import {guideContainer} from './InputGuide.module.css';
 import {useHashLocation} from './wouter-hash.js';
 import {InputGuide} from './InputGuide.js';
 

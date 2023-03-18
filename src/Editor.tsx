@@ -7,7 +7,7 @@ import * as monaco from 'monaco-editor/esm/vs/editor/editor.api.js';
 import {type ComponentChild, Component} from 'preact';
 import assert from './assert.js';
 import type {Disposable} from './disposable.js';
-import * as css from './Editor.module.css.js';
+import * as css from './Editor.module.css';
 
 const lightTheme = 'vs-light';
 const darkTheme = 'vs-dark';

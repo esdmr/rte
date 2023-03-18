@@ -1,7 +1,7 @@
 import type {FunctionComponent} from 'preact';
 import {lazy, Suspense, useEffect, useMemo} from 'preact/compat';
 import {Loading} from './Loading.js';
-import * as css from './Editor.module.css.js';
+import * as css from './Editor.module.css';
 import {pageStateContext, usePageState} from './page-state/global.js';
 import {PageStateNode} from './page-state/node.js';
 import {voidPageState} from './page-state/void.js';

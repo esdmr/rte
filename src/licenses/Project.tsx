@@ -6,11 +6,11 @@ import {
 } from '@mdi/js';
 import {Icon} from '@mdi/react';
 import type {ComponentChild, FunctionComponent} from 'preact';
-import {CircularButton} from '../circular-button.js';
+import {CircularButton} from '../CircularButton.js';
 import {classes} from '../classes.js';
 import {NavRow} from '../navigation/NavRow.js';
 import {Authors} from './Authors.js';
-import * as css from './Project.module.css.js';
+import * as css from './Project.module.css';
 
 export const encodePkgId = (pkgId: string) => {
 	return encodeURIComponent(pkgId).replace(/%40/g, '@').replace(/%2F/g, '/');

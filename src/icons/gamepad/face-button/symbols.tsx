@@ -1,7 +1,7 @@
 import {scale, subtract, vectorPolar} from '../../../geometry.js';
 import {numberToString} from '../../../number-to-string.js';
 import * as svgPath from '../../../svg-path.js';
-import * as css from './index.module.css.js';
+import * as css from './index.module.css';
 import type {FaceButtonStyle} from './types.js';
 
 const symbolsRadius = 6;
