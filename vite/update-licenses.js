@@ -175,7 +175,7 @@ async function processPnpmDir(pkgDir, snapshot, unusedOverrides) {
 		version,
 		license: pkgLicense,
 		licenses: pkgLicenses,
-		repository: pkgRepository,
+		repository,
 		author: pkgAuthor = '',
 		contributors: pkgContributors = [],
 		maintainers: pkgMaintainers = [],
@@ -216,6 +216,10 @@ async function processPnpmDir(pkgDir, snapshot, unusedOverrides) {
 	unusedOverrides.delete(name);
 	unusedOverrides.delete(pkgId);
 
+	if (typeof repository === 'object' && repository.url.endsWith('.git')) {
+		repository.url = repository.url.slice(0, -4);
+	}
+
 	return /** @type {[string, Package]} */ ([
 		pkgId,
 		{
@@ -223,7 +227,7 @@ async function processPnpmDir(pkgDir, snapshot, unusedOverrides) {
 			version,
 			authors,
 			license,
-			repository: getPkgRepo({repository: pkgRepository}).browse(),
+			repository: getPkgRepo({repository}).browse(),
 			...overrides[name],
 			...overrides[pkgId],
 		},

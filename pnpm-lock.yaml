@@ -30,7 +30,7 @@ specifiers:
   get-pkg-repo: 5.0.0
   history: 5.3.0
   jsdom: 21.1.0
-  monaco-editor: 0.34.1
+  monaco-editor: 0.36.1
   parse-author: 2.0.0
   preact: 10.11.3
   react: npm:@preact/compat@17.1.1
@@ -50,7 +50,7 @@ dependencies:
   '@mdi/react': 1.6.1
   '@preact/signals': 1.1.3_preact@10.11.3
   history: 5.3.0
-  monaco-editor: 0.34.1
+  monaco-editor: 0.36.1
   preact: 10.11.3
   react: /@preact/compat/17.1.1_preact@10.11.3
   react-dom: /@preact/compat/17.1.1_preact@10.11.3
@@ -3634,8 +3634,8 @@ packages:
       ufo: 1.0.1
     dev: true
 
-  /monaco-editor/0.34.1:
-    resolution: {integrity: sha512-FKc80TyiMaruhJKKPz5SpJPIjL+dflGvz4CpuThaPMc94AyN7SeC9HQ8hrvaxX7EyHdJcUY5i4D0gNyJj1vSZQ==}
+  /monaco-editor/0.36.1:
+    resolution: {integrity: sha512-/CaclMHKQ3A6rnzBzOADfwdSJ25BFoFT0Emxsc4zYVyav5SkK9iA6lEtIeuN/oRYbwPgviJT+t3l+sjFa28jYg==}
     dev: false
 
   /mrmime/1.0.1:
