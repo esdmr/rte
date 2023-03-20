@@ -11,7 +11,7 @@ patchedDependencies:
     path: patches/@prefresh__vite@2.2.8.patch
 
 specifiers:
-  '@mdi/js': 7.0.96
+  '@mdi/js': 7.1.96
   '@mdi/react': 1.6.1
   '@pnpm/lockfile-file': 6.0.5
   '@pnpm/logger': 5.0.0
@@ -46,7 +46,7 @@ specifiers:
   xo: 0.53.1
 
 dependencies:
-  '@mdi/js': 7.0.96
+  '@mdi/js': 7.1.96
   '@mdi/react': 1.6.1
   '@preact/signals': 1.1.3_preact@10.13.0
   history: 5.3.0
@@ -583,8 +583,8 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.14
     dev: true
 
-  /@mdi/js/7.0.96:
-    resolution: {integrity: sha512-lNqhkV3cpPfYb/Avh+vXLFukUTbHbyHoFo4Jdc7Oc9UvURGVhamFIpgOVvEf2bNA78zvjXTZeVWExUTR+DLBfQ==}
+  /@mdi/js/7.1.96:
+    resolution: {integrity: sha512-wlrJs6Ryhaa5CqhK3FjTfMRnb/s7HeLkKMFqwQySkK86cdN1TGdzpSM3O4tsmzCA1dYBeTbXvOwSE/Y42cUrvA==}
     dev: false
 
   /@mdi/react/1.6.1:
