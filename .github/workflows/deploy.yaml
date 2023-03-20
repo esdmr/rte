@@ -52,7 +52,7 @@ jobs:
 
       - name: Setup Pages
         id: pages
-        uses: actions/configure-pages@c5a3e1159e0cbdf0845eb8811bd39e39fc3099c2 # v2
+        uses: actions/configure-pages@7110e9e03ffb4a421945e5d0607007b8e9f1f52b # v3
 
       - name: Build
         run: pnpm run build
