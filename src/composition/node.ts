@@ -1,8 +1,12 @@
 import assert from '../assert.js';
 import type {Disposable} from '../disposable.js';
-import type {EventMap} from './types.js';
 import {compositorNodeOfElement} from './registry.js';
 import type {CompositorLayer} from './layer.js';
+
+export type EventMap = {
+	Gamepad: GamepadEvent;
+	ChildrenUpdate: Event;
+} & HTMLElementEventMap;
 
 export function getCompositorNode(
 	element: unknown,
