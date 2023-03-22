@@ -121,7 +121,7 @@ export abstract class CompositorNode implements Disposable {
 	removeEventListener(
 		type: string,
 		listener: EventListenerOrEventListenerObject,
-		options?: boolean | EventListenerOptions,
+		options: boolean | EventListenerOptions,
 	): void {
 		this._element.removeEventListener(type, listener, options);
 	}
