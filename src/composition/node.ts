@@ -8,18 +8,6 @@ export type EventMap = {
 	ChildrenUpdate: Event;
 } & HTMLElementEventMap;
 
-export function getCompositorNode(
-	element: unknown,
-): CompositorNode | undefined {
-	if (!element) {
-		return undefined;
-	}
-
-	const child = compositorNodeOfElement.get(element as HTMLElement);
-	assert(child, `Element is not registered in a compositor`);
-	return child;
-}
-
 export abstract class CompositorNode implements Disposable {
 	constructor(
 		/** @internal */

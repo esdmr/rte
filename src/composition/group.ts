@@ -1,25 +1,37 @@
 import assert from '../assert.js';
-import {CompositorNode, getCompositorNode} from './node.js';
+import {CompositorNode} from './node.js';
+import {compositorNodeOfElement} from './registry.js';
+
+function getCompositorNodeOf(
+	// eslint-disable-next-line @typescript-eslint/ban-types
+	element: Element | null,
+): CompositorNode | undefined {
+	if (!element) {
+		return undefined;
+	}
+
+	const child = compositorNodeOfElement.get(element);
+	assert(child, 'Child of compositor group is not a compositor node');
+	return child;
+}
 
 export class CompositorGroup<
 	T extends CompositorNode = CompositorNode,
 > extends CompositorNode {
 	get children() {
-		return [...this._element.children].map((i) => {
-			const child = getCompositorNode(i);
-			assert(child, 'Child of CompositorGroup is not a CompositorNode');
-			return child as T;
-		}) as readonly T[];
+		return [...this._element.children]
+			.map((i) => getCompositorNodeOf(i) as T)
+			.filter(Boolean) as readonly T[];
 	}
 
 	get firstChild() {
-		return getCompositorNode(this._element.firstElementChild) as
+		return getCompositorNodeOf(this._element.firstElementChild) as
 			| T
 			| undefined;
 	}
 
 	get lastChild() {
-		return getCompositorNode(this._element.lastElementChild) as
+		return getCompositorNodeOf(this._element.lastElementChild) as
 			| T
 			| undefined;
 	}
