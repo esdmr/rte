@@ -36,7 +36,7 @@ export class CompositorLayer extends CompositorNode {
 		);
 	}
 
-	blur(): void {
+	blur() {
 		this._element.blur();
 	}
 
@@ -44,7 +44,7 @@ export class CompositorLayer extends CompositorNode {
 		this._element.focus(options);
 	}
 
-	dispose(): void {
+	dispose() {
 		groupParentOf(this)?.remove(this);
 		this.render(null);
 	}

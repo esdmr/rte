@@ -5,7 +5,7 @@ import {compositorNodeOfElement} from './registry.js';
 function getCompositorNodeOf(
 	// eslint-disable-next-line @typescript-eslint/ban-types
 	element: Element | null,
-): CompositorNode | undefined {
+) {
 	if (!element) {
 		return undefined;
 	}
@@ -90,7 +90,7 @@ export class CompositorGroup<
 		this._onChildrenUpdate();
 	}
 
-	dispose(): void {
+	dispose() {
 		for (const child of this.children) {
 			child.dispose();
 		}
@@ -101,9 +101,9 @@ export class CompositorGroup<
 	}
 }
 
-export function groupParentOf<T extends CompositorNode>(
-	node: T,
-): CompositorGroup<T> | undefined {
+export function groupParentOf<T extends CompositorNode>(node: T) {
 	const {parent} = node;
-	return parent instanceof CompositorGroup ? parent : undefined;
+	return parent instanceof CompositorGroup
+		? (parent as CompositorGroup<T>)
+		: undefined;
 }

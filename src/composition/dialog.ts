@@ -18,7 +18,7 @@ export class CompositorDialog<T> extends CompositorLayer {
 			});
 	}
 
-	override dispose(): void {
+	override dispose() {
 		assert(
 			this.result.state !== 'pending',
 			'Cannot dispose a pending dialog',

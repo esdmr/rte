@@ -16,7 +16,7 @@ export class CompositorGlobalGroup extends CompositorNode {
 		return this.pages.activeDescendant;
 	}
 
-	dispose(): void {
+	dispose() {
 		this.pages.dispose();
 		this.overlays.dispose();
 	}

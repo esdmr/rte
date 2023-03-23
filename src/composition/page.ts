@@ -30,7 +30,7 @@ export class CompositorPage extends CompositorNode {
 		return this.dialogs.activeDescendant ?? this.content.activeDescendant;
 	}
 
-	dispose(): void {
+	dispose() {
 		this.content.dispose();
 		this.dialogs.dispose();
 		groupParentOf(this)?.remove(this);

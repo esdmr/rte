@@ -36,7 +36,7 @@ export abstract class CompositorNode implements Disposable {
 
 	findNearest<T extends CompositorNode>(
 		Class: abstract new (...args: any) => T,
-	): T | undefined {
+	) {
 		// eslint-disable-next-line @typescript-eslint/no-this-alias, unicorn/no-this-assignment
 		let node: CompositorNode | undefined = this;
 
@@ -88,11 +88,11 @@ export abstract class CompositorNode implements Disposable {
 	animate(
 		keyframes?: Keyframe[] | PropertyIndexedKeyframes,
 		options?: number | KeyframeAnimationOptions,
-	): Animation {
+	) {
 		return this._element.animate(keyframes ?? null, options);
 	}
 
-	getAnimations(options?: GetAnimationsOptions): Animation[] {
+	getAnimations(options?: GetAnimationsOptions) {
 		return this._element.getAnimations(options);
 	}
 
@@ -105,11 +105,11 @@ export abstract class CompositorNode implements Disposable {
 		type: string,
 		listener: EventListenerOrEventListenerObject,
 		options: boolean | AddEventListenerOptions,
-	): void {
+	) {
 		this._element.addEventListener(type, listener, options);
 	}
 
-	dispatchEvent(event: EventMap[keyof EventMap]): boolean {
+	dispatchEvent(event: EventMap[keyof EventMap]) {
 		return this._element.dispatchEvent(event);
 	}
 
@@ -122,7 +122,7 @@ export abstract class CompositorNode implements Disposable {
 		type: string,
 		listener: EventListenerOrEventListenerObject,
 		options: boolean | EventListenerOptions,
-	): void {
+	) {
 		this._element.removeEventListener(type, listener, options);
 	}
 
