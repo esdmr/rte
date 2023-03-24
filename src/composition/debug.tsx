@@ -3,33 +3,33 @@ import {useMemo, useState, type StateUpdater} from 'preact/hooks';
 import * as css from './debug.module.css';
 import {
 	createDialog,
-	useCompositorDialog,
-	type CompositorDialog,
+	useCompDialog,
+	type CompDialog,
 } from './dialog.js';
 import {
-	CompositorGlobalGroup,
-	useCompositorGlobalGroup,
+	CompGlobalGroup,
+	useCompGlobalGroup,
 } from './global-group.js';
-import {CompositorLayer} from './layer.js';
-import {createPage, useCompositorPage, type CompositorPage} from './page.js';
+import {CompLayer} from './layer.js';
+import {createPage, useCompPage, type CompPage} from './page.js';
 
 const useRandomId = () =>
 	useMemo(() => Math.random().toString().slice(2, 10), []);
 
 const resolveDialog =
-	(dialog: CompositorDialog<string>) =>
+	(dialog: CompDialog<string>) =>
 	(event: TargetedEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		const form = new FormData(event.currentTarget);
 		dialog.result.resolve(form.get('result')?.toString() ?? '');
 	};
 
-const abortDialog = (dialog: CompositorDialog<any>) => () => {
+const abortDialog = (dialog: CompDialog<any>) => () => {
 	dialog.result.abort();
 };
 
 const openDialog =
-	(page: CompositorPage, setResult: StateUpdater<string | undefined>) =>
+	(page: CompPage, setResult: StateUpdater<string | undefined>) =>
 	() => {
 		createDialog<string>({
 			page,
@@ -45,7 +45,7 @@ const openDialog =
 		);
 	};
 
-const openPage = (page: CompositorPage, action?: 'replace') => () => {
+const openPage = (page: CompPage, action?: 'replace') => () => {
 	createPage({
 		page,
 		replace: action === 'replace',
@@ -54,13 +54,13 @@ const openPage = (page: CompositorPage, action?: 'replace') => () => {
 	});
 };
 
-const closePage = (page: CompositorPage) => () => {
+const closePage = (page: CompPage) => () => {
 	page.dispose();
 };
 
 const Dialog: FunctionComponent = () => {
-	const dialog = useCompositorDialog<string>();
-	const page = useCompositorPage();
+	const dialog = useCompDialog<string>();
+	const page = useCompPage();
 	const [result, setResult] = useState<string>();
 
 	return (
@@ -85,8 +85,8 @@ const Dialog: FunctionComponent = () => {
 };
 
 const Page: FunctionComponent = () => {
-	const page = useCompositorPage();
-	const root = useCompositorGlobalGroup();
+	const page = useCompPage();
+	const root = useCompGlobalGroup();
 	const [result, setResult] = useState<string>();
 
 	return (
@@ -111,9 +111,9 @@ const Page: FunctionComponent = () => {
 	);
 };
 
-const root = new CompositorGlobalGroup(document.body);
+const root = new CompGlobalGroup(document.body);
 
-const overlay = new CompositorLayer();
+const overlay = new CompLayer();
 root.overlays.append(overlay);
 overlay.classList.add(css.overlay);
 overlay.render(<span>Just press the buttons, it’s easy!</span>);

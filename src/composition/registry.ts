@@ -1,3 +1,3 @@
-import type {CompositorNode} from './node.js';
+import type {CompNode} from './node.js';
 
-export const compositorNodeOfElement = new WeakMap<Element, CompositorNode>();
+export const compNodeOfElement = new WeakMap<Element, CompNode>();

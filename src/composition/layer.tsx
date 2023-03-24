@@ -2,17 +2,15 @@ import {type ComponentChild, render, createContext} from 'preact';
 import {useContext, useMemo} from 'preact/hooks';
 import assert from '../assert.js';
 import {groupParentOf} from './group.js';
-import {CompositorNode} from './node.js';
+import {CompNode} from './node.js';
 
-export const compositorLayer = createContext<CompositorLayer | undefined>(
-	undefined,
-);
+export const compLayer = createContext<CompLayer | undefined>(undefined);
 
 if (import.meta.env.DEV) {
-	compositorLayer.displayName = 'compositorLayer';
+	compLayer.displayName = 'compLayer';
 }
 
-export class CompositorLayer extends CompositorNode {
+export class CompLayer extends CompNode {
 	constructor(element = document.createElement('section')) {
 		super(element);
 		this._element.tabIndex = -1;
@@ -26,9 +24,7 @@ export class CompositorLayer extends CompositorNode {
 	render(vnode: ComponentChild) {
 		render(
 			typeof vnode === 'object' && vnode !== null ? (
-				<compositorLayer.Provider value={this}>
-					{vnode}
-				</compositorLayer.Provider>
+				<compLayer.Provider value={this}>{vnode}</compLayer.Provider>
 			) : (
 				vnode
 			),
@@ -50,16 +46,16 @@ export class CompositorLayer extends CompositorNode {
 	}
 }
 
-export function useCompositorLayer() {
-	const layer = useContext(compositorLayer);
+export function useCompLayer() {
+	const layer = useContext(compLayer);
 	assert(layer, 'Called outside of the compositor');
 	return layer;
 }
 
-export function useCompositorNode<T extends CompositorNode>(
+export function useCompNode<T extends CompNode>(
 	AncestorClass: abstract new (...args: any[]) => T,
 ) {
-	const layer = useCompositorLayer();
+	const layer = useCompLayer();
 
 	return useMemo(() => {
 		const ancestor = layer.findNearest(AncestorClass);

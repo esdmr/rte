@@ -1,11 +1,11 @@
-import {CompositorGroup} from './group.js';
-import {useCompositorNode, type CompositorLayer} from './layer.js';
-import {CompositorNode} from './node.js';
-import {CompositorPageGroup} from './page-group.js';
+import {CompGroup} from './group.js';
+import {useCompNode, type CompLayer} from './layer.js';
+import {CompNode} from './node.js';
+import {CompPageGroup} from './page-group.js';
 
-export class CompositorGlobalGroup extends CompositorNode {
-	readonly pages = new CompositorPageGroup();
-	readonly overlays = new CompositorGroup<CompositorLayer>();
+export class CompGlobalGroup extends CompNode {
+	readonly pages = new CompPageGroup();
+	readonly overlays = new CompGroup<CompLayer>();
 
 	constructor(element?: HTMLElement) {
 		super(element);
@@ -22,6 +22,6 @@ export class CompositorGlobalGroup extends CompositorNode {
 	}
 }
 
-export function useCompositorGlobalGroup() {
-	return useCompositorNode(CompositorGlobalGroup);
+export function useCompGlobalGroup() {
+	return useCompNode(CompGlobalGroup);
 }

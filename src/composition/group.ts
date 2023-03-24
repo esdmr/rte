@@ -1,8 +1,8 @@
 import assert from '../assert.js';
-import {CompositorNode} from './node.js';
-import {compositorNodeOfElement} from './registry.js';
+import {CompNode} from './node.js';
+import {compNodeOfElement} from './registry.js';
 
-function getCompositorNodeOf(
+function getCompNodeOf(
 	// eslint-disable-next-line @typescript-eslint/ban-types
 	element: Element | null,
 ) {
@@ -10,28 +10,28 @@ function getCompositorNodeOf(
 		return undefined;
 	}
 
-	const child = compositorNodeOfElement.get(element);
+	const child = compNodeOfElement.get(element);
 	assert(child, 'Child of compositor group is not a compositor node');
 	return child;
 }
 
-export class CompositorGroup<
-	T extends CompositorNode = CompositorNode,
-> extends CompositorNode {
+export class CompGroup<
+	T extends CompNode = CompNode,
+> extends CompNode {
 	get children() {
 		return [...this._element.children]
-			.map((i) => getCompositorNodeOf(i) as T)
+			.map((i) => getCompNodeOf(i) as T)
 			.filter(Boolean) as readonly T[];
 	}
 
 	get firstChild() {
-		return getCompositorNodeOf(this._element.firstElementChild) as
+		return getCompNodeOf(this._element.firstElementChild) as
 			| T
 			| undefined;
 	}
 
 	get lastChild() {
-		return getCompositorNodeOf(this._element.lastElementChild) as
+		return getCompNodeOf(this._element.lastElementChild) as
 			| T
 			| undefined;
 	}
@@ -101,9 +101,9 @@ export class CompositorGroup<
 	}
 }
 
-export function groupParentOf<T extends CompositorNode>(node: T) {
+export function groupParentOf<T extends CompNode>(node: T) {
 	const {parent} = node;
-	return parent instanceof CompositorGroup
-		? (parent as CompositorGroup<T>)
+	return parent instanceof CompGroup
+		? (parent as CompGroup<T>)
 		: undefined;
 }

@@ -1,10 +1,10 @@
 import type {ComponentChild} from 'preact';
 import assert from '../assert.js';
-import {CompositorLayer, useCompositorNode} from './layer.js';
-import type {CompositorPage} from './page.js';
+import {CompLayer, useCompNode} from './layer.js';
+import type {CompPage} from './page.js';
 import {Result} from './result.js';
 
-export class CompositorDialog<T> extends CompositorLayer {
+export class CompDialog<T> extends CompLayer {
 	readonly result = new Result<T>();
 
 	constructor(element?: HTMLElement) {
@@ -27,16 +27,16 @@ export class CompositorDialog<T> extends CompositorLayer {
 	}
 }
 
-export function useCompositorDialog<T = unknown>() {
-	return useCompositorNode<CompositorDialog<T>>(CompositorDialog);
+export function useCompDialog<T = unknown>() {
+	return useCompNode<CompDialog<T>>(CompDialog);
 }
 
 export function createDialog<T = unknown>(options: {
-	readonly page: CompositorPage;
+	readonly page: CompPage;
 	readonly content: ComponentChild;
 	readonly classes: readonly string[];
 }) {
-	const dialog = new CompositorDialog<T>();
+	const dialog = new CompDialog<T>();
 
 	options.page.dialogs.append(dialog);
 	dialog.classList.add(...options.classes);

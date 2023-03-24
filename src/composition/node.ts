@@ -1,44 +1,44 @@
 import assert from '../assert.js';
 import type {Disposable} from '../disposable.js';
-import {compositorNodeOfElement} from './registry.js';
-import type {CompositorLayer} from './layer.js';
+import {compNodeOfElement} from './registry.js';
+import type {CompLayer} from './layer.js';
 
 export type EventMap = {
 	Gamepad: GamepadEvent;
 	ChildrenUpdate: Event;
 } & HTMLElementEventMap;
 
-export abstract class CompositorNode implements Disposable {
+export abstract class CompNode implements Disposable {
 	constructor(
 		/** @internal */
 		readonly _element: HTMLElement = document.createElement('div'),
 	) {
 		assert(
-			!compositorNodeOfElement.has(this._element),
+			!compNodeOfElement.has(this._element),
 			'Element already registered in a compositor',
 		);
 
-		compositorNodeOfElement.set(this._element, this);
+		compNodeOfElement.set(this._element, this);
 		this.role = 'presentation';
 
 		if (import.meta.env.DEV) {
-			this._element.dataset.compositor = this.constructor.name;
+			this._element.dataset.className = this.constructor.name;
 		}
 	}
 
-	get parent(): CompositorNode | undefined {
+	get parent(): CompNode | undefined {
 		const {parentElement} = this._element;
 
 		return parentElement
-			? compositorNodeOfElement.get(parentElement)
+			? compNodeOfElement.get(parentElement)
 			: undefined;
 	}
 
-	findNearest<T extends CompositorNode>(
+	findNearest<T extends CompNode>(
 		Class: abstract new (...args: any) => T,
 	) {
 		// eslint-disable-next-line @typescript-eslint/no-this-alias, unicorn/no-this-assignment
-		let node: CompositorNode | undefined = this;
+		let node: CompNode | undefined = this;
 
 		while (node && !(node instanceof Class)) {
 			node = node.parent;
@@ -47,7 +47,7 @@ export abstract class CompositorNode implements Disposable {
 		return node;
 	}
 
-	get root(): CompositorNode {
+	get root(): CompNode {
 		return this.parent?.root ?? this;
 	}
 
@@ -83,7 +83,7 @@ export abstract class CompositorNode implements Disposable {
 		}
 	}
 
-	abstract get activeDescendant(): CompositorLayer | undefined;
+	abstract get activeDescendant(): CompLayer | undefined;
 
 	animate(
 		keyframes?: Keyframe[] | PropertyIndexedKeyframes,

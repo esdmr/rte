@@ -1,15 +1,15 @@
 import type {ComponentChild} from 'preact';
 import assert from '../assert.js';
-import type {CompositorDialog} from './dialog.js';
-import {CompositorGlobalGroup} from './global-group.js';
-import {CompositorGroup, groupParentOf} from './group.js';
-import {CompositorLayer, useCompositorNode} from './layer.js';
-import {CompositorNode} from './node.js';
+import type {CompDialog} from './dialog.js';
+import {CompGlobalGroup} from './global-group.js';
+import {CompGroup, groupParentOf} from './group.js';
+import {CompLayer, useCompNode} from './layer.js';
+import {CompNode} from './node.js';
 import * as css from './page.module.css';
 
-export class CompositorPage extends CompositorNode {
-	readonly content = new CompositorLayer(document.createElement('main'));
-	readonly dialogs = new CompositorGroup<CompositorDialog<any>>();
+export class CompPage extends CompNode {
+	readonly content = new CompLayer(document.createElement('main'));
+	readonly dialogs = new CompGroup<CompDialog<any>>();
 
 	constructor(element?: HTMLElement) {
 		super(element);
@@ -37,22 +37,22 @@ export class CompositorPage extends CompositorNode {
 	}
 }
 
-export function useCompositorPage() {
-	return useCompositorNode(CompositorPage);
+export function useCompPage() {
+	return useCompNode(CompPage);
 }
 
 export function createPage(options: {
-	readonly root?: CompositorGlobalGroup;
-	readonly page?: CompositorPage;
+	readonly root?: CompGlobalGroup;
+	readonly page?: CompPage;
 	readonly replace?: boolean;
 	readonly content: ComponentChild;
 	readonly classes: readonly string[];
 }) {
 	const root =
-		options.root ?? options.page?.findNearest(CompositorGlobalGroup);
+		options.root ?? options.page?.findNearest(CompGlobalGroup);
 	assert(root, 'Either root or page needs to be provided');
 
-	const newPage = new CompositorPage();
+	const newPage = new CompPage();
 
 	if (options.replace) {
 		assert(options.page, 'You must provide a page to replace');
