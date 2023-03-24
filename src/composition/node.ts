@@ -29,14 +29,10 @@ export abstract class CompNode implements Disposable {
 	get parent(): CompNode | undefined {
 		const {parentElement} = this._element;
 
-		return parentElement
-			? compNodeOfElement.get(parentElement)
-			: undefined;
+		return parentElement ? compNodeOfElement.get(parentElement) : undefined;
 	}
 
-	findNearest<T extends CompNode>(
-		Class: abstract new (...args: any) => T,
-	) {
+	findNearest<T extends CompNode>(Class: abstract new (...args: any) => T) {
 		// eslint-disable-next-line @typescript-eslint/no-this-alias, unicorn/no-this-assignment
 		let node: CompNode | undefined = this;
 

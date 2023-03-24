@@ -15,9 +15,7 @@ function getCompNodeOf(
 	return child;
 }
 
-export class CompGroup<
-	T extends CompNode = CompNode,
-> extends CompNode {
+export class CompGroup<T extends CompNode = CompNode> extends CompNode {
 	get children() {
 		return [...this._element.children]
 			.map((i) => getCompNodeOf(i) as T)
@@ -25,15 +23,11 @@ export class CompGroup<
 	}
 
 	get firstChild() {
-		return getCompNodeOf(this._element.firstElementChild) as
-			| T
-			| undefined;
+		return getCompNodeOf(this._element.firstElementChild) as T | undefined;
 	}
 
 	get lastChild() {
-		return getCompNodeOf(this._element.lastElementChild) as
-			| T
-			| undefined;
+		return getCompNodeOf(this._element.lastElementChild) as T | undefined;
 	}
 
 	get hasChildren() {
@@ -103,7 +97,5 @@ export class CompGroup<
 
 export function groupParentOf<T extends CompNode>(node: T) {
 	const {parent} = node;
-	return parent instanceof CompGroup
-		? (parent as CompGroup<T>)
-		: undefined;
+	return parent instanceof CompGroup ? (parent as CompGroup<T>) : undefined;
 }

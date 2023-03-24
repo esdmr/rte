@@ -1,15 +1,8 @@
 import type {FunctionComponent, TargetedEvent} from 'preact/compat';
 import {useMemo, useState, type StateUpdater} from 'preact/hooks';
 import * as css from './debug.module.css';
-import {
-	createDialog,
-	useCompDialog,
-	type CompDialog,
-} from './dialog.js';
-import {
-	CompGlobalGroup,
-	useCompGlobalGroup,
-} from './global-group.js';
+import {createDialog, useCompDialog, type CompDialog} from './dialog.js';
+import {CompGlobalGroup, useCompGlobalGroup} from './global-group.js';
 import {CompLayer} from './layer.js';
 import {createPage, useCompPage, type CompPage} from './page.js';
 
@@ -17,8 +10,7 @@ const useRandomId = () =>
 	useMemo(() => Math.random().toString().slice(2, 10), []);
 
 const resolveDialog =
-	(dialog: CompDialog<string>) =>
-	(event: TargetedEvent<HTMLFormElement>) => {
+	(dialog: CompDialog<string>) => (event: TargetedEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		const form = new FormData(event.currentTarget);
 		dialog.result.resolve(form.get('result')?.toString() ?? '');
@@ -29,8 +21,7 @@ const abortDialog = (dialog: CompDialog<any>) => () => {
 };
 
 const openDialog =
-	(page: CompPage, setResult: StateUpdater<string | undefined>) =>
-	() => {
+	(page: CompPage, setResult: StateUpdater<string | undefined>) => () => {
 		createDialog<string>({
 			page,
 			content: <Dialog />,
