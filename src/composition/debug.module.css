@@ -1,3 +1,11 @@
+body {
+	margin: 0;
+}
+
+body.animating {
+	overflow: hidden;
+}
+
 .overlay {
 	display: inline-block;
 	position: fixed;
@@ -14,6 +22,7 @@
 .page {
 	background-color: #cbfeb7;
 	padding: 1.5em;
+	outline: 0;
 }
 
 .dialog {
