@@ -3,6 +3,8 @@ import type {Disposable} from '../disposable.js';
 import {compNodeOfElement} from './registry.js';
 import type {CompLayer} from './layer.js';
 
+assert(typeof document.body.inert === 'boolean', 'Inert polyfill is required');
+
 export type EventMap = {
 	Gamepad: GamepadEvent;
 	ChildrenUpdate: Event;
