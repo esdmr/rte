@@ -8,12 +8,8 @@
 		<title>Gamepad Editor</title>
 		<script type="module">
 			import 'preact/debug';
-
-			if (typeof document.body.inert !== 'boolean') {
-				console.log('Loading inert polyfill….');
-				await import('wicg-inert');
-			}
 		</script>
+		<script type="module" src="./src/setup.ts"></script>
 		<script type="module" src="./src/composition/debug.tsx"></script>
 	</head>
 	<body>

@@ -1,5 +1,3 @@
-// eslint-disable-next-line import/no-unassigned-import
-import 'preact/debug';
 import {render} from 'preact';
 import {Router} from 'wouter-preact';
 import {App} from './App.js';

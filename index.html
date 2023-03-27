@@ -6,6 +6,10 @@
 		<meta name="Content-Security-Policy" content="default-src 'self';base-uri 'none';object-src 'none';">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>RTE</title>
+		<script type="module">
+			import 'preact/debug';
+		</script>
+		<script type="module" src="./src/setup.ts"></script>
 		<script type="module" src="./src/index.tsx"></script>
 	</head>
 	<body>

@@ -93,6 +93,7 @@ export default defineConfig(({command}) => ({
 		cache: {
 			dir: 'node_modules/.cache/vitest',
 		},
+		setupFiles: 'src/setup.ts',
 		mockReset: true,
 	},
 }));
