@@ -50,7 +50,7 @@
 		"vitest": "0.29.2",
 		"xo": "0.53.1"
 	},
-	"packageManager": "pnpm@7.29.0",
+	"packageManager": "pnpm@7.29.1",
 	"pnpm": {
 		"packageExtensions": {
 			"eslint-import-resolver-webpack": {
