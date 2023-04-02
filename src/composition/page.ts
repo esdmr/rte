@@ -3,7 +3,7 @@ import assert from '../assert.js';
 import type {CompDialog} from './dialog.js';
 import {CompGlobalGroup} from './global-group.js';
 import {CompGroup, groupParentOf} from './group.js';
-import {CompLayer, useCompNode} from './layer.js';
+import {CompLayer} from './layer.js';
 import {CompNode} from './node.js';
 import * as css from './page.module.css';
 
@@ -35,10 +35,6 @@ export class CompPage extends CompNode {
 		this.dialogs.dispose();
 		groupParentOf(this)?.remove(this);
 	}
-}
-
-export function useCompPage() {
-	return useCompNode(CompPage);
 }
 
 export function createPage(options: {

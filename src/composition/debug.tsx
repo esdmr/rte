@@ -1,10 +1,10 @@
 import type {FunctionComponent, TargetedEvent} from 'preact/compat';
 import {useMemo, useState, type StateUpdater} from 'preact/hooks';
 import * as css from './debug.module.css';
-import {createDialog, useCompDialog, type CompDialog} from './dialog.js';
-import {CompGlobalGroup, useCompGlobalGroup} from './global-group.js';
-import {CompLayer} from './layer.js';
-import {createPage, useCompPage, type CompPage} from './page.js';
+import {createDialog, CompDialog} from './dialog.js';
+import {CompGlobalGroup} from './global-group.js';
+import {CompLayer, useCompNode} from './layer.js';
+import {createPage, CompPage} from './page.js';
 
 const useRandomId = () =>
 	useMemo(() => Math.random().toString().slice(2, 10), []);
@@ -50,8 +50,8 @@ const closePage = (page: CompPage) => () => {
 };
 
 const Dialog: FunctionComponent = () => {
-	const dialog = useCompDialog<string>();
-	const page = useCompPage();
+	const dialog = useCompNode<CompDialog<string>>(CompDialog);
+	const page = useCompNode(CompPage);
 	const [result, setResult] = useState<string>();
 
 	return (
@@ -76,8 +76,8 @@ const Dialog: FunctionComponent = () => {
 };
 
 const Page: FunctionComponent = () => {
-	const page = useCompPage();
-	const root = useCompGlobalGroup();
+	const page = useCompNode(CompPage);
+	const root = useCompNode(CompGlobalGroup);
 	const [result, setResult] = useState<string>();
 
 	return (

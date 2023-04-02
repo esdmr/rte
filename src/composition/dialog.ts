@@ -1,6 +1,6 @@
 import type {ComponentChild} from 'preact';
 import assert from '../assert.js';
-import {CompLayer, useCompNode} from './layer.js';
+import {CompLayer} from './layer.js';
 import type {CompPage} from './page.js';
 import {Result} from './result.js';
 
@@ -25,10 +25,6 @@ export class CompDialog<T> extends CompLayer {
 		);
 		super.dispose();
 	}
-}
-
-export function useCompDialog<T = unknown>() {
-	return useCompNode<CompDialog<T>>(CompDialog);
 }
 
 export function createDialog<T = unknown>(options: {

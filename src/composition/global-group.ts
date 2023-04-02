@@ -1,5 +1,5 @@
 import {CompGroup} from './group.js';
-import {useCompNode, type CompLayer} from './layer.js';
+import {type CompLayer} from './layer.js';
 import {CompNode} from './node.js';
 import {CompPageGroup} from './page-group.js';
 
@@ -20,8 +20,4 @@ export class CompGlobalGroup extends CompNode {
 		this.pages.dispose();
 		this.overlays.dispose();
 	}
-}
-
-export function useCompGlobalGroup() {
-	return useCompNode(CompGlobalGroup);
 }
