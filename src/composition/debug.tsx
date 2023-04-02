@@ -2,7 +2,7 @@ import type {FunctionComponent, TargetedEvent} from 'preact/compat';
 import {useMemo, useState, type StateUpdater} from 'preact/hooks';
 import * as css from './debug.module.css';
 import {createDialog, CompDialog} from './dialog.js';
-import {CompGlobalGroup} from './global-group.js';
+import {CompWindow} from './window.js';
 import {CompLayer, useCompNode} from './layer.js';
 import {createPage, CompPage} from './page.js';
 
@@ -77,19 +77,19 @@ const Dialog: FunctionComponent = () => {
 
 const Page: FunctionComponent = () => {
 	const page = useCompNode(CompPage);
-	const root = useCompNode(CompGlobalGroup);
+	const window = useCompNode(CompWindow);
 	const [result, setResult] = useState<string>();
 
 	return (
 		<>
 			<h1>
-				Hello, World! (level = {root.pages.children.indexOf(page)},
+				Hello, World! (level = {window.pages.children.indexOf(page)},
 				randId = {useRandomId()})
 			</h1>
 			{result && <p>Dialog result was: {result}</p>}
 			<button
 				onClick={closePage(page)}
-				disabled={root.pages.firstChild === page}
+				disabled={window.pages.firstChild === page}
 			>
 				Back
 			</button>
@@ -102,15 +102,15 @@ const Page: FunctionComponent = () => {
 	);
 };
 
-const root = new CompGlobalGroup(document.body);
+const window = new CompWindow(document.body);
 
 const overlay = new CompLayer();
-root.overlays.append(overlay);
+window.overlays.append(overlay);
 overlay.classList.add(css.overlay);
 overlay.render(<span>Just press the buttons, it’s easy!</span>);
 
 createPage({
-	root,
+	window,
 	content: <Page />,
 	classes: [css.page],
 });

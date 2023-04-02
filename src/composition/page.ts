@@ -1,7 +1,7 @@
 import type {ComponentChild} from 'preact';
 import assert from '../assert.js';
 import type {CompDialog} from './dialog.js';
-import {CompGlobalGroup} from './global-group.js';
+import {CompWindow} from './window.js';
 import {CompGroup, groupParentOf} from './group.js';
 import {CompLayer} from './layer.js';
 import {CompNode} from './node.js';
@@ -38,25 +38,25 @@ export class CompPage extends CompNode {
 }
 
 export function createPage(options: {
-	readonly root?: CompGlobalGroup;
+	readonly window?: CompWindow;
 	readonly page?: CompPage;
 	readonly replace?: boolean;
 	readonly content: ComponentChild;
 	readonly classes: readonly string[];
 }) {
-	const root = options.root ?? options.page?.findNearest(CompGlobalGroup);
-	assert(root, 'Either root or page needs to be provided');
+	const window = options.window ?? options.page?.findNearest(CompWindow);
+	assert(window, 'Either window or page needs to be provided');
 
 	const newPage = new CompPage();
 
 	if (options.replace) {
 		assert(options.page, 'You must provide a page to replace');
-		root.pages.replace(options.page, newPage);
+		window.pages.replace(options.page, newPage);
 		options.page.dispose();
 	} else if (options.page) {
-		root.pages.after(options.page, newPage);
+		window.pages.after(options.page, newPage);
 	} else {
-		root.pages.append(newPage);
+		window.pages.append(newPage);
 	}
 
 	newPage.content.classList.add(...options.classes);

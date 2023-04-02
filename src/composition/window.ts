@@ -3,7 +3,7 @@ import {type CompLayer} from './layer.js';
 import {CompNode} from './node.js';
 import {CompPageGroup} from './page-group.js';
 
-export class CompGlobalGroup extends CompNode {
+export class CompWindow extends CompNode {
 	readonly pages = new CompPageGroup();
 	readonly overlays = new CompGroup<CompLayer>();
 
