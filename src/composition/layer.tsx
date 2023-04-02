@@ -12,6 +12,11 @@ if (import.meta.env.DEV) {
 
 export class CompLayer extends CompNode {
 	constructor(element = document.createElement('section')) {
+		assert(
+			element !== document.body,
+			'Refusing to initialize compositor layer at document body',
+		);
+
 		super(element);
 		this._element.tabIndex = -1;
 		this.role = undefined;

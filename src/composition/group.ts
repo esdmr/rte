@@ -16,6 +16,15 @@ function getCompNodeOf(
 }
 
 export class CompGroup<T extends CompNode = CompNode> extends CompNode {
+	constructor(element?: HTMLElement) {
+		assert(
+			element !== document.body,
+			'Refusing to initialize compositor group at document body',
+		);
+
+		super(element);
+	}
+
 	get children() {
 		return [...this._element.children]
 			.map((i) => getCompNodeOf(i) as T)
