@@ -11,15 +11,15 @@ function getCompNodeOf(
 	}
 
 	const child = compNodeOfElement.get(element);
-	assert(child, 'Child of compositor group is not a compositor node');
+	assert(child, 'Child of compositor list is not a compositor node');
 	return child;
 }
 
-export class CompGroup<T extends CompNode = CompNode> extends CompNode {
+export class CompList<T extends CompNode = CompNode> extends CompNode {
 	constructor(element?: HTMLElement) {
 		assert(
 			element !== document.body,
-			'Refusing to initialize compositor group at document body',
+			'Refusing to initialize compositor list at document body',
 		);
 
 		super(element);
@@ -104,7 +104,7 @@ export class CompGroup<T extends CompNode = CompNode> extends CompNode {
 	}
 }
 
-export function groupParentOf<T extends CompNode>(node: T) {
+export function listParentOf<T extends CompNode>(node: T) {
 	const {parent} = node;
-	return parent instanceof CompGroup ? (parent as CompGroup<T>) : undefined;
+	return parent instanceof CompList ? (parent as CompList<T>) : undefined;
 }

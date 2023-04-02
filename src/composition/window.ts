@@ -1,11 +1,11 @@
-import {CompGroup} from './group.js';
+import {CompList} from './list.js';
 import {type CompLayer} from './layer.js';
 import {CompNode} from './node.js';
-import {CompPageGroup} from './page-group.js';
+import {CompPageList} from './page-list.js';
 
 export class CompWindow extends CompNode {
-	readonly pages = new CompPageGroup();
-	readonly overlays = new CompGroup<CompLayer>();
+	readonly pages = new CompPageList();
+	readonly overlays = new CompList<CompLayer>();
 
 	constructor(element?: HTMLElement) {
 		super(element);

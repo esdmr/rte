@@ -2,14 +2,14 @@ import type {ComponentChild} from 'preact';
 import assert from '../assert.js';
 import type {CompDialog} from './dialog.js';
 import {CompWindow} from './window.js';
-import {CompGroup, groupParentOf} from './group.js';
+import {CompList, listParentOf} from './list.js';
 import {CompLayer} from './layer.js';
 import {CompNode} from './node.js';
 import * as css from './page.module.css';
 
 export class CompPage extends CompNode {
 	readonly content = new CompLayer(document.createElement('main'));
-	readonly dialogs = new CompGroup<CompDialog<any>>();
+	readonly dialogs = new CompList<CompDialog<any>>();
 
 	constructor(element?: HTMLElement) {
 		super(element);
@@ -33,7 +33,7 @@ export class CompPage extends CompNode {
 	dispose() {
 		this.content.dispose();
 		this.dialogs.dispose();
-		groupParentOf(this)?.remove(this);
+		listParentOf(this)?.remove(this);
 	}
 }
 

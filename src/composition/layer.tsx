@@ -1,7 +1,7 @@
 import {type ComponentChild, render, createContext} from 'preact';
 import {useContext, useMemo} from 'preact/hooks';
 import assert from '../assert.js';
-import {groupParentOf} from './group.js';
+import {listParentOf} from './list.js';
 import {CompNode} from './node.js';
 
 export const compLayer = createContext<CompLayer | undefined>(undefined);
@@ -46,7 +46,7 @@ export class CompLayer extends CompNode {
 	}
 
 	dispose() {
-		groupParentOf(this)?.remove(this);
+		listParentOf(this)?.remove(this);
 		this.render(null);
 	}
 }

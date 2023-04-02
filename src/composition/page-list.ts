@@ -1,7 +1,7 @@
-import {CompGroup} from './group.js';
+import {CompList} from './list.js';
 import type {CompPage} from './page.js';
 
-export class CompPageGroup extends CompGroup<CompPage> {
+export class CompPageList extends CompList<CompPage> {
 	constructor(element?: HTMLElement) {
 		super(element);
 
