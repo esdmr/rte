@@ -13,7 +13,7 @@ patchedDependencies:
 specifiers:
   '@mdi/js': 7.1.96
   '@mdi/react': 1.6.1
-  '@pnpm/lockfile-file': 7.0.5
+  '@pnpm/lockfile-file': 7.0.6
   '@pnpm/logger': 5.0.0
   '@preact/signals': 1.1.3
   '@prefresh/vite': 2.2.8
@@ -57,7 +57,7 @@ dependencies:
   wouter-preact: 2.8.0-alpha.2_ignvtktwp77in5csvysi247wve_preact@10.13.1
 
 devDependencies:
-  '@pnpm/lockfile-file': 7.0.5_@pnpm+logger@5.0.0
+  '@pnpm/lockfile-file': 7.0.6_@pnpm+logger@5.0.0
   '@pnpm/logger': 5.0.0
   '@prefresh/vite': 2.2.8_4jt37oehemwuq3cvigkaotgg2u_preact@10.13.1+vite@4.1.4
   '@rollup/plugin-strip': 3.0.2
@@ -650,8 +650,8 @@ packages:
       execa: /safe-execa/0.1.3
     dev: true
 
-  /@pnpm/lockfile-file/7.0.5_@pnpm+logger@5.0.0:
-    resolution: {integrity: sha512-KjgoJ9VQTkstwzCVqGOX7UVHzVOal1YGfnb1LSVriqdCxYAtA5iTGji1Vr5sGmyfbwGFjTFWdqx6QGRGP0rggw==}
+  /@pnpm/lockfile-file/7.0.6_@pnpm+logger@5.0.0:
+    resolution: {integrity: sha512-YRbdI/9TfnlLZ33xU/hQ/OefcACTBI1Ub2qrxQ9JkpIeFi6MH2kr1RAPTlFZ8SPtK2GlD1oJunEq6kqiY7JVuQ==}
     engines: {node: '>=14.6'}
     peerDependencies:
       '@pnpm/logger': ^5.0.0
