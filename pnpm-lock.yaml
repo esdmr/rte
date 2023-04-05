@@ -3,12 +3,12 @@ lockfileVersion: 5.4
 packageExtensionsChecksum: 119843541e5de0faa8c89f50fa62a06d
 
 patchedDependencies:
-  wouter-preact@2.8.0-alpha.2:
-    hash: ignvtktwp77in5csvysi247wve
-    path: patches/wouter-preact@2.8.0-alpha.2.patch
   '@prefresh/vite@2.2.8':
     hash: 4jt37oehemwuq3cvigkaotgg2u
     path: patches/@prefresh__vite@2.2.8.patch
+  wouter-preact@2.8.0-alpha.2:
+    hash: ignvtktwp77in5csvysi247wve
+    path: patches/wouter-preact@2.8.0-alpha.2.patch
 
 specifiers:
   '@mdi/js': 7.1.96
