@@ -11,7 +11,7 @@ patchedDependencies:
     path: patches/wouter-preact@2.8.0-alpha.2.patch
 
 specifiers:
-  '@mdi/js': 7.1.96
+  '@mdi/js': 7.2.96
   '@mdi/react': 1.6.1
   '@pnpm/lockfile-file': 7.0.6
   '@pnpm/logger': 5.0.0
@@ -46,7 +46,7 @@ specifiers:
   xo: 0.53.1
 
 dependencies:
-  '@mdi/js': 7.1.96
+  '@mdi/js': 7.2.96
   '@mdi/react': 1.6.1
   '@preact/signals': 1.1.3_preact@10.13.1
   history: 5.3.0
@@ -583,8 +583,8 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.14
     dev: true
 
-  /@mdi/js/7.1.96:
-    resolution: {integrity: sha512-wlrJs6Ryhaa5CqhK3FjTfMRnb/s7HeLkKMFqwQySkK86cdN1TGdzpSM3O4tsmzCA1dYBeTbXvOwSE/Y42cUrvA==}
+  /@mdi/js/7.2.96:
+    resolution: {integrity: sha512-paR9M9ZT7rKbh2boksNUynuSZMHhqRYnEZOm/KrZTjQ4/FzyhjLHuvw/8XYzP+E7fS4+/Ms/82EN1pl/OFsiIA==}
     dev: false
 
   /@mdi/react/1.6.1:
