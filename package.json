@@ -25,6 +25,7 @@
 		"wouter-preact": "2.8.0-alpha.2"
 	},
 	"devDependencies": {
+		"@pnpm/dependency-path": "2.1.1",
 		"@pnpm/lockfile-file": "7.0.6",
 		"@pnpm/logger": "5.0.0",
 		"@prefresh/vite": "2.2.8",
@@ -50,7 +51,7 @@
 		"vitest": "0.29.8",
 		"xo": "0.53.1"
 	},
-	"packageManager": "pnpm@7.30.5",
+	"packageManager": "pnpm@8.3.1",
 	"pnpm": {
 		"packageExtensions": {
 			"eslint-import-resolver-webpack": {
