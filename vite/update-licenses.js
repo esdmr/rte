@@ -14,6 +14,7 @@ import {existsSync} from 'node:fs';
 import fs from 'node:fs/promises';
 import process from 'node:process';
 import {readWantedLockfile} from '@pnpm/lockfile-file';
+import {parse, depPathToFilename} from '@pnpm/dependency-path';
 import parseAuthor from 'parse-author';
 import getPkgRepo from 'get-pkg-repo';
 import {
@@ -115,26 +116,24 @@ async function updateDepsLicenses(integrity) {
 }
 
 async function getPnpmDirs() {
-	const lockfile = await readWantedLockfile('', {ignoreIncompatible: false});
+	const lockfile = await readWantedLockfile('', {
+		ignoreIncompatible: false,
+	});
 	assert(lockfile !== null);
 
 	return Object.entries(lockfile.packages ?? {})
 		.filter(([, snapshot]) => !snapshot.dev)
 		.sort(([a], [b]) => a.localeCompare(b, 'en'))
 		.map(([pkgPath, snapshot]) => {
-			const [, name, version] =
-				/^\/((?:@.+?\/)?.+?)\/(.+)$/.exec(pkgPath) ?? [];
+			const {name, version} = parse(pkgPath);
 
 			assert(name);
 			assert(version);
 
-			const pkgId = `${name}@${version}`;
-
 			return /** @type {[URL, PackageSnapshotExtended]} */ ([
 				new URL(
-					`node_modules/.pnpm/${pkgId.replace(
-						/\//g,
-						'+',
+					`node_modules/.pnpm/${depPathToFilename(
+						pkgPath,
 					)}/node_modules/${name}/`,
 					paths.rootDir,
 				),
