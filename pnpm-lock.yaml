@@ -44,8 +44,8 @@ devDependencies:
     specifier: 2.1.1
     version: 2.1.1
   '@pnpm/lockfile-file':
-    specifier: 8.0.0
-    version: 8.0.0(@pnpm/logger@5.0.0)
+    specifier: 8.0.1
+    version: 8.0.1(@pnpm/logger@5.0.0)
   '@pnpm/logger':
     specifier: 5.0.0
     version: 5.0.0
@@ -660,8 +660,8 @@ packages:
       rfc4648: 1.5.2
     dev: true
 
-  /@pnpm/dependency-path@2.0.0:
-    resolution: {integrity: sha512-07LLC1ljEV6beOY8JCHueSyHpLk6Z6aKfIkrxwIoYQqhoDg7Uh6WogM36DbZCQ3qj6tniUK+DYARSKgQPBCXmQ==}
+  /@pnpm/dependency-path@2.1.0:
+    resolution: {integrity: sha512-so0+DWHaJ2oTxws8LQ3kmanxoxO/JAfRB7o1QQCOjTVTlK0vFrKSRj9xZVHBZoWq2C9GbIj1V0Gmcwz7zMs/EQ==}
     engines: {node: '>=16.14'}
     dependencies:
       '@pnpm/crypto.base32-hash': 2.0.0
@@ -694,14 +694,14 @@ packages:
       execa: /safe-execa@0.1.2
     dev: true
 
-  /@pnpm/lockfile-file@8.0.0(@pnpm/logger@5.0.0):
-    resolution: {integrity: sha512-ZIrI8XH954/7sk1wqisWXNaL5hHWTrVLg7/fnl3UBXYGtwFjnrRd6nj6h+Cah4lGfak114m0jDjN8ZLEzM/Zaw==}
+  /@pnpm/lockfile-file@8.0.1(@pnpm/logger@5.0.0):
+    resolution: {integrity: sha512-3ztE/5Phy8aIk2d2ntD9wPSetFoe3YAQ3inhvBOEhvJo9BYgdclLGivrPnHyPOZw0dRRhir12oGDSwrYuR32dg==}
     engines: {node: '>=16.14'}
     peerDependencies:
       '@pnpm/logger': ^5.0.0
     dependencies:
       '@pnpm/constants': 7.0.0
-      '@pnpm/dependency-path': 2.0.0
+      '@pnpm/dependency-path': 2.1.0
       '@pnpm/error': 5.0.0
       '@pnpm/git-utils': 1.0.0
       '@pnpm/lockfile-types': 5.0.0
