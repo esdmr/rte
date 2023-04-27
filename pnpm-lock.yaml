@@ -107,8 +107,8 @@ devDependencies:
     specifier: 1.1.3
     version: 1.1.3(vite@4.2.1)
   vite-plugin-inspect:
-    specifier: 0.7.18
-    version: 0.7.18(vite@4.2.1)
+    specifier: 0.7.19
+    version: 0.7.19(vite@4.2.1)
   vitest:
     specifier: 0.29.8
     version: 0.29.8(jsdom@21.1.1)
@@ -2593,8 +2593,8 @@ packages:
       mime-types: 2.1.35
     dev: true
 
-  /fs-extra@11.1.0:
-    resolution: {integrity: sha512-0rcTq621PD5jM/e0a3EJoGC/1TC5ZBCERW82LQuwfGnCa1V8w7dpYH1yNu+SLb6E5dkeCBzKEyLGlFrnr+dUyw==}
+  /fs-extra@11.1.1:
+    resolution: {integrity: sha512-MGIE4HOvQCeUCzmlHs0vXpih4ysz4wg9qiSAu6cd42lVwPbTM1TjV7RusoyQqMmk/95gdQZX72u+YW+c3eEpFQ==}
     engines: {node: '>=14.14'}
     dependencies:
       graceful-fs: 4.2.10
@@ -5004,8 +5004,8 @@ packages:
       vite: 4.2.1(@types/node@18.11.18)
     dev: true
 
-  /vite-plugin-inspect@0.7.18(vite@4.2.1):
-    resolution: {integrity: sha512-hyIxg2qJaRs0LoB3Tqy9ML8yEublIzTzFVXmNhgw2jsjETJUXeR6iQ4YPHk3Q6kTbbiwgoPPyXimlAfEwektnA==}
+  /vite-plugin-inspect@0.7.19(vite@4.2.1):
+    resolution: {integrity: sha512-OdKObJGdzOMR7SuqykN/Rb6rVtMK1wp4EmUTM3xhTCuSR1K/oM7fi4CKeBWhpYSkqop7O4gVB/MOUk7+RO7gIQ==}
     engines: {node: '>=14'}
     peerDependencies:
       vite: ^3.1.0 || ^4.0.0
@@ -5013,7 +5013,7 @@ packages:
       '@antfu/utils': 0.7.2
       '@rollup/pluginutils': 5.0.2
       debug: 4.3.4
-      fs-extra: 11.1.0
+      fs-extra: 11.1.1
       kolorist: 1.7.0
       sirv: 2.0.2
       ufo: 1.1.1
