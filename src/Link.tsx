@@ -15,6 +15,7 @@ type LinkProps = JSX.IntrinsicElements['a'] & {
 
 type LinkClickHandler = NonNullable<LinkProps['onClick']>;
 
+/** @deprecated */
 export const Link: FunctionComponent<LinkProps> = ({
 	href,
 	onClick,

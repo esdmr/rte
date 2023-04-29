@@ -6,6 +6,7 @@ import {useCallback, useEffect, useRef, useState} from 'preact/hooks';
 import type {BaseLocationHook} from 'wouter-preact';
 import history from './history.js';
 
+/** @deprecated */
 export const useHashLocation: BaseLocationHook = () => {
 	const [path, update] = useState(history.location.pathname);
 	const hash = useRef(path);

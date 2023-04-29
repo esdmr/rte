@@ -8,6 +8,7 @@ export const CircularButton: FunctionComponent<
 	Omit<JSX.HTMLAttributes<HTMLButtonElement | HTMLAnchorElement>, 'href'> & {
 		href?: string;
 		class?: string;
+		/** @deprecated */
 		external?: boolean;
 	}
 > = (props) => {
