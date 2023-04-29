@@ -1,27 +1,32 @@
 import type {FunctionComponent, TargetedEvent} from 'preact/compat';
-import {useMemo, useState, type StateUpdater} from 'preact/hooks';
+import {useState, type StateUpdater} from 'preact/hooks';
+import assert from '../assert.js';
 import * as css from './debug.module.css';
 import {createDialog, CompDialog} from './dialog.js';
 import {CompWindow} from './window.js';
-import {CompLayer, useCompNode} from './layer.js';
+import {CompLayer, useCompLayer} from './layer.js';
 import {createPage, CompPage} from './page.js';
 
-const useRandomId = () =>
-	useMemo(() => Math.random().toString().slice(2, 10), []);
-
 const resolveDialog =
-	(dialog: CompDialog<string>) => (event: TargetedEvent<HTMLFormElement>) => {
+	(layer: CompLayer) => (event: TargetedEvent<HTMLFormElement>) => {
 		event.preventDefault();
+		const dialog = layer.findNearest(CompDialog);
+		assert(dialog, 'Not in a dialog');
 		const form = new FormData(event.currentTarget);
 		dialog.result.resolve(form.get('result')?.toString() ?? '');
 	};
 
-const abortDialog = (dialog: CompDialog<any>) => () => {
+const abortDialog = (layer: CompLayer) => () => {
+	const dialog = layer.findNearest(CompDialog);
+	assert(dialog, 'Not in a dialog');
 	dialog.result.abort();
 };
 
 const openDialog =
-	(page: CompPage, setResult: StateUpdater<string | undefined>) => () => {
+	(layer: CompLayer, setResult: StateUpdater<string | undefined>) => () => {
+		const page = layer.findNearest(CompPage);
+		assert(page, 'Not in a page');
+
 		createDialog<string>({
 			page,
 			content: <Dialog />,
@@ -36,7 +41,10 @@ const openDialog =
 		);
 	};
 
-const openPage = (page: CompPage, action?: 'replace') => () => {
+const openPage = (layer: CompLayer, action?: 'replace') => () => {
+	const page = layer.findNearest(CompPage);
+	assert(page, 'Not in a page');
+
 	createPage({
 		page,
 		replace: action === 'replace',
@@ -45,58 +53,45 @@ const openPage = (page: CompPage, action?: 'replace') => () => {
 	});
 };
 
-const closePage = (page: CompPage) => () => {
+const closePage = (layer: CompLayer) => () => {
+	const page = layer.findNearest(CompPage);
+	assert(page, 'Not in a page');
 	page.dispose();
 };
 
 const Dialog: FunctionComponent = () => {
-	const dialog = useCompNode<CompDialog<string>>(CompDialog);
-	const page = useCompNode(CompPage);
+	const layer = useCompLayer();
 	const [result, setResult] = useState<string>();
 
 	return (
 		<article class={css.dialogContainer}>
-			<h1>
-				This is a dialog! (level ={' '}
-				{page.dialogs.children.indexOf(dialog)}, randId ={' '}
-				{useRandomId()})
-			</h1>
+			<h1>This is a dialog!</h1>
 			{result && <p>Dialog result was: {result}</p>}
-			<form onSubmit={resolveDialog(dialog)}>
+			<form onSubmit={resolveDialog(layer)}>
 				<label>
 					Dialog result: <input name="result" type="text" />
 				</label>
 				<button>Resolve</button>
 			</form>
-			<button onClick={abortDialog(dialog)}>Abort</button>
-			<button onClick={openDialog(page, setResult)}>Open dialog</button>
-			<button onClick={openPage(page)}>Open page</button>
+			<button onClick={abortDialog(layer)}>Abort</button>
+			<button onClick={openDialog(layer, setResult)}>Open dialog</button>
+			<button onClick={openPage(layer)}>Open page</button>
 		</article>
 	);
 };
 
 const Page: FunctionComponent = () => {
-	const page = useCompNode(CompPage);
-	const window = useCompNode(CompWindow);
+	const layer = useCompLayer();
 	const [result, setResult] = useState<string>();
-	const {pages} = window;
 
 	return (
 		<>
-			<h1>
-				Hello, World! (level = {pages.children.indexOf(page)}, randId ={' '}
-				{useRandomId()})
-			</h1>
+			<h1>Hello, World!</h1>
 			{result && <p>Dialog result was: {result}</p>}
-			<button
-				onClick={closePage(page)}
-				disabled={pages.firstChild === page}
-			>
-				Back
-			</button>
-			<button onClick={openDialog(page, setResult)}>Open dialog</button>
-			<button onClick={openPage(page)}>Open page</button>
-			<button onClick={openPage(page, 'replace')}>
+			<button onClick={closePage(layer)}>Back</button>
+			<button onClick={openDialog(layer, setResult)}>Open dialog</button>
+			<button onClick={openPage(layer)}>Open page</button>
+			<button onClick={openPage(layer, 'replace')}>
 				Open page in-place
 			</button>
 		</>
