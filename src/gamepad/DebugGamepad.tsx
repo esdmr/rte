@@ -4,7 +4,6 @@ import type {FunctionComponent} from 'preact';
 import {AllowScroll} from '../AllowScroll.js';
 import {CircularButton} from '../CircularButton.js';
 import {NavColumn} from '../navigation/NavColumn.js';
-import {Title} from '../Title.js';
 import {DebugGamepadState} from './DebugGamepadState.js';
 import {GamepadToSignal} from './GamepadToSignal.js';
 
@@ -20,7 +19,7 @@ export const DebugGamepad: FunctionComponent = () => (
 				</nav>
 			</header>
 			<main>
-				<Title h1>Debug gamepad</Title>
+				<h1>Debug gamepad</h1>
 
 				<DebugGamepadState />
 			</main>

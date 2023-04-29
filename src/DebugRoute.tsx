@@ -1,11 +1,10 @@
 import {mdiHome} from '@mdi/js';
 import {Icon} from '@mdi/react';
 import type {FunctionComponent} from 'preact';
-import {Link} from './Link.js';
 import {AllowScroll} from './AllowScroll.js';
 import {CircularButton} from './CircularButton.js';
+import {Link} from './Link.js';
 import {NavColumn} from './navigation/NavColumn.js';
-import {Title} from './Title.js';
 
 export const DebugRoute: FunctionComponent<{id: string}> = ({id}) => (
 	<>
@@ -19,7 +18,7 @@ export const DebugRoute: FunctionComponent<{id: string}> = ({id}) => (
 				</nav>
 			</header>
 			<main>
-				<Title h1>Debug route: {id}</Title>
+				<h1>Debug route: {id}</h1>
 				<nav aria-label="Debug route links">
 					<ul>
 						<NavColumn>

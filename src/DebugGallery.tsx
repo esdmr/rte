@@ -4,9 +4,8 @@ import type {FunctionComponent} from 'preact';
 import {AllowScroll} from './AllowScroll.js';
 import {CircularButton} from './CircularButton.js';
 import * as css from './DebugGallery.module.css';
-import * as gfbi from './icons/gamepad/face-button/index.js';
 import {Loading} from './Loading.js';
-import {Title} from './Title.js';
+import * as gfbi from './icons/gamepad/face-button/index.js';
 
 const style = [gfbi.symbols, gfbi.lettersAb, gfbi.lettersBa] as const;
 const which = ['down', 'right', 'left', 'up'] as const;
@@ -22,7 +21,7 @@ export const DebugGallery: FunctionComponent = () => (
 			</nav>
 		</header>
 		<main>
-			<Title h1>Debug Gallery</Title>
+			<h1>Debug Gallery</h1>
 
 			<h2>Loading icon</h2>
 			<Loading placement="center" />

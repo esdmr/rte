@@ -2,11 +2,10 @@ import {mdiArrowLeft} from '@mdi/js';
 import {Icon} from '@mdi/react';
 import type {FunctionComponent} from 'preact';
 import {lazy, Suspense, useMemo} from 'preact/compat';
-import assert from '../assert.js';
 import {AllowScroll} from '../AllowScroll.js';
+import assert from '../assert.js';
 import {CircularButton} from '../CircularButton.js';
 import {Loading} from '../Loading.js';
-import {Title} from '../Title.js';
 
 export const LicenseFile: FunctionComponent<{
 	label: string;
@@ -33,7 +32,7 @@ export const LicenseFile: FunctionComponent<{
 					</nav>
 				</header>
 				<main>
-					<Title h1>Invalid package id</Title>
+					<h1>Invalid package id</h1>
 					<p>
 						<code>{path}</code> is not a valid package name.
 					</p>
@@ -88,7 +87,7 @@ export const LicenseFile: FunctionComponent<{
 				</nav>
 			</header>
 			<main>
-				<Title h1>License file for: {label}</Title>
+				<h1>License file for: {label}</h1>
 				<Suspense fallback={<Loading placement="center" />}>
 					<Content />
 				</Suspense>

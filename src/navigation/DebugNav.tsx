@@ -3,11 +3,10 @@ import {Icon} from '@mdi/react';
 import type {FunctionComponent} from 'preact';
 import {AllowScroll} from '../AllowScroll.js';
 import {CircularButton} from '../CircularButton.js';
-import {Title} from '../Title.js';
+import * as css from './DebugNav.module.css';
 import {NavColumn} from './NavColumn.js';
 import {NavFlow} from './NavFlow.js';
 import {NavGrid} from './NavGrid.js';
-import * as css from './DebugNav.module.css';
 import {NavRow} from './NavRow.js';
 import {A, Button} from './wrappers.js';
 
@@ -24,7 +23,7 @@ export const DebugNav: FunctionComponent = () => (
 			</header>
 			<main>
 				<NavColumn>
-					<Title h1>Debug navigation</Title>
+					<h1>Debug navigation</h1>
 					<h2>Texts and Anchors</h2>
 					<div>Text 1</div>
 					<Button>Focusable button 2</Button>

@@ -3,7 +3,6 @@ import {Icon} from '@mdi/react';
 import type {FunctionComponent} from 'preact';
 import {AllowScroll} from './AllowScroll.js';
 import {CircularButton} from './CircularButton.js';
-import {Title} from './Title.js';
 
 export const UnknownRoute: FunctionComponent = () => (
 	<>
@@ -16,7 +15,7 @@ export const UnknownRoute: FunctionComponent = () => (
 			</nav>
 		</header>
 		<main>
-			<Title h1>Page not found!</Title>
+			<h1>Page not found!</h1>
 		</main>
 	</>
 );

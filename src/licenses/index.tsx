@@ -6,10 +6,9 @@ import {AllowScroll} from '../AllowScroll.js';
 import {CircularButton} from '../CircularButton.js';
 import {Loading} from '../Loading.js';
 import {NavColumn} from '../navigation/NavColumn.js';
-import {Title} from '../Title.js';
+import {Project} from './Project.js';
 import {Dependencies} from './packages-list.js';
 import {Patches} from './patches-list.js';
-import {Project} from './Project.js';
 
 export const Licenses: FunctionComponent<{
 	'return-route': string;
@@ -26,7 +25,7 @@ export const Licenses: FunctionComponent<{
 			</header>
 			<main>
 				<NavColumn>
-					<Title h1>Licenses</Title>
+					<h1>Licenses</h1>
 					<h2>This project</h2>
 					<Project
 						name="RTE"
