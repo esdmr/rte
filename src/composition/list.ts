@@ -25,10 +25,16 @@ export class CompList<T extends CompNode = CompNode> extends CompNode {
 		super(element);
 	}
 
+	*[Symbol.iterator]() {
+		for (const child of this._element.children) {
+			const node = getCompNodeOf(child) as T;
+			assert(node, 'Non-compositor child found in compositor list');
+			yield node;
+		}
+	}
+
 	get children() {
-		return [...this._element.children]
-			.map((i) => getCompNodeOf(i) as T)
-			.filter(Boolean) as readonly T[];
+		return [...this] as const;
 	}
 
 	get firstChild() {
@@ -94,7 +100,7 @@ export class CompList<T extends CompNode = CompNode> extends CompNode {
 	}
 
 	dispose() {
-		for (const child of this.children) {
+		for (const child of this) {
 			child.dispose();
 		}
 	}

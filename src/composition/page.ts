@@ -20,8 +20,8 @@ export class CompPage extends CompNode {
 			const activeChild = this.dialogs.lastChild ?? this.content;
 			this.content.inert = this.content !== activeChild;
 
-			for (const item of this.dialogs.children) {
-				activeChild.inert = item !== activeChild;
+			for (const dialog of this.dialogs) {
+				activeChild.inert = dialog !== activeChild;
 			}
 		});
 	}

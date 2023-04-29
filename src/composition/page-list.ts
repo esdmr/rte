@@ -8,7 +8,7 @@ export class CompPageList extends CompList<CompPage> {
 		this.addEventListener('ChildrenUpdate', () => {
 			const {lastChild} = this;
 
-			for (const child of this.children) {
+			for (const child of this) {
 				child.hidden = child !== lastChild;
 			}
 		});
