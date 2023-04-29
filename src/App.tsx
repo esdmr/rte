@@ -3,15 +3,15 @@ import {Route} from 'wouter-preact';
 import {DebugGallery} from './DebugGallery.js';
 import {DebugRoute} from './DebugRoute.js';
 import {EditorContainer} from './EditorContainer.js';
-import {DebugGamepad} from './gamepad/DebugGamepad.js';
 import {HomePage} from './HomePage.js';
-import {Licenses} from './licenses/index.js';
+import {UnknownRoute} from './UnknownRoute.js';
+import {DebugGamepad} from './gamepad/DebugGamepad.js';
 import {LicenseFile} from './licenses/LicenseFile.js';
+import {Licenses} from './licenses/index.js';
 import {DebugNav} from './navigation/DebugNav.js';
 import {NavSwitch} from './navigation/NavSwitch.js';
-import {DebugPageState} from './page-state/DebugPageState.js';
-import {UnknownRoute} from './UnknownRoute.js';
 
+/** @deprecated */
 export const App: FunctionComponent = () => (
 	<NavSwitch>
 		<Route path="/">{() => <HomePage />}</Route>
@@ -45,7 +45,6 @@ export const App: FunctionComponent = () => (
 			{({id}) => <DebugRoute id={id} />}
 		</Route>
 		<Route path="/debug/nav">{() => <DebugNav />}</Route>
-		<Route path="/debug/page-state">{() => <DebugPageState />}</Route>
 		<Route path="/debug/gamepad">{() => <DebugGamepad />}</Route>
 		<Route>{() => <UnknownRoute />}</Route>
 	</NavSwitch>
