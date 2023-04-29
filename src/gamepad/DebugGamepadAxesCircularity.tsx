@@ -8,6 +8,8 @@ const axisPointerRadius = 2;
 const tau = 2 * Math.PI;
 
 const background = document.createElement('canvas');
+background.width = canvasSize;
+background.height = canvasSize;
 
 {
 	const ctx = background.getContext('2d')!;
