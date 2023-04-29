@@ -79,17 +79,18 @@ const Page: FunctionComponent = () => {
 	const page = useCompNode(CompPage);
 	const window = useCompNode(CompWindow);
 	const [result, setResult] = useState<string>();
+	const {pages} = window;
 
 	return (
 		<>
 			<h1>
-				Hello, World! (level = {window.pages.children.indexOf(page)},
-				randId = {useRandomId()})
+				Hello, World! (level = {pages.children.indexOf(page)}, randId ={' '}
+				{useRandomId()})
 			</h1>
 			{result && <p>Dialog result was: {result}</p>}
 			<button
 				onClick={closePage(page)}
-				disabled={window.pages.firstChild === page}
+				disabled={pages.firstChild === page}
 			>
 				Back
 			</button>

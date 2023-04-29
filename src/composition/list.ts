@@ -1,21 +1,17 @@
 import assert from '../assert.js';
-import {CompNode} from './node.js';
-import {compNodeOfElement} from './registry.js';
+import {
+	CompNode,
+	type ChildrenRemovable,
+	tryRemovingFromParent,
+} from './node.js';
+import {getCompNodeOf} from './registry.js';
 
-function getCompNodeOf(
-	// eslint-disable-next-line @typescript-eslint/ban-types
-	element: Element | null,
-) {
-	if (!element) {
-		return undefined;
-	}
+const description = 'compositor list';
 
-	const child = compNodeOfElement.get(element);
-	assert(child, 'Child of compositor list is not a compositor node');
-	return child;
-}
-
-export class CompList<T extends CompNode = CompNode> extends CompNode {
+export class CompList<T extends CompNode = CompNode>
+	extends CompNode
+	implements ChildrenRemovable<T>
+{
 	constructor(element?: HTMLElement) {
 		assert(
 			element !== document.body,
@@ -25,12 +21,31 @@ export class CompList<T extends CompNode = CompNode> extends CompNode {
 		super(element);
 	}
 
-	*[Symbol.iterator]() {
+	*entries() {
+		let i = 0;
+
 		for (const child of this._element.children) {
-			const node = getCompNodeOf(child) as T;
+			const node = getCompNodeOf(child, description) as T;
 			assert(node, 'Non-compositor child found in compositor list');
+			yield [i, node] as const;
+			++i;
+		}
+	}
+
+	*keys() {
+		for (const [key] of this.entries()) {
+			yield key;
+		}
+	}
+
+	*values() {
+		for (const [, node] of this.entries()) {
 			yield node;
 		}
+	}
+
+	[Symbol.iterator]() {
+		return this.values();
 	}
 
 	get children() {
@@ -38,11 +53,15 @@ export class CompList<T extends CompNode = CompNode> extends CompNode {
 	}
 
 	get firstChild() {
-		return getCompNodeOf(this._element.firstElementChild) as T | undefined;
+		return getCompNodeOf(this._element.firstElementChild, description) as
+			| T
+			| undefined;
 	}
 
 	get lastChild() {
-		return getCompNodeOf(this._element.lastElementChild) as T | undefined;
+		return getCompNodeOf(this._element.lastElementChild, description) as
+			| T
+			| undefined;
 	}
 
 	get hasChildren() {
@@ -103,14 +122,11 @@ export class CompList<T extends CompNode = CompNode> extends CompNode {
 		for (const child of this) {
 			child.dispose();
 		}
+
+		tryRemovingFromParent(this);
 	}
 
 	private _onChildrenUpdate() {
 		this.dispatchEvent(new Event('ChildrenUpdate'));
 	}
-}
-
-export function listParentOf<T extends CompNode>(node: T) {
-	const {parent} = node;
-	return parent instanceof CompList ? (parent as CompList<T>) : undefined;
 }

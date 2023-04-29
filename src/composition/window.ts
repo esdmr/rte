@@ -1,23 +1,33 @@
-import {CompList} from './list.js';
+import assert from '../assert.js';
 import {type CompLayer} from './layer.js';
-import {CompNode} from './node.js';
+import {CompList} from './list.js';
 import {CompPageList} from './page-list.js';
+import {CompRecord} from './record.js';
 
-export class CompWindow extends CompNode {
-	readonly pages = new CompPageList();
-	readonly overlays = new CompList<CompLayer>();
+export class CompWindow extends CompRecord<{
+	pages: CompPageList;
+	overlays: CompList<CompLayer>;
+}> {
+	get pages() {
+		const pages = this.get('pages');
+		assert(pages, 'Window is missing its page list');
+		return pages;
+	}
+
+	get overlays() {
+		const overlays = this.get('overlays');
+		assert(overlays, 'Window is missing its overlay list');
+		return overlays;
+	}
 
 	constructor(element?: HTMLElement) {
-		super(element);
-		this._element.append(this.pages._element, this.overlays._element);
+		super(element, {
+			pages: new CompPageList(),
+			overlays: new CompList<CompLayer>(),
+		});
 	}
 
 	get activeDescendant() {
 		return this.pages.activeDescendant;
-	}
-
-	dispose() {
-		this.pages.dispose();
-		this.overlays.dispose();
 	}
 }

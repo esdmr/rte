@@ -28,6 +28,10 @@ export abstract class CompNode implements Disposable {
 		}
 	}
 
+	get isAtDocumentBody() {
+		return this._element === document.body;
+	}
+
 	get parent(): CompNode | undefined {
 		const {parentElement} = this._element;
 
@@ -125,4 +129,19 @@ export abstract class CompNode implements Disposable {
 	}
 
 	abstract dispose(): void;
+}
+
+export type ChildrenRemovable<T extends CompNode = CompNode> = {
+	remove(oldChild: T): void;
+};
+
+export function tryRemovingFromParent(node: CompNode) {
+	const {parent} = node;
+
+	if (parent && !('remove' in parent)) {
+		return false;
+	}
+
+	(parent as ChildrenRemovable | undefined)?.remove(node);
+	return true;
 }
