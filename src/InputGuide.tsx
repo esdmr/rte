@@ -1,4 +1,4 @@
-import {signal} from '@preact/signals';
+import {signal, type Signal} from '@preact/signals';
 import type {FunctionComponent} from 'preact';
 import * as css from './InputGuide.module.css';
 import {activeInputMode, type InputMode} from './gamepad/input-mode.js';
@@ -13,7 +13,7 @@ export type InputGuideEntry = {
 	readonly icons: readonly InputGuideIcon[];
 };
 
-export const inputGuideEntries = signal<readonly InputGuideEntry[]>([]);
+export const inputGuideEntries: Signal<readonly InputGuideEntry[]> = signal([]);
 
 export const InputGuide: FunctionComponent = () => (
 	<ul
