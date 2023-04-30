@@ -1,5 +1,6 @@
 import assert from '../assert.js';
 import type {Disposable} from '../disposable.js';
+import type {GamepadEvent} from '../gamepad/event.js';
 import {compNodeOfElement} from './registry.js';
 import type {CompLayer} from './layer.js';
 
