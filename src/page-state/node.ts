@@ -45,24 +45,6 @@ export class PageStateNode implements Disposable {
 		}
 	}
 
-	private _title = '';
-
-	get title() {
-		return this._title;
-	}
-
-	set title(value) {
-		if (this._title === value) {
-			return;
-		}
-
-		this._title = value;
-
-		if (this.connected) {
-			queueUpdate();
-		}
-	}
-
 	constructor(
 		private readonly parent: PageStateNode | undefined,
 		protected readonly hooks: PageStateHooks,
@@ -88,10 +70,6 @@ export class PageStateNode implements Disposable {
 		this.parent._child = undefined;
 		this.disposed = true;
 		this.connected = false;
-	}
-
-	listTitles(): readonly string[] {
-		return [...(this._child?.listTitles() ?? []), this.title];
 	}
 
 	applyInputGuideEntries(entries: InputGuideEntry[]) {

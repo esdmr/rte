@@ -7,7 +7,6 @@ import {
 } from './events.js';
 import {rootState} from './global.js';
 
-const originalTitle = document.title;
 let updateQueued = false;
 
 export const queueUpdate = () => {
@@ -40,9 +39,6 @@ export const queueUpdate = () => {
 			'gamepadconnected',
 			onGamepadConnected,
 		);
-
-		const titles = [...rootState.listTitles(), originalTitle];
-		document.title = titles.filter(Boolean).join(' - ');
 
 		const newEntries: InputGuideEntry[] = [];
 		rootState.applyInputGuideEntries(newEntries);
