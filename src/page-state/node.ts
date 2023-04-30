@@ -4,12 +4,14 @@ import type {InputGuideEntry} from '../InputGuide.js';
 import type {GamepadClone} from '../gamepad/diff.js';
 import {queueUpdate} from './update.js';
 
+/** @deprecated */
 export type PageStateEvents = {
 	onKeyDown?(this: PageStateNode, event: KeyboardEvent): boolean;
 	onFocusIn?(this: PageStateNode, event: FocusEvent): boolean;
 	onGamepad?(this: PageStateNode, gamepads: readonly GamepadClone[]): boolean;
 };
 
+/** @deprecated */
 export type PageStateHooks = PageStateEvents & {
 	applyInputGuideEntries?(
 		this: PageStateNode,
@@ -17,6 +19,7 @@ export type PageStateHooks = PageStateEvents & {
 	): void;
 };
 
+/** @deprecated */
 export class PageStateNode implements Disposable {
 	protected connected = false;
 	private disposed = false;

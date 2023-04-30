@@ -3,6 +3,7 @@ import {queueUpdate} from './update.js';
 
 const emptyHooks: PageStateHooks = /* @__PURE__ */ Object.freeze({});
 
+/** @deprecated */
 export class MutablePageStateNode extends PageStateNode {
 	protected declare hooks: PageStateHooks;
 

@@ -63,6 +63,7 @@ const handleKeyPress = (root: NavNode, code: string, focusVisible: boolean) => {
 	}
 };
 
+/** @deprecated */
 export const navPageState = (root: NavNode): PageStateHooks => ({
 	onKeyDown(event) {
 		if (!/^Arrow(?:Up|Down|Left|Right)$/.test(event.code)) {

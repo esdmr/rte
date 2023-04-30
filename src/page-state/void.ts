@@ -1,5 +1,6 @@
 import type {PageStateHooks} from './node.js';
 
+/** @deprecated */
 export const voidPageState: PageStateHooks = {
 	onFocusIn() {
 		return true;

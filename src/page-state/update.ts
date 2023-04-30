@@ -9,6 +9,7 @@ import {rootState} from './global.js';
 
 let updateQueued = false;
 
+/** @deprecated */
 export const queueUpdate = () => {
 	if (updateQueued) {
 		return;
