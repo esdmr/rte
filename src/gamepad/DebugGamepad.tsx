@@ -5,10 +5,9 @@ import {AllowScroll} from '../AllowScroll.js';
 import {CircularButton} from '../CircularButton.js';
 import {NavColumn} from '../navigation/NavColumn.js';
 import {DebugGamepadState} from './DebugGamepadState.js';
-import {GamepadToSignal} from './GamepadToSignal.js';
 
 export const DebugGamepad: FunctionComponent = () => (
-	<GamepadToSignal>
+	<>
 		<AllowScroll />
 		<NavColumn>
 			<header>
@@ -24,5 +23,5 @@ export const DebugGamepad: FunctionComponent = () => (
 				<DebugGamepadState />
 			</main>
 		</NavColumn>
-	</GamepadToSignal>
+	</>
 );
