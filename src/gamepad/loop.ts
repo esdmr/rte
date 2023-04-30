@@ -1,6 +1,7 @@
 import {rootState} from '../page-state/global.js';
 import {activeInputMode} from '../page-state/input-mode.js';
 import {cloneGamepads, compareGamepads, type GamepadClone} from './diff.js';
+import {GamepadEvent} from './event.js';
 
 let gamepadLoopId: number | undefined;
 let oldGamepads: GamepadClone[] = [];
@@ -49,6 +50,9 @@ const gamepadLoop = () => {
 			? oldGamepads[0].type ?? 'xbox'
 			: 'keyboard';
 		rootState.dispatchEvent('onGamepad', oldGamepads);
+		(document.activeElement ?? document.body).dispatchEvent(
+			new GamepadEvent(oldGamepads),
+		);
 
 		performance.mark('gamepad.update.end');
 		performance.measure(
