@@ -1,5 +1,5 @@
 import {rootState} from '../page-state/global.js';
-import {activeInputMode} from '../page-state/input-mode.js';
+import {activeInputMode} from './input-mode.js';
 import {cloneGamepads, compareGamepads, type GamepadClone} from './diff.js';
 import {GamepadEvent} from './event.js';
 
