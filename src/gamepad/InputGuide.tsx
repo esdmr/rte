@@ -12,7 +12,7 @@ export type InputGuideIcon = {
 
 export type InputGuideEntry = {
 	readonly text: string;
-	readonly id?: symbol | undefined;
+	readonly id: symbol;
 	readonly icons: readonly InputGuideIcon[];
 };
 
@@ -68,9 +68,7 @@ export function requestInputGuideUpdate() {
 
 		if (
 			newEntries.length !== oldEntries.length ||
-			newEntries.some(
-				(entry, i) => !entry.id || entry.id !== oldEntries[i]!.id,
-			)
+			newEntries.some((entry, i) => entry.id !== oldEntries[i]!.id)
 		) {
 			inputGuideEntries.value = newEntries;
 		}
