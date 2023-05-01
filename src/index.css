@@ -9,6 +9,8 @@
 		local("Courier New");
 }
 
+@layer base;
+
 @layer app {
 	:root {
 		/* Dark theme */
