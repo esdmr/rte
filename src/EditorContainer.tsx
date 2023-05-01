@@ -20,6 +20,7 @@ export const EditorContainer: FunctionComponent = () => {
 			onfocusin={stopPropagation}
 			onGamepad={stopPropagation}
 			onKeyDown={stopPropagation}
+			onInputGuideUpdate={stopPropagation}
 		>
 			<Suspense
 				fallback={
