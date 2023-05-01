@@ -1,7 +1,6 @@
 import {Router} from 'wouter-preact';
 import {App} from './App.js';
 import {NavRoot} from './navigation/NavRoot.js';
-import './index.css';
 import {guideContainer} from './gamepad/InputGuide.module.css';
 import {useHashLocation} from './wouter-hash.js';
 import {InputGuide, setupInputGuide} from './gamepad/InputGuide.js';

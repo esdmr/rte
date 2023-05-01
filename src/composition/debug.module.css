@@ -15,6 +15,7 @@ body.animating {
 	border-radius: 0.5em;
 	background-color: #2e6d15;
 	backdrop-filter: blur(2px);
+	-webkit-backdrop-filter: blur(2px);
 	pointer-events: none;
 	color: white;
 }

@@ -1,23 +1,27 @@
-.face-button text {
-	text-anchor: middle;
-	dominant-baseline: central;
-	font-size: 12px;
-	user-select: none;
-}
+@layer base {
+	.face-button text {
+		text-anchor: middle;
+		dominant-baseline: central;
+		font-size: 12px;
+		user-select: none;
+		-moz-user-select: none;
+		-webkit-user-select: none;
+	}
 
-.face-button .base {
-	fill: currentColor;
-}
+	.face-button .base {
+		fill: currentColor;
+	}
 
-.face-button .mask-out {
-	fill: white;
-}
+	.face-button .mask-out {
+		fill: white;
+	}
 
-.face-button .mask-in-fill {
-	fill: black;
-}
+	.face-button .mask-in-fill {
+		fill: black;
+	}
 
-.face-button .mask-in-stroke {
-	stroke: black;
-	fill: none;
+	.face-button .mask-in-stroke {
+		stroke: black;
+		fill: none;
+	}
 }

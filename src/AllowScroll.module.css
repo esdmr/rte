@@ -1,0 +1,6 @@
+.scroll {
+	display: block;
+	overflow: auto;
+	width: auto;
+	height: auto;
+}

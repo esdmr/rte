@@ -1,25 +1,27 @@
-.loading {
-	--loading--animation-duration: 2s;
-	--loading--animation-scale: 2;
-	display: grid;
-	place-items: end;
-	padding: 5em;
-}
+@layer base {
+	.loading {
+		--loading--animation-duration: 2s;
+		--loading--animation-scale: 2;
+		display: grid;
+		place-items: end;
+		padding: 5em;
+	}
 
-.loading[data-placement=center] {
-	place-items: center;
-}
+	.loading[data-placement=center] {
+		place-items: center;
+	}
 
-.loading svg {
-	width: 5em;
-}
+	.loading svg {
+		width: 5em;
+	}
 
-.loading circle {
-	--loading--step: 0;
-	fill: var(--foreground);
-	transform-origin: center;
-	transform-box: fill-box;
-	animation: loading calc(var(--loading--animation-duration) / 2) ease-in-out calc(-1 * var(--loading--step) * var(--loading--animation-duration) / var(--loading--animation-scale)) infinite alternate;
+	.loading circle {
+		--loading--step: 0;
+		fill: var(--foreground);
+		transform-origin: center;
+		transform-box: fill-box;
+		animation: loading calc(var(--loading--animation-duration) / 2) ease-in-out calc(-1 * var(--loading--step) * var(--loading--animation-duration) / var(--loading--animation-scale)) infinite alternate;
+	}
 }
 
 @keyframes loading {

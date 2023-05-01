@@ -9,92 +9,83 @@
 		local("Courier New");
 }
 
-:root {
-	/* Dark theme */
-	--dark-background-rgb: 30 30 30;
-	--dark-foreground-rgb: 212 212 212;
-	--dark-focus-outline: #6495ed;
-	--dark-blur-outline: #a8a8a8;
-
-	/* Light theme */
-	--light-background-rgb: 255 255 254;
-	--light-foreground-rgb: 0 0 0;
-	--light-focus-outline: #4169e1;
-	--light-blur-outline: #919191;
-	--light-foreground-22: #0002;
-	--light-foreground-44: #0004;
-
-	--background-rgb: var(--dark-background-rgb);
-	--foreground-rgb: var(--dark-foreground-rgb);
-	--background: rgb(var(--background-rgb));
-	--foreground: rgb(var(--foreground-rgb));
-	--focus-outline: var(--dark-focus-outline);
-	--blur-outline: var(--dark-blur-outline);
-	--hover-alpha: 0.15;
-	--active-alpha: 0.3;
-
-	--SQRT-2: 1.414213562;
-
-	--body-padding-horizontal: 10vw;
-	--body-padding-vertical: 5vh;
-	--body-padding-minimum: 0.5em;
-
-	color-scheme: dark light;
-}
-
-@media (prefers-color-scheme: light) {
+@layer app {
 	:root {
-		--background-rgb: var(--light-background-rgb);
-		--foreground-rgb: var(--light-foreground-rgb);
-		--focus-outline: var(--light-focus-outline);
-		--blur-outline: var(--light-blur-outline);
+		/* Dark theme */
+		--dark-background-rgb: 30 30 30;
+		--dark-foreground-rgb: 212 212 212;
+		--dark-focus-outline: #6495ed;
+		--dark-blur-outline: #a8a8a8;
+
+		/* Light theme */
+		--light-background-rgb: 255 255 254;
+		--light-foreground-rgb: 0 0 0;
+		--light-focus-outline: #4169e1;
+		--light-blur-outline: #919191;
+		--light-foreground-22: #0002;
+		--light-foreground-44: #0004;
+
+		--background-rgb: var(--dark-background-rgb);
+		--foreground-rgb: var(--dark-foreground-rgb);
+		--background: rgb(var(--background-rgb));
+		--foreground: rgb(var(--foreground-rgb));
+		--focus-outline: var(--dark-focus-outline);
+		--blur-outline: var(--dark-blur-outline);
+		--hover-alpha: 0.15;
+		--active-alpha: 0.3;
+
+		--SQRT-2: 1.414213562;
+
+		--body-padding-horizontal: 10vw;
+		--body-padding-vertical: 5vh;
+		--body-padding-minimum: 0.5em;
+
+		color-scheme: dark light;
 	}
-}
 
-.app {
-	display: inline-block;
-	margin: 0;
-	background: var(--background);
-	color: var(--foreground);
-	width: 100vw;
-	height: 100vh;
-	padding: max(var(--body-padding-minimum), var(--body-padding-vertical)) max(var(--body-padding-minimum), var(--body-padding-horizontal));
-	box-sizing: border-box;
-	overflow: hidden;
-	font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-body.scroll {
-	display: block;
-	overflow: auto;
-	width: auto;
-	height: auto;
-}
-
-header {
-	height: calc(1.5em * var(--SQRT-2));
-	margin-bottom: 0.5em;
-}
-
-@media (max-width: 45em) {
-	:root {
-		--body-padding-horizontal: 5vw;
-		--body-padding-vertical: 2.5vh;
+	@media (prefers-color-scheme: light) {
+		:root {
+			--background-rgb: var(--light-background-rgb);
+			--foreground-rgb: var(--light-foreground-rgb);
+			--focus-outline: var(--light-focus-outline);
+			--blur-outline: var(--light-blur-outline);
+		}
 	}
-}
 
-code,
-pre {
-	font-family: 'System Mono', monospace;
-}
+	.app {
+		display: inline-block;
+		margin: 0;
+		background: var(--background);
+		color: var(--foreground);
+		width: 100vw;
+		height: 100vh;
+		padding: max(var(--body-padding-minimum), var(--body-padding-vertical)) max(var(--body-padding-minimum), var(--body-padding-horizontal));
+		box-sizing: border-box;
+		overflow: hidden;
+		font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	}
 
-:focus-visible,
-:focus.focus-visible {
-	outline: 0.1em solid var(--focus-outline);
-	outline-offset: 0.1em;
-	z-index: 9990;
-}
+	header {
+		height: calc(1.5em * var(--SQRT-2));
+		margin-bottom: 0.5em;
+	}
 
-.app {
-	display: contents;
+	@media (max-width: 45em) {
+		:root {
+			--body-padding-horizontal: 5vw;
+			--body-padding-vertical: 2.5vh;
+		}
+	}
+
+	code,
+	pre {
+		font-family: 'System Mono', monospace;
+	}
+
+	:focus-visible,
+	:focus.focus-visible {
+		outline: 0.1em solid var(--focus-outline);
+		outline-offset: 0.1em;
+		z-index: 9990;
+	}
 }

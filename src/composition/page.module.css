@@ -1,8 +1,10 @@
-.page-content {
-	display: inline-block;
-	position: absolute;
-	inset: 0;
-	box-sizing: border-box;
-	width: 100vw;
-	height: 100vh;
+@layer base {
+	.page-content {
+		display: inline-block;
+		position: absolute;
+		inset: 0;
+		box-sizing: border-box;
+		width: 100vw;
+		height: 100vh;
+	}
 }

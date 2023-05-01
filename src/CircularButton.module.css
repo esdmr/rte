@@ -1,35 +1,37 @@
-.circular {
-	display: inline-grid;
-	place-items: center;
-	width: calc(1.5em * var(--SQRT-2));
-	height: calc(1.5em * var(--SQRT-2));
-	border-radius: 1.5em;
-	background: transparent;
-	color: inherit;
-	transition: background-color 100ms ease-in-out;
-	/* Normalize anchors and buttons. */
-	font-size: inherit;
-	border: none;
-	padding: 0;
-	margin: 0;
-	/* The :hover/:active backgrounds already indicates the tap. No need for a
-	 * highlight.
-	 */
-	-webkit-tap-highlight-color: transparent;
-}
+@layer base {
+	.circular {
+		display: inline-grid;
+		place-items: center;
+		width: calc(1.5em * var(--SQRT-2));
+		height: calc(1.5em * var(--SQRT-2));
+		border-radius: 1.5em;
+		background: transparent;
+		color: inherit;
+		transition: background-color 100ms ease-in-out;
+		/* Normalize anchors and buttons. */
+		font-size: inherit;
+		border: none;
+		padding: 0;
+		margin: 0;
+		/* The :hover/:active backgrounds already indicates the tap. No need for a
+		 * highlight.
+		 */
+		-webkit-tap-highlight-color: transparent;
+	}
 
-/* Note: Default :focus-visible style applies. */
+	/* Note: Default :focus-visible style applies. */
 
-.circular:hover {
-	background: rgba(var(--foreground-rgb) / var(--hover-alpha));
-}
+	.circular:hover {
+		background: rgba(var(--foreground-rgb) / var(--hover-alpha));
+	}
 
-.circular:active {
-	background: rgba(var(--foreground-rgb) / var(--active-alpha));
-}
+	.circular:active {
+		background: rgba(var(--foreground-rgb) / var(--active-alpha));
+	}
 
-.circular svg {
-	display: inline-block;
-	width: 1.5em;
-	height: 1.5em;
+	.circular svg {
+		display: inline-block;
+		width: 1.5em;
+		height: 1.5em;
+	}
 }
