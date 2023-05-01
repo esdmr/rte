@@ -1,15 +1,10 @@
 import assert from '../assert.js';
 import type {Disposable} from '../disposable.js';
-import type {GamepadEvent} from '../gamepad/event.js';
 import {compNodeOfElement} from './registry.js';
 import type {CompLayer} from './layer.js';
+import type {EventMap} from './event.js';
 
 assert(typeof document.body.inert === 'boolean', 'Inert polyfill is required');
-
-export type EventMap = {
-	Gamepad: GamepadEvent;
-	ChildrenUpdate: Event;
-} & HTMLElementEventMap;
 
 export abstract class CompNode implements Disposable {
 	constructor(

@@ -1,12 +1,10 @@
 import type {FunctionComponent} from 'preact';
 import {useEffect, useMemo} from 'preact/hooks';
-import {pageStateContext, usePageState} from '../page-state/global.js';
-import {MutablePageStateNode} from '../page-state/mutable-node.js';
-import {navPageState as navPageStateHooks} from '../page-state/navigation.js';
-import {PageStateNode} from '../page-state/node.js';
+import {useCompLayer} from '../composition/layer.js';
 import {wrapNavChildren} from './child-token.js';
 import {NavNode} from './node.js';
-import {navUnaryHooks, type UnaryProps} from './unary.js';
+import {navColumnHooks} from './NavColumn.js';
+import {setupNavigation} from './composition.js';
 
 declare global {
 	/** Used for debugging. Only available in development mode. */
@@ -14,35 +12,9 @@ declare global {
 	var navRootNode: NavNode | undefined;
 }
 
-export const NavRoot: FunctionComponent<UnaryProps> = (props) => {
-	const rootNode = useMemo(() => new NavNode(undefined, navUnaryHooks), []);
-	const parentPageState = usePageState();
-	const pageState = useMemo(
-		() => new PageStateNode(parentPageState, navPageStateHooks(rootNode)),
-		[parentPageState],
-	);
-	const selectedNodePageState = useMemo(
-		() => new MutablePageStateNode(pageState),
-		[pageState],
-	);
-
-	useEffect(() => {
-		parentPageState.child = pageState;
-
-		return () => {
-			pageState.dispose();
-		};
-	}, [pageState]);
-
-	useEffect(() => {
-		pageState.child = selectedNodePageState;
-		rootNode.state.selectedNodePageState = selectedNodePageState;
-
-		return () => {
-			selectedNodePageState.dispose();
-			rootNode.state.selectedNodePageState = undefined;
-		};
-	}, [selectedNodePageState]);
+export const NavRoot: FunctionComponent = (props) => {
+	const rootNode = useMemo(() => new NavNode(undefined, navColumnHooks), []);
+	const layer = useCompLayer();
 
 	useEffect(
 		() => () => {
@@ -52,13 +24,18 @@ export const NavRoot: FunctionComponent<UnaryProps> = (props) => {
 		[rootNode],
 	);
 
+	useEffect(() => {
+		const controller = new AbortController();
+		setupNavigation(rootNode, layer, controller.signal);
+
+		return () => {
+			controller.abort();
+		};
+	}, [rootNode, layer]);
+
 	if (import.meta.env.DEV) {
 		globalThis.navRootNode = rootNode;
 	}
 
-	return (
-		<pageStateContext.Provider value={selectedNodePageState}>
-			{wrapNavChildren(rootNode, props.children)}
-		</pageStateContext.Provider>
-	);
+	return <>{wrapNavChildren(rootNode, props.children)}</>;
 };

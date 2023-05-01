@@ -35,6 +35,10 @@
 
 	--SQRT-2: 1.414213562;
 
+	--body-padding-horizontal: 10vw;
+	--body-padding-vertical: 5vh;
+	--body-padding-minimum: 0.5em;
+
 	color-scheme: dark light;
 }
 
@@ -47,10 +51,7 @@
 	}
 }
 
-body {
-	--body-padding-horizontal: 10vw;
-	--body-padding-vertical: 5vh;
-	--body-padding-minimum: 0.5em;
+.app {
 	display: inline-block;
 	margin: 0;
 	background: var(--background);
@@ -76,7 +77,7 @@ header {
 }
 
 @media (max-width: 45em) {
-	body {
+	:root {
 		--body-padding-horizontal: 5vw;
 		--body-padding-vertical: 2.5vh;
 	}

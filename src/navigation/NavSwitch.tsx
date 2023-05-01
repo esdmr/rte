@@ -5,6 +5,7 @@ import {navChildToken, useChildToken} from './child-token.js';
 import {navUnaryHooks} from './unary.js';
 import {NavNode} from './node.js';
 
+/** @deprecated */
 export const NavSwitch: FunctionComponent<SwitchProps> = (props) => {
 	const childToken = useChildToken();
 	const node = useMemo(

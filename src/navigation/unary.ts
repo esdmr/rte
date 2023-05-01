@@ -1,14 +1,10 @@
-import type {ComponentChild} from 'preact';
 import assert from '../assert.js';
 import {NavChildToken} from './child-token.js';
 import type {NavHooks, NavNode} from './node.js';
 
-export type UnaryProps = {
-	children: ComponentChild;
-};
-
 const childTokens = new WeakMap<NavNode, NavChildToken>();
 
+/** @deprecated */
 export const navUnaryHooks: NavHooks = {
 	onNewChild() {
 		assert(

@@ -1,18 +1,18 @@
 import type {FunctionComponent} from 'preact';
 import {useEffect} from 'preact/hooks';
-import {usePageState} from './page-state/global.js';
+import {useCompLayer} from './composition/layer.js';
 
 /** @deprecated */
 export const AllowScroll: FunctionComponent = () => {
-	const pageState = usePageState();
+	const layer = useCompLayer();
 
 	useEffect(() => {
-		pageState.root.classList.add('scroll');
+		layer.classList.add('scroll');
 
 		return () => {
-			pageState.root.classList.remove('scroll');
+			layer.classList.remove('scroll');
 		};
-	}, [pageState]);
+	}, [layer]);
 
 	return null;
 };
