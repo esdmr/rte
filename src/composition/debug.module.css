@@ -6,22 +6,9 @@ body.animating {
 	overflow: hidden;
 }
 
-.overlay {
-	display: inline-block;
-	position: fixed;
-	right: 1em;
-	bottom: 1em;
-	padding: 0.5em;
-	border-radius: 0.5em;
-	background-color: #2e6d15;
-	backdrop-filter: blur(2px);
-	-webkit-backdrop-filter: blur(2px);
-	pointer-events: none;
-	color: white;
-}
-
 .page {
-	background-color: #cbfeb7;
+	background-color: var(--background);
+	color: var(--foreground);
 	padding: 1.5em;
 	outline: 0;
 }
@@ -39,7 +26,8 @@ body.animating {
 }
 
 .dialog-container {
-	background-color: #f0f0f0;
+	background-color: var(--background);
+	color: var(--foreground);
 	border-radius: 1em;
 	padding: 1.5em;
 	box-shadow: 0 5px 5px #f0f0f080;

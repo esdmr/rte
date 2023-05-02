@@ -1,11 +1,14 @@
 import type {FunctionComponent, TargetedEvent} from 'preact/compat';
 import {useState, type StateUpdater} from 'preact/hooks';
 import assert from '../assert.js';
+import {NavRoot} from '../navigation/NavRoot.js';
+import {Button} from '../navigation/wrappers.js';
+import {NavRow} from '../navigation/NavRow.js';
+import {NavColumn} from '../navigation/NavColumn.js';
 import * as css from './debug.module.css';
-import {createDialog, CompDialog} from './dialog.js';
-import {CompWindow} from './window.js';
-import {CompLayer, useCompLayer} from './layer.js';
-import {createPage, CompPage} from './page.js';
+import {CompDialog, createDialog} from './dialog.js';
+import {useCompLayer, type CompLayer} from './layer.js';
+import {CompPage, createPage} from './page.js';
 
 const resolveDialog =
 	(layer: CompLayer) => (event: TargetedEvent<HTMLFormElement>) => {
@@ -23,13 +26,18 @@ const abortDialog = (layer: CompLayer) => () => {
 };
 
 const openDialog =
-	(layer: CompLayer, setResult: StateUpdater<string | undefined>) => () => {
+	(
+		layer: CompLayer,
+		depth: number,
+		setResult: StateUpdater<string | undefined>,
+	) =>
+	() => {
 		const page = layer.findNearest(CompPage);
 		assert(page, 'Not in a page');
 
 		createDialog<string>({
 			page,
-			content: <Dialog />,
+			content: <CompDebugDialog depth={depth} />,
 			classes: [css.dialog],
 		}).result.promise.then(
 			(value) => {
@@ -41,17 +49,18 @@ const openDialog =
 		);
 	};
 
-const openPage = (layer: CompLayer, action?: 'replace') => () => {
-	const page = layer.findNearest(CompPage);
-	assert(page, 'Not in a page');
+const openPage =
+	(layer: CompLayer, depth: number, action?: 'replace') => () => {
+		const page = layer.findNearest(CompPage);
+		assert(page, 'Not in a page');
 
-	createPage({
-		page,
-		replace: action === 'replace',
-		content: <Page />,
-		classes: [css.page],
-	});
-};
+		createPage({
+			page,
+			replace: action === 'replace',
+			content: <CompDebugPage depth={depth} />,
+			classes: [css.page],
+		});
+	};
 
 const closePage = (layer: CompLayer) => () => {
 	const page = layer.findNearest(CompPage);
@@ -59,54 +68,63 @@ const closePage = (layer: CompLayer) => () => {
 	page.dispose();
 };
 
-const Dialog: FunctionComponent = () => {
+const CompDebugDialog: FunctionComponent<{
+	depth: number;
+}> = ({depth}) => {
 	const layer = useCompLayer();
 	const [result, setResult] = useState<string>();
 
 	return (
-		<article class={css.dialogContainer}>
-			<h1>This is a dialog!</h1>
-			{result && <p>Dialog result was: {result}</p>}
-			<form onSubmit={resolveDialog(layer)}>
-				<label>
-					Dialog result: <input name="result" type="text" />
-				</label>
-				<button>Resolve</button>
-			</form>
-			<button onClick={abortDialog(layer)}>Abort</button>
-			<button onClick={openDialog(layer, setResult)}>Open dialog</button>
-			<button onClick={openPage(layer)}>Open page</button>
-		</article>
+		<NavRoot>
+			<article class={css.dialogContainer}>
+				<h1>This is a dialog! (Depth is {depth})</h1>
+				{result && <p>Dialog result was: {result}</p>}
+				<NavColumn>
+					<form onSubmit={resolveDialog(layer)}>
+						<label>
+							Dialog result: <input name="result" type="text" />
+						</label>
+						<Button>Resolve</Button>
+					</form>
+					<NavRow>
+						<Button onClick={abortDialog(layer)}>Abort</Button>
+						<Button
+							onClick={openDialog(layer, depth + 1, setResult)}
+						>
+							Open dialog
+						</Button>
+						<Button onClick={openPage(layer, depth + 1)}>
+							Open page
+						</Button>
+					</NavRow>
+				</NavColumn>
+			</article>
+		</NavRoot>
 	);
 };
 
-const Page: FunctionComponent = () => {
+export const CompDebugPage: FunctionComponent<{
+	depth?: number;
+}> = ({depth = 0}) => {
 	const layer = useCompLayer();
 	const [result, setResult] = useState<string>();
 
 	return (
-		<>
-			<h1>Hello, World!</h1>
+		<NavRoot>
+			<h1>Hello, World! (Depth is {depth})</h1>
 			{result && <p>Dialog result was: {result}</p>}
-			<button onClick={closePage(layer)}>Back</button>
-			<button onClick={openDialog(layer, setResult)}>Open dialog</button>
-			<button onClick={openPage(layer)}>Open page</button>
-			<button onClick={openPage(layer, 'replace')}>
-				Open page in-place
-			</button>
-		</>
+			<NavRow>
+				<Button onClick={closePage(layer)}>Back</Button>
+				<Button onClick={openDialog(layer, depth + 1, setResult)}>
+					Open dialog
+				</Button>
+				<Button onClick={openPage(layer, depth + 1)}>Open page</Button>
+				<Button onClick={openPage(layer, depth, 'replace')}>
+					Open page in-place
+				</Button>
+			</NavRow>
+		</NavRoot>
 	);
 };
 
-const window = new CompWindow(document.body);
-
-const overlay = new CompLayer();
-window.overlays.append(overlay);
-overlay.classList.add(css.overlay);
-overlay.render(<span>Just press the buttons, it’s easy!</span>);
-
-createPage({
-	window,
-	content: <Page />,
-	classes: [css.page],
-});
+export const compDebugPageClass = css.page;
