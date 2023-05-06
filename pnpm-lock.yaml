@@ -107,8 +107,8 @@ devDependencies:
     specifier: 1.1.3
     version: 1.1.3(vite@4.2.1)
   vite-plugin-inspect:
-    specifier: 0.7.21
-    version: 0.7.21(vite@4.2.1)
+    specifier: 0.7.22
+    version: 0.7.22(vite@4.2.1)
   vitest:
     specifier: 0.30.1
     version: 0.30.1(jsdom@21.1.1)
@@ -4997,8 +4997,8 @@ packages:
       vite: 4.2.1(@types/node@18.11.18)
     dev: true
 
-  /vite-plugin-inspect@0.7.21(vite@4.2.1):
-    resolution: {integrity: sha512-zIyTGkoj76EnDV/Hj20cYjRCtOvzab6EX2tcKy4QWe/qrW/Apxuqc2nZgv4BkTg/bXyL1/1cozlxzx7GfAh9yw==}
+  /vite-plugin-inspect@0.7.22(vite@4.2.1):
+    resolution: {integrity: sha512-Z4y3MPuvn//0/XcpNLwTBqjfSt+c2utIFZu8Dw+nbR2HrPoIrKHedvSuqC8mLzxOpRKRoW60HWvZUDz8J2zRIA==}
     engines: {node: '>=14'}
     peerDependencies:
       vite: ^3.1.0 || ^4.0.0
