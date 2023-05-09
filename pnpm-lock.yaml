@@ -44,8 +44,8 @@ devDependencies:
     specifier: 2.1.1
     version: 2.1.1
   '@pnpm/lockfile-file':
-    specifier: 8.0.1
-    version: 8.0.1(@pnpm/logger@5.0.0)
+    specifier: 8.0.2
+    version: 8.0.2(@pnpm/logger@5.0.0)
   '@pnpm/logger':
     specifier: 5.0.0
     version: 5.0.0
@@ -660,16 +660,6 @@ packages:
       rfc4648: 1.5.2
     dev: true
 
-  /@pnpm/dependency-path@2.1.0:
-    resolution: {integrity: sha512-so0+DWHaJ2oTxws8LQ3kmanxoxO/JAfRB7o1QQCOjTVTlK0vFrKSRj9xZVHBZoWq2C9GbIj1V0Gmcwz7zMs/EQ==}
-    engines: {node: '>=16.14'}
-    dependencies:
-      '@pnpm/crypto.base32-hash': 2.0.0
-      '@pnpm/types': 9.0.0
-      encode-registry: 3.0.0
-      semver: 7.5.0
-    dev: true
-
   /@pnpm/dependency-path@2.1.1:
     resolution: {integrity: sha512-nm0uVPyzxEW+pY1XZARgXdnPZ034UO9ISKOKCkAIBySCu5RVIU1IhO31u/rikJojXmSRvh5Wr8WImZP2jCgypw==}
     engines: {node: '>=16.14'}
@@ -694,19 +684,19 @@ packages:
       execa: /safe-execa@0.1.2
     dev: true
 
-  /@pnpm/lockfile-file@8.0.1(@pnpm/logger@5.0.0):
-    resolution: {integrity: sha512-3ztE/5Phy8aIk2d2ntD9wPSetFoe3YAQ3inhvBOEhvJo9BYgdclLGivrPnHyPOZw0dRRhir12oGDSwrYuR32dg==}
+  /@pnpm/lockfile-file@8.0.2(@pnpm/logger@5.0.0):
+    resolution: {integrity: sha512-V4PA48Q/ZqTu5PkSLX7/H8nCS8gmKUICIDFQRRxpoHF8iv54s01chd9uGwuj1ifO8NQPID0R0zh613/oKSL32A==}
     engines: {node: '>=16.14'}
     peerDependencies:
       '@pnpm/logger': ^5.0.0
     dependencies:
       '@pnpm/constants': 7.0.0
-      '@pnpm/dependency-path': 2.1.0
+      '@pnpm/dependency-path': 2.1.1
       '@pnpm/error': 5.0.0
       '@pnpm/git-utils': 1.0.0
       '@pnpm/lockfile-types': 5.0.0
       '@pnpm/logger': 5.0.0
-      '@pnpm/merge-lockfile-changes': 5.0.0
+      '@pnpm/merge-lockfile-changes': 5.0.1
       '@pnpm/types': 9.0.0
       '@pnpm/util.lex-comparator': 1.0.0
       '@zkochan/rimraf': 2.1.2
@@ -735,8 +725,8 @@ packages:
       ndjson: 2.0.0
     dev: true
 
-  /@pnpm/merge-lockfile-changes@5.0.0:
-    resolution: {integrity: sha512-iYR4hCGTMJDp1THLrySkW3NOR/UkKLKRxpDoNdtDv/tsl0KN3lzGnaNKmBNQVh0AS0EW8YViP2MZJRPAKj3BTg==}
+  /@pnpm/merge-lockfile-changes@5.0.1:
+    resolution: {integrity: sha512-qYu/S2PT+FA1CuBStqdit1ywO35lMkw4gb6jTTSo4PNTcsAycrmiXQ8Q/LzXM7hW/zhz1S4Xs2DwnCvUbe59Ww==}
     engines: {node: '>=16.14'}
     dependencies:
       '@pnpm/lockfile-types': 5.0.0
