@@ -1,6 +1,6 @@
 /**
- * @see https://github.com/GoogleChromeLabs/proxx/blob/c6c1558/lib/css-module-types.js
- * @license
+ * This file is adapted from {@link https://togithub.com/GoogleChromeLabs/proxx}.
+ * @license Apache-2.0
  * Copyright 2019 Google Inc. All Rights Reserved.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
