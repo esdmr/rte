@@ -8,6 +8,7 @@ import {CompWindow} from './composition/window.js';
 import {CompPage} from './composition/page.js';
 import {CompLayer} from './composition/layer.js';
 import {setupGamepadSignal} from './gamepad/gamepad-signal.js';
+import {setupGamepad} from './gamepad/loop.js';
 
 if (import.meta.env.DEV) {
 	await import('./debug-utils.js');
@@ -33,3 +34,5 @@ const inputGuide = new CompLayer(document.createElement('aside'));
 inputGuide.classList.add(guideContainer);
 window.overlays.append(inputGuide);
 inputGuide.render(<InputGuide />);
+
+setupGamepad();

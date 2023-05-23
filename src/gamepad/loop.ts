@@ -69,16 +69,24 @@ export const queueGamepadLoop = () => {
 	gamepadLoopId = requestAnimationFrame(gamepadLoop);
 };
 
-document.addEventListener(
-	'visibilitychange',
-	() => {
-		console.debug('Visibility changed:', document.visibilityState);
+export const setupGamepad = () => {
+	document.addEventListener(
+		'visibilitychange',
+		() => {
+			console.debug('Visibility changed:', document.visibilityState);
 
-		if (document.visibilityState === 'visible') {
-			queueGamepadLoop();
-		}
-	},
-	{
-		passive: true,
-	},
-);
+			if (document.visibilityState === 'visible') {
+				queueGamepadLoop();
+			}
+		},
+		{
+			passive: true,
+		},
+	);
+
+	addEventListener('gamepadconnected', () => {
+		queueGamepadLoop();
+	});
+
+	queueGamepadLoop();
+};
