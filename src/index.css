@@ -24,15 +24,13 @@
 		--light-foreground-rgb: 0 0 0;
 		--light-focus-outline: #4169e1;
 		--light-blur-outline: #919191;
-		--light-foreground-22: #0002;
-		--light-foreground-44: #0004;
 
 		--background-rgb: var(--dark-background-rgb);
 		--foreground-rgb: var(--dark-foreground-rgb);
-		--background: rgb(var(--background-rgb));
-		--foreground: rgb(var(--foreground-rgb));
 		--focus-outline: var(--dark-focus-outline);
 		--blur-outline: var(--dark-blur-outline);
+		--background: rgb(var(--background-rgb));
+		--foreground: rgb(var(--foreground-rgb));
 		--hover-alpha: 0.15;
 		--active-alpha: 0.3;
 
