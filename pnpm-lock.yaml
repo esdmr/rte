@@ -51,7 +51,7 @@ devDependencies:
     version: 5.0.0
   '@prefresh/vite':
     specifier: 2.2.8
-    version: 2.2.8(patch_hash=4jt37oehemwuq3cvigkaotgg2u)(preact@10.14.0)(vite@4.3.5)
+    version: 2.2.8(patch_hash=4jt37oehemwuq3cvigkaotgg2u)(preact@10.14.0)(vite@4.3.6)
   '@rollup/plugin-strip':
     specifier: 3.0.2
     version: 3.0.2
@@ -101,14 +101,14 @@ devDependencies:
     specifier: 5.0.4
     version: 5.0.4
   vite:
-    specifier: 4.3.5
-    version: 4.3.5(@types/node@18.11.18)
+    specifier: 4.3.6
+    version: 4.3.6(@types/node@18.11.18)
   vite-plugin-environment:
     specifier: 1.1.3
-    version: 1.1.3(vite@4.3.5)
+    version: 1.1.3(vite@4.3.6)
   vite-plugin-inspect:
     specifier: 0.7.26
-    version: 0.7.26(vite@4.3.5)
+    version: 0.7.26(vite@4.3.6)
   vitest:
     specifier: 0.31.0
     version: 0.31.0(jsdom@22.0.0)
@@ -790,7 +790,7 @@ packages:
     resolution: {integrity: sha512-Mb9abhJTOV4yCfkXrMrcgFiFT7MfNOw8sDa+XyZBdq/Ai2p4Zyxqsb3EgHLOEdHpMj6J9aiZ54W8H6FTam1u+A==}
     dev: true
 
-  /@prefresh/vite@2.2.8(patch_hash=4jt37oehemwuq3cvigkaotgg2u)(preact@10.14.0)(vite@4.3.5):
+  /@prefresh/vite@2.2.8(patch_hash=4jt37oehemwuq3cvigkaotgg2u)(preact@10.14.0)(vite@4.3.6):
     resolution: {integrity: sha512-yGGa+PKPYPTzMlxgQ8aBgxw9K69I8X4iQ0E6KOcIvls96WKqKLLOYZW9SUgCve446jpUXvc9udviPBZjCeZIIQ==}
     peerDependencies:
       preact: ^10.4.0
@@ -802,7 +802,7 @@ packages:
       '@prefresh/utils': 1.1.3
       '@rollup/pluginutils': 4.2.1
       preact: 10.14.0
-      vite: 4.3.5(@types/node@18.11.18)
+      vite: 4.3.6(@types/node@18.11.18)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -4918,7 +4918,7 @@ packages:
       mlly: 1.2.0
       pathe: 1.1.0
       picocolors: 1.0.0
-      vite: 4.3.5(@types/node@18.11.18)
+      vite: 4.3.6(@types/node@18.11.18)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -4929,15 +4929,15 @@ packages:
       - terser
     dev: true
 
-  /vite-plugin-environment@1.1.3(vite@4.3.5):
+  /vite-plugin-environment@1.1.3(vite@4.3.6):
     resolution: {integrity: sha512-9LBhB0lx+2lXVBEWxFZC+WO7PKEyE/ykJ7EPWCq95NEcCpblxamTbs5Dm3DLBGzwODpJMEnzQywJU8fw6XGGGA==}
     peerDependencies:
       vite: '>= 2.7'
     dependencies:
-      vite: 4.3.5(@types/node@18.11.18)
+      vite: 4.3.6(@types/node@18.11.18)
     dev: true
 
-  /vite-plugin-inspect@0.7.26(vite@4.3.5):
+  /vite-plugin-inspect@0.7.26(vite@4.3.6):
     resolution: {integrity: sha512-gRjBay+OxLr/Dr+HXlfJVXZH0cqhE5hkkBvo2du2cA1LGUBnV8Aym89AdPrURkSpTk3Rvw9dNWM2VLIuw6RKJg==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -4949,14 +4949,14 @@ packages:
       fs-extra: 11.1.1
       picocolors: 1.0.0
       sirv: 2.0.3
-      vite: 4.3.5(@types/node@18.11.18)
+      vite: 4.3.6(@types/node@18.11.18)
     transitivePeerDependencies:
       - rollup
       - supports-color
     dev: true
 
-  /vite@4.3.5(@types/node@18.11.18):
-    resolution: {integrity: sha512-0gEnL9wiRFxgz40o/i/eTBwm+NEbpUeTWhzKrZDSdKm6nplj+z4lKz8ANDgildxHm47Vg8EUia0aicKbawUVVA==}
+  /vite@4.3.6(@types/node@18.11.18):
+    resolution: {integrity: sha512-cqIyLSbA6gornMS659AXTVKF7cvSHMdKmJJwQ9DXq3lwsT1uZSdktuBRlpHQ8VnOWx0QHtjDwxPpGtyo9Fh/Qg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
@@ -5042,7 +5042,7 @@ packages:
       strip-literal: 1.0.1
       tinybench: 2.5.0
       tinypool: 0.5.0
-      vite: 4.3.5(@types/node@18.11.18)
+      vite: 4.3.6(@types/node@18.11.18)
       vite-node: 0.31.0(@types/node@18.11.18)
       why-is-node-running: 2.2.2
     transitivePeerDependencies:
