@@ -19,7 +19,9 @@ export const NavSwitch: FunctionComponent<SwitchProps> = (props) => {
 					children: (parameters: any) => (
 						<navChildToken.Provider value={node.newChildToken()}>
 							{typeof vnode.props.children === 'function'
-								? vnode.props.children(parameters)
+								? vnode.props.children(
+										parameters as Record<string, string>,
+								  )
 								: vnode.props.children}
 						</navChildToken.Provider>
 					),
