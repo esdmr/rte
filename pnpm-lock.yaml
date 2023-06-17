@@ -19,7 +19,7 @@ dependencies:
     version: 1.6.1
   '@preact/signals':
     specifier: 1.1.3
-    version: 1.1.3(preact@10.15.0)
+    version: 1.1.3(preact@10.15.1)
   history:
     specifier: 5.3.0
     version: 5.3.0
@@ -27,17 +27,17 @@ dependencies:
     specifier: 0.38.0
     version: 0.38.0
   preact:
-    specifier: 10.15.0
-    version: 10.15.0
+    specifier: 10.15.1
+    version: 10.15.1
   react:
     specifier: npm:@preact/compat@17.1.1
-    version: /@preact/compat@17.1.1(preact@10.15.0)
+    version: /@preact/compat@17.1.1(preact@10.15.1)
   react-dom:
     specifier: npm:@preact/compat@17.1.1
-    version: /@preact/compat@17.1.1(preact@10.15.0)
+    version: /@preact/compat@17.1.1(preact@10.15.1)
   wouter-preact:
     specifier: 2.8.0-alpha.2
-    version: 2.8.0-alpha.2(patch_hash=ignvtktwp77in5csvysi247wve)(preact@10.15.0)
+    version: 2.8.0-alpha.2(patch_hash=ignvtktwp77in5csvysi247wve)(preact@10.15.1)
 
 devDependencies:
   '@pnpm/dependency-path':
@@ -51,13 +51,13 @@ devDependencies:
     version: 5.0.0
   '@prefresh/vite':
     specifier: 2.2.8
-    version: 2.2.8(patch_hash=4jt37oehemwuq3cvigkaotgg2u)(preact@10.15.0)(vite@4.3.9)
+    version: 2.2.8(patch_hash=4jt37oehemwuq3cvigkaotgg2u)(preact@10.15.1)(vite@4.3.9)
   '@rollup/plugin-strip':
     specifier: 3.0.2
     version: 3.0.2
   '@testing-library/preact':
     specifier: 3.2.3
-    version: 3.2.3(preact@10.15.0)
+    version: 3.2.3(preact@10.15.1)
   '@types/find':
     specifier: 0.2.1
     version: 0.2.1
@@ -798,44 +798,44 @@ packages:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
     dev: true
 
-  /@preact/compat@17.1.1(preact@10.15.0):
+  /@preact/compat@17.1.1(preact@10.15.1):
     resolution: {integrity: sha512-OjQJ6oVcjFTiKWs4MIoE/cORFFGhqnt1RO0uxGNAFUglBMPNahMDJyX5w+qEOEaOpaNTLM1L3ixc2bFEpxgs3A==}
     peerDependencies:
       preact: '*'
     dependencies:
-      preact: 10.15.0
+      preact: 10.15.1
     dev: false
 
   /@preact/signals-core@1.2.3:
     resolution: {integrity: sha512-Kui4p7PMcEQevBgsTO0JBo3gyQ88Q3qzEvsVCuSp11t0JcN4DmGCTJcGRVSCq7Bn7lGxJBO+57jNSzDoDJ+QmA==}
     dev: false
 
-  /@preact/signals@1.1.3(preact@10.15.0):
+  /@preact/signals@1.1.3(preact@10.15.1):
     resolution: {integrity: sha512-N09DuAVvc90bBZVRwD+aFhtGyHAmJLhS3IFoawO/bYJRcil4k83nBOchpCEoS0s5+BXBpahgp0Mjf+IOqP57Og==}
     peerDependencies:
       preact: 10.x
     dependencies:
       '@preact/signals-core': 1.2.3
-      preact: 10.15.0
+      preact: 10.15.1
     dev: false
 
   /@prefresh/babel-plugin@0.4.3:
     resolution: {integrity: sha512-fYAWbU1WDSLn108kKY4eDaaeUcnszFqXjgaGKYXNZ5NLulpRTpsrY+Sbfo9q8LDpWrBpqIgzjrwNnvglWI1xNQ==}
     dev: true
 
-  /@prefresh/core@1.4.1(preact@10.15.0):
+  /@prefresh/core@1.4.1(preact@10.15.1):
     resolution: {integrity: sha512-og1vaBj3LMJagVncNrDb37Gqc0cWaUcDbpVt5hZtsN4i2Iwzd/5hyTsDHvlMirhSym3wL9ihU0Xa2VhSaOue7g==}
     peerDependencies:
       preact: ^10.0.0
     dependencies:
-      preact: 10.15.0
+      preact: 10.15.1
     dev: true
 
   /@prefresh/utils@1.1.3:
     resolution: {integrity: sha512-Mb9abhJTOV4yCfkXrMrcgFiFT7MfNOw8sDa+XyZBdq/Ai2p4Zyxqsb3EgHLOEdHpMj6J9aiZ54W8H6FTam1u+A==}
     dev: true
 
-  /@prefresh/vite@2.2.8(patch_hash=4jt37oehemwuq3cvigkaotgg2u)(preact@10.15.0)(vite@4.3.9):
+  /@prefresh/vite@2.2.8(patch_hash=4jt37oehemwuq3cvigkaotgg2u)(preact@10.15.1)(vite@4.3.9):
     resolution: {integrity: sha512-yGGa+PKPYPTzMlxgQ8aBgxw9K69I8X4iQ0E6KOcIvls96WKqKLLOYZW9SUgCve446jpUXvc9udviPBZjCeZIIQ==}
     peerDependencies:
       preact: ^10.4.0
@@ -843,10 +843,10 @@ packages:
     dependencies:
       '@babel/core': 7.20.12
       '@prefresh/babel-plugin': 0.4.3
-      '@prefresh/core': 1.4.1(preact@10.15.0)
+      '@prefresh/core': 1.4.1(preact@10.15.1)
       '@prefresh/utils': 1.1.3
       '@rollup/pluginutils': 4.2.1
-      preact: 10.15.0
+      preact: 10.15.1
       vite: 4.3.9(@types/node@18.11.18)
     transitivePeerDependencies:
       - supports-color
@@ -903,14 +903,14 @@ packages:
       pretty-format: 27.5.1
     dev: true
 
-  /@testing-library/preact@3.2.3(preact@10.15.0):
+  /@testing-library/preact@3.2.3(preact@10.15.1):
     resolution: {integrity: sha512-y6Kklp1XK3f1X2fWCbujmJyzkf+1BgLYXNgAx21j9+D4CoqMTz5qC4SQufb1L6q/jxLGACzrQ90ewVOTBvHOfg==}
     engines: {node: '>= 12'}
     peerDependencies:
       preact: '>=10 || ^10.0.0-alpha.0 || ^10.0.0-beta.0'
     dependencies:
       '@testing-library/dom': 8.20.0
-      preact: 10.15.0
+      preact: 10.15.1
     dev: true
 
   /@tootallnate/once@2.0.0:
@@ -4199,8 +4199,8 @@ packages:
       source-map-js: 1.0.2
     dev: true
 
-  /preact@10.15.0:
-    resolution: {integrity: sha512-nZSa8M2R2m1n7nJSBlzDpxRJaIsejrTO1vlFbdpFvyC8qM1iU+On2y0otfoUm6SRB5o0lF0CKDFxg6grEFU0iQ==}
+  /preact@10.15.1:
+    resolution: {integrity: sha512-qs2ansoQEwzNiV5eAcRT1p1EC/dmEzaATVDJNiB3g2sRDWdA7b7MurXdJjB2+/WQktGWZwxvDrnuRFbWuIr64g==}
 
   /prelude-ls@1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
@@ -5299,12 +5299,12 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /wouter-preact@2.8.0-alpha.2(patch_hash=ignvtktwp77in5csvysi247wve)(preact@10.15.0):
+  /wouter-preact@2.8.0-alpha.2(patch_hash=ignvtktwp77in5csvysi247wve)(preact@10.15.1):
     resolution: {integrity: sha512-f19qDB+HhR6C3lnPFdsJQ8wZZIFzm0m8XciEiBzyB1VtkPE/QaSrm1dxcvqrZu1hKaUA/gdee6OGGj0jGDtgGA==}
     peerDependencies:
       preact: ^10.0.0
     dependencies:
-      preact: 10.15.0
+      preact: 10.15.1
     dev: false
     patched: true
 
