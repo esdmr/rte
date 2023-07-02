@@ -89,6 +89,8 @@ export class NavNode implements Disposable {
 
 				if (this._disposed && !this.parent?._disposed) {
 					path += ':disposed';
+				} else if (!this._disposed && this.parent?._disposed) {
+					path += ':not(:disposed)';
 				}
 
 				if (this.selected) {
