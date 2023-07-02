@@ -1,18 +1,15 @@
-import {mdiArrowLeft} from '@mdi/js';
-import {Icon} from '@mdi/react';
 import type {FunctionComponent} from 'preact';
 import {lazy, Suspense, useMemo} from 'preact/compat';
 import {AllowScroll} from '../AllowScroll.js';
 import assert from '../assert.js';
-import {CircularButton} from '../CircularButton.js';
 import {Loading} from '../Loading.js';
+import {CloseButton} from '../composition/CloseButton.js';
 
 export const LicenseFile: FunctionComponent<{
 	label: string;
 	path: string;
 	dir: string;
 	'is-package'?: boolean;
-	'return-route': string;
 }> = (props) => {
 	const label = decodeURIComponent(props.label);
 	const path = decodeURIComponent(props.path);
@@ -23,12 +20,7 @@ export const LicenseFile: FunctionComponent<{
 				<AllowScroll />
 				<header>
 					<nav>
-						<CircularButton
-							href={props['return-route']}
-							title="Back"
-						>
-							<Icon path={mdiArrowLeft} />
-						</CircularButton>
+						<CloseButton />
 					</nav>
 				</header>
 				<main>
@@ -81,9 +73,7 @@ export const LicenseFile: FunctionComponent<{
 			<AllowScroll />
 			<header>
 				<nav>
-					<CircularButton href={props['return-route']} title="Back">
-						<Icon path={mdiArrowLeft} />
-					</CircularButton>
+					<CloseButton />
 				</nav>
 			</header>
 			<main>

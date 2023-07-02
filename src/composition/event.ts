@@ -6,6 +6,7 @@ import {
 export type EventMap = {
 	[GamepadEvent.eventName]: GamepadEvent;
 	ChildrenUpdate: Event;
+	LayerDispose: Event;
 } & HTMLElementEventMap;
 
 declare global {

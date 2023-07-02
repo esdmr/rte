@@ -6,6 +6,7 @@ const childTokens = new WeakMap<NavNode, NavChildToken>();
 
 /** @deprecated */
 export const navUnaryHooks: NavHooks = {
+	type: 'deprecated-unary',
 	onNewChild() {
 		assert(
 			this.children.length <= 1,

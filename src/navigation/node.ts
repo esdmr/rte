@@ -33,7 +33,11 @@ export class NavNode implements Disposable {
 
 	readonly state: NavState;
 	readonly children: Array<NavNode | undefined> = [];
-	private disposed = false;
+	private disposed_ = false;
+
+	get disposed() {
+		return this.disposed_;
+	}
 
 	get selected() {
 		return this.state.selected === this;
@@ -60,27 +64,36 @@ export class NavNode implements Disposable {
 	constructor(
 		readonly parent: NavNode | undefined,
 		private readonly hooks: NavHooks,
+		private readonly name: string = '',
 	) {
 		this.state = parent?.state ?? new NavState();
 
 		if (import.meta.env.DEV) {
 			this.getPath = () => {
-				let path = this.parent
-					? `${
-							this.parent.getPath?.() ?? 'unknown'
-					  }[${this.parent.children.indexOf(this)}]`
-					: 'root';
+				let path = '';
 
-				if (this.hooks.type) {
-					path += `(${this.hooks.type})`;
+				if (this.parent) {
+					path += `${this.parent.getPath?.() ?? '…'} > `;
 				}
 
-				if (this.disposed && !this.parent?.disposed) {
-					path += '.dispose()';
+				if (this.hooks.type) {
+					path += `${this.hooks.type}`;
+				}
+
+				path += this.parent
+					? `:nth-child(${this.parent.children.indexOf(this)})`
+					: ':root';
+
+				if (this.name) {
+					path += `[name=${this.name}]`;
+				}
+
+				if (this.disposed_ && !this.parent?.disposed_) {
+					path += ':disposed';
 				}
 
 				if (this.selected) {
-					path += '.select()';
+					path += ':selected';
 				}
 
 				return path;
@@ -92,7 +105,7 @@ export class NavNode implements Disposable {
 	getPath?(): string;
 
 	newChildToken() {
-		assert(!this.disposed, 'node is disposed');
+		assert(!this.disposed_, 'node is disposed');
 		const maybeChildToken = this.hooks.onNewChild?.call(this);
 
 		if (maybeChildToken) {
@@ -104,9 +117,11 @@ export class NavNode implements Disposable {
 	}
 
 	dispose(root = this) {
-		if (this.disposed) {
+		if (this.disposed_) {
 			return;
 		}
+
+		this.disposed_ = true;
 
 		for (const [index, child] of this.children.entries()) {
 			child?.dispose(root);
@@ -120,13 +135,12 @@ export class NavNode implements Disposable {
 			});
 		}
 
-		this.disposed = true;
 		this.hooks.onDispose?.call(this);
 		this.ref = undefined;
 	}
 
 	select(options?: NavSelectOptions) {
-		assert(!this.disposed, 'node is disposed');
+		assert(!this.disposed_, 'node is disposed');
 		assert(this.hooks.onSelect !== undefined, 'select hook is undefined');
 
 		if (this.selected) {
@@ -139,18 +153,21 @@ export class NavNode implements Disposable {
 	}
 
 	deselect() {
-		assert(!this.disposed, 'node is disposed');
+		if (this.disposed_) {
+			return;
+		}
+
 		assert(this.selected, 'node is not selected');
 		this.hooks.onDeselect?.call(this);
 	}
 
 	getLeaf(via: NavDirection) {
-		assert(!this.disposed, 'node is disposed');
+		assert(!this.disposed_, 'node is disposed');
 		return this.hooks.getLeaf?.call(this, via);
 	}
 
 	getNextLeaf(child: NavNode, via: NavDirection) {
-		assert(!this.disposed, 'node is disposed');
+		assert(!this.disposed_, 'node is disposed');
 		assert(this.children.includes(child), 'node is not a child');
 		return this.hooks.getNextLeaf?.call(this, child, via);
 	}

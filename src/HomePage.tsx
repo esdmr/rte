@@ -1,12 +1,12 @@
 import type {FunctionComponent} from 'preact';
-import {Link} from './Link.js';
 import {AllowScroll} from './AllowScroll.js';
+import {Link} from './Link.js';
+import assert from './assert.js';
+import {compDebugPage} from './composition/debug.js';
+import {useCompLayer} from './composition/layer.js';
+import {CompPage} from './composition/page.js';
 import {NavColumn} from './navigation/NavColumn.js';
 import {Button} from './navigation/wrappers.js';
-import {useCompLayer} from './composition/layer.js';
-import {CompWindow} from './composition/window.js';
-import {createPage} from './composition/page.js';
-import {CompDebugPage, compDebugPageClass} from './composition/debug.js';
 
 export const HomePage: FunctionComponent = () => {
 	const layer = useCompLayer();
@@ -46,14 +46,11 @@ export const HomePage: FunctionComponent = () => {
 							<li>
 								<Button
 									onClick={() => {
-										const window =
-											layer.findNearest(CompWindow);
+										const page =
+											layer.findNearest(CompPage);
+										assert(page, 'CompPage not found');
 
-										createPage({
-											window,
-											content: <CompDebugPage />,
-											classes: [compDebugPageClass],
-										});
+										compDebugPage.after(page);
 									}}
 								>
 									Debug compositor

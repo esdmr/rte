@@ -9,11 +9,20 @@ import {setupNavigation} from './composition.js';
 declare global {
 	/** Used for debugging. Only available in development mode. */
 	// eslint-disable-next-line no-var
-	var navRootNode: NavNode | undefined;
+	var navRootNodes: Set<NavNode> | undefined;
 }
 
-export const NavRoot: FunctionComponent = (props) => {
-	const rootNode = useMemo(() => new NavNode(undefined, navColumnHooks), []);
+if (import.meta.env.DEV) {
+	globalThis.navRootNodes = new Set();
+}
+
+export const NavRoot: FunctionComponent<{
+	name?: string;
+}> = (props) => {
+	const rootNode = useMemo(
+		() => new NavNode(undefined, navColumnHooks, props.name),
+		[],
+	);
 	const layer = useCompLayer();
 
 	useEffect(
@@ -28,14 +37,18 @@ export const NavRoot: FunctionComponent = (props) => {
 		const controller = new AbortController();
 		setupNavigation(rootNode, layer, controller.signal);
 
+		if (import.meta.env.DEV) {
+			globalThis.navRootNodes?.add(rootNode);
+		}
+
 		return () => {
+			if (import.meta.env.DEV) {
+				globalThis.navRootNodes?.delete(rootNode);
+			}
+
 			controller.abort();
 		};
 	}, [rootNode, layer]);
-
-	if (import.meta.env.DEV) {
-		globalThis.navRootNode = rootNode;
-	}
 
 	return <>{wrapNavChildren(rootNode, props.children)}</>;
 };

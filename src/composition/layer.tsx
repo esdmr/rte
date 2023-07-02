@@ -10,6 +10,8 @@ if (import.meta.env.DEV) {
 }
 
 export class CompLayer extends CompNode {
+	private _rendering = false;
+
 	constructor(element = document.createElement('section')) {
 		assert(
 			element !== document.body,
@@ -25,7 +27,18 @@ export class CompLayer extends CompNode {
 		return this;
 	}
 
+	override get parent() {
+		assert(
+			!this._rendering,
+			'accessed the parent of layer while rendering',
+		);
+
+		return super.parent;
+	}
+
 	render(vnode: ComponentChild) {
+		this._rendering = true;
+
 		render(
 			typeof vnode === 'object' && vnode !== null ? (
 				<compLayer.Provider value={this}>{vnode}</compLayer.Provider>
@@ -34,6 +47,8 @@ export class CompLayer extends CompNode {
 			),
 			this._element,
 		);
+
+		this._rendering = false;
 	}
 
 	blur() {
@@ -45,6 +60,7 @@ export class CompLayer extends CompNode {
 	}
 
 	dispose() {
+		this.dispatchEvent(new Event('LayerDispose'));
 		this.render(null);
 		tryRemovingFromParent(this);
 	}

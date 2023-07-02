@@ -1,11 +1,9 @@
-import {mdiArrowLeft} from '@mdi/js';
-import {Icon} from '@mdi/react';
 import type {FunctionComponent} from 'preact';
 import {AllowScroll} from './AllowScroll.js';
-import {CircularButton} from './CircularButton.js';
 import * as css from './DebugGallery.module.css';
 import {Loading} from './Loading.js';
 import * as gfbi from './icons/gamepad/face-button/index.js';
+import {CloseButton} from './composition/CloseButton.js';
 
 const style = [gfbi.symbols, gfbi.lettersAb, gfbi.lettersBa] as const;
 const which = ['down', 'right', 'left', 'up'] as const;
@@ -15,9 +13,7 @@ export const DebugGallery: FunctionComponent = () => (
 		<AllowScroll />
 		<header>
 			<nav>
-				<CircularButton href="/" title="Back">
-					<Icon path={mdiArrowLeft} />
-				</CircularButton>
+				<CloseButton />
 			</nav>
 		</header>
 		<main>

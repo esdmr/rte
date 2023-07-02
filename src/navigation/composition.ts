@@ -69,6 +69,20 @@ export function setupNavigation(
 	signal?: AbortSignal,
 ) {
 	layer.addEventListener(
+		'LayerDispose',
+		() => {
+			console.group(
+				'Composition layer is being disposed.',
+				'Disposing its navigation root with it.',
+			);
+			root.dispose();
+			console.log('Done!');
+			console.groupEnd();
+		},
+		{signal},
+	);
+
+	layer.addEventListener(
 		'keydown',
 		(event) => {
 			if (!/^Arrow(?:Up|Down|Left|Right)$/.test(event.code)) {

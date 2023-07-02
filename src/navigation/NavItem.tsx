@@ -7,6 +7,7 @@ import {type NavHooks, NavNode} from './node.js';
 import {isVnodeFocusable, setRef} from './utils.js';
 
 const navItemHooks: NavHooks = {
+	type: 'item',
 	onSelect(options) {
 		const {ref} = this;
 		assert(ref, 'no ref to select');

@@ -1,8 +1,6 @@
-import {mdiArrowLeft} from '@mdi/js';
-import {Icon} from '@mdi/react';
 import type {FunctionComponent} from 'preact';
 import {AllowScroll} from '../AllowScroll.js';
-import {CircularButton} from '../CircularButton.js';
+import {CloseButton} from '../composition/CloseButton.js';
 import * as css from './DebugNav.module.css';
 import {NavColumn} from './NavColumn.js';
 import {NavFlow} from './NavFlow.js';
@@ -16,9 +14,7 @@ export const DebugNav: FunctionComponent = () => (
 		<NavColumn>
 			<header>
 				<nav>
-					<CircularButton href="/" title="Back">
-						<Icon path={mdiArrowLeft} />
-					</CircularButton>
+					<CloseButton />
 				</nav>
 			</header>
 			<main>

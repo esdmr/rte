@@ -5,7 +5,7 @@ import {type NavHooks, NavNode} from './node.js';
 import {getAnyLeaf, iterateChildren} from './utils.js';
 
 const navRowHooks: NavHooks = {
-	type: '→',
+	type: 'row',
 	getLeaf(via) {
 		return via === 'left'
 			? getAnyLeaf(iterateChildren(this, this.children.length, -1), via)

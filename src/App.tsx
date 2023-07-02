@@ -21,7 +21,6 @@ export const App: FunctionComponent = () => (
 					path={id + '.txt'}
 					label={(pkg ?? 'an unknown') + ' patch'}
 					dir="licenses/files/"
-					return-route="/debug/licenses"
 				/>
 			)}
 		</Route>
@@ -32,13 +31,10 @@ export const App: FunctionComponent = () => (
 					label={pkg}
 					dir="licenses/deps/"
 					is-package
-					return-route="/debug/licenses"
 				/>
 			)}
 		</Route>
-		<Route path="/debug/licenses">
-			{() => <Licenses return-route="/" />}
-		</Route>
+		<Route path="/debug/licenses">{() => <Licenses />}</Route>
 		<Route path="/debug/editor">{() => <EditorContainer />}</Route>
 		<Route path="/debug/gallery">{() => <DebugGallery />}</Route>
 		<Route path="/debug/route/:id+">

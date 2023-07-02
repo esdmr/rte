@@ -17,7 +17,18 @@ if (import.meta.env.DEV) {
 const window = new CompWindow(document.body);
 setupInputGuide(window.pages);
 
+declare global {
+	/** Used for debugging. Only available in development mode. */
+	// eslint-disable-next-line no-var
+	var compWindow: CompWindow | undefined;
+}
+
+if (import.meta.env.DEV) {
+	globalThis.compWindow = window;
+}
+
 const app = new CompPage(document.createElement('div'));
+app.content.showPageCloseButton = false;
 app.content.classList.add('app');
 window.pages.append(app);
 setupGamepadSignal(app.content);

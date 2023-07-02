@@ -5,7 +5,7 @@ import {type NavHooks, NavNode} from './node.js';
 import {getAnyLeaf, iterateChildren} from './utils.js';
 
 const navFlowHooks: NavHooks = {
-	type: '⇉',
+	type: 'flow',
 	getLeaf(via) {
 		return via === 'left' || via === 'up'
 			? getAnyLeaf(iterateChildren(this, this.children.length, -1), via)

@@ -1,8 +1,6 @@
-import {mdiArrowLeft} from '@mdi/js';
-import {Icon} from '@mdi/react';
 import type {FunctionComponent} from 'preact';
 import {AllowScroll} from '../AllowScroll.js';
-import {CircularButton} from '../CircularButton.js';
+import {CloseButton} from '../composition/CloseButton.js';
 import {NavColumn} from '../navigation/NavColumn.js';
 import {DebugGamepadState} from './DebugGamepadState.js';
 
@@ -12,9 +10,7 @@ export const DebugGamepad: FunctionComponent = () => (
 		<NavColumn>
 			<header>
 				<nav>
-					<CircularButton href="/" title="Back">
-						<Icon path={mdiArrowLeft} />
-					</CircularButton>
+					<CloseButton />
 				</nav>
 			</header>
 			<main>
