@@ -4,35 +4,18 @@ import assert from '../assert.js';
 import type {NavNode} from './node.js';
 
 export class NavChildToken {
-	private _revoked = false;
-
 	constructor(readonly parent: NavNode, private readonly _index: number) {}
 
-	revoke() {
-		this.clear();
-		this._revoked = true;
-	}
-
 	clear() {
-		if (this._revoked) {
-			return;
-		}
-
 		this.child?.dispose();
 		this.child = undefined;
 	}
 
 	get child() {
-		if (this._revoked) {
-			return undefined;
-		}
-
 		return this.parent.children[this._index];
 	}
 
 	set child(node: NavNode | undefined) {
-		assert(!this._revoked, 'child token is revoked');
-
 		if (node !== undefined && node !== this.child) {
 			assert(
 				this.child === undefined,

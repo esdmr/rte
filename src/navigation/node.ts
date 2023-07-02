@@ -12,7 +12,6 @@ export type NavSelectOptions = {
 
 export type NavHooks = {
 	readonly type?: string;
-	onNewChild?(this: NavNode): NavChildToken | void;
 	onDispose?(this: NavNode): void;
 	onSelect?(this: NavNode, options?: NavSelectOptions): void;
 	onDeselect?(this: NavNode): void;
@@ -106,12 +105,6 @@ export class NavNode implements Disposable {
 
 	newChildToken() {
 		assert(!this._disposed, 'node is disposed');
-		const maybeChildToken = this._hooks.onNewChild?.call(this);
-
-		if (maybeChildToken) {
-			return maybeChildToken;
-		}
-
 		const index = this.children.push(undefined) - 1;
 		return new NavChildToken(this, index);
 	}
