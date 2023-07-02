@@ -37,7 +37,7 @@ export const Link: FunctionComponent<LinkProps> = ({
 			}
 
 			if (typeof onClick === 'function') {
-				Reflect.apply(onClick, this, [event]);
+				onClick.call(this, event);
 			}
 
 			if (!event.defaultPrevented) {
