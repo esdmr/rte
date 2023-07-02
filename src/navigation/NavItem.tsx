@@ -46,7 +46,6 @@ export const NavItem: FunctionComponent<{
 				ref(value: unknown) {
 					if (value instanceof HTMLElement) {
 						node.ref = value;
-						setRef(oldRef, value);
 					} else if (value === null || value === undefined) {
 						// Do nothing. Clearing the ref causes dispose to fail.
 						// But only sometimes!
@@ -55,6 +54,8 @@ export const NavItem: FunctionComponent<{
 							'NavItem with a non-HTMLElement ref',
 						);
 					}
+
+					setRef(oldRef, value);
 				},
 			})}
 		</navChildToken.Provider>
