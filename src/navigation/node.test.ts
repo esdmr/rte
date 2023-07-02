@@ -86,12 +86,12 @@ describe('NavNode', () => {
 		if (import.meta.env.DEV) {
 			it('returns a string', () => {
 				const node = new NavNode(undefined, {});
-				expect(node.getPath?.()).toBeTypeOf('string');
+				expect(node._getPath?.()).toBeTypeOf('string');
 			});
 		} else {
 			it('is undefined', () => {
 				const node = new NavNode(undefined, {});
-				expect(node.getPath).toBeUndefined();
+				expect(node._getPath).toBeUndefined();
 			});
 		}
 	});

@@ -4,17 +4,17 @@ import assert from '../assert.js';
 import type {NavNode} from './node.js';
 
 export class NavChildToken {
-	private revoked = false;
+	private _revoked = false;
 
-	constructor(readonly parent: NavNode, private readonly index: number) {}
+	constructor(readonly parent: NavNode, private readonly _index: number) {}
 
 	revoke() {
 		this.clear();
-		this.revoked = true;
+		this._revoked = true;
 	}
 
 	clear() {
-		if (this.revoked) {
+		if (this._revoked) {
 			return;
 		}
 
@@ -23,15 +23,15 @@ export class NavChildToken {
 	}
 
 	get child() {
-		if (this.revoked) {
+		if (this._revoked) {
 			return undefined;
 		}
 
-		return this.parent.children[this.index];
+		return this.parent.children[this._index];
 	}
 
 	set child(node: NavNode | undefined) {
-		assert(!this.revoked, 'child token is revoked');
+		assert(!this._revoked, 'child token is revoked');
 
 		if (node !== undefined && node !== this.child) {
 			assert(
@@ -44,7 +44,7 @@ export class NavChildToken {
 			);
 		}
 
-		this.parent.children[this.index] = node;
+		this.parent.children[this._index] = node;
 	}
 }
 

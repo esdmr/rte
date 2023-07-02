@@ -2,10 +2,10 @@ import type {Vector} from './geometry.js';
 import {numberToString} from './number-to-string.js';
 
 export class Context {
-	private readonly segments: string[] = [];
+	private readonly _segments: string[] = [];
 
 	toString() {
-		return this.segments.join('');
+		return this._segments.join('');
 	}
 
 	addSegment(
@@ -30,7 +30,7 @@ export class Context {
 			})
 			.join(' ');
 
-		this.segments.push(`${command}${arg}`);
+		this._segments.push(`${command}${arg}`);
 	}
 }
 
