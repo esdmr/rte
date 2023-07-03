@@ -1,10 +1,10 @@
 import type {FunctionComponent} from 'preact';
 import {lazy, Suspense, useMemo} from 'preact/compat';
-import {AllowScroll} from '../AllowScroll.js';
+import {scrollable} from '../scrollable.module.css';
 import assert from '../assert.js';
-import {Loading} from '../Loading.js';
 import {CloseButton} from '../composition/CloseButton.js';
 import {CompPageBuilder} from '../composition/page.js';
+import {Loading} from '../Loading.js';
 import {NavRoot} from '../navigation/NavRoot.js';
 
 const LicenseFile: FunctionComponent<{
@@ -60,7 +60,6 @@ const LicenseFile: FunctionComponent<{
 
 	return (
 		<NavRoot>
-			<AllowScroll />
 			<header>
 				<nav>
 					<CloseButton />
@@ -81,3 +80,5 @@ export const licenseFile = new CompPageBuilder(LicenseFile, {
 	label: '(uninitialized)',
 	dir: '(uninitialized)/',
 });
+
+licenseFile.classList.push(scrollable);

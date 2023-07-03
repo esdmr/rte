@@ -1,14 +1,13 @@
 import type {FunctionComponent} from 'preact';
-import {AllowScroll} from '../AllowScroll.js';
+import {scrollable} from '../scrollable.module.css';
 import {CloseButton} from '../composition/CloseButton.js';
-import {NavColumn} from '../navigation/NavColumn.js';
 import {CompPageBuilder} from '../composition/page.js';
+import {NavColumn} from '../navigation/NavColumn.js';
 import {NavRoot} from '../navigation/NavRoot.js';
 import {DebugGamepadState} from './DebugGamepadState.js';
 
 const DebugGamepad: FunctionComponent = () => (
 	<NavRoot>
-		<AllowScroll />
 		<NavColumn>
 			<header>
 				<nav>
@@ -25,3 +24,4 @@ const DebugGamepad: FunctionComponent = () => (
 );
 
 export const debugGamepad = new CompPageBuilder(DebugGamepad, {});
+debugGamepad.classList.push(scrollable);

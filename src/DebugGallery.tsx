@@ -1,5 +1,5 @@
 import type {FunctionComponent} from 'preact';
-import {AllowScroll} from './AllowScroll.js';
+import {scrollable} from './scrollable.module.css';
 import * as css from './DebugGallery.module.css';
 import {Loading} from './Loading.js';
 import {CloseButton} from './composition/CloseButton.js';
@@ -12,7 +12,6 @@ const which = ['down', 'right', 'left', 'up'] as const;
 
 const DebugGallery: FunctionComponent = () => (
 	<NavRoot>
-		<AllowScroll />
 		<header>
 			<nav>
 				<CloseButton />
@@ -48,3 +47,4 @@ const DebugGallery: FunctionComponent = () => (
 );
 
 export const debugGallery = new CompPageBuilder(DebugGallery, {});
+debugGallery.classList.push(scrollable);

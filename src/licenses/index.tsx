@@ -1,10 +1,10 @@
 import type {FunctionComponent} from 'preact';
 import {Suspense} from 'preact/compat';
-import {AllowScroll} from '../AllowScroll.js';
+import {scrollable} from '../scrollable.module.css';
 import {Loading} from '../Loading.js';
 import {CloseButton} from '../composition/CloseButton.js';
-import {NavColumn} from '../navigation/NavColumn.js';
 import {CompPageBuilder} from '../composition/page.js';
+import {NavColumn} from '../navigation/NavColumn.js';
 import {NavRoot} from '../navigation/NavRoot.js';
 import {Project} from './Project.js';
 import {Dependencies} from './packages-list.js';
@@ -12,7 +12,6 @@ import {Patches} from './patches-list.js';
 
 const Licenses: FunctionComponent = () => (
 	<NavRoot>
-		<AllowScroll />
 		<NavColumn>
 			<header>
 				<nav>
@@ -74,3 +73,4 @@ const Licenses: FunctionComponent = () => (
 );
 
 export const licenses = new CompPageBuilder(Licenses, {});
+licenses.classList.push(scrollable);

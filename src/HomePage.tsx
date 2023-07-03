@@ -1,19 +1,19 @@
 import type {FunctionComponent} from 'preact';
-import {AllowScroll} from './AllowScroll.js';
+import {scrollable} from './scrollable.module.css';
+import {debugGallery} from './DebugGallery.js';
+import {editorContainer} from './EditorContainer.js';
 import {Link} from './Link.js';
 import assert from './assert.js';
+import {CloseButton} from './composition/CloseButton.js';
 import {compDebugPage} from './composition/debug.js';
 import {useCompLayer} from './composition/layer.js';
 import {CompPage, CompPageBuilder} from './composition/page.js';
-import {NavColumn} from './navigation/NavColumn.js';
-import {Button} from './navigation/wrappers.js';
 import {debugGamepad} from './gamepad/DebugGamepad.js';
-import {debugNav} from './navigation/DebugNav.js';
-import {debugGallery} from './DebugGallery.js';
-import {editorContainer} from './EditorContainer.js';
 import {licenses} from './licenses/index.js';
+import {debugNav} from './navigation/DebugNav.js';
+import {NavColumn} from './navigation/NavColumn.js';
 import {NavRoot} from './navigation/NavRoot.js';
-import {CloseButton} from './composition/CloseButton.js';
+import {Button} from './navigation/wrappers.js';
 
 const HomePage: FunctionComponent = () => {
 	const layer = useCompLayer();
@@ -24,7 +24,6 @@ const HomePage: FunctionComponent = () => {
 				<CloseButton />
 			</header>
 			<main>
-				<AllowScroll />
 				<h1>RTE</h1>
 				<p>Work in progress!</p>
 				<nav>
@@ -73,3 +72,4 @@ const HomePage: FunctionComponent = () => {
 };
 
 export const homePage = new CompPageBuilder(HomePage, {});
+homePage.classList.push(scrollable);
