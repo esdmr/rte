@@ -1,19 +1,17 @@
 import type {FunctionComponent} from 'preact';
-import {scrollable} from './scrollable.module.css';
 import {debugGallery} from './DebugGallery.js';
 import {editorContainer} from './EditorContainer.js';
-import {Link} from './Link.js';
-import assert from './assert.js';
 import {CloseButton} from './composition/CloseButton.js';
 import {compDebugPage} from './composition/debug.js';
 import {useCompLayer} from './composition/layer.js';
-import {CompPage, CompPageBuilder} from './composition/page.js';
+import {CompPageBuilder} from './composition/page.js';
 import {debugGamepad} from './gamepad/DebugGamepad.js';
 import {licenses} from './licenses/index.js';
 import {debugNav} from './navigation/DebugNav.js';
 import {NavColumn} from './navigation/NavColumn.js';
 import {NavRoot} from './navigation/NavRoot.js';
 import {Button} from './navigation/wrappers.js';
+import {scrollable} from './scrollable.module.css';
 
 const HomePage: FunctionComponent = () => {
 	const layer = useCompLayer();
@@ -30,35 +28,41 @@ const HomePage: FunctionComponent = () => {
 					<ul>
 						<NavColumn>
 							<li>
-								<Link builder={editorContainer}>
+								<Button
+									onClick={editorContainer.afterOnClick(
+										layer,
+									)}
+								>
 									Debug Editor
-								</Link>
+								</Button>
 							</li>
 							<li>
-								<Link builder={licenses}>Debug Licenses</Link>
-							</li>
-							<li>
-								<Link builder={debugGallery}>
-									Debug Gallery
-								</Link>
-							</li>
-							<li>
-								<Link builder={debugNav}>Debug navigation</Link>
-							</li>
-							<li>
-								<Link builder={debugGamepad}>
-									Debug gamepad
-								</Link>
+								<Button onClick={licenses.afterOnClick(layer)}>
+									Debug Licenses
+								</Button>
 							</li>
 							<li>
 								<Button
-									onClick={() => {
-										const page =
-											layer.findNearest(CompPage);
-										assert(page, 'CompPage not found');
-
-										compDebugPage.after(page);
-									}}
+									onClick={debugGallery.afterOnClick(layer)}
+								>
+									Debug Gallery
+								</Button>
+							</li>
+							<li>
+								<Button onClick={debugNav.afterOnClick(layer)}>
+									Debug navigation
+								</Button>
+							</li>
+							<li>
+								<Button
+									onClick={debugGamepad.afterOnClick(layer)}
+								>
+									Debug gamepad
+								</Button>
+							</li>
+							<li>
+								<Button
+									onClick={compDebugPage.afterOnClick(layer)}
 								>
 									Debug compositor
 								</Button>

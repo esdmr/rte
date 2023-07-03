@@ -40,18 +40,6 @@ const openDialog =
 		);
 	};
 
-const openPage =
-	(layer: CompLayer, depth: number, action?: 'replace') => () => {
-		const page = layer.findNearest(CompPage);
-		assert(page, 'Not in a page');
-
-		if (action === 'replace') {
-			compDebugPage.replace(page, undefined, {depth, replaced: true});
-		} else {
-			compDebugPage.after(page, undefined, {depth});
-		}
-	};
-
 const CompDebugDialog: FunctionComponent<{
 	depth: number;
 }> = ({depth}) => {
@@ -85,7 +73,11 @@ const CompDebugDialog: FunctionComponent<{
 							>
 								Open dialog
 							</Button>
-							<Button onClick={openPage(layer, depth + 1)}>
+							<Button
+								onClick={compDebugPage.afterOnClick(layer, {
+									depth: depth + 1,
+								})}
+							>
 								Open page
 							</Button>
 						</NavRow>
@@ -120,10 +112,19 @@ const CompDebugPage: FunctionComponent<{
 					<Button onClick={openDialog(layer, depth + 1, setResult)}>
 						Open dialog
 					</Button>
-					<Button onClick={openPage(layer, depth + 1)}>
+					<Button
+						onClick={compDebugPage.afterOnClick(layer, {
+							depth: depth + 1,
+						})}
+					>
 						Open page
 					</Button>
-					<Button onClick={openPage(layer, depth, 'replace')}>
+					<Button
+						onClick={compDebugPage.replaceOnClick(layer, {
+							depth,
+							replaced: true,
+						})}
+					>
 						Open page in-place
 					</Button>
 				</NavRow>

@@ -5,6 +5,7 @@ import {CompList} from './list.js';
 import {CompPageContent} from './page-content.js';
 import {CompRecord} from './record.js';
 import {CompWindow} from './window.js';
+import type {CompLayer} from './layer.js';
 
 export class CompPage extends CompRecord<{
 	content: CompPageContent;
@@ -72,6 +73,17 @@ export class CompPageBuilder<T = any> {
 		return newPage;
 	}
 
+	replaceOnClick(
+		layer: CompLayer,
+		newParameters?: Readonly<Partial<RenderableProps<T>>>,
+	) {
+		return () => {
+			const page = layer.findNearest(CompPage);
+			assert(page, 'Not in a page');
+			return this.replace(page, undefined, newParameters);
+		};
+	}
+
 	after(
 		page: CompPage,
 		window = page.findNearest(CompWindow),
@@ -82,6 +94,17 @@ export class CompPageBuilder<T = any> {
 		window.pages.after(page, newPage);
 		window.root.activeDescendant?.focus();
 		return newPage;
+	}
+
+	afterOnClick(
+		layer: CompLayer,
+		newParameters?: Readonly<Partial<RenderableProps<T>>>,
+	) {
+		return () => {
+			const page = layer.findNearest(CompPage);
+			assert(page, 'Not in a page');
+			return this.after(page, undefined, newParameters);
+		};
 	}
 
 	append(window: CompWindow, newParameters?: Partial<RenderableProps<T>>) {
