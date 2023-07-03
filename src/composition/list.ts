@@ -1,17 +1,10 @@
 import assert from '../assert.js';
-import {
-	CompNode,
-	type ChildrenRemovable,
-	tryRemovingFromParent,
-} from './node.js';
+import {CompNode, tryRemovingFromParent} from './node.js';
 import {getCompNodeOf} from './registry.js';
 
 const description = 'compositor list';
 
-export class CompList<T extends CompNode = CompNode>
-	extends CompNode
-	implements ChildrenRemovable<T>
-{
+export class CompList<T extends CompNode = CompNode> extends CompNode {
 	constructor(element?: HTMLElement) {
 		assert(
 			element !== document.body,
@@ -108,7 +101,7 @@ export class CompList<T extends CompNode = CompNode>
 		this._onChildrenUpdate();
 	}
 
-	remove(oldChild: T) {
+	override remove(oldChild: T) {
 		assert(
 			oldChild.parent === this,
 			'Node to be removed is not a child of this node',

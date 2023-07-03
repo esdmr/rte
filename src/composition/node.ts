@@ -124,20 +124,17 @@ export abstract class CompNode implements Disposable {
 		this._element.removeEventListener(type, listener, options);
 	}
 
+	remove?(oldChild: CompNode): void;
 	abstract dispose(): void;
 }
-
-export type ChildrenRemovable<T extends CompNode = CompNode> = {
-	remove(oldChild: T): void;
-};
 
 export function tryRemovingFromParent(node: CompNode) {
 	const {parent} = node;
 
-	if (parent && !('remove' in parent)) {
+	if (parent && !parent.remove) {
 		return false;
 	}
 
-	(parent as ChildrenRemovable | undefined)?.remove(node);
+	parent?.remove!(node);
 	return true;
 }

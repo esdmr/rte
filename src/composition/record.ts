@@ -1,18 +1,13 @@
 import assert from '../assert.js';
-import {
-	CompNode,
-	type ChildrenRemovable,
-	tryRemovingFromParent,
-} from './node.js';
+import {CompNode, tryRemovingFromParent} from './node.js';
 import {getCompNodeOf} from './registry.js';
 
 const description = 'compositor record';
 const datasetKey = 'key';
 
-export abstract class CompRecord<T extends Record<string, CompNode>>
-	extends CompNode
-	implements ChildrenRemovable<T[string]>
-{
+export abstract class CompRecord<
+	T extends Record<string, CompNode>,
+> extends CompNode {
 	constructor(element?: HTMLElement, initialValues?: Readonly<Partial<T>>) {
 		super(element);
 
@@ -108,7 +103,7 @@ export abstract class CompRecord<T extends Record<string, CompNode>>
 		}
 	}
 
-	remove(oldChild: T[string]) {
+	override remove(oldChild: T[string]) {
 		assert(
 			oldChild.parent === this,
 			'Node to be removed is not a child of this node',
