@@ -22,8 +22,7 @@
 		"preact": "10.13.0",
 		"react": "npm:@preact/compat@17.1.1",
 		"react-dom": "npm:@preact/compat@17.1.1",
-		"wicg-inert": "3.1.2",
-		"wouter-preact": "2.8.0-alpha.2"
+		"wicg-inert": "3.1.2"
 	},
 	"devDependencies": {
 		"@pnpm/lockfile-file": "7.0.5",
@@ -71,7 +70,6 @@
 			}
 		},
 		"patchedDependencies": {
-			"wouter-preact@2.8.0-alpha.2": "patches/wouter-preact@2.8.0-alpha.2.patch",
 			"@prefresh/vite@2.2.8": "patches/@prefresh__vite@2.2.8.patch"
 		}
 	}

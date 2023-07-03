@@ -4,7 +4,7 @@ import type * as Types from '../license-types.js';
 import {NavColumn} from '../navigation/NavColumn.js';
 import {Patch} from './Patch.js';
 
-const createComponent = (file: string, route: string) =>
+const createComponent = (file: string) =>
 	lazy<FunctionComponent>(async () => {
 		try {
 			const response = await fetch(file, {
@@ -28,7 +28,6 @@ const createComponent = (file: string, route: string) =>
 						<Patch
 							patch={patch}
 							key={`${patch.name}@${patch.version}`}
-							route={route}
 						/>
 					))}
 				</NavColumn>
@@ -45,5 +44,4 @@ const createComponent = (file: string, route: string) =>
 
 export const Patches = /* @__PURE__ */ createComponent(
 	`${import.meta.env.BASE_URL}licenses/patches/index.json`,
-	'/debug/licenses/',
 );

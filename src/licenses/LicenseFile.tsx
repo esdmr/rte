@@ -4,6 +4,8 @@ import {AllowScroll} from '../AllowScroll.js';
 import assert from '../assert.js';
 import {Loading} from '../Loading.js';
 import {CloseButton} from '../composition/CloseButton.js';
+import {CompPageBuilder} from '../composition/page.js';
+import {NavRoot} from '../navigation/NavRoot.js';
 
 export const LicenseFile: FunctionComponent<{
 	label: string;
@@ -11,8 +13,8 @@ export const LicenseFile: FunctionComponent<{
 	dir: string;
 	'is-package'?: boolean;
 }> = (props) => {
-	const label = decodeURIComponent(props.label);
-	const path = decodeURIComponent(props.path);
+	const label = props.label;
+	const path = props.path;
 
 	if (props['is-package'] && !/^(@.+?\/)?.+?@.+$/.test(path)) {
 		return (
@@ -85,3 +87,21 @@ export const LicenseFile: FunctionComponent<{
 		</>
 	);
 };
+
+export const licenseFile = new CompPageBuilder(
+	(props: {
+		label: string;
+		path: string;
+		dir: string;
+		'is-package'?: boolean;
+	}) => (
+		<NavRoot>
+			<LicenseFile {...props} />
+		</NavRoot>
+	),
+	{
+		path: '(uninitialized)',
+		label: '(uninitialized)',
+		dir: '(uninitialized)/',
+	},
+);

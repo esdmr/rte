@@ -2,8 +2,10 @@ import type {FunctionComponent} from 'preact';
 import {AllowScroll} from './AllowScroll.js';
 import * as css from './DebugGallery.module.css';
 import {Loading} from './Loading.js';
-import * as gfbi from './icons/gamepad/face-button/index.js';
 import {CloseButton} from './composition/CloseButton.js';
+import {CompPageBuilder} from './composition/page.js';
+import * as gfbi from './icons/gamepad/face-button/index.js';
+import {NavRoot} from './navigation/NavRoot.js';
 
 const style = [gfbi.symbols, gfbi.lettersAb, gfbi.lettersBa] as const;
 const which = ['down', 'right', 'left', 'up'] as const;
@@ -43,4 +45,13 @@ export const DebugGallery: FunctionComponent = () => (
 			))}
 		</main>
 	</>
+);
+
+export const debugGallery = new CompPageBuilder(
+	() => (
+		<NavRoot>
+			<DebugGallery />
+		</NavRoot>
+	),
+	{},
 );

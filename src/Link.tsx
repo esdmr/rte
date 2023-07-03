@@ -4,12 +4,14 @@
  */
 import type {FunctionComponent, JSX} from 'preact';
 import {useCallback} from 'preact/hooks';
-import {useLocation} from 'wouter-preact';
-import history from './history.js';
-import {A} from './navigation/wrappers.js';
+import {Button} from './navigation/wrappers.js';
+import {CompPage, type CompPageBuilder} from './composition/page.js';
+import {useCompLayer} from './composition/layer.js';
+import assert from './assert.js';
 
-type LinkProps = JSX.IntrinsicElements['a'] & {
-	href: string;
+type LinkProps = JSX.IntrinsicElements['button'] & {
+	builder: CompPageBuilder;
+	newParameters?: any;
 	replace?: boolean;
 };
 
@@ -17,12 +19,13 @@ type LinkClickHandler = NonNullable<LinkProps['onClick']>;
 
 /** @deprecated */
 export const Link: FunctionComponent<LinkProps> = ({
-	href,
+	builder,
+	newParameters,
 	onClick,
 	replace = false,
 	...props
 }) => {
-	const [, navigate] = useLocation();
+	const layer = useCompLayer();
 
 	const handleClick = useCallback<LinkClickHandler>(
 		function (event) {
@@ -42,16 +45,22 @@ export const Link: FunctionComponent<LinkProps> = ({
 
 			if (!event.defaultPrevented) {
 				event.preventDefault();
-				navigate(href, {replace});
+				const page = layer.findNearest(CompPage);
+				assert(page, 'Not in a page');
+
+				if (replace) {
+					builder.replace(page, undefined, newParameters);
+				} else {
+					builder.after(page, undefined, newParameters);
+				}
 			}
 		},
-		[href, onClick, replace],
+		[builder, onClick, replace],
 	);
 
 	const extraProps = {
-		href: history.createHref(href),
 		onClick: handleClick,
 	};
 
-	return <A {...props} {...extraProps} />;
+	return <Button {...props} {...extraProps} />;
 };

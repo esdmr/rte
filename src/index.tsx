@@ -1,14 +1,12 @@
-import {Router} from 'wouter-preact';
-import {App} from './App.js';
-import {NavRoot} from './navigation/NavRoot.js';
-import {guideContainer} from './gamepad/InputGuide.module.css';
-import {useHashLocation} from './wouter-hash.js';
-import {InputGuide, setupInputGuide} from './gamepad/InputGuide.js';
-import {CompWindow} from './composition/window.js';
-import {CompPage} from './composition/page.js';
+import {HomePage} from './HomePage.js';
 import {CompLayer} from './composition/layer.js';
+import {CompPage} from './composition/page.js';
+import {CompWindow} from './composition/window.js';
+import {InputGuide, setupInputGuide} from './gamepad/InputGuide.js';
+import {guideContainer} from './gamepad/InputGuide.module.css';
 import {setupGamepadSignal} from './gamepad/gamepad-signal.js';
 import {setupGamepad} from './gamepad/loop.js';
+import {NavRoot} from './navigation/NavRoot.js';
 
 if (import.meta.env.DEV) {
 	await import('./debug-utils.js');
@@ -35,9 +33,7 @@ setupGamepadSignal(app.content);
 
 app.content.render(
 	<NavRoot>
-		<Router hook={useHashLocation}>
-			<App />
-		</Router>
+		<HomePage />
 	</NavRoot>,
 );
 

@@ -78,7 +78,6 @@
 		},
 		{
 			"matchPackageNames": [
-				"wouter-preact",
 				"@prefresh/vite"
 			],
 			"enabled": false

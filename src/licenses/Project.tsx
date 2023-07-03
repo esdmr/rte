@@ -9,26 +9,18 @@ import type {ComponentChild, FunctionComponent} from 'preact';
 import {CircularButton} from '../CircularButton.js';
 import {classes} from '../classes.js';
 import {NavRow} from '../navigation/NavRow.js';
+import type {CompPageBuilder} from '../composition/page.js';
 import {Authors} from './Authors.js';
 import * as css from './Project.module.css';
-
-export const encodePkgId = (pkgId: string) => {
-	return encodeURIComponent(pkgId).replace(/%40/g, '@').replace(/%2F/g, '/');
-};
-
-type ProjectLink = {
-	readonly href: string;
-	readonly external?: boolean;
-};
 
 export const Project: FunctionComponent<{
 	readonly heading: ComponentChild;
 	readonly authors?: readonly string[];
 	readonly name: string;
-	readonly repository?: ProjectLink;
-	readonly registry?: ProjectLink;
-	readonly source?: ProjectLink;
-	readonly license?: ProjectLink;
+	readonly repository?: string | [CompPageBuilder, any];
+	readonly registry?: string | [CompPageBuilder, any];
+	readonly source?: string | [CompPageBuilder, any];
+	readonly license?: string | [CompPageBuilder, any];
 }> = (props) => {
 	return (
 		<article class={classes(css.project)}>
@@ -70,8 +62,13 @@ export const Project: FunctionComponent<{
 								link && (
 									<CircularButton
 										key={type}
-										href={link.href}
-										external={link.external}
+										href={
+											Array.isArray(link) ? link[0] : link
+										}
+										newParameters={
+											Array.isArray(link) &&
+											(link[1] as unknown)
+										}
 										title={`See ${type}`}
 										aria-label={`See ${type} for ${props.name}`}
 									>

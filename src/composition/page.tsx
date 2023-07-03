@@ -44,7 +44,7 @@ export class CompPage extends CompRecord<{
 	}
 }
 
-export class CompPageBuilder<T> {
+export class CompPageBuilder<T = any> {
 	readonly classList: string[] = [];
 
 	constructor(

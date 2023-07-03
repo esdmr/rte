@@ -7,6 +7,12 @@ import {useCompLayer} from './composition/layer.js';
 import {CompPage} from './composition/page.js';
 import {NavColumn} from './navigation/NavColumn.js';
 import {Button} from './navigation/wrappers.js';
+import {debugRoute} from './DebugRoute.js';
+import {debugGamepad} from './gamepad/DebugGamepad.js';
+import {debugNav} from './navigation/DebugNav.js';
+import {debugGallery} from './DebugGallery.js';
+import {editorContainer} from './EditorContainer.js';
+import {licenses} from './licenses/index.js';
 
 export const HomePage: FunctionComponent = () => {
 	const layer = useCompLayer();
@@ -22,26 +28,28 @@ export const HomePage: FunctionComponent = () => {
 					<ul>
 						<NavColumn>
 							<li>
-								<Link href="/debug/editor">Debug Editor</Link>
-							</li>
-							<li>
-								<Link href="/debug/licenses">
-									Debug Licenses
+								<Link builder={editorContainer}>
+									Debug Editor
 								</Link>
 							</li>
 							<li>
-								<Link href="/debug/gallery">Debug Gallery</Link>
+								<Link builder={licenses}>Debug Licenses</Link>
 							</li>
 							<li>
-								<Link href="/debug/route/init">
-									Debug routes
+								<Link builder={debugGallery}>
+									Debug Gallery
 								</Link>
 							</li>
 							<li>
-								<Link href="/debug/nav">Debug navigation</Link>
+								<Link builder={debugRoute}>Debug routes</Link>
 							</li>
 							<li>
-								<Link href="/debug/gamepad">Debug gamepad</Link>
+								<Link builder={debugNav}>Debug navigation</Link>
+							</li>
+							<li>
+								<Link builder={debugGamepad}>
+									Debug gamepad
+								</Link>
 							</li>
 							<li>
 								<Button

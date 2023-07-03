@@ -1,12 +1,14 @@
 import type {FunctionComponent} from 'preact';
 import {AllowScroll} from '../AllowScroll.js';
 import {CloseButton} from '../composition/CloseButton.js';
+import {CompPageBuilder} from '../composition/page.js';
 import * as css from './DebugNav.module.css';
 import {NavColumn} from './NavColumn.js';
 import {NavFlow} from './NavFlow.js';
 import {NavGrid} from './NavGrid.js';
 import {NavRow} from './NavRow.js';
 import {A, Button} from './wrappers.js';
+import {NavRoot} from './NavRoot.js';
 
 export const DebugNav: FunctionComponent = () => (
 	<>
@@ -110,4 +112,13 @@ export const DebugNav: FunctionComponent = () => (
 			</main>
 		</NavColumn>
 	</>
+);
+
+export const debugNav = new CompPageBuilder(
+	() => (
+		<NavRoot>
+			<DebugNav />
+		</NavRoot>
+	),
+	{},
 );

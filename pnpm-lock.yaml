@@ -3,9 +3,6 @@ lockfileVersion: 5.4
 packageExtensionsChecksum: 119843541e5de0faa8c89f50fa62a06d
 
 patchedDependencies:
-  wouter-preact@2.8.0-alpha.2:
-    hash: ignvtktwp77in5csvysi247wve
-    path: patches/wouter-preact@2.8.0-alpha.2.patch
   '@prefresh/vite@2.2.8':
     hash: 4jt37oehemwuq3cvigkaotgg2u
     path: patches/@prefresh__vite@2.2.8.patch
@@ -43,7 +40,6 @@ specifiers:
   vite-plugin-inspect: 0.7.15
   vitest: 0.29.1
   wicg-inert: 3.1.2
-  wouter-preact: 2.8.0-alpha.2
   xo: 0.53.1
 
 dependencies:
@@ -56,7 +52,6 @@ dependencies:
   react: /@preact/compat/17.1.1_preact@10.13.0
   react-dom: /@preact/compat/17.1.1_preact@10.13.0
   wicg-inert: 3.1.2
-  wouter-preact: 2.8.0-alpha.2_ignvtktwp77in5csvysi247wve_preact@10.13.0
 
 devDependencies:
   '@pnpm/lockfile-file': 7.0.5_@pnpm+logger@5.0.0
@@ -5193,15 +5188,6 @@ packages:
     resolution: {integrity: sha512-Hz/mrNwitNRh/HUAtM/VT/5VH+ygD6DV7mYKZAtHOrbs8U7lvPS6xf7EJKMF0uW1KJCl0H701g3ZGus+muE5vQ==}
     engines: {node: '>=0.10.0'}
     dev: true
-
-  /wouter-preact/2.8.0-alpha.2_ignvtktwp77in5csvysi247wve_preact@10.13.0:
-    resolution: {integrity: sha512-f19qDB+HhR6C3lnPFdsJQ8wZZIFzm0m8XciEiBzyB1VtkPE/QaSrm1dxcvqrZu1hKaUA/gdee6OGGj0jGDtgGA==}
-    peerDependencies:
-      preact: ^10.0.0
-    dependencies:
-      preact: 10.13.0
-    dev: false
-    patched: true
 
   /wrap-ansi/6.2.0:
     resolution: {integrity: sha512-r6lPcBGxZXlIcymEu7InxDMhdW0KDxpLgoFLcguasxCaJ/SOIZwINatK9KY/tf+ZrlywOKU0UDj3ATXUBfxJXA==}

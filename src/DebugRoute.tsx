@@ -1,10 +1,10 @@
-import {mdiHome} from '@mdi/js';
-import {Icon} from '@mdi/react';
 import type {FunctionComponent} from 'preact';
 import {AllowScroll} from './AllowScroll.js';
-import {CircularButton} from './CircularButton.js';
 import {Link} from './Link.js';
+import {CloseButton} from './composition/CloseButton.js';
+import {CompPageBuilder} from './composition/page.js';
 import {NavColumn} from './navigation/NavColumn.js';
+import {NavRoot} from './navigation/NavRoot.js';
 
 export const DebugRoute: FunctionComponent<{id: string}> = ({id}) => (
 	<>
@@ -12,9 +12,7 @@ export const DebugRoute: FunctionComponent<{id: string}> = ({id}) => (
 		<NavColumn>
 			<header>
 				<nav>
-					<CircularButton href="/" title="Home">
-						<Icon path={mdiHome} />
-					</CircularButton>
+					<CloseButton />
 				</nav>
 			</header>
 			<main>
@@ -23,10 +21,22 @@ export const DebugRoute: FunctionComponent<{id: string}> = ({id}) => (
 					<ul>
 						<NavColumn>
 							<li>
-								<Link href="/debug/route/a">link to: a</Link>
+								<Link
+									builder={debugRoute}
+									newParameters={{id: 'a'}}
+									replace
+								>
+									link to: a
+								</Link>
 							</li>
 							<li>
-								<Link href="/debug/route/b">link to: b</Link>
+								<Link
+									builder={debugRoute}
+									newParameters={{id: 'b'}}
+									replace
+								>
+									link to: b
+								</Link>
 							</li>
 						</NavColumn>
 					</ul>
@@ -34,4 +44,13 @@ export const DebugRoute: FunctionComponent<{id: string}> = ({id}) => (
 			</main>
 		</NavColumn>
 	</>
+);
+
+export const debugRoute = new CompPageBuilder(
+	({id}: {id: string}) => (
+		<NavRoot>
+			<DebugRoute id={id} />
+		</NavRoot>
+	),
+	{id: 'init'},
 );
