@@ -6,7 +6,7 @@ import {CompPageBuilder} from '../composition/page.js';
 import {NavRoot} from '../navigation/NavRoot.js';
 import {DebugGamepadState} from './DebugGamepadState.js';
 
-export const DebugGamepad: FunctionComponent = () => (
+const DebugGamepad: FunctionComponent = () => (
 	<NavRoot>
 		<AllowScroll />
 		<NavColumn>

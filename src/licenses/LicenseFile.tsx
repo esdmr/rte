@@ -7,7 +7,7 @@ import {CloseButton} from '../composition/CloseButton.js';
 import {CompPageBuilder} from '../composition/page.js';
 import {NavRoot} from '../navigation/NavRoot.js';
 
-export const LicenseFile: FunctionComponent<{
+const LicenseFile: FunctionComponent<{
 	label: string;
 	path: string;
 	dir: string;

@@ -13,7 +13,7 @@ const stopPropagation = (event: Event) => {
 	event.stopPropagation();
 };
 
-export const EditorContainer: FunctionComponent = () => {
+const EditorContainer: FunctionComponent = () => {
 	return (
 		<NavRoot>
 			<main

@@ -10,7 +10,7 @@ import {Project} from './Project.js';
 import {Dependencies} from './packages-list.js';
 import {Patches} from './patches-list.js';
 
-export const Licenses: FunctionComponent = () => (
+const Licenses: FunctionComponent = () => (
 	<NavRoot>
 		<AllowScroll />
 		<NavColumn>

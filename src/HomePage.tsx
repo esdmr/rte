@@ -15,7 +15,7 @@ import {licenses} from './licenses/index.js';
 import {NavRoot} from './navigation/NavRoot.js';
 import {CloseButton} from './composition/CloseButton.js';
 
-export const HomePage: FunctionComponent = () => {
+const HomePage: FunctionComponent = () => {
 	const layer = useCompLayer();
 
 	return (

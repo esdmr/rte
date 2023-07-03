@@ -10,7 +10,7 @@ import {NavRoot} from './navigation/NavRoot.js';
 const style = [gfbi.symbols, gfbi.lettersAb, gfbi.lettersBa] as const;
 const which = ['down', 'right', 'left', 'up'] as const;
 
-export const DebugGallery: FunctionComponent = () => (
+const DebugGallery: FunctionComponent = () => (
 	<NavRoot>
 		<AllowScroll />
 		<header>

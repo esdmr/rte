@@ -10,7 +10,7 @@ import {NavRow} from './NavRow.js';
 import {A, Button} from './wrappers.js';
 import {NavRoot} from './NavRoot.js';
 
-export const DebugNav: FunctionComponent = () => (
+const DebugNav: FunctionComponent = () => (
 	<NavRoot>
 		<AllowScroll />
 		<NavColumn>

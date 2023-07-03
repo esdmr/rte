@@ -96,7 +96,7 @@ const CompDebugDialog: FunctionComponent<{
 	);
 };
 
-export const CompDebugPage: FunctionComponent<{
+const CompDebugPage: FunctionComponent<{
 	depth: number;
 	replaced?: boolean;
 }> = ({depth, replaced}) => {
