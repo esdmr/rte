@@ -2,7 +2,6 @@
 import 'monaco-editor/esm/vs/basic-languages/javascript/javascript.contribution.js';
 import 'monaco-editor/esm/vs/editor/contrib/bracketMatching/browser/bracketMatching.js';
 import 'monaco-editor/esm/vs/editor/contrib/wordHighlighter/browser/wordHighlighter.js';
-
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api.js';
 import {type ComponentChild, Component} from 'preact';
 import assert from './assert.js';

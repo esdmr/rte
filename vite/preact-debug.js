@@ -2,6 +2,7 @@ import {definePlugin} from './plugin-helper.js';
 
 export default definePlugin({
 	name: 'preact-debug',
+	enforce: 'pre',
 	apply: 'build',
 	resolveId(source) {
 		if (source === 'preact/debug') {

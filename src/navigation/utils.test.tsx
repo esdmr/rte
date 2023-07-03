@@ -69,7 +69,6 @@ describe('isVnodeFocusable', () => {
 	});
 
 	it('recognizes inert', () => {
-		// @ts-expect-error inert is not yet in attributes interface of preact
 		expect(isVnodeFocusable(<button inert />)).toBe(false);
 	});
 
