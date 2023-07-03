@@ -7,7 +7,6 @@ import {useCompLayer} from './composition/layer.js';
 import {CompPage, CompPageBuilder} from './composition/page.js';
 import {NavColumn} from './navigation/NavColumn.js';
 import {Button} from './navigation/wrappers.js';
-import {debugRoute} from './DebugRoute.js';
 import {debugGamepad} from './gamepad/DebugGamepad.js';
 import {debugNav} from './navigation/DebugNav.js';
 import {debugGallery} from './DebugGallery.js';
@@ -43,9 +42,6 @@ export const HomePage: FunctionComponent = () => {
 								<Link builder={debugGallery}>
 									Debug Gallery
 								</Link>
-							</li>
-							<li>
-								<Link builder={debugRoute}>Debug routes</Link>
 							</li>
 							<li>
 								<Link builder={debugNav}>Debug navigation</Link>

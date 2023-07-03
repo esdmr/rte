@@ -46,7 +46,7 @@ const openPage =
 		assert(page, 'Not in a page');
 
 		if (action === 'replace') {
-			compDebugPage.replace(page, undefined, {depth});
+			compDebugPage.replace(page, undefined, {depth, replaced: true});
 		} else {
 			compDebugPage.after(page, undefined, {depth});
 		}
@@ -98,7 +98,8 @@ const CompDebugDialog: FunctionComponent<{
 
 export const CompDebugPage: FunctionComponent<{
 	depth: number;
-}> = ({depth}) => {
+	replaced?: boolean;
+}> = ({depth, replaced}) => {
 	const layer = useCompLayer();
 	const [result, setResult] = useState<string>();
 
@@ -110,7 +111,10 @@ export const CompDebugPage: FunctionComponent<{
 				</nav>
 			</header>
 			<main>
-				<h1>Hello, World! (Depth is {depth})</h1>
+				<h1>
+					Hello, World! (Depth is {depth}, Replaced:{' '}
+					{String(replaced)})
+				</h1>
 				{result && <p>Dialog result was: {result}</p>}
 				<NavRow>
 					<Button onClick={openDialog(layer, depth + 1, setResult)}>
@@ -133,4 +137,7 @@ const compDebugDialog = new CompDialogBuilder(CompDebugDialog, {
 }).withType<string>();
 compDebugDialog.classList.push(css.dialog);
 
-export const compDebugPage = new CompPageBuilder(CompDebugPage, {depth: 0});
+export const compDebugPage = new CompPageBuilder(CompDebugPage, {
+	depth: 0,
+	replaced: false,
+});
