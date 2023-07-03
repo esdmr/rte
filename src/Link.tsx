@@ -49,9 +49,17 @@ export const Link: FunctionComponent<LinkProps> = ({
 				assert(page, 'Not in a page');
 
 				if (replace) {
-					builder.replace(page, undefined, newParameters);
+					builder.replace(
+						page,
+						undefined,
+						newParameters as Partial<any>,
+					);
 				} else {
-					builder.after(page, undefined, newParameters);
+					builder.after(
+						page,
+						undefined,
+						newParameters as Partial<any>,
+					);
 				}
 			}
 		},
