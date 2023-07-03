@@ -125,6 +125,13 @@ export abstract class CompNode implements Disposable {
 	}
 
 	remove?(oldChild: CompNode): void;
+
+	disposeAndSetFocus() {
+		const root = this.parent?.root;
+		this.dispose();
+		root?.activeDescendant?.focus();
+	}
+
 	abstract dispose(): void;
 }
 
@@ -132,6 +139,11 @@ export function tryRemovingFromParent(node: CompNode) {
 	const {parent} = node;
 
 	if (parent && !parent.remove) {
+		console.warn(
+			'Node has parent, but it does not allow removing children',
+			node,
+			parent,
+		);
 		return false;
 	}
 

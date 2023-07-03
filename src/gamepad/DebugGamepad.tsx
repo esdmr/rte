@@ -7,7 +7,7 @@ import {NavRoot} from '../navigation/NavRoot.js';
 import {DebugGamepadState} from './DebugGamepadState.js';
 
 export const DebugGamepad: FunctionComponent = () => (
-	<>
+	<NavRoot>
 		<AllowScroll />
 		<NavColumn>
 			<header>
@@ -21,14 +21,7 @@ export const DebugGamepad: FunctionComponent = () => (
 				<DebugGamepadState />
 			</main>
 		</NavColumn>
-	</>
+	</NavRoot>
 );
 
-export const debugGamepad = new CompPageBuilder(
-	() => (
-		<NavRoot>
-			<DebugGamepad />
-		</NavRoot>
-	),
-	{},
-);
+export const debugGamepad = new CompPageBuilder(DebugGamepad, {});

@@ -134,4 +134,3 @@ const compDebugDialog = new CompDialogBuilder(CompDebugDialog, {
 compDebugDialog.classList.push(css.dialog);
 
 export const compDebugPage = new CompPageBuilder(CompDebugPage, {depth: 0});
-compDebugPage.classList.push(css.page, 'app');

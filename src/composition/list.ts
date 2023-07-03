@@ -15,13 +15,12 @@ export class CompList<T extends CompNode = CompNode> extends CompNode {
 	}
 
 	*entries() {
-		let i = 0;
+		const children = [...this._element.children];
 
-		for (const child of this._element.children) {
+		for (const [i, child] of children.entries()) {
 			const node = getCompNodeOf(child, description) as T;
 			assert(node, 'Non-compositor child found in compositor list');
 			yield [i, node] as const;
-			++i;
 		}
 	}
 

@@ -11,7 +11,7 @@ import {A, Button} from './wrappers.js';
 import {NavRoot} from './NavRoot.js';
 
 export const DebugNav: FunctionComponent = () => (
-	<>
+	<NavRoot>
 		<AllowScroll />
 		<NavColumn>
 			<header>
@@ -111,14 +111,7 @@ export const DebugNav: FunctionComponent = () => (
 				</NavColumn>
 			</main>
 		</NavColumn>
-	</>
+	</NavRoot>
 );
 
-export const debugNav = new CompPageBuilder(
-	() => (
-		<NavRoot>
-			<DebugNav />
-		</NavRoot>
-	),
-	{},
-);
+export const debugNav = new CompPageBuilder(DebugNav, {});

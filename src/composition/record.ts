@@ -19,7 +19,9 @@ export abstract class CompRecord<
 	}
 
 	*entries() {
-		for (const child of this._element.children) {
+		const children = [...this._element.children];
+
+		for (const child of children) {
 			const key = (child as HTMLElement).dataset?.[datasetKey];
 			const node = getCompNodeOf(child, description) as T[string];
 

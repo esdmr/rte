@@ -16,22 +16,10 @@ export const LicenseFile: FunctionComponent<{
 	const label = props.label;
 	const path = props.path;
 
-	if (props['is-package'] && !/^(@.+?\/)?.+?@.+$/.test(path)) {
-		return (
-			<>
-				<AllowScroll />
-				<header>
-					<nav>
-						<CloseButton />
-					</nav>
-				</header>
-				<main>
-					<h1>Invalid package id</h1>
-					<p>
-						<code>{path}</code> is not a valid package name.
-					</p>
-				</main>
-			</>
+	if (props['is-package']) {
+		assert(
+			/^(@.+?\/)?.+?@.+$/.test(path),
+			`“${path}” is not a valid package name`,
 		);
 	}
 
@@ -71,7 +59,7 @@ export const LicenseFile: FunctionComponent<{
 	);
 
 	return (
-		<>
+		<NavRoot>
 			<AllowScroll />
 			<header>
 				<nav>
@@ -84,24 +72,12 @@ export const LicenseFile: FunctionComponent<{
 					<Content />
 				</Suspense>
 			</main>
-		</>
+		</NavRoot>
 	);
 };
 
-export const licenseFile = new CompPageBuilder(
-	(props: {
-		label: string;
-		path: string;
-		dir: string;
-		'is-package'?: boolean;
-	}) => (
-		<NavRoot>
-			<LicenseFile {...props} />
-		</NavRoot>
-	),
-	{
-		path: '(uninitialized)',
-		label: '(uninitialized)',
-		dir: '(uninitialized)/',
-	},
-);
+export const licenseFile = new CompPageBuilder(LicenseFile, {
+	path: '(uninitialized)',
+	label: '(uninitialized)',
+	dir: '(uninitialized)/',
+});

@@ -15,31 +15,26 @@ const stopPropagation = (event: Event) => {
 
 export const EditorContainer: FunctionComponent = () => {
 	return (
-		<main
-			class={css.editorContainer}
-			role="region"
-			aria-live="polite"
-			onfocusin={stopPropagation}
-			onGamepad={stopPropagation}
-			onKeyDown={stopPropagation}
-			onInputGuideUpdate={stopPropagation}
-		>
-			<Suspense
-				fallback={
-					<Loading placement="bottom-right" class={css.editor} />
-				}
+		<NavRoot>
+			<main
+				class={css.editorContainer}
+				role="region"
+				aria-live="polite"
+				onfocusin={stopPropagation}
+				onGamepad={stopPropagation}
+				onKeyDown={stopPropagation}
+				onInputGuideUpdate={stopPropagation}
 			>
-				<Editor />
-			</Suspense>
-		</main>
+				<Suspense
+					fallback={
+						<Loading placement="bottom-right" class={css.editor} />
+					}
+				>
+					<Editor />
+				</Suspense>
+			</main>
+		</NavRoot>
 	);
 };
 
-export const editorContainer = new CompPageBuilder(
-	() => (
-		<NavRoot>
-			<EditorContainer />
-		</NavRoot>
-	),
-	{},
-);
+export const editorContainer = new CompPageBuilder(EditorContainer, {});

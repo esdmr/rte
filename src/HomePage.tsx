@@ -4,7 +4,7 @@ import {Link} from './Link.js';
 import assert from './assert.js';
 import {compDebugPage} from './composition/debug.js';
 import {useCompLayer} from './composition/layer.js';
-import {CompPage} from './composition/page.js';
+import {CompPage, CompPageBuilder} from './composition/page.js';
 import {NavColumn} from './navigation/NavColumn.js';
 import {Button} from './navigation/wrappers.js';
 import {debugRoute} from './DebugRoute.js';
@@ -13,13 +13,17 @@ import {debugNav} from './navigation/DebugNav.js';
 import {debugGallery} from './DebugGallery.js';
 import {editorContainer} from './EditorContainer.js';
 import {licenses} from './licenses/index.js';
+import {NavRoot} from './navigation/NavRoot.js';
+import {CloseButton} from './composition/CloseButton.js';
 
 export const HomePage: FunctionComponent = () => {
 	const layer = useCompLayer();
 
 	return (
-		<>
-			<header aria-hidden />
+		<NavRoot>
+			<header>
+				<CloseButton />
+			</header>
 			<main>
 				<AllowScroll />
 				<h1>RTE</h1>
@@ -68,6 +72,8 @@ export const HomePage: FunctionComponent = () => {
 					</ul>
 				</nav>
 			</main>
-		</>
+		</NavRoot>
 	);
 };
+
+export const homePage = new CompPageBuilder(HomePage, {});

@@ -7,7 +7,7 @@ import {NavColumn} from './navigation/NavColumn.js';
 import {NavRoot} from './navigation/NavRoot.js';
 
 export const DebugRoute: FunctionComponent<{id: string}> = ({id}) => (
-	<>
+	<NavRoot>
 		<AllowScroll />
 		<NavColumn>
 			<header>
@@ -43,14 +43,7 @@ export const DebugRoute: FunctionComponent<{id: string}> = ({id}) => (
 				</nav>
 			</main>
 		</NavColumn>
-	</>
+	</NavRoot>
 );
 
-export const debugRoute = new CompPageBuilder(
-	({id}: {id: string}) => (
-		<NavRoot>
-			<DebugRoute id={id} />
-		</NavRoot>
-	),
-	{id: 'init'},
-);
+export const debugRoute = new CompPageBuilder(DebugRoute, {id: 'init'});

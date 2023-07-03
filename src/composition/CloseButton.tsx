@@ -11,7 +11,7 @@ import {CompDialog} from './dialog.js';
 const closePage = (layer: CompPageContent) => () => {
 	const page = layer.findNearest(CompPage);
 	assert(page, 'Not in a page');
-	page.dispose();
+	page.disposeAndSetFocus();
 };
 
 const closeDialog = (layer: CompDialog<unknown>) => () => {

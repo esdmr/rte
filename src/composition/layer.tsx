@@ -56,7 +56,9 @@ export class CompLayer extends CompNode {
 	}
 
 	focus(options?: FocusOptions) {
-		this._element.focus(options);
+		if (this.dispatchEvent(new Event('Refocus', {cancelable: true}))) {
+			this._element.focus(options);
+		}
 	}
 
 	dispose() {

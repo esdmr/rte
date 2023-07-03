@@ -1,12 +1,10 @@
 import type {FunctionComponent} from 'preact';
 import {StandardAxes, StandardButtons} from './standard.js';
-import {useGamepads} from './gamepad-signal.js';
+import {gamepads} from './gamepad-signal.js';
 import {DebugGamepadAxesCircularity} from './DebugGamepadAxesCircularity.js';
 import * as css from './DebugGamepadState.module.css';
 
 export const DebugGamepadState: FunctionComponent = () => {
-	const gamepads = useGamepads();
-
 	return (
 		<>
 			{gamepads.value.length === 0 && <p key="empty">Empty list.</p>}

@@ -11,7 +11,7 @@ const style = [gfbi.symbols, gfbi.lettersAb, gfbi.lettersBa] as const;
 const which = ['down', 'right', 'left', 'up'] as const;
 
 export const DebugGallery: FunctionComponent = () => (
-	<>
+	<NavRoot>
 		<AllowScroll />
 		<header>
 			<nav>
@@ -44,14 +44,7 @@ export const DebugGallery: FunctionComponent = () => (
 				</figure>
 			))}
 		</main>
-	</>
+	</NavRoot>
 );
 
-export const debugGallery = new CompPageBuilder(
-	() => (
-		<NavRoot>
-			<DebugGallery />
-		</NavRoot>
-	),
-	{},
-);
+export const debugGallery = new CompPageBuilder(DebugGallery, {});

@@ -46,11 +46,19 @@ export class CompPage extends CompRecord<{
 
 export class CompPageBuilder<T = any> {
 	readonly classList: string[] = [];
+	showPageCloseButton = true;
 
 	constructor(
 		readonly content: ComponentFactory<T>,
 		readonly parameters: RenderableProps<T>,
 	) {}
+
+	copy() {
+		const builder = new CompPageBuilder(this.content, this.parameters);
+		builder.classList.push(...this.classList);
+		builder.showPageCloseButton = this.showPageCloseButton;
+		return builder;
+	}
 
 	replace(
 		page: CompPage,
@@ -58,8 +66,10 @@ export class CompPageBuilder<T = any> {
 		newParameters?: Partial<RenderableProps<T>>,
 	) {
 		assert(window, 'CompWindow not found');
-		window.pages.replace(page, this._create(newParameters));
-		page.dispose();
+		const newPage = this._create(newParameters);
+		window.pages.replace(page, newPage);
+		page.disposeAndSetFocus();
+		return newPage;
 	}
 
 	after(
@@ -68,18 +78,25 @@ export class CompPageBuilder<T = any> {
 		newParameters?: Partial<RenderableProps<T>>,
 	) {
 		assert(window, 'CompWindow not found');
-		window.pages.after(page, this._create(newParameters));
+		const newPage = this._create(newParameters);
+		window.pages.after(page, newPage);
+		window.root.activeDescendant?.focus();
+		return newPage;
 	}
 
 	append(window: CompWindow, newParameters?: Partial<RenderableProps<T>>) {
-		window.pages.append(this._create(newParameters));
+		const newPage = this._create(newParameters);
+		window.pages.append(newPage);
+		window.root.activeDescendant?.focus();
+		return newPage;
 	}
 
 	private _create(newParameters?: Partial<RenderableProps<T>>) {
 		const newPage = new CompPage();
 		const {content} = newPage;
-
 		const {content: Content} = this;
+
+		content.showPageCloseButton = this.showPageCloseButton;
 		content.render(<Content {...this.parameters} {...newParameters} />);
 		content.classList.add(...this.classList);
 

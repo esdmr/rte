@@ -1,5 +1,9 @@
 import type {CompLayer} from '../composition/layer.js';
-import {removeFocusVisible} from '../focus-visible.js';
+import {
+	isFocusVisible,
+	makeFocusVisible,
+	removeFocusVisible,
+} from '../focus-visible.js';
 import {StandardButtons} from '../gamepad/standard.js';
 import type {NavNode} from './node.js';
 
@@ -68,6 +72,21 @@ export function setupNavigation(
 	layer: CompLayer,
 	signal?: AbortSignal,
 ) {
+	layer.addEventListener('Refocus', (event) => {
+		const ref = root.state.selected?.ref;
+
+		if (ref) {
+			const wasFocusVisible = isFocusVisible();
+
+			event.preventDefault();
+			ref.focus();
+
+			if (wasFocusVisible) {
+				makeFocusVisible();
+			}
+		}
+	});
+
 	layer.addEventListener(
 		'LayerDispose',
 		() => {

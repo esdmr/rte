@@ -14,7 +14,7 @@ export class CompDialog<T> extends CompLayer {
 		this.result.promise
 			.catch(() => undefined)
 			.finally(() => {
-				this.dispose();
+				this.disposeAndSetFocus();
 			});
 	}
 
@@ -40,10 +40,19 @@ export class CompDialogBuilder<T, D = unknown> {
 		return this as unknown as CompDialogBuilder<T, NewD>;
 	}
 
+	copy() {
+		const builder = new CompDialogBuilder<T, D>(
+			this.content,
+			this.parameters,
+		);
+		builder.classList.push(...this.classList);
+		return builder;
+	}
+
 	append(page: CompPage, newParameters?: Partial<RenderableProps<T>>) {
 		const dialog = this._create(newParameters);
 		page.dialogs.append(dialog);
-		dialog.focus();
+		page.root.activeDescendant?.focus();
 		return dialog;
 	}
 

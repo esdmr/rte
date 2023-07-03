@@ -11,7 +11,7 @@ import {Dependencies} from './packages-list.js';
 import {Patches} from './patches-list.js';
 
 export const Licenses: FunctionComponent = () => (
-	<>
+	<NavRoot>
 		<AllowScroll />
 		<NavColumn>
 			<header>
@@ -70,14 +70,7 @@ export const Licenses: FunctionComponent = () => (
 				</NavColumn>
 			</main>
 		</NavColumn>
-	</>
+	</NavRoot>
 );
 
-export const licenses = new CompPageBuilder(
-	() => (
-		<NavRoot>
-			<Licenses />
-		</NavRoot>
-	),
-	{},
-);
+export const licenses = new CompPageBuilder(Licenses, {});

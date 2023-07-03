@@ -7,6 +7,7 @@ export type EventMap = {
 	[GamepadEvent.eventName]: GamepadEvent;
 	ChildrenUpdate: Event;
 	LayerDispose: Event;
+	Refocus: Event;
 } & HTMLElementEventMap;
 
 declare global {
