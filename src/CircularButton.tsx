@@ -6,7 +6,6 @@ import {A, Button} from './navigation/wrappers.js';
 export const CircularButton: FunctionComponent<
 	Omit<JSX.HTMLAttributes<HTMLButtonElement | HTMLAnchorElement>, 'href'> & {
 		href?: string;
-		newParameters?: any;
 		class?: string;
 	}
 > = (props) => {
