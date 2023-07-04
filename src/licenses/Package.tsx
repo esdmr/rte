@@ -1,5 +1,6 @@
 import type {FunctionComponent} from 'preact';
 import type * as Types from '../license-types.js';
+import {useCompLayer} from '../composition/layer.js';
 import {LegacyLicense} from './LegacyLicense.js';
 import * as css from './Project.module.css';
 import {Project} from './Project.js';
@@ -8,6 +9,7 @@ import {licenseFile} from './LicenseFile.js';
 export const Package: FunctionComponent<{
 	pkg: Types.Package;
 }> = ({pkg}) => {
+	const layer = useCompLayer();
 	const pkgId = `${pkg.name}@${pkg.version}`;
 	let hasLicenseFile = false;
 	let license;
@@ -55,15 +57,12 @@ export const Package: FunctionComponent<{
 			repository={pkg.repository}
 			license={
 				hasLicenseFile
-					? [
-							licenseFile,
-							{
-								path: pkgId,
-								label: pkgId,
-								dir: 'licenses/deps/',
-								'is-package': true,
-							},
-					  ]
+					? licenseFile.afterOnClick(layer, {
+							path: pkgId,
+							label: pkgId,
+							dir: 'licenses/deps/',
+							'is-package': true,
+					  })
 					: undefined
 			}
 		>

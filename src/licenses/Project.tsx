@@ -9,7 +9,6 @@ import type {ComponentChild, FunctionComponent} from 'preact';
 import {CircularButton} from '../CircularButton.js';
 import {classes} from '../classes.js';
 import {NavRow} from '../navigation/NavRow.js';
-import type {CompPageBuilder} from '../composition/page.js';
 import {Authors} from './Authors.js';
 import * as css from './Project.module.css';
 
@@ -17,10 +16,10 @@ export const Project: FunctionComponent<{
 	readonly heading: ComponentChild;
 	readonly authors?: readonly string[];
 	readonly name: string;
-	readonly repository?: string | [CompPageBuilder, any];
-	readonly registry?: string | [CompPageBuilder, any];
-	readonly source?: string | [CompPageBuilder, any];
-	readonly license?: string | [CompPageBuilder, any];
+	readonly repository?: string | (() => void);
+	readonly registry?: string | (() => void);
+	readonly source?: string | (() => void);
+	readonly license?: string | (() => void);
 }> = (props) => {
 	return (
 		<article class={classes(css.project)}>
@@ -57,25 +56,25 @@ export const Project: FunctionComponent<{
 								mdiCopyright,
 								'license file',
 							] as const,
-						].map(
-							([link, icon, type]) =>
-								link && (
-									<CircularButton
-										key={type}
-										href={
-											Array.isArray(link) ? link[0] : link
-										}
-										newParameters={
-											Array.isArray(link) &&
-											(link[1] as unknown)
-										}
-										title={`See ${type}`}
-										aria-label={`See ${type} for ${props.name}`}
-									>
-										<Icon path={icon} />
-									</CircularButton>
-								),
-						)}
+						].map(([link, icon, type]) => {
+							if (!link) return;
+
+							const linkProps =
+								typeof link === 'function'
+									? {onClick: link}
+									: {href: link};
+
+							return (
+								<CircularButton
+									key={type}
+									{...linkProps}
+									title={`See ${type}`}
+									aria-label={`See ${type} for ${props.name}`}
+								>
+									<Icon path={icon} />
+								</CircularButton>
+							);
+						})}
 					</NavRow>
 				</div>
 			</NavRow>

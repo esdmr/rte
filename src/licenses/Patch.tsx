@@ -1,5 +1,6 @@
 import type {FunctionComponent} from 'preact';
 import type * as Types from '../license-types.js';
+import {useCompLayer} from '../composition/layer.js';
 import * as css from './Project.module.css';
 import {Project} from './Project.js';
 import {Authors} from './Authors.js';
@@ -9,6 +10,7 @@ export const Patch: FunctionComponent<{
 	patch: Types.Patch;
 }> = ({patch}) => {
 	const pkgId = `${patch.name}@${patch.version}`;
+	const layer = useCompLayer();
 
 	return (
 		<Project
@@ -20,14 +22,11 @@ export const Patch: FunctionComponent<{
 				</>
 			}
 			source={new URL(patch.path, import.meta.env.RTE_TREE_URL).href}
-			license={[
-				licenseFile,
-				{
-					path: patch.license + '.txt',
-					label: (pkgId ?? 'an unknown') + ' patch',
-					dir: 'licenses/files/',
-				},
-			]}
+			license={licenseFile.afterOnClick(layer, {
+				path: patch.license + '.txt',
+				label: (pkgId ?? 'an unknown') + ' patch',
+				dir: 'licenses/files/',
+			})}
 		>
 			<p>
 				Original package by <Authors list={patch.originalAuthors} />.
