@@ -1,7 +1,4 @@
-import {
-	type InputGuideUpdateEvent,
-	type GamepadEvent,
-} from '../gamepad/event.js';
+import type {InputGuideUpdateEvent, GamepadEvent} from '../gamepad/event.js';
 
 export type EventMap = {
 	[GamepadEvent.eventName]: GamepadEvent;

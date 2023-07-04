@@ -1,5 +1,5 @@
 import assert from '../assert.js';
-import {type CompLayer} from './layer.js';
+import type {CompLayer} from './layer.js';
 import {CompList} from './list.js';
 import {CompPageList} from './page-list.js';
 import {CompRecord} from './record.js';
