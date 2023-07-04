@@ -29,10 +29,6 @@ Files: vite/typed-css-modules.js
 Copyright: 2019 Google Inc.
 License: Apache-2.0
 
-Files: src/Link.tsx
-Copyright: Alexey Taktarov
-License: ISC
-
 Files: patches/@prefresh__vite@2.2.8.patch
 Copyright: 2020 Jovi De Croock
 X-Patch-By: esdmr
