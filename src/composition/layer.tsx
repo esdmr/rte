@@ -10,6 +10,10 @@ if (import.meta.env.DEV) {
 }
 
 export class CompLayer extends CompNode {
+	/** @internal for testing purposes */
+	static _renderer: (vnode: ComponentChild, parent: HTMLElement) => void =
+		render;
+
 	private _rendering = false;
 
 	constructor(element = document.createElement('section')) {
@@ -39,7 +43,7 @@ export class CompLayer extends CompNode {
 	render(vnode: ComponentChild) {
 		this._rendering = true;
 
-		render(
+		CompLayer._renderer(
 			typeof vnode === 'object' && vnode !== null ? (
 				<compLayer.Provider value={this}>{vnode}</compLayer.Provider>
 			) : (

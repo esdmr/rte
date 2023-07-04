@@ -141,8 +141,6 @@ export function tryRemovingFromParent(node: CompNode) {
 	if (parent && !parent.remove) {
 		console.warn(
 			'Node has parent, but it does not allow removing children',
-			node,
-			parent,
 		);
 		return false;
 	}

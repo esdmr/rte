@@ -1,6 +1,7 @@
 {
 	"rules": {
 		"n/file-extension-in-import": "off",
-		"@typescript-eslint/no-implicit-any-catch": "off"
+		"@typescript-eslint/no-implicit-any-catch": "off",
+		"import/no-mutable-exports": "off"
 	}
 }
