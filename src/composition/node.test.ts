@@ -189,6 +189,9 @@ describe('CompNode', () => {
 
 			node._element.setAttribute('role', 'alertdialog');
 			expect(node.role).toBe('alertdialog');
+
+			node._element.removeAttribute('role');
+			expect(node.role).toBeUndefined();
 		});
 
 		it('sets the element role attribute', () => {

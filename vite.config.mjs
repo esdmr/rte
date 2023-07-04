@@ -88,6 +88,8 @@ export default defineConfig(({command}) => ({
 				'**/*.d.ts',
 				'src/license-types.ts',
 				'src/components/icons/gamepad/face-button/types.ts',
+				'src/composition/test-renderer.ts',
+				'src/composition/event.ts',
 			],
 		},
 		cache: {

@@ -6,11 +6,12 @@ import {CompDialog} from './dialog.js';
 import {CompPageList} from './page-list.js';
 import {CompPage} from './page.js';
 import {lastRender, setTestRenderer} from './test-renderer.js';
+import {CompLayer} from './layer.js';
 
 describe('CloseButton', () => {
 	setTestRenderer();
 
-	it('Throws an error outside of a page or dialog', () => {
+	it('Throws an error outside of compositor', () => {
 		expect(() => {
 			render(
 				<NavRoot>
@@ -19,6 +20,20 @@ describe('CloseButton', () => {
 			);
 		}).toThrowErrorMatchingInlineSnapshot(
 			'"Assertion failed: Called outside of the compositor"',
+		);
+	});
+
+	it('Throws an error outside of a page or dialog', () => {
+		const layer = new CompLayer();
+
+		expect(() => {
+			layer.render(
+				<NavRoot>
+					<CloseButton />
+				</NavRoot>,
+			);
+		}).toThrowErrorMatchingInlineSnapshot(
+			'"CloseButton outside a page or dialog"',
 		);
 	});
 
@@ -32,6 +47,19 @@ describe('CloseButton', () => {
 
 		assert(lastRender);
 		expect(lastRender.container.childElementCount).toBeGreaterThan(0);
+	});
+
+	it('should not render if showPageCloseButton is unset', () => {
+		const page = new CompPage();
+		page.content.showPageCloseButton = false;
+		page.content.render(
+			<NavRoot>
+				<CloseButton />
+			</NavRoot>,
+		);
+
+		assert(lastRender);
+		expect(lastRender.container.childElementCount).toBe(0);
 	});
 
 	it('should render inside a dialog', () => {
