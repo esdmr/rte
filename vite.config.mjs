@@ -78,7 +78,7 @@ export default defineConfig(({command}) => ({
 		environment: 'jsdom',
 		css: true,
 		coverage: {
-			provider: 'c8',
+			provider: 'v8',
 			all: true,
 			skipFull: true,
 			reporter: 'lcov',
