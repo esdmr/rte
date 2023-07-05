@@ -23,46 +23,7 @@ describe('NavChildToken', () => {
 		});
 	});
 
-	describe('revoke', () => {
-		it('disposes the child', () => {
-			const parent = new NavNode(undefined, {});
-
-			const child = new NavNode(parent, {});
-			parent.children[0] = child;
-			const spiedChildDispose = vi.spyOn(child, 'dispose');
-
-			new NavChildToken(parent, 0).revoke();
-			expect(spiedChildDispose).toHaveBeenCalled();
-		});
-
-		it('clears the child slot of parent', () => {
-			const parent = new NavNode(undefined, {});
-
-			const child = new NavNode(parent, {});
-			parent.children[0] = child;
-
-			new NavChildToken(parent, 0).revoke();
-
-			expect(parent.children[0]).toBeUndefined();
-		});
-	});
-
 	describe('clear', () => {
-		it('does nothing if the token is revoked', () => {
-			const parent = new NavNode(undefined, {});
-
-			const token = new NavChildToken(parent, 0);
-			token.revoke();
-			token.clear();
-
-			const child = new NavNode(parent, {});
-			parent.children[0] = child;
-			const spiedChildDispose = vi.spyOn(child, 'dispose');
-
-			expect(parent.children[0]).toBe(child);
-			expect(spiedChildDispose).toHaveBeenCalledTimes(0);
-		});
-
 		it('disposes the child', () => {
 			const parent = new NavNode(undefined, {});
 
@@ -87,18 +48,6 @@ describe('NavChildToken', () => {
 	});
 
 	describe('get child', () => {
-		it('returns undefined if revoked', () => {
-			const parent = new NavNode(undefined, {});
-
-			const token = new NavChildToken(parent, 0);
-			token.revoke();
-
-			const child = new NavNode(parent, {});
-			parent.children[0] = child;
-
-			expect(token.child).toBeUndefined();
-		});
-
 		it('returns the child from the parent', () => {
 			const parent = new NavNode(undefined, {});
 			const token = new NavChildToken(parent, 0);
@@ -112,23 +61,6 @@ describe('NavChildToken', () => {
 	});
 
 	describe('set child', () => {
-		it('throws if revoked', () => {
-			const parent = new NavNode(undefined, {});
-
-			const token = new NavChildToken(parent, 0);
-			token.revoke();
-
-			const child = new NavNode(parent, {});
-
-			expect(() => {
-				token.child = child;
-			}).toThrowErrorMatchingInlineSnapshot(
-				'"Assertion failed: child token is revoked"',
-			);
-
-			expect(parent.children[0]).toBeUndefined();
-		});
-
 		it('takes undefined', () => {
 			const parent = new NavNode(undefined, {});
 			const token = new NavChildToken(parent, 0);

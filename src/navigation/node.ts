@@ -12,7 +12,6 @@ export type NavSelectOptions = {
 
 export type NavHooks = {
 	readonly type?: string;
-	onNewChild?(this: NavNode): NavChildToken | void;
 	onDispose?(this: NavNode): void;
 	onSelect?(this: NavNode, options?: NavSelectOptions): void;
 	onDeselect?(this: NavNode): void;
@@ -33,7 +32,11 @@ export class NavNode implements Disposable {
 
 	readonly state: NavState;
 	readonly children: Array<NavNode | undefined> = [];
-	private disposed = false;
+	private _disposed = false;
+
+	get disposed() {
+		return this._disposed;
+	}
 
 	get selected() {
 		return this.state.selected === this;
@@ -59,28 +62,39 @@ export class NavNode implements Disposable {
 
 	constructor(
 		readonly parent: NavNode | undefined,
-		private readonly hooks: NavHooks,
+		private readonly _hooks: NavHooks,
+		private readonly _name: string = '',
 	) {
 		this.state = parent?.state ?? new NavState();
 
 		if (import.meta.env.DEV) {
-			this.getPath = () => {
-				let path = this.parent
-					? `${
-							this.parent.getPath?.() ?? 'unknown'
-					  }[${this.parent.children.indexOf(this)}]`
-					: 'root';
+			this._getPath = () => {
+				let path = '';
 
-				if (this.hooks.type) {
-					path += `(${this.hooks.type})`;
+				if (this.parent) {
+					path += `${this.parent._getPath?.() ?? '…'} > `;
 				}
 
-				if (this.disposed && !this.parent?.disposed) {
-					path += '.dispose()';
+				if (this._hooks.type) {
+					path += `${this._hooks.type}`;
+				}
+
+				path += this.parent
+					? `:nth-child(${this.parent.children.indexOf(this)})`
+					: ':root';
+
+				if (this._name) {
+					path += `[name=${this._name}]`;
+				}
+
+				if (this._disposed && !this.parent?._disposed) {
+					path += ':disposed';
+				} else if (!this._disposed && this.parent?._disposed) {
+					path += ':not(:disposed)';
 				}
 
 				if (this.selected) {
-					path += '.select()';
+					path += ':selected';
 				}
 
 				return path;
@@ -88,25 +102,21 @@ export class NavNode implements Disposable {
 		}
 	}
 
-	/** Used for debugging. Only available in development mode. */
-	getPath?(): string;
+	/** @internal Used for debugging. Only available in development mode. */
+	_getPath?(): string;
 
 	newChildToken() {
-		assert(!this.disposed, 'node is disposed');
-		const maybeChildToken = this.hooks.onNewChild?.call(this);
-
-		if (maybeChildToken) {
-			return maybeChildToken;
-		}
-
+		assert(!this._disposed, 'node is disposed');
 		const index = this.children.push(undefined) - 1;
 		return new NavChildToken(this, index);
 	}
 
 	dispose(root = this) {
-		if (this.disposed) {
+		if (this._disposed) {
 			return;
 		}
+
+		this._disposed = true;
 
 		for (const [index, child] of this.children.entries()) {
 			child?.dispose(root);
@@ -120,14 +130,13 @@ export class NavNode implements Disposable {
 			});
 		}
 
-		this.disposed = true;
-		this.hooks.onDispose?.call(this);
+		this._hooks.onDispose?.call(this);
 		this.ref = undefined;
 	}
 
 	select(options?: NavSelectOptions) {
-		assert(!this.disposed, 'node is disposed');
-		assert(this.hooks.onSelect !== undefined, 'select hook is undefined');
+		assert(!this._disposed, 'node is disposed');
+		assert(this._hooks.onSelect !== undefined, 'select hook is undefined');
 
 		if (this.selected) {
 			return;
@@ -135,23 +144,26 @@ export class NavNode implements Disposable {
 
 		this.state.deselect();
 		this.state.selected = this;
-		this.hooks.onSelect.call(this, options);
+		this._hooks.onSelect.call(this, options);
 	}
 
 	deselect() {
-		assert(!this.disposed, 'node is disposed');
+		if (this._disposed) {
+			return;
+		}
+
 		assert(this.selected, 'node is not selected');
-		this.hooks.onDeselect?.call(this);
+		this._hooks.onDeselect?.call(this);
 	}
 
 	getLeaf(via: NavDirection) {
-		assert(!this.disposed, 'node is disposed');
-		return this.hooks.getLeaf?.call(this, via);
+		assert(!this._disposed, 'node is disposed');
+		return this._hooks.getLeaf?.call(this, via);
 	}
 
 	getNextLeaf(child: NavNode, via: NavDirection) {
-		assert(!this.disposed, 'node is disposed');
+		assert(!this._disposed, 'node is disposed');
 		assert(this.children.includes(child), 'node is not a child');
-		return this.hooks.getNextLeaf?.call(this, child, via);
+		return this._hooks.getNextLeaf?.call(this, child, via);
 	}
 }

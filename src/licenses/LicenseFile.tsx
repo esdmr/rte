@@ -1,44 +1,25 @@
-import {mdiArrowLeft} from '@mdi/js';
-import {Icon} from '@mdi/react';
 import type {FunctionComponent} from 'preact';
 import {lazy, Suspense, useMemo} from 'preact/compat';
+import {scrollable} from '../scrollable.module.css';
 import assert from '../assert.js';
-import {AllowScroll} from '../AllowScroll.js';
-import {CircularButton} from '../CircularButton.js';
+import {CloseButton} from '../composition/CloseButton.js';
+import {CompPageBuilder} from '../composition/page.js';
 import {Loading} from '../Loading.js';
-import {Title} from '../Title.js';
+import {NavRoot} from '../navigation/NavRoot.js';
 
-export const LicenseFile: FunctionComponent<{
+const LicenseFile: FunctionComponent<{
 	label: string;
 	path: string;
 	dir: string;
 	'is-package'?: boolean;
-	'return-route': string;
 }> = (props) => {
-	const label = decodeURIComponent(props.label);
-	const path = decodeURIComponent(props.path);
+	const label = props.label;
+	const path = props.path;
 
-	if (props['is-package'] && !/^(@.+?\/)?.+?@.+$/.test(path)) {
-		return (
-			<>
-				<AllowScroll />
-				<header>
-					<nav>
-						<CircularButton
-							href={props['return-route']}
-							title="Back"
-						>
-							<Icon path={mdiArrowLeft} />
-						</CircularButton>
-					</nav>
-				</header>
-				<main>
-					<Title h1>Invalid package id</Title>
-					<p>
-						<code>{path}</code> is not a valid package name.
-					</p>
-				</main>
-			</>
+	if (props['is-package']) {
+		assert(
+			/^(@.+?\/)?.+?@.+$/.test(path),
+			`“${path}” is not a valid package name`,
 		);
 	}
 
@@ -78,21 +59,26 @@ export const LicenseFile: FunctionComponent<{
 	);
 
 	return (
-		<>
-			<AllowScroll />
+		<NavRoot>
 			<header>
 				<nav>
-					<CircularButton href={props['return-route']} title="Back">
-						<Icon path={mdiArrowLeft} />
-					</CircularButton>
+					<CloseButton />
 				</nav>
 			</header>
 			<main>
-				<Title h1>License file for: {label}</Title>
+				<h1>License file for: {label}</h1>
 				<Suspense fallback={<Loading placement="center" />}>
 					<Content />
 				</Suspense>
 			</main>
-		</>
+		</NavRoot>
 	);
 };
+
+export const licenseFile = new CompPageBuilder(LicenseFile, {
+	path: '(uninitialized)',
+	label: '(uninitialized)',
+	dir: '(uninitialized)/',
+});
+
+licenseFile.classList.push(scrollable);

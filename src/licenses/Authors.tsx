@@ -9,11 +9,20 @@ export const Authors: FunctionComponent<{list: readonly string[]}> = ({
 		return <>unknown authors</>;
 	}
 
+	const lastIndex = list.length - 1;
+
 	const formattedAuthors = listFormat
 		.formatToParts(list)
-		.map((item) =>
-			item.type === 'element' ? <i>{item.value}</i> : item.value,
-		);
+		.map((item, index) => {
+			// Since `Authors` is followed by a period, make sure to prevent
+			// double periods.
+			const value =
+				index === lastIndex
+					? item.value.replace(/\.$/, '')
+					: item.value;
+
+			return item.type === 'element' ? <i>{value}</i> : value;
+		});
 
 	return <>{formattedAuthors}</>;
 };

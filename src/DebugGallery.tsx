@@ -1,28 +1,24 @@
-import {mdiArrowLeft} from '@mdi/js';
-import {Icon} from '@mdi/react';
 import type {FunctionComponent} from 'preact';
-import {AllowScroll} from './AllowScroll.js';
-import {CircularButton} from './CircularButton.js';
+import {scrollable} from './scrollable.module.css';
 import * as css from './DebugGallery.module.css';
-import * as gfbi from './icons/gamepad/face-button/index.js';
 import {Loading} from './Loading.js';
-import {Title} from './Title.js';
+import {CloseButton} from './composition/CloseButton.js';
+import {CompPageBuilder} from './composition/page.js';
+import * as gfbi from './icons/gamepad/face-button/index.js';
+import {NavRoot} from './navigation/NavRoot.js';
 
 const style = [gfbi.symbols, gfbi.lettersAb, gfbi.lettersBa] as const;
 const which = ['down', 'right', 'left', 'up'] as const;
 
-export const DebugGallery: FunctionComponent = () => (
-	<>
-		<AllowScroll />
+const DebugGallery: FunctionComponent = () => (
+	<NavRoot>
 		<header>
 			<nav>
-				<CircularButton href="/" title="Back">
-					<Icon path={mdiArrowLeft} />
-				</CircularButton>
+				<CloseButton />
 			</nav>
 		</header>
 		<main>
-			<Title h1>Debug Gallery</Title>
+			<h1>Debug Gallery</h1>
 
 			<h2>Loading icon</h2>
 			<Loading placement="center" />
@@ -47,5 +43,8 @@ export const DebugGallery: FunctionComponent = () => (
 				</figure>
 			))}
 		</main>
-	</>
+	</NavRoot>
 );
+
+export const debugGallery = new CompPageBuilder(DebugGallery, {});
+debugGallery.classList.push(scrollable);

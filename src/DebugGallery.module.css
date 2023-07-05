@@ -1,37 +1,39 @@
-.inline-figure {
-	display: inline-block;
-	width: min-content;
-	text-align: center;
-	margin: 0;
-}
+@layer app {
+	.inline-figure {
+		display: inline-block;
+		width: min-content;
+		text-align: center;
+		margin: 0;
+	}
 
-.gfbi-grid {
-	display: inline-grid;
-	margin: 0.5em;
-	grid-template-areas:
-		' .    up    .  '
-		'left  .   right'
-		' .   down   .  ';
-}
+	.gfbi-grid {
+		display: inline-grid;
+		margin: 0.5em;
+		grid-template-areas:
+			' .    up    .  '
+			'left  .   right'
+			' .   down   .  ';
+	}
 
-.gfbi {
-	display: inline-block;
-	width: 1.5em;
-	height: 1.5em;
-}
+	.gfbi {
+		display: inline-block;
+		width: 1.5em;
+		height: 1.5em;
+	}
 
-.gfbi[data-which=down] {
-	grid-area: down;
-}
+	.gfbi[data-which=down] {
+		grid-area: down;
+	}
 
-.gfbi[data-which=right] {
-	grid-area: right;
-}
+	.gfbi[data-which=right] {
+		grid-area: right;
+	}
 
-.gfbi[data-which=left] {
-	grid-area: left;
-}
+	.gfbi[data-which=left] {
+		grid-area: left;
+	}
 
-.gfbi[data-which=up] {
-	grid-area: up;
+	.gfbi[data-which=up] {
+		grid-area: up;
+	}
 }

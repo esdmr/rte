@@ -12,7 +12,7 @@ const lightTheme = 'vs-light';
 const darkTheme = 'vs-dark';
 
 export class MonacoEditor implements Disposable {
-	private readonly editor: monaco.editor.IStandaloneCodeEditor;
+	private readonly _editor: monaco.editor.IStandaloneCodeEditor;
 	private _lightTheme: boolean;
 
 	get lightTheme(): boolean {
@@ -21,8 +21,8 @@ export class MonacoEditor implements Disposable {
 
 	set lightTheme(value: boolean) {
 		this._lightTheme = value;
-		this.editor.updateOptions({
-			theme: this.getTheme(),
+		this._editor.updateOptions({
+			theme: this._getTheme(),
 		});
 	}
 
@@ -34,13 +34,13 @@ export class MonacoEditor implements Disposable {
 
 	set forceAccessibility(value: boolean) {
 		this._forceAccessibility = value;
-		this.editor.updateOptions({
-			accessibilitySupport: this.getAccessibilitySupport(),
+		this._editor.updateOptions({
+			accessibilitySupport: this._getAccessibilitySupport(),
 		});
 	}
 
 	constructor(
-		private readonly element: HTMLElement,
+		private readonly _element: HTMLElement,
 		options: {
 			lightTheme: boolean;
 			forceAccessibility: boolean;
@@ -49,35 +49,35 @@ export class MonacoEditor implements Disposable {
 		this._lightTheme = options.lightTheme;
 		this._forceAccessibility = options.forceAccessibility;
 
-		const editor = monaco.editor.create(element, {
+		const editor = monaco.editor.create(_element, {
 			language: 'javascript',
-			theme: this.getTheme(),
+			theme: this._getTheme(),
 			fontFamily: '"System Mono"',
 			fontLigatures: true,
 			scrollBeyondLastLine: false,
-			ariaContainerElement: element,
-			accessibilitySupport: this.getAccessibilitySupport(),
+			ariaContainerElement: _element,
+			accessibilitySupport: this._getAccessibilitySupport(),
 		});
 
-		this.editor = editor;
+		this._editor = editor;
 		this.updateLayout();
 	}
 
 	updateLayout() {
-		this.editor.layout();
+		this._editor.layout();
 	}
 
 	dispose() {
-		this.editor.getModel()?.dispose();
-		this.editor.dispose();
-		this.element.replaceChildren();
+		this._editor.getModel()?.dispose();
+		this._editor.dispose();
+		this._element.replaceChildren();
 	}
 
-	private getTheme() {
+	private _getTheme() {
 		return this.lightTheme ? lightTheme : darkTheme;
 	}
 
-	private getAccessibilitySupport() {
+	private _getAccessibilitySupport() {
 		return this.forceAccessibility ? 'on' : 'auto';
 	}
 }
@@ -88,34 +88,34 @@ type EditorProps = {
 };
 
 export class Editor extends Component<EditorProps> {
-	private forceAccessibility = false;
-	private theme: EditorProps['theme'];
-	private editor?: MonacoEditor;
-	private readonly themeQuery = matchMedia('(prefers-color-scheme: light)');
+	private _forceAccessibility = false;
+	private _theme: EditorProps['theme'];
+	private _editor?: MonacoEditor;
+	private readonly _themeQuery = matchMedia('(prefers-color-scheme: light)');
 
 	constructor(props?: EditorProps) {
 		super(props);
-		this.theme = props?.theme ?? 'auto';
-		this.forceAccessibility = props?.forceAccessibility ?? false;
+		this._theme = props?.theme ?? 'auto';
+		this._forceAccessibility = props?.forceAccessibility ?? false;
 	}
 
 	override componentWillReceiveProps(nextProps: Readonly<EditorProps>): void {
 		const theme = nextProps.theme ?? 'auto';
 		const forceAccessibility = nextProps.forceAccessibility ?? false;
 
-		if (this.theme !== theme) {
-			this.theme = theme;
+		if (this._theme !== theme) {
+			this._theme = theme;
 
-			if (this.editor) {
-				this.editor.lightTheme = this.isLightTheme();
+			if (this._editor) {
+				this._editor.lightTheme = this._isLightTheme();
 			}
 		}
 
-		if (this.forceAccessibility !== forceAccessibility) {
-			this.forceAccessibility = forceAccessibility;
+		if (this._forceAccessibility !== forceAccessibility) {
+			this._forceAccessibility = forceAccessibility;
 
-			if (this.editor) {
-				this.editor.forceAccessibility = forceAccessibility;
+			if (this._editor) {
+				this._editor.forceAccessibility = forceAccessibility;
 			}
 		}
 	}
@@ -127,12 +127,12 @@ export class Editor extends Component<EditorProps> {
 	override componentDidMount(): void {
 		assert(this.base instanceof HTMLElement, 'base is not a HTMLElement');
 
-		this.editor = new MonacoEditor(this.base, {
-			forceAccessibility: this.forceAccessibility,
-			lightTheme: this.isLightTheme(),
+		this._editor = new MonacoEditor(this.base, {
+			forceAccessibility: this._forceAccessibility,
+			lightTheme: this._isLightTheme(),
 		});
 
-		addEventListener('resize', this.onDidResize, {
+		addEventListener('resize', this._onDidResize, {
 			passive: true,
 		});
 
@@ -140,13 +140,13 @@ export class Editor extends Component<EditorProps> {
 	}
 
 	override componentWillUnmount(): void {
-		this.themeQuery.removeEventListener(
+		this._themeQuery.removeEventListener(
 			'change',
-			this.onDidThemeQueryChange,
+			this._onDidThemeQueryChange,
 		);
-		removeEventListener('resize', this.onDidResize);
-		this.editor?.dispose();
-		this.editor = undefined;
+		removeEventListener('resize', this._onDidResize);
+		this._editor?.dispose();
+		this._editor = undefined;
 
 		console.debug('monaco editor stopped.');
 	}
@@ -155,13 +155,13 @@ export class Editor extends Component<EditorProps> {
 		return <div class={css.editor} />;
 	}
 
-	private isLightTheme() {
-		this.themeQuery.removeEventListener(
+	private _isLightTheme() {
+		this._themeQuery.removeEventListener(
 			'change',
-			this.onDidThemeQueryChange,
+			this._onDidThemeQueryChange,
 		);
 
-		switch (this.theme) {
+		switch (this._theme) {
 			case 'light': {
 				return true;
 			}
@@ -171,25 +171,25 @@ export class Editor extends Component<EditorProps> {
 			}
 
 			default: {
-				this.themeQuery.addEventListener(
+				this._themeQuery.addEventListener(
 					'change',
-					this.onDidThemeQueryChange,
+					this._onDidThemeQueryChange,
 					{
 						passive: true,
 					},
 				);
-				return this.themeQuery.matches;
+				return this._themeQuery.matches;
 			}
 		}
 	}
 
-	private readonly onDidResize = () => {
-		assert(this.editor, 'editor is undefined');
-		this.editor.updateLayout();
+	private readonly _onDidResize = () => {
+		assert(this._editor, 'editor is undefined');
+		this._editor.updateLayout();
 	};
 
-	private readonly onDidThemeQueryChange = (event: MediaQueryListEvent) => {
-		assert(this.editor, 'editor is undefined');
-		this.editor.lightTheme = event.matches;
+	private readonly _onDidThemeQueryChange = (event: MediaQueryListEvent) => {
+		assert(this._editor, 'editor is undefined');
+		this._editor.lightTheme = event.matches;
 	};
 }

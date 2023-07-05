@@ -36,7 +36,7 @@ export default defineConfig(({command}) => ({
 		target: ['firefox103', 'chrome104'],
 		outDir: 'build',
 		rollupOptions: {
-			input: ['index.html', '404.html'],
+			input: ['index.html'],
 		},
 	},
 	server: {
@@ -78,7 +78,7 @@ export default defineConfig(({command}) => ({
 		environment: 'jsdom',
 		css: true,
 		coverage: {
-			provider: 'c8',
+			provider: 'v8',
 			all: true,
 			skipFull: true,
 			reporter: 'lcov',
@@ -88,11 +88,14 @@ export default defineConfig(({command}) => ({
 				'**/*.d.ts',
 				'src/license-types.ts',
 				'src/components/icons/gamepad/face-button/types.ts',
+				'src/composition/test-renderer.ts',
+				'src/composition/event.ts',
 			],
 		},
 		cache: {
 			dir: 'node_modules/.cache/vitest',
 		},
+		setupFiles: 'src/setup.ts',
 		mockReset: true,
 	},
 }));

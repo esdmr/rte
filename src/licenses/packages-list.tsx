@@ -4,7 +4,7 @@ import type * as Types from '../license-types.js';
 import {NavColumn} from '../navigation/NavColumn.js';
 import {Package} from './Package.js';
 
-const createComponent = (file: string, route: string) =>
+const createComponent = (file: string) =>
 	lazy<FunctionComponent>(async () => {
 		try {
 			const response = await fetch(file, {
@@ -25,11 +25,7 @@ const createComponent = (file: string, route: string) =>
 			const LoadedPackagesList = () => (
 				<NavColumn>
 					{json.map((pkg) => (
-						<Package
-							pkg={pkg}
-							key={`${pkg.name}@${pkg.version}`}
-							route={route}
-						/>
+						<Package pkg={pkg} key={`${pkg.name}@${pkg.version}`} />
 					))}
 				</NavColumn>
 			);
@@ -45,5 +41,4 @@ const createComponent = (file: string, route: string) =>
 
 export const Dependencies = /* @__PURE__ */ createComponent(
 	`${import.meta.env.BASE_URL}licenses/deps/index.json`,
-	'/debug/licenses/',
 );

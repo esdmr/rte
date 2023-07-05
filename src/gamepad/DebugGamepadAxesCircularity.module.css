@@ -1,0 +1,9 @@
+.domain {
+	stroke: rgba(var(--foreground-rgb) / 0.3);
+	stroke-width: 1px;
+	fill: transparent;
+}
+
+.pointer {
+	fill: var(--foreground);
+}

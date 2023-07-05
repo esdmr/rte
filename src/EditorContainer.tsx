@@ -1,33 +1,30 @@
 import type {FunctionComponent} from 'preact';
-import {lazy, Suspense, useEffect, useMemo} from 'preact/compat';
+import {lazy, Suspense} from 'preact/compat';
 import {Loading} from './Loading.js';
 import * as css from './Editor.module.css';
-import {pageStateContext, usePageState} from './page-state/global.js';
-import {PageStateNode} from './page-state/node.js';
-import {voidPageState} from './page-state/void.js';
+import {CompPageBuilder} from './composition/page.js';
+import {NavRoot} from './navigation/NavRoot.js';
 
 const Editor = /* @__PURE__ */ lazy(async () =>
 	import('./Editor.js').then((mod) => mod.Editor),
 );
 
-export const EditorContainer: FunctionComponent = () => {
-	const parentPageState = usePageState();
-	const pageState = useMemo(
-		() => new PageStateNode(parentPageState, voidPageState),
-		[parentPageState],
-	);
+const stopPropagation = (event: Event) => {
+	event.stopPropagation();
+};
 
-	useEffect(() => {
-		parentPageState.child = pageState;
-
-		return () => {
-			pageState.dispose();
-		};
-	}, [parentPageState]);
-
+const EditorContainer: FunctionComponent = () => {
 	return (
-		<pageStateContext.Provider value={pageState}>
-			<main class={css.editorContainer} role="region" aria-live="polite">
+		<NavRoot>
+			<main
+				class={css.editorContainer}
+				role="region"
+				aria-live="polite"
+				onfocusin={stopPropagation}
+				onGamepad={stopPropagation}
+				onKeyDown={stopPropagation}
+				onInputGuideUpdate={stopPropagation}
+			>
 				<Suspense
 					fallback={
 						<Loading placement="bottom-right" class={css.editor} />
@@ -36,6 +33,8 @@ export const EditorContainer: FunctionComponent = () => {
 					<Editor />
 				</Suspense>
 			</main>
-		</pageStateContext.Provider>
+		</NavRoot>
 	);
 };
+
+export const editorContainer = new CompPageBuilder(EditorContainer, {});

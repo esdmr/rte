@@ -1,29 +1,27 @@
-import {mdiArrowLeft} from '@mdi/js';
-import {Icon} from '@mdi/react';
 import type {FunctionComponent} from 'preact';
-import {AllowScroll} from '../AllowScroll.js';
-import {CircularButton} from '../CircularButton.js';
+import {scrollable} from '../scrollable.module.css';
+import {CloseButton} from '../composition/CloseButton.js';
+import {CompPageBuilder} from '../composition/page.js';
 import {NavColumn} from '../navigation/NavColumn.js';
-import {Title} from '../Title.js';
+import {NavRoot} from '../navigation/NavRoot.js';
 import {DebugGamepadState} from './DebugGamepadState.js';
-import {GamepadToSignal} from './GamepadToSignal.js';
 
-export const DebugGamepad: FunctionComponent = () => (
-	<GamepadToSignal>
-		<AllowScroll />
+const DebugGamepad: FunctionComponent = () => (
+	<NavRoot>
 		<NavColumn>
 			<header>
 				<nav>
-					<CircularButton href="/" title="Back">
-						<Icon path={mdiArrowLeft} />
-					</CircularButton>
+					<CloseButton />
 				</nav>
 			</header>
 			<main>
-				<Title h1>Debug gamepad</Title>
+				<h1>Debug gamepad</h1>
 
 				<DebugGamepadState />
 			</main>
 		</NavColumn>
-	</GamepadToSignal>
+	</NavRoot>
 );
+
+export const debugGamepad = new CompPageBuilder(DebugGamepad, {});
+debugGamepad.classList.push(scrollable);

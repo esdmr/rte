@@ -1,33 +1,36 @@
-// eslint-disable-next-line import/no-unassigned-import
-import 'preact/debug';
-import {render} from 'preact';
-import {Router} from 'wouter-preact';
-import {App} from './App.js';
-import {NavRoot} from './navigation/NavRoot.js';
-import './index.css';
-import {guideContainer} from './InputGuide.module.css';
-import {useHashLocation} from './wouter-hash.js';
-import {InputGuide} from './InputGuide.js';
+import {homePage} from './HomePage.js';
+import {CompLayer} from './composition/layer.js';
+import {CompWindow} from './composition/window.js';
+import {InputGuide, setupInputGuide} from './gamepad/InputGuide.js';
+import {guideContainer} from './gamepad/InputGuide.module.css';
+import {setupGamepadSignal} from './gamepad/gamepad-signal.js';
+import {setupGamepad} from './gamepad/loop.js';
 
 if (import.meta.env.DEV) {
 	await import('./debug-utils.js');
 }
 
-const app = document.createElement('div');
-app.classList.add('app');
-app.setAttribute('role', 'presentation');
-document.body.append(app);
+const window = new CompWindow(document.body);
+setupInputGuide(window.pages);
+setupGamepadSignal(window);
 
-render(
-	<NavRoot>
-		<Router hook={useHashLocation}>
-			<App />
-		</Router>
-	</NavRoot>,
-	app,
-);
+declare global {
+	/** Used for debugging. Only available in development mode. */
+	// eslint-disable-next-line no-var
+	var compWindow: CompWindow | undefined;
+}
 
-const inputGuide = document.createElement('aside');
+if (import.meta.env.DEV) {
+	globalThis.compWindow = window;
+}
+
+const homePageCopy = homePage.copy();
+homePageCopy.showPageCloseButton = false;
+homePageCopy.append(window);
+
+const inputGuide = new CompLayer(document.createElement('aside'));
 inputGuide.classList.add(guideContainer);
-document.body.append(inputGuide);
-render(<InputGuide />, inputGuide);
+window.overlays.append(inputGuide);
+inputGuide.render(<InputGuide />);
+
+setupGamepad();

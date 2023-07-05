@@ -3,7 +3,7 @@ Upstream-Name: RTE
 Upstream-Contact: esdmr <esdmr0@gmail.com>
 Source: https://github.com/esdmr/rte
 
-Files: src/* 404.html index.html
+Files: src/* index.html
 Copyright: 2022 esdmr
 License: AGPL-3.0-only
 
@@ -29,16 +29,7 @@ Files: vite/typed-css-modules.js
 Copyright: 2019 Google Inc.
 License: Apache-2.0
 
-Files: src/wouter-hash.ts
-Copyright: Alexey Taktarov
-License: ISC
-
 Files: patches/@prefresh__vite@2.2.8.patch
 Copyright: 2020 Jovi De Croock
 X-Patch-By: esdmr
 License: MIT
-
-Files: patches/wouter-preact@2.8.0-alpha.2.patch
-Copyright: 2019 Alexey Taktarov
-X-Patch-By: esdmr
-License: ISC

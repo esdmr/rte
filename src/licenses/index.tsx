@@ -1,48 +1,36 @@
-import {mdiArrowLeft} from '@mdi/js';
-import {Icon} from '@mdi/react';
 import type {FunctionComponent} from 'preact';
 import {Suspense} from 'preact/compat';
-import {AllowScroll} from '../AllowScroll.js';
-import {CircularButton} from '../CircularButton.js';
+import {scrollable} from '../scrollable.module.css';
 import {Loading} from '../Loading.js';
+import {CloseButton} from '../composition/CloseButton.js';
+import {CompPageBuilder} from '../composition/page.js';
 import {NavColumn} from '../navigation/NavColumn.js';
-import {Title} from '../Title.js';
+import {NavRoot} from '../navigation/NavRoot.js';
+import {Project} from './Project.js';
 import {Dependencies} from './packages-list.js';
 import {Patches} from './patches-list.js';
-import {Project} from './Project.js';
 
-export const Licenses: FunctionComponent<{
-	'return-route': string;
-}> = (props) => (
-	<>
-		<AllowScroll />
+const Licenses: FunctionComponent = () => (
+	<NavRoot>
 		<NavColumn>
 			<header>
 				<nav>
-					<CircularButton href={props['return-route']} title="Back">
-						<Icon path={mdiArrowLeft} />
-					</CircularButton>
+					<CloseButton />
 				</nav>
 			</header>
 			<main>
 				<NavColumn>
-					<Title h1>Licenses</Title>
+					<h1>Licenses</h1>
 					<h2>This project</h2>
 					<Project
 						name="RTE"
 						heading="RTE"
 						authors={['esdmr']}
-						source={{
-							href: import.meta.env.RTE_TREE_URL,
-							external: true,
-						}}
-						license={{
-							href: new URL(
-								'LICENSE.md',
-								import.meta.env.RTE_BLOB_URL,
-							).href,
-							external: true,
-						}}
+						source={import.meta.env.RTE_TREE_URL}
+						license={
+							new URL('LICENSE.md', import.meta.env.RTE_BLOB_URL)
+								.href
+						}
 					>
 						<p>
 							Multiple licenses. Mostly <code>AGPL-3.0-only</code>
@@ -58,14 +46,8 @@ export const Licenses: FunctionComponent<{
 						name="Material Design Icons"
 						heading="Material Design Icons"
 						authors={['Google']}
-						repository={{
-							href: 'https://github.com/google/material-design-icons',
-							external: true,
-						}}
-						license={{
-							href: 'https://github.com/google/material-design-icons/blob/master/LICENSE',
-							external: true,
-						}}
+						repository="https://github.com/google/material-design-icons"
+						license="https://github.com/google/material-design-icons/blob/master/LICENSE"
 					>
 						<p>
 							<code>Apache-2.0</code>.
@@ -87,5 +69,8 @@ export const Licenses: FunctionComponent<{
 				</NavColumn>
 			</main>
 		</NavColumn>
-	</>
+	</NavRoot>
 );
+
+export const licenses = new CompPageBuilder(Licenses, {});
+licenses.classList.push(scrollable);

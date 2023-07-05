@@ -1,30 +1,26 @@
-import {mdiArrowLeft} from '@mdi/js';
-import {Icon} from '@mdi/react';
 import type {FunctionComponent} from 'preact';
-import {AllowScroll} from '../AllowScroll.js';
-import {CircularButton} from '../CircularButton.js';
-import {Title} from '../Title.js';
+import {scrollable} from '../scrollable.module.css';
+import {CloseButton} from '../composition/CloseButton.js';
+import {CompPageBuilder} from '../composition/page.js';
+import * as css from './DebugNav.module.css';
 import {NavColumn} from './NavColumn.js';
 import {NavFlow} from './NavFlow.js';
 import {NavGrid} from './NavGrid.js';
-import * as css from './DebugNav.module.css';
+import {NavRoot} from './NavRoot.js';
 import {NavRow} from './NavRow.js';
 import {A, Button} from './wrappers.js';
 
-export const DebugNav: FunctionComponent = () => (
-	<>
-		<AllowScroll />
+const DebugNav: FunctionComponent = () => (
+	<NavRoot>
 		<NavColumn>
 			<header>
 				<nav>
-					<CircularButton href="/" title="Back">
-						<Icon path={mdiArrowLeft} />
-					</CircularButton>
+					<CloseButton />
 				</nav>
 			</header>
 			<main>
 				<NavColumn>
-					<Title h1>Debug navigation</Title>
+					<h1>Debug navigation</h1>
 					<h2>Texts and Anchors</h2>
 					<div>Text 1</div>
 					<Button>Focusable button 2</Button>
@@ -114,5 +110,8 @@ export const DebugNav: FunctionComponent = () => (
 				</NavColumn>
 			</main>
 		</NavColumn>
-	</>
+	</NavRoot>
 );
+
+export const debugNav = new CompPageBuilder(DebugNav, {});
+debugNav.classList.push(scrollable);

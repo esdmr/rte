@@ -1,20 +1,22 @@
 import type {FunctionComponent} from 'preact';
 import type * as Types from '../license-types.js';
+import {useCompLayer} from '../composition/layer.js';
 import {LegacyLicense} from './LegacyLicense.js';
 import * as css from './Project.module.css';
-import {encodePkgId, Project} from './Project.js';
+import {Project} from './Project.js';
+import {licenseFile} from './LicenseFile.js';
 
 export const Package: FunctionComponent<{
 	pkg: Types.Package;
-	route: string;
-}> = ({pkg, route}) => {
+}> = ({pkg}) => {
+	const layer = useCompLayer();
 	const pkgId = `${pkg.name}@${pkg.version}`;
-	let licenseFile = false;
+	let hasLicenseFile = false;
 	let license;
 
 	switch (pkg.license.type) {
 		case 'spdx': {
-			licenseFile = !pkg.license.fileMissing;
+			hasLicenseFile = !pkg.license.fileMissing;
 			license = (
 				<p>
 					<code>{pkg.license.id}</code>.
@@ -26,7 +28,7 @@ export const Package: FunctionComponent<{
 		}
 
 		case 'custom': {
-			licenseFile = true;
+			hasLicenseFile = true;
 			license = <p>Custom license.</p>;
 			break;
 		}
@@ -51,19 +53,16 @@ export const Package: FunctionComponent<{
 				</>
 			}
 			authors={pkg.authors}
-			registry={{
-				href: `https://www.npmjs.com/package/${pkg.name}/v/${pkg.version}`,
-				external: true,
-			}}
-			repository={{
-				href: pkg.repository,
-				external: true,
-			}}
+			registry={`https://www.npmjs.com/package/${pkg.name}/v/${pkg.version}`}
+			repository={pkg.repository}
 			license={
-				licenseFile
-					? {
-							href: `${route}deps/${encodePkgId(pkgId)}`,
-					  }
+				hasLicenseFile
+					? licenseFile.afterOnClick(layer, {
+							path: pkgId,
+							label: pkgId,
+							dir: 'licenses/deps/',
+							'is-package': true,
+					  })
 					: undefined
 			}
 		>

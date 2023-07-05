@@ -4,35 +4,18 @@ import assert from '../assert.js';
 import type {NavNode} from './node.js';
 
 export class NavChildToken {
-	private revoked = false;
-
-	constructor(readonly parent: NavNode, private readonly index: number) {}
-
-	revoke() {
-		this.clear();
-		this.revoked = true;
-	}
+	constructor(readonly parent: NavNode, private readonly _index: number) {}
 
 	clear() {
-		if (this.revoked) {
-			return;
-		}
-
 		this.child?.dispose();
 		this.child = undefined;
 	}
 
 	get child() {
-		if (this.revoked) {
-			return undefined;
-		}
-
-		return this.parent.children[this.index];
+		return this.parent.children[this._index];
 	}
 
 	set child(node: NavNode | undefined) {
-		assert(!this.revoked, 'child token is revoked');
-
 		if (node !== undefined && node !== this.child) {
 			assert(
 				this.child === undefined,
@@ -44,7 +27,7 @@ export class NavChildToken {
 			);
 		}
 
-		this.parent.children[this.index] = node;
+		this.parent.children[this._index] = node;
 	}
 }
 

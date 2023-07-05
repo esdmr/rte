@@ -1,16 +1,18 @@
 /* Note: Default :focus-visible style applies. */
 
-.flex-column {
-	display: grid;
-	grid-auto-flow: column;
-}
+@layer app {
+	.flex-column {
+		display: grid;
+		grid-auto-flow: column;
+	}
 
-.flex-row {
-	display: grid;
-	grid-auto-flow: row;
-}
+	.flex-row {
+		display: grid;
+		grid-auto-flow: row;
+	}
 
-.grid {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+	.grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+	}
 }

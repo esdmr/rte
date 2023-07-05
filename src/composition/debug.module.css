@@ -1,0 +1,34 @@
+body {
+	margin: 0;
+}
+
+body.animating {
+	overflow: hidden;
+}
+
+.page {
+	background-color: var(--background);
+	color: var(--foreground);
+	padding: 1.5em;
+	outline: 0;
+}
+
+.dialog {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+
+	position: absolute;
+	inset: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: #00000080;
+}
+
+.dialog-container {
+	background-color: var(--background);
+	color: var(--foreground);
+	border-radius: 1em;
+	padding: 1.5em;
+	box-shadow: 0 5px 5px #f0f0f080;
+}

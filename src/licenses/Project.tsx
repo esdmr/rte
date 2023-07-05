@@ -12,23 +12,14 @@ import {NavRow} from '../navigation/NavRow.js';
 import {Authors} from './Authors.js';
 import * as css from './Project.module.css';
 
-export const encodePkgId = (pkgId: string) => {
-	return encodeURIComponent(pkgId).replace(/%40/g, '@').replace(/%2F/g, '/');
-};
-
-type ProjectLink = {
-	readonly href: string;
-	readonly external?: boolean;
-};
-
 export const Project: FunctionComponent<{
 	readonly heading: ComponentChild;
 	readonly authors?: readonly string[];
 	readonly name: string;
-	readonly repository?: ProjectLink;
-	readonly registry?: ProjectLink;
-	readonly source?: ProjectLink;
-	readonly license?: ProjectLink;
+	readonly repository?: string | (() => void);
+	readonly registry?: string | (() => void);
+	readonly source?: string | (() => void);
+	readonly license?: string | (() => void);
 }> = (props) => {
 	return (
 		<article class={classes(css.project)}>
@@ -65,20 +56,25 @@ export const Project: FunctionComponent<{
 								mdiCopyright,
 								'license file',
 							] as const,
-						].map(
-							([link, icon, type]) =>
-								link && (
-									<CircularButton
-										key={type}
-										href={link.href}
-										external={link.external}
-										title={`See ${type}`}
-										aria-label={`See ${type} for ${props.name}`}
-									>
-										<Icon path={icon} />
-									</CircularButton>
-								),
-						)}
+						].map(([link, icon, type]) => {
+							if (!link) return;
+
+							const linkProps =
+								typeof link === 'function'
+									? {onClick: link}
+									: {href: link};
+
+							return (
+								<CircularButton
+									key={type}
+									{...linkProps}
+									title={`See ${type}`}
+									aria-label={`See ${type} for ${props.name}`}
+								>
+									<Icon path={icon} />
+								</CircularButton>
+							);
+						})}
 					</NavRow>
 				</div>
 			</NavRow>

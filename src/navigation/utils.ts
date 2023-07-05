@@ -82,7 +82,7 @@ export const getAnyLeaf = (nodes: Iterable<NavNode>, via: NavDirection) => {
 	for (const node of nodes) {
 		const leaf = node.getLeaf(via);
 
-		if (leaf !== undefined) {
+		if (leaf !== undefined && !leaf.disposed) {
 			return leaf;
 		}
 	}
