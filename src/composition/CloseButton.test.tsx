@@ -8,9 +8,9 @@ import {CompPage} from './page.js';
 import {lastRender, setTestRenderer} from './test-renderer.js';
 import {CompLayer} from './layer.js';
 
-describe('CloseButton', () => {
-	setTestRenderer();
+setTestRenderer();
 
+describe('CloseButton', () => {
 	it('Throws an error outside of compositor', () => {
 		expect(() => {
 			render(
@@ -35,6 +35,8 @@ describe('CloseButton', () => {
 		}).toThrowErrorMatchingInlineSnapshot(
 			'"CloseButton outside a page or dialog"',
 		);
+
+		layer.dispose();
 	});
 
 	it('should render inside a page', () => {
@@ -47,6 +49,7 @@ describe('CloseButton', () => {
 
 		assert(lastRender);
 		expect(lastRender.container.childElementCount).toBeGreaterThan(0);
+		page.dispose();
 	});
 
 	it('should not render if showPageCloseButton is unset', () => {
@@ -60,6 +63,7 @@ describe('CloseButton', () => {
 
 		assert(lastRender);
 		expect(lastRender.container.childElementCount).toBe(0);
+		page.dispose();
 	});
 
 	it('should render inside a dialog', () => {
@@ -72,6 +76,7 @@ describe('CloseButton', () => {
 
 		assert(lastRender);
 		expect(lastRender.container.childElementCount).toBeGreaterThan(0);
+		dialog.result.abort();
 	});
 
 	it('should close a page', async () => {
@@ -91,6 +96,8 @@ describe('CloseButton', () => {
 			expect(list.childrenCount).toBe(0);
 			expect(page.parent).toBeUndefined();
 		});
+
+		page.dispose();
 	});
 
 	it('should close a dialog', async () => {
@@ -113,5 +120,7 @@ describe('CloseButton', () => {
 			expect(page.dialogs.childrenCount).toBe(0);
 			expect(dialog.parent).toBeUndefined();
 		});
+
+		dialog.dispose();
 	});
 });

@@ -14,9 +14,13 @@ describe('getCompNodeOf', () => {
 	});
 
 	it('throws if input is not a comp element', () => {
+		const element = document.createElement('div');
+
 		expect(() =>
-			getCompNodeOf(null, 'test'),
-		).toThrowErrorMatchingInlineSnapshot();
+			getCompNodeOf(element, 'test'),
+		).toThrowErrorMatchingInlineSnapshot(
+			'"Assertion failed: Child of test is not a compositor node"',
+		);
 	});
 
 	it('returns the node associated with the element', () => {

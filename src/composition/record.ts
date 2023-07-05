@@ -1,8 +1,7 @@
 import assert from '../assert.js';
 import {CompNode, tryRemovingFromParent} from './node.js';
-import {getCompNodeOf} from './registry.js';
+import {compNodeOfElement} from './registry.js';
 
-const description = 'compositor record';
 const datasetKey = 'key';
 
 export abstract class CompRecord<
@@ -23,9 +22,9 @@ export abstract class CompRecord<
 
 		for (const child of children) {
 			const key = (child as HTMLElement).dataset?.[datasetKey];
-			const node = getCompNodeOf(child, description) as T[string];
+			const node = compNodeOfElement.get(child) as T[string];
 
-			if (this.isAtDocumentBody && (key === undefined || !node)) {
+			if (this.isAtDocumentBody && (!node || key === undefined)) {
 				console.warn(
 					'`document.body` contains garbage. Probably due to some browser extensions.',
 				);
@@ -63,14 +62,6 @@ export abstract class CompRecord<
 		return Object.fromEntries(this) as Readonly<Partial<T>>;
 	}
 
-	get hasChildren() {
-		return this._element.childElementCount > 0;
-	}
-
-	get childrenCount() {
-		return this._element.childElementCount;
-	}
-
 	get<K extends keyof T & string>(key: K) {
 		for (const [actualKey, child] of this) {
 			if (key === actualKey) {
@@ -95,7 +86,7 @@ export abstract class CompRecord<
 		newNode._element.dataset[datasetKey] = key;
 	}
 
-	delete(key: string) {
+	delete(key: keyof T & string) {
 		const oldNode = this.get(key);
 
 		if (oldNode) {

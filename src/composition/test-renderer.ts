@@ -1,20 +1,19 @@
 import {beforeEach} from 'vitest';
 import {render, type RenderResult} from '@testing-library/preact';
+import type {ComponentChild} from 'preact';
 import {CompLayer} from './layer.js';
+import {compNodeOfElement} from './registry.js';
 
-let setup = false;
 export let lastRender: RenderResult | undefined;
 
+function testRenderer(vnode: ComponentChild, parent: HTMLElement) {
+	lastRender = render(vnode, {container: parent});
+}
+
 export function setTestRenderer() {
-	if (!setup) {
-		CompLayer._renderer = (vnode, parent) => {
-			lastRender = render(vnode, {container: parent});
-		};
-
-		setup = true;
-	}
-
 	beforeEach(() => {
+		CompLayer._renderer = testRenderer;
 		lastRender = undefined;
+		compNodeOfElement.delete(document.body);
 	});
 }
