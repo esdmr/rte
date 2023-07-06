@@ -1,7 +1,7 @@
 {
 	"private": true,
 	"license": "SEE LICENSE IN LICENSE.md",
-	"author": "esdmr <esdmr0@gmail.com (https://github.com/esdmr)>",
+	"author": "esdmr <esdmr0@gmail.com> (https://github.com/esdmr)",
 	"type": "module",
 	"scripts": {
 		"build": "vite build",
