@@ -1,22 +1,18 @@
-#!/usr/bin/env node
-/**
- * @typedef {import('../src/license-types.js').Package} Package
- * @typedef {import('../src/license-types.js').License} License
- * @typedef {import('../src/license-types.js').LegacyLicense} LegacyLicense
- * @typedef {import('../src/license-types.js').Patch} Patch
- * @typedef {import('@pnpm/lockfile-file').PackageSnapshot & {
- *   name: string;
- *   version: string;
- * }} PackageSnapshotExtended
- */
 import assert from 'node:assert';
 import {existsSync} from 'node:fs';
 import fs from 'node:fs/promises';
 import process from 'node:process';
-import {readWantedLockfile} from '@pnpm/lockfile-file';
+import {readWantedLockfile, type PackageSnapshot} from '@pnpm/lockfile-file';
 import {parse, depPathToFilename} from '@pnpm/dependency-path';
 import parseAuthor from 'parse-author';
 import getPkgRepo from 'get-pkg-repo';
+import type {
+	Package,
+	License,
+	LegacyLicense,
+	Patch,
+} from '../src/license-types.js';
+import type thisPackageJson from '../package.json';
 import {
 	createDir,
 	destroyDir,
@@ -25,13 +21,21 @@ import {
 } from './plugin-helper.js';
 import * as paths from './paths.js';
 
-/** @type {Record<string, Partial<Package>>} */
-const overrides = {
+type PackageSnapshotExtended = PackageSnapshot & {
+	name: string;
+	version: string;
+};
+
+type PatchesInfo = Awaited<ReturnType<typeof getPatches>>;
+
+const overrides: Record<string, Partial<Package>> = {
+	/* eslint-disable @typescript-eslint/naming-convention */
 	preact: {authors: ['Jason Miller']},
 	'@preact/signals-core': {authors: ['Preact Team']},
 	'@preact/signals': {authors: ['Preact Team']},
 	'prop-types': {authors: ['Facebook, Inc.']},
 	'react-is': {authors: ['Facebook, Inc. and its affiliates']},
+	/* eslint-enable @typescript-eslint/naming-convention */
 };
 
 const licenseFileNames = [
@@ -50,7 +54,7 @@ const licenseFileNames = [
 	'License.txt',
 ];
 
-{
+export async function updateAll() {
 	const depsIntegrity = await getDepsIntegrity();
 	const patches = await getPatches();
 
@@ -82,10 +86,7 @@ async function getDepsIntegrity() {
 	return getIntegrity(await fs.readFile(paths.pnpmLockFile));
 }
 
-/**
- * @param {string} integrity
- */
-async function updateDepsLicenses(integrity) {
+async function updateDepsLicenses(integrity: string) {
 	await destroyDir(paths.depsDir);
 	await createDir(paths.depsDir);
 
@@ -103,7 +104,7 @@ async function updateDepsLicenses(integrity) {
 	}
 
 	const packages = new Map(
-		/** @type {[string, Package][]} */ (packageList.filter(Boolean)),
+		packageList.filter(Boolean) as Array<[string, Package]>,
 	);
 
 	const deps = [...packages.entries()]
@@ -130,7 +131,7 @@ async function getPnpmDirs() {
 			assert(name);
 			assert(version);
 
-			return /** @type {[URL, PackageSnapshotExtended]} */ ([
+			return [
 				new URL(
 					`node_modules/.pnpm/${depPathToFilename(
 						pkgPath,
@@ -142,16 +143,15 @@ async function getPnpmDirs() {
 					name,
 					version,
 				},
-			]);
+			] as [URL, PackageSnapshotExtended];
 		});
 }
 
-/**
- * @param {URL} pkgDir
- * @param {PackageSnapshotExtended} snapshot
- * @param {Set<string>} unusedOverrides
- */
-async function processPnpmDir(pkgDir, snapshot, unusedOverrides) {
+async function processPnpmDir(
+	pkgDir: URL,
+	snapshot: PackageSnapshotExtended,
+	unusedOverrides: Set<string>,
+) {
 	if (!existsSync(pkgDir)) {
 		if (snapshot.optional) {
 			console.warn(
@@ -178,7 +178,18 @@ async function processPnpmDir(pkgDir, snapshot, unusedOverrides) {
 		author: pkgAuthor = '',
 		contributors: pkgContributors = [],
 		maintainers: pkgMaintainers = [],
-	} = JSON.parse(await fs.readFile(new URL('package.json', pkgDir), 'utf8'));
+	} = JSON.parse(
+		await fs.readFile(new URL('package.json', pkgDir), 'utf8'),
+	) as {
+		name: string;
+		version: string;
+		license?: unknown;
+		licenses?: unknown;
+		repository?: unknown;
+		author?: string | {name?: string};
+		contributors?: Array<string | {name?: string} | undefined>;
+		maintainers?: Array<string | {name?: string} | undefined>;
+	};
 
 	const authors = [
 		...new Set(
@@ -215,11 +226,17 @@ async function processPnpmDir(pkgDir, snapshot, unusedOverrides) {
 	unusedOverrides.delete(name);
 	unusedOverrides.delete(pkgId);
 
-	if (typeof repository === 'object' && repository.url.endsWith('.git')) {
+	if (
+		typeof repository === 'object' &&
+		repository !== null &&
+		'url' in repository &&
+		typeof repository.url === 'string' &&
+		repository.url.endsWith('.git')
+	) {
 		repository.url = repository.url.slice(0, -4);
 	}
 
-	return /** @type {[string, Package]} */ ([
+	return [
 		pkgId,
 		{
 			name,
@@ -230,37 +247,34 @@ async function processPnpmDir(pkgDir, snapshot, unusedOverrides) {
 			...overrides[name],
 			...overrides[pkgId],
 		},
-	]);
+	] as [string, Package];
 }
 
-/** @param {string | {name?: string | null} | null | undefined} author */
-function getContributorName(author) {
+function getContributorName(
+	author?: string | {name?: string | undefined} | undefined,
+) {
 	return (
 		(typeof author === 'string'
 			? parseAuthor(author).name
-			: author?.name) || ''
+			: author?.name) ?? ''
 	);
 }
 
-/**
- * @param {unknown} pkgLicense
- * @param {unknown} pkgLicenses
- * @param {URL} pkgDir
- * @returns {{license: License, licensePath: URL | undefined}}
- */
-function getLicenseInfo(pkgLicense, pkgLicenses, pkgDir) {
+function getLicenseInfo(
+	pkgLicense: unknown,
+	pkgLicenses: unknown,
+	pkgDir: URL,
+): {license: License; licensePath: URL | undefined} {
 	if (typeof pkgLicense !== 'string') {
-		const licenses = /** @type {LegacyLicense['entries']} */ (
-			[pkgLicense, pkgLicenses]
-				.flat()
-				.filter(
-					(license) =>
-						typeof license === 'object' &&
-						license !== null &&
-						'type' in license &&
-						'url' in license,
-				)
-		);
+		const licenses = ([pkgLicense, pkgLicenses] as LegacyLicense['entries'])
+			.flat()
+			.filter(
+				(license) =>
+					typeof license === 'object' &&
+					license !== null &&
+					'type' in license &&
+					'url' in license,
+			);
 
 		if (licenses.length === 0) {
 			const licenseFile = tryFindLicenseFile(pkgDir);
@@ -297,43 +311,40 @@ function getLicenseInfo(pkgLicense, pkgLicenses, pkgDir) {
 	};
 }
 
-/**
- * @param {URL} pkgDir
- */
-function tryFindLicenseFile(pkgDir) {
+function tryFindLicenseFile(pkgDir: URL) {
 	return licenseFileNames
 		.map((i) => new URL(i, pkgDir))
 		.find((i) => existsSync(i));
 }
 
-/**
- * @typedef {Awaited<ReturnType<typeof getPatches>>} PatchesInfo
- */
 async function getPatches() {
-	const pkg = JSON.parse(await fs.readFile(paths.packageFile, 'utf8'));
+	const pkg = JSON.parse(
+		await fs.readFile(paths.packageFile, 'utf8'),
+	) as typeof thisPackageJson;
 
-	/** @type {Record<string, string>} */
-	const patches = Object.fromEntries(
+	const patches: Record<string, string> = Object.fromEntries(
 		Object.entries(pkg.pnpm.patchedDependencies).map(([a, b]) => [b, a]),
 	);
 
 	const dep5 = await fs.readFile(paths.dep5File, 'utf8');
 
-	/** @type {ReadonlyArray<Record<string, string>>} */
-	const rulesArray = dep5
+	const rulesArray: ReadonlyArray<Record<string, string>> = dep5
 		.trim()
 		.split('\n\n')
 		.slice(1)
-		.map((i) =>
-			Object.fromEntries(
-				i
-					.split(/\n(?!\t)/g)
-					.map((i) => i.replace(/\s+/g, ' ').split(': ')),
-			),
+		.map(
+			(i) =>
+				Object.fromEntries(
+					i
+						.split(/\n(?!\t)/g)
+						.map((i) => i.replace(/\s+/g, ' ').split(': ')),
+				) as Record<string, string>,
 		);
 
-	/** @type {Record<string, {copyright: string; patchBy: string; license: string}>} */
-	const rules = Object.create(null);
+	const rules = Object.create(null) as Record<
+		string,
+		{copyright: string; patchBy: string; license: string}
+	>;
 
 	for (const stanza of rulesArray) {
 		if (
@@ -371,26 +382,24 @@ async function getPatches() {
 	return {patches, rules, integrity};
 }
 
-/**
- * @param {PatchesInfo} info
- */
-async function updatePatchesLicenses({patches, rules, integrity}) {
+async function updatePatchesLicenses({patches, rules, integrity}: PatchesInfo) {
 	await destroyDir(paths.patchesDir);
 	await createDir(paths.patchesDir);
 
-	/** @type {readonly Patch[]} */
-	const index = Object.entries(rules).map(
+	const index: readonly Patch[] = Object.entries(rules).map(
 		([path, {copyright, patchBy, license}]) => {
 			const originalAuthors = /^\d+ (.*)$/.exec(copyright)?.[1] ?? '';
-			const pkgId = /** @type {string} */ (patches[path]);
+			const pkgId = patches[path]!;
 			const match = /^(?<name>.+?)@(?<version>.+)$/.exec(pkgId);
 
 			if (!match) {
 				throw new Error(`String “${pkgId}” is not a Package Id.`);
 			}
 
-			const {name, version} =
-				/** @type {{name: string; version: string}} */ (match.groups);
+			const {name, version} = match.groups as {
+				name: string;
+				version: string;
+			};
 
 			return {
 				path,

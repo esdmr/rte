@@ -74,9 +74,6 @@ devDependencies:
   default-import:
     specifier: 1.1.5
     version: 1.1.5
-  execa:
-    specifier: 7.1.1
-    version: 7.1.1
   find:
     specifier: 0.3.0
     version: 0.3.0

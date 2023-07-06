@@ -1,24 +1,8 @@
-import {fileURLToPath} from 'node:url';
-import {execaNode} from 'execa';
 import sirv from 'sirv';
 import {definePlugin} from './plugin-helper.js';
+import {updateAll} from './update-licenses.js';
 
-const scriptPath = fileURLToPath(
-	new URL('update-licenses.js', import.meta.url),
-);
-
-const updateLicenses = async () => {
-	console.log('Fetching the licenses...');
-	return execaNode(scriptPath, {
-		stdio: 'inherit',
-		cwd: new URL('..', import.meta.url),
-		env: {
-			ONLY_PROD: 'true',
-		},
-	});
-};
-
-let isBuild = true;
+let didBuilt = false;
 
 export default definePlugin({
 	name: 'licenses',
@@ -31,12 +15,12 @@ export default definePlugin({
 
 		server.watcher.on('change', (path) => {
 			if (path === 'pnpm-lock.yaml') {
-				updateLicenses().catch(console.error);
+				updateAll().catch(console.error);
 			}
 		});
 
-		await updateLicenses();
-		isBuild = false;
+		await updateAll();
+		didBuilt = true;
 
 		const licenseFilesRoute = sirv('build/licenses', {
 			extensions: [],
@@ -49,8 +33,8 @@ export default definePlugin({
 		);
 	},
 	async closeBundle() {
-		if (isBuild) {
-			await updateLicenses();
+		if (!didBuilt) {
+			await updateAll();
 		}
 	},
 });
