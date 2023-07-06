@@ -9,6 +9,7 @@ import type {ComponentChild, FunctionComponent} from 'preact';
 import {CircularButton} from '../CircularButton.js';
 import {classes} from '../classes.js';
 import {NavRow} from '../navigation/NavRow.js';
+import {NavColumn} from '../navigation/NavColumn.js';
 import {Authors} from './Authors.js';
 import * as css from './Project.module.css';
 
@@ -34,7 +35,7 @@ export const Project: FunctionComponent<{
 					{props.children}
 				</div>
 				<div class={css.icon} role="presentation">
-					<NavRow>
+					<NavColumn>
 						{[
 							[
 								props.registry,
@@ -75,7 +76,7 @@ export const Project: FunctionComponent<{
 								</CircularButton>
 							);
 						})}
-					</NavRow>
+					</NavColumn>
 				</div>
 			</NavRow>
 		</article>
