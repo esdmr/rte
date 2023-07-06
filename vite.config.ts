@@ -9,8 +9,8 @@ import preactDebug from './vite/preact-debug.js';
 import typedCssModules from './vite/typed-css-modules.js';
 import updateLicenses from './vite/licenses.js';
 
-/** @param {string} url */
-const ensureTrailingSlash = (url) => (url.endsWith('/') ? url : url + '/');
+const ensureTrailingSlash = (url: string) =>
+	url.endsWith('/') ? url : url + '/';
 
 export default defineConfig(({command}) => ({
 	base: ensureTrailingSlash(
@@ -72,7 +72,9 @@ export default defineConfig(({command}) => ({
 		updateLicenses,
 	],
 	define: {
+		/* eslint-disable @typescript-eslint/naming-convention */
 		'import.meta.vitest': 'undefined',
+		/* eslint-enable @typescript-eslint/naming-convention */
 	},
 	test: {
 		environment: 'jsdom',

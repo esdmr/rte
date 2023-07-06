@@ -16,10 +16,10 @@ import path from 'node:path';
 import DtsCreator from 'typed-css-modules';
 import find from 'find';
 import {defaultImport} from 'default-import';
+import type {DtsContent} from 'typed-css-modules/lib/dts-content.js';
 import {definePlugin} from './plugin-helper.js';
 
-/** @type {readonly string[]} */
-const files = await new Promise((resolve) => {
+const files: readonly string[] = await new Promise((resolve) => {
 	find.file(/\.module\.css$/, 'src', resolve);
 });
 
@@ -31,15 +31,16 @@ const newCreator = () =>
 		namedExports: true,
 	});
 
-/**
- * @param {string} file
- */
-const writeTypes = async (file, creator = newCreator()) => {
+const writeTypes = async (file: string, creator = newCreator()) => {
 	const content = await creator.create(file);
 
 	Object.defineProperty(content, 'outputFileName', {
-		get() {
-			return this.rInputPath.replace(/\.css$/, '') + '.d.css.ts';
+		get(this: DtsContent) {
+			// @ts-expect-error DtsContent does not allow us to modify the
+			// extension, so we need to: redefine a private accessor, and read
+			// the file path from a private property.
+			const rInputPath = this.rInputPath as string;
+			return rInputPath.replace(/\.css$/, '') + '.d.css.ts';
 		},
 	});
 
