@@ -20,12 +20,12 @@ Files:
 	README.md
 	renovate.json
 	tsconfig.json
-	vite.config.mjs
+	vite.config.ts
 	vite/*
 Copyright: 2022 esdmr
 License: MIT
 
-Files: vite/typed-css-modules.js
+Files: vite/typed-css-modules.ts
 Copyright: 2019 Google Inc.
 License: Apache-2.0
 
