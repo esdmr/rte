@@ -2,7 +2,7 @@ import sirv from 'sirv';
 import {definePlugin} from './plugin-helper.js';
 import {updateAll} from './update-licenses.js';
 
-let didBuilt = false;
+let didBuild = false;
 
 export default definePlugin({
 	name: 'licenses',
@@ -20,7 +20,7 @@ export default definePlugin({
 		});
 
 		await updateAll();
-		didBuilt = true;
+		didBuild = true;
 
 		const licenseFilesRoute = sirv('build/licenses', {
 			extensions: [],
@@ -33,7 +33,7 @@ export default definePlugin({
 		);
 	},
 	async closeBundle() {
-		if (!didBuilt) {
+		if (!didBuild) {
 			await updateAll();
 		}
 	},
