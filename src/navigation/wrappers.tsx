@@ -132,7 +132,7 @@ function createButtonLike<T extends 'a' | 'button'>(name: T) {
 }
 
 function createGeneric<T extends keyof JSX.IntrinsicElements>(name: T) {
-	const Name: string = name;
+	const Name = name as unknown as FunctionComponent<JSX.IntrinsicElements[T]>;
 
 	const WrappedComponent: FunctionComponent<JSX.IntrinsicElements[T]> = (
 		props,
