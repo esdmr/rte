@@ -12,7 +12,7 @@ const dep5 = stdout.toString('utf8');
 
 const rulesArray: ReadonlyArray<Record<string, string>> = dep5
 	.trim()
-	.replace(/<text>(.*?)<\/text>/gs, (_, match: string) =>
+	.replaceAll(/<text>(.*?)<\/text>/gs, (_, match: string) =>
 		match.replaceAll('\n', '\v'),
 	)
 	.split('\n\n')
@@ -22,13 +22,16 @@ const rulesArray: ReadonlyArray<Record<string, string>> = dep5
 			Object.fromEntries(
 				i
 					.split(/\n(?!\t)/g)
-					.map((i) => i.replace(/\s+/g, ' ').split(': '))
+					.map((i) => i.replaceAll(/\s+/g, ' ').split(': '))
 					.filter((i) => i.length === 2),
 			) as Record<string, string>,
 	);
 
 class File {
-	constructor(readonly license: string, readonly copy: string) {}
+	constructor(
+		readonly license: string,
+		readonly copy: string,
+	) {}
 }
 
 const files = new Map<string, File>();

@@ -8,7 +8,7 @@ export type EventMap = {
 } & HTMLElementEventMap;
 
 declare global {
-	// eslint-disable-next-line @typescript-eslint/no-namespace
+	// eslint-disable-next-line @typescript-eslint/no-namespace, @typescript-eslint/no-unnecessary-qualifier
 	namespace preact.JSX {
 		export type TargetedGamepadEvent<Target extends EventTarget> =
 			TargetedEvent<Target, GamepadEvent>;

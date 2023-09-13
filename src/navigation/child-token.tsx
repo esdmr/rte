@@ -4,7 +4,10 @@ import assert from '../assert.js';
 import type {NavNode} from './node.js';
 
 export class NavChildToken {
-	constructor(readonly parent: NavNode, private readonly _index: number) {}
+	constructor(
+		readonly parent: NavNode,
+		private readonly _index: number,
+	) {}
 
 	clear() {
 		this.child?.dispose();

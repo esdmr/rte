@@ -337,7 +337,7 @@ async function getPatches() {
 				Object.fromEntries(
 					i
 						.split(/\n(?!\t)/g)
-						.map((i) => i.replace(/\s+/g, ' ').split(': ')),
+						.map((i) => i.replaceAll(/\s+/g, ' ').split(': ')),
 				) as Record<string, string>,
 		);
 
