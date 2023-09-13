@@ -63,7 +63,7 @@ export class NavNode implements Disposable {
 	constructor(
 		readonly parent: NavNode | undefined,
 		private readonly _hooks: NavHooks,
-		private readonly _name: string = '',
+		private readonly _name = '',
 	) {
 		this.state = parent?.state ?? new NavState();
 
