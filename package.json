@@ -42,7 +42,7 @@
 		"parse-author": "2.0.0",
 		"sirv": "2.0.3",
 		"typed-css-modules": "0.7.2",
-		"typescript": "5.1.6",
+		"typescript": "5.2.2",
 		"vite": "4.4.9",
 		"vite-node": "0.34.2",
 		"vite-plugin-environment": "1.1.3",
