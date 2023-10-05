@@ -57,8 +57,8 @@ devDependencies:
     specifier: 3.2.3
     version: 3.2.3(preact@10.15.1)
   '@types/find':
-    specifier: 0.2.1
-    version: 0.2.1
+    specifier: 0.2.2
+    version: 0.2.2
   '@types/jsdom':
     specifier: 21.1.2
     version: 21.1.2
@@ -974,8 +974,8 @@ packages:
     resolution: {integrity: sha512-WulqXMDUTYAXCjZnk6JtIHPigp55cVtDgDrO2gHRwhyJto21+1zbVCtOYB2L1F9w4qCQ0rOGWBnBe0FNTiEJIQ==}
     dev: true
 
-  /@types/find@0.2.1:
-    resolution: {integrity: sha512-qUrCBlWoo9ij6ZEMx8G2WEjkdpofFks37/eZSDce7e0BY8lCYS2u7dVAoBy6AKRGX8z/ukllrUAyQ8h+/zlW9w==}
+  /@types/find@0.2.2:
+    resolution: {integrity: sha512-Q67LLJvnvyiAu8XP1D2pPkxWh1hXLVOI3X77z4kw2orV4AIEz4I4UgVofabIIfypGoBZ2WAosTuu3gJVKPzlyw==}
     dev: true
 
   /@types/istanbul-lib-coverage@2.0.4:
