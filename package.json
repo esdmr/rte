@@ -16,7 +16,7 @@
 	"dependencies": {
 		"@mdi/js": "7.2.96",
 		"@mdi/react": "1.6.1",
-		"@preact/signals": "1.1.5",
+		"@preact/signals": "1.2.1",
 		"monaco-editor": "0.38.0",
 		"preact": "10.15.1",
 		"react": "npm:@preact/compat@17.1.1",
