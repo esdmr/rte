@@ -51,8 +51,8 @@ devDependencies:
     specifier: 2.2.8
     version: 2.2.8(patch_hash=4jt37oehemwuq3cvigkaotgg2u)(preact@10.17.1)(vite@4.4.11)
   '@rollup/plugin-strip':
-    specifier: 3.0.2
-    version: 3.0.2
+    specifier: 3.0.3
+    version: 3.0.3
   '@testing-library/preact':
     specifier: 3.2.3
     version: 3.2.3(preact@10.17.1)
@@ -859,11 +859,11 @@ packages:
     dev: true
     patched: true
 
-  /@rollup/plugin-strip@3.0.2:
-    resolution: {integrity: sha512-L8Whin/DB5XsLE586+xcud6yX/pMVUlfalA999uAsC+dtwmBHSiUwtAxMl3eVvykX3N5BhdeAjStqDlzMmfUXw==}
+  /@rollup/plugin-strip@3.0.3:
+    resolution: {integrity: sha512-7pk6dVG4gor4x+n7FtLeMLuYMFgJvLiRqXJHwHEkAXsORaVgCmIbhOyW+In0gMov4DYwMcXdoll/5bCKeCngHA==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
-      rollup: ^1.20.0||^2.0.0||^3.0.0
+      rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
     peerDependenciesMeta:
       rollup:
         optional: true
