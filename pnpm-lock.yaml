@@ -63,8 +63,8 @@ devDependencies:
     specifier: 21.1.4
     version: 21.1.4
   '@types/parse-author':
-    specifier: 2.0.1
-    version: 2.0.1
+    specifier: 2.0.2
+    version: 2.0.2
   '@types/postcss-url':
     specifier: 10.0.2
     version: 10.0.2
@@ -987,8 +987,8 @@ packages:
     resolution: {integrity: sha512-lqa4UEhhv/2sjjIQgjX8B+RBjj47eo0mzGasklVJ78UKGQY1r0VpB9XHDaZZO9qzEFDdy4MrXLuEaSmPrPSe/A==}
     dev: true
 
-  /@types/parse-author@2.0.1:
-    resolution: {integrity: sha512-2RNXvvDY+7ITl/Q3znDpW9DxyAckKgLCXpoiBHN9BeLH1aV7z/W657P2+PK3wVUgGWXtc99ZQy3LkJTGlxLsvA==}
+  /@types/parse-author@2.0.2:
+    resolution: {integrity: sha512-erPq9bzt/xzhfDBzSctZFDCbLmU5CEAUOWy/vfwkv9N9RVNcG7UIrTwA7llH+u2LKfuVO5WwQ8kfBIgxmz5wrg==}
     dev: true
 
   /@types/postcss-url@10.0.2:
