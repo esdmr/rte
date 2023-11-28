@@ -30,7 +30,7 @@
 		"@prefresh/vite": "2.2.8",
 		"@rollup/plugin-strip": "3.0.4",
 		"@testing-library/preact": "3.2.3",
-		"@types/find": "0.2.3",
+		"@types/find": "0.2.4",
 		"@types/jsdom": "21.1.4",
 		"@types/parse-author": "2.0.2",
 		"@types/postcss-url": "10.0.2",
