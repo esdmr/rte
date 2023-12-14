@@ -19,8 +19,8 @@ dependencies:
     specifier: 1.6.1
     version: 1.6.1
   '@preact/signals':
-    specifier: 1.2.1
-    version: 1.2.1(preact@10.17.1)
+    specifier: 1.2.2
+    version: 1.2.2(preact@10.17.1)
   monaco-editor:
     specifier: 0.43.0
     version: 0.43.0
@@ -816,8 +816,8 @@ packages:
     resolution: {integrity: sha512-U2diO1Z4i1n2IoFgMYmRdHWGObNrcuTRxyNEn7deSq2cru0vj0583HYQZHsAqcs7FE+hQyX3mjIV7LAfHCvy8w==}
     dev: false
 
-  /@preact/signals@1.2.1(preact@10.17.1):
-    resolution: {integrity: sha512-hRPvp1C2ooDzOHqfnhdpHgoIFDbYFAXLhoid3+jSItuPPD/J0r/UsiWKv/8ZO/oEhjRaP0M5niuRYsWqmY2GEA==}
+  /@preact/signals@1.2.2(preact@10.17.1):
+    resolution: {integrity: sha512-ColCqdo4cRP18bAuIR4Oik5rDpiyFtPIJIygaYPMEAwTnl4buWkBOflGBSzhYyPyJfKpkwlekrvK+1pzQ2ldWw==}
     peerDependencies:
       preact: 10.x
     dependencies:
