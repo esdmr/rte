@@ -39,8 +39,8 @@ dependencies:
 
 devDependencies:
   '@pnpm/dependency-path':
-    specifier: 2.1.5
-    version: 2.1.5
+    specifier: 2.1.6
+    version: 2.1.6
   '@pnpm/lockfile-file':
     specifier: 8.1.4
     version: 8.1.4(@pnpm/logger@5.0.0)
@@ -721,6 +721,16 @@ packages:
       semver: 7.5.4
     dev: true
 
+  /@pnpm/dependency-path@2.1.6:
+    resolution: {integrity: sha512-xHld0DIIfMMTYmestpNInVpDQL7VC/9uXYzj1fNrDC4wLafgSBcjljlFPaWVCRC1xyrNcsepQD86Bl2hgZ7sJg==}
+    engines: {node: '>=16.14'}
+    dependencies:
+      '@pnpm/crypto.base32-hash': 2.0.0
+      '@pnpm/types': 9.4.1
+      encode-registry: 3.0.1
+      semver: 7.5.4
+    dev: true
+
   /@pnpm/error@5.0.2:
     resolution: {integrity: sha512-0TEm+tWNYm+9uh6DSKyRbv8pv/6b4NL0PastLvMxIoqZbBZ5Zj1cYi332R9xsSUi31ZOsu2wpgn/bC7DA9hrjg==}
     engines: {node: '>=16.14'}
@@ -792,6 +802,11 @@ packages:
 
   /@pnpm/types@9.4.0:
     resolution: {integrity: sha512-IRDuIuNobLRQe0UyY2gbrrTzYS46tTNvOEfL6fOf0Qa8NyxUzeXz946v7fQuQE3LSBf8ENBC5SXhRmDl+mBEqA==}
+    engines: {node: '>=16.14'}
+    dev: true
+
+  /@pnpm/types@9.4.1:
+    resolution: {integrity: sha512-X7k9wdk5XlW1uo9Nq38nSzqRvOAxrPcrzgx8xm2T3DtRsLYsiBbzcGZyqrGpsW37lYf/KLZwoTVMeQkACPE64Q==}
     engines: {node: '>=16.14'}
     dev: true
 

@@ -24,7 +24,7 @@
 		"wicg-inert": "3.1.2"
 	},
 	"devDependencies": {
-		"@pnpm/dependency-path": "2.1.5",
+		"@pnpm/dependency-path": "2.1.6",
 		"@pnpm/lockfile-file": "8.1.4",
 		"@pnpm/logger": "5.0.0",
 		"@prefresh/vite": "2.2.8",
