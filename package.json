@@ -40,7 +40,7 @@
 		"get-pkg-repo": "5.0.0",
 		"jsdom": "22.1.0",
 		"parse-author": "2.0.0",
-		"sirv": "2.0.3",
+		"sirv": "2.0.4",
 		"typed-css-modules": "0.8.1",
 		"typescript": "5.3.3",
 		"vite": "4.5.1",
