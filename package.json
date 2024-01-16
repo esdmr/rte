@@ -25,7 +25,7 @@
 	},
 	"devDependencies": {
 		"@pnpm/dependency-path": "2.1.7",
-		"@pnpm/lockfile-file": "8.1.5",
+		"@pnpm/lockfile-file": "8.1.6",
 		"@pnpm/logger": "5.0.0",
 		"@prefresh/vite": "2.2.8",
 		"@rollup/plugin-strip": "3.0.4",
