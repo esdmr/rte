@@ -16,7 +16,6 @@ import path from 'node:path';
 import DtsCreator from 'typed-css-modules';
 import find from 'find';
 import {defaultImport} from 'default-import';
-import type {DtsContent} from 'typed-css-modules/lib/dts-content.js';
 import {definePlugin} from './plugin-helper.js';
 
 const files: readonly string[] = await new Promise((resolve) => {
@@ -29,21 +28,11 @@ const newCreator = () =>
 		dropExtension: false,
 		outDir: path.join('build', 'types'),
 		namedExports: true,
+		allowArbitraryExtensions: true,
 	});
 
 const writeTypes = async (file: string, creator = newCreator()) => {
 	const content = await creator.create(file);
-
-	Object.defineProperty(content, 'outputFileName', {
-		get(this: DtsContent) {
-			// @ts-expect-error DtsContent does not allow us to modify the
-			// extension, so we need to: redefine a private accessor, and read
-			// the file path from a private property.
-			const rInputPath = this.rInputPath as string;
-			return rInputPath.replace(/\.css$/, '') + '.d.css.ts';
-		},
-	});
-
 	await content.writeFile();
 };
 
