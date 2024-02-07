@@ -38,7 +38,7 @@
 		"default-import": "1.1.5",
 		"find": "0.3.0",
 		"get-pkg-repo": "5.0.0",
-		"jsdom": "22.1.0",
+		"jsdom": "23.2.0",
 		"parse-author": "2.0.0",
 		"sirv": "2.0.4",
 		"typed-css-modules": "0.9.1",
