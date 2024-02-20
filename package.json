@@ -14,7 +14,7 @@
 		"test": "vitest"
 	},
 	"dependencies": {
-		"@mdi/js": "7.2.96",
+		"@mdi/js": "7.4.47",
 		"@mdi/react": "1.6.1",
 		"@preact/signals": "1.2.2",
 		"monaco-editor": "0.43.0",
